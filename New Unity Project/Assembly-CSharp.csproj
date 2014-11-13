@@ -51,6 +51,7 @@
      <Compile Include="Assets\Enemies\Eattacks.cs" />
      <Compile Include="Assets\Enemies\Estats.cs" />
      <Compile Include="Assets\Enemies\First_AI.cs" />
+     <Compile Include="Assets\Enemies\SpawnerScript.cs" />
      <Compile Include="Assets\I-V-S\Items\Ilist.cs" />
      <Compile Include="Assets\I-V-S\Items\Istats.cs" />
      <Compile Include="Assets\I-V-S\Spells\Sbehaviour.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Portal\Placement.cs" />
      <Compile Include="Assets\Portal\Spawning.cs" />
      <Compile Include="Assets\char\CameraFollow.cs" />
+     <Compile Include="Assets\char\Controls.cs" />
      <Compile Include="Assets\char\Movement.cs" />
      <Compile Include="Assets\char\Pattacks.cs" />
      <Compile Include="Assets\char\Pinventory.cs" />
