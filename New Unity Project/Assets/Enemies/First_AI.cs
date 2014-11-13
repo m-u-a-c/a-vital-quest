@@ -14,6 +14,7 @@ public class First_AI : MonoBehaviour {
 	public Transform groundcheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
+	public bool facingRight = true;
 	
 	void Start ()
 	{
@@ -34,7 +35,8 @@ public class First_AI : MonoBehaviour {
 		if (player.transform.position.x > transform.position.x && GetDistance () < 1) 
 		{
 			//move right
-			transform.position = new Vector2 (transform.position.x + enemySpeed, transform.position.y);
+			transform.position = new Vector2 (transform.position.x + enemySpeed/10, transform.position.y);
+			facingRight = true;
 			//			if (transform.position.x + enemySpeed =  && grounded)
 			//			{
 			//				rigidbody2D.AddForce(0, jumpForce);
@@ -43,7 +45,8 @@ public class First_AI : MonoBehaviour {
 		//move left
 		if (player.transform.position.x < transform.position.x && GetDistance () < 1) 
 		{	
-			transform.position = new Vector2 (transform.position.x - enemySpeed, transform.position.y);
+			transform.position = new Vector2 (transform.position.x - enemySpeed/10, transform.position.y);
+			facingRight= false;
 			//			if (transform.position.x - enemySpeed =  && grounded)
 			//			{
 			//				rigidbody2D.AddForce(0, jumpForce);

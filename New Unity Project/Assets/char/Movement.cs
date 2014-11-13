@@ -4,7 +4,7 @@ using System.Collections;
 public class Movement : MonoBehaviour {
 	//runnin & jumpin
 	public float maxSpeed = 10f;
-	public float jumpForce = 4f;
+	public float jumpForce = 1000f;
 
 	public Vector2 playerposition;
 	bool grounded = false;
@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour {
 	public LayerMask whatIsGround;
 	
 	//flippin
-	bool facingRight = true;
+	public bool facingRight = true;
 
 	void FixedUpdate ()
 	{
@@ -25,10 +25,16 @@ public class Movement : MonoBehaviour {
 		playerposition.x = rigidbody2D.position.x;
 		playerposition.y = rigidbody2D.position.y;
 
+		Pattacks attacks = GetComponent<Pattacks> ();
+
 		if (move > 0 && !facingRight)
+		{
 			Flip ();
+		}
 		else if (move < 0 && facingRight)
+		{
 			Flip ();
+		}
 	}
 
 	void Flip()

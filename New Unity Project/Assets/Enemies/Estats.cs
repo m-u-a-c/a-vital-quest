@@ -3,9 +3,10 @@ using System.Collections;
 
 public class Estats : MonoBehaviour {
 	//hittin
-	public float aDamage = 5.0f;
+	public float aDamage = 50.0f;
 	public float defense = 10.0f;
 	public float health = 20.0f;
+	public float aSpeed = 1.0f;
 
 	void Start ()
 	{

@@ -8,6 +8,10 @@ public class Pattacks : MonoBehaviour {
 	Vector2 checkArea;
 	public LayerMask whatIsEnemy;
 	float Dmg;
+	public float side = 1;
+	public float knockbackSide;
+	public bool isOnCooldown = false;
+	public bool invincible = false;
 
 	void Start ()
 	{
@@ -16,20 +20,45 @@ public class Pattacks : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		checkArea = new Vector2(transform.position.x + 2,transform.position.y + 4);
+		if (gameObject.GetComponent<Movement>().facingRight)
+		{
+			side = transform.position.x + 2;
+		}
+		if(!gameObject.GetComponent<Movement>().facingRight)
+		{
+			side = transform.position.x - 2;
+		}
+		if (gameObject.GetComponent<Movement>().facingRight)
+		{
+			knockbackSide = 0.05f;
+		}
+		if(!gameObject.GetComponent<Movement>().facingRight)
+		{
+			knockbackSide = -0.05f;
+		}
+		checkArea = new Vector2(side,transform.position.y + 2);
 		hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
-		//ska inkludera && hittin
-		if (Input.GetKey (KeyCode.Mouse0) && hittin)
+		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
 		{
-			Pstats statScript = GetComponent<Pstats> ();
-
-			Zwordstats swordScript = GetComponent<Zwordstats> ();
-			//skapar errors
-			//Dmg = statScript.aDamage;
-			Dmg = statScript.aDamage;
-			hittin.gameObject.GetComponent<Estats>().getHit(Dmg);
-			//enemyScript.health =- Dmg;
+			StartCoroutine(Cooldown());
+			if(hittin)
+			{
+				Pstats statScript = GetComponent<Pstats> ();
+				Zwordstats swordScript = GetComponent<Zwordstats> ();
+				Dmg = statScript.aDamage;
+				hittin.gameObject.GetComponent<Estats>().getHit(Dmg);
+				hittin.gameObject.GetComponent<Estats>().rigidbody2D.AddForce(new Vector2(knockbackSide,0.05f));
+				Debug.Log("Hit");
+			}
 		}
+	}
+
+	public IEnumerator Cooldown()
+	{
+		isOnCooldown = true;
+		Pstats statScript = GetComponent<Pstats> ();
+		yield return new WaitForSeconds(statScript.aSpeed);
+		isOnCooldown = false;
 	}
 }
