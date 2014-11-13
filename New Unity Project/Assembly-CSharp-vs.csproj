@@ -51,7 +51,6 @@
      <Compile Include="Assets\Enemies\Eattacks.cs" />
      <Compile Include="Assets\Enemies\Estats.cs" />
      <Compile Include="Assets\Enemies\First_AI.cs" />
-     <Compile Include="Assets\Enemies\SpawnerScript.cs" />
      <Compile Include="Assets\I-V-S\Items\Ilist.cs" />
      <Compile Include="Assets\I-V-S\Items\Istats.cs" />
      <Compile Include="Assets\I-V-S\Spells\Sbehaviour.cs" />
@@ -61,8 +60,7 @@
      <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
      <Compile Include="Assets\Menus\MainMenu.cs" />
-     <Compile Include="Assets\Portal\Placement.cs" />
-     <Compile Include="Assets\Portal\Spawning.cs" />
+     <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\char\CameraFollow.cs" />
      <Compile Include="Assets\char\Controls.cs" />
      <Compile Include="Assets\char\Movement.cs" />
@@ -71,11 +69,7 @@
      <Compile Include="Assets\char\Pspells.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
-<<<<<<< HEAD
- <HintPath>C:/Users/Leon/Desktop/A vital quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
-=======
  <HintPath>C:/Users/viggo.lunden/Downloads/A Vital Quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
->>>>>>> origin/master
  </Reference>
   </ItemGroup>
   <ItemGroup>
