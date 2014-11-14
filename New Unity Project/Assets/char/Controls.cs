@@ -36,8 +36,8 @@ public class Controls : MonoBehaviour
 		float move = Input.GetAxis ("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 
-		playerposition.x = rigidbody2D.position.x;
-		playerposition.y = rigidbody2D.position.y;
+		playerposition.x = rigidbody2D.transform.position.x;
+		playerposition.y = rigidbody2D.transform.position.y;
 
 		if (move > 0 && !facingRight)
 						Flip ();

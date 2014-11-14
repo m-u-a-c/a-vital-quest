@@ -6,25 +6,33 @@ public class HolyGrail : BaseItem  {
 	public HolyGrail(GameObject g)
 	{
 		go = g;
+		ItemName = "Holy Grail";
 	}
 	public override void Effect ()
 	{
-		ItemName = "Holy Grail";
+
+	}
+	public override void Stats ()
+	{
 		go.GetComponent<Pstats> ().health += 30;
 		go.GetComponent<Pstats> ().healthreg += 5;
 	}
 }
 
-public class LJRobe : BaseItem {
+public class FriarTucksRobe : BaseItem {
 	GameObject go;
 	
-	public LJRobe(GameObject g)
+	public FriarTucksRobe(GameObject g)
 	{
 		go = g;
+		ItemName = "Friar Tuck's Robe";
 	}
 	public override void Effect ()
 	{
-		ItemName = "Lil John's Robe";
+	}
+
+	public override void Stats ()
+	{
 		go.GetComponent<Pstats> ().charges += 2;
 		go.GetComponent<Pstats> ().chargereg += 2;
 	}
@@ -35,11 +43,16 @@ public class GlassIdol : BaseItem {
 	public GlassIdol(GameObject g)
 	{
 		go = g;
+		ItemName = "Glass Idol";
 	}
 	public override void Effect ()
 	{
-		ItemName = "Glass Idol";
 		//TODO: Restores you to full HP and Charges when brought below 10 HP. Breaks on effect.
+	}
+
+	public override void Stats ()
+	{
+		//NULL
 	}
 }
 
@@ -48,11 +61,15 @@ public class LuckyHorseshoe : BaseItem {
 	public LuckyHorseshoe(GameObject g)
 	{
 		go = g;
+		ItemName = "Lucky Horseshoe";
 	}
 	public override void Effect()
 	{
-		ItemName = "Lucky Horseshoe";
+	}
+	public override void Stats ()
+	{
 		go.GetComponent<Pstats> ().critchance += 10;
+		
 	}
 }
 
@@ -61,10 +78,15 @@ public class BootsOfUrgency : BaseItem {
 	public BootsOfUrgency(GameObject g)
 	{
 		go = g;
+		ItemName = "Boots of Urgency";
 	}
 	public override void Effect()
 	{
-		ItemName = "Boots of Urgency";
+
+	}
+
+	public override void Stats ()
+	{
 		go.GetComponent<Pstats> ().attackspeed += 20;
 		go.GetComponent<Pstats> ().movement += 20;
 	}
@@ -75,12 +97,16 @@ public class SturdySocks : BaseItem {
 	public SturdySocks(GameObject g)
 	{
 		go = g;
+		ItemName = "Sturdy Socks";
 	}
 	public override void Effect()
 	{
-		ItemName = "Sturdy Socks";
-		go.GetComponent<Pstats> ().aDamage += 3;
 		//TODO: Cannot get knocked back.
+	}
+	public override void Stats ()
+	{
+
+		go.GetComponent<Pstats> ().aDamage += 3;
 	}
 }
 
@@ -89,10 +115,15 @@ public class MysticalOrb : BaseItem {
 	public MysticalOrb(GameObject g)
 	{
 		go = g;
+		ItemName = "Mystical Orb";
 	}
 	public override void Effect()
 	{
-		ItemName = "Mystical Orb";
+
+	}
+
+	public override void Stats ()
+	{
 		go.GetComponent<Pstats> ().sDamage += 3;
 		go.GetComponent<Pstats> ().chargereg += 4;
 	}
