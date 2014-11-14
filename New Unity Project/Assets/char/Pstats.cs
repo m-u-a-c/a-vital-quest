@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Pstats : MonoBehaviour {
@@ -7,7 +7,18 @@ public class Pstats : MonoBehaviour {
 	public float defense = 10.0f;
 	public float aSpeed = 1.5f;
 	public float health = 100.0f;
-	public float charges = 5.0f;
+	//TODO: 
+	public float healthreg = 0;
+	// makes you unable to set charges above 5
+	public float charges { get{ return charges; } set{if (charges > 5) charges = 5; return;} }
+	//TODO: 
+	public float chargereg = 1;
+	//TODO: 
+	public float critchance = 5;
+	//TODO: 
+	public float attackspeed = 10;
+	//TODO: 
+	public float movement = 100;
 	public bool invincible = false;
 	
 	void Start ()
