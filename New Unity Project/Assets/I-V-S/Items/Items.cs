@@ -87,7 +87,7 @@ public class BootsOfUrgency : BaseItem {
 
 	public override void Stats ()
 	{
-		go.GetComponent<Pstats> ().attackspeed += 20;
+		go.GetComponent<Pstats> ().aSpeed += 20;
 		go.GetComponent<Pstats> ().movement += 20;
 	}
 }

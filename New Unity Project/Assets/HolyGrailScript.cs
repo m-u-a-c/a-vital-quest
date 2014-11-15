@@ -16,6 +16,6 @@ public class HolyGrailScript : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		if (coll.gameObject.tag == "Player")
 						coll.gameObject.GetComponent<Pinventory> ().AddItem (new HolyGrail(coll.gameObject));
-		
+
 	}
 }

@@ -5,7 +5,7 @@ public class Pstats : MonoBehaviour {
 	public float aDamage = 50.0f;
 	public float sDamage = 5.0f;
 	public float defense = 10.0f;
-	public float aSpeed = 1.5f;
+	public float aSpeed = 100;
 	public float health = 100.0f;
 	//TODO: 
 	public float healthreg = 0;
@@ -15,8 +15,6 @@ public class Pstats : MonoBehaviour {
 	public float chargereg = 1;
 	//TODO: 
 	public float critchance = 5;
-	//TODO: 
-	public float attackspeed = 10;
 	//TODO: 
 	public float movement = 100;
 	public bool invincible = false;
@@ -28,10 +26,13 @@ public class Pstats : MonoBehaviour {
 
 	void Update ()
 	{
+	
 		if (health <= 0) 
 		{
 			Destroy(gameObject);
 		}
+
+
 	}
 
 	public void getHit(float damageTaken)
