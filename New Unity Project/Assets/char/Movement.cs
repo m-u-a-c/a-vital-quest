@@ -35,7 +35,26 @@ public class Movement : MonoBehaviour {
 		{
 			Flip ();
 		}
+
+		if (gameObject.GetComponent<Pstats> ().charges > 0) {
+			if (Input.GetKeyDown (KeyCode.J)) {
+				gameObject.GetComponent<Pinventory>().spell.Left = true;
+				gameObject.GetComponent<Pinventory> ().spell.Effect ();
+				
+			}
+			if (Input.GetKeyDown (KeyCode.K)) {
+				gameObject.GetComponent<Pinventory>().spell.Left = false;
+				gameObject.GetComponent<Pinventory> ().spell.Effect ();
+				
+			}		
+		}
+
+		
 	}
+	void Start()
+	{
+		gameObject.GetComponent<Pinventory> ().spell = new MagicPeashooter(gameObject);
+		}
 
 	void Flip()
 	{

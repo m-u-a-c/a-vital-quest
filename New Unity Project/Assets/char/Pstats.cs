@@ -2,15 +2,16 @@ using UnityEngine;
 using System.Collections;
 
 public class Pstats : MonoBehaviour {
-	public float aDamage = 50.0f;
-	public float sDamage = 5.0f;
-	public float defense = 10.0f;
+	public float aDamage = 50;
+	public float sDamage = 5;
+	public float defense = 10;
 	public float aSpeed = 100;
-	public float health = 100.0f;
+	public float health = 100;
+	public float maxhealth = 100;
 	//TODO: 
 	public float healthreg = 0;
-	// makes you unable to set charges above 5
-	public float charges { get{ return charges; } set{if (charges > 5) charges = 5; return;} }
+
+	public float charges = 5;
 	//TODO: 
 	public float chargereg = 1;
 	//TODO: 
@@ -26,7 +27,9 @@ public class Pstats : MonoBehaviour {
 
 	void Update ()
 	{
-	
+		// makes you unable to set charges above 5
+		if (charges >= 5)
+						charges = 5;
 		if (health <= 0) 
 		{
 			Destroy(gameObject);

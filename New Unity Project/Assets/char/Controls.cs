@@ -44,6 +44,7 @@ public class Controls : MonoBehaviour
 				else if (move < 0 && facingRight)
 						Flip ();
 
+
 //		if (Input.GetKeyDown (KeyCode.Mouse0))
 //			swordScript.OnCollisionEnter2D ();
 	}
@@ -67,6 +68,7 @@ public class Controls : MonoBehaviour
 		{
 			rigidbody2D.AddForce(new Vector2(0, jumpForce));
 		}
+
 	}
 
 	void takeDamage(float damage)

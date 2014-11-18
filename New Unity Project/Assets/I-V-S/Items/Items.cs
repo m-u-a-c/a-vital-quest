@@ -16,6 +16,7 @@ public class HolyGrail : BaseItem  {
 	{
 		go.GetComponent<Pstats> ().health += 30;
 		go.GetComponent<Pstats> ().healthreg += 5;
+		go.GetComponent<Pstats> ().maxhealth += 15;
 	}
 }
 

@@ -1,22 +1,14 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\char\Pstats.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\I-V-S\Spells\Spells.cs">
     <Files>
-      <File FileName="New Unity Project.sln" Line="1" Column="1" />
-      <File FileName="Assets\HolyGrailScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\ChestBehaviour.cs" Line="15" Column="3" />
-      <File FileName="Assets\char\Movement.cs" Line="22" Column="45" />
-      <File FileName="Assets\I-V-S\Items\Items.cs" Line="85" Column="3" />
-      <File FileName="Assets\I-V-S\Weapons\BaseWeapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\I-V-S\Items\BaseItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\I-V-S\Weapons\Weapons.cs" Line="7" Column="3" />
-      <File FileName="Assets\I-V-S\Spells\BaseSpell.cs" Line="1" Column="1" />
-      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="1" Column="1" />
-      <File FileName="Assets\I-V-S\Items\Ilist.cs" Line="1" Column="1" />
-      <File FileName="Assets\char\Pattacks.cs" Line="1" Column="1" />
-      <File FileName="Assets\char\Pinventory.cs" Line="15" Column="4" />
-      <File FileName="Assets\I-V-S\Items\Istats.cs" Line="1" Column="1" />
-      <File FileName="Assets\char\Pstats.cs" Line="8" Column="24" />
+      <File FileName="Assets\char\Pstats.cs" Line="26" Column="3" />
+      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="16" Column="16" />
+      <File FileName="Assets\char\Controls.cs" Line="47" Column="3" />
+      <File FileName="Assets\I-V-S\Spells\BaseSpell.cs" Line="12" Column="9" />
+      <File FileName="Assets\char\Pinventory.cs" Line="18" Column="402" />
+      <File FileName="Assets\char\Movement.cs" Line="18" Column="21" />
+      <File FileName="Assets\char\Pspells.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

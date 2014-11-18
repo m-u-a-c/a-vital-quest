@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class Peashooter : BaseSpell {
+public class MagicPeashooter : BaseSpell {
 	GameObject go;
-	public Peashooter(GameObject g)
+
+	public MagicPeashooter(GameObject g)
 	{
-		SpellName = "Peashooter";
+		Left = true;
+		SpellName = "Magic Peashooter";
 		go = g;
 	}
 
@@ -18,7 +20,16 @@ public class Peashooter : BaseSpell {
 
 	public override void Effect ()
 	{
-		//NULL
+		GameObject pea = (GameObject)Object.Instantiate (Resources.Load ("Spells/Pea"));
+		pea.transform.position = go.transform.position;
+		if (Left) {
+			pea.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
+			pea.rigidbody2D.velocity = new Vector2(-18, 0);
+				} else {
+			pea.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
+			pea.rigidbody2D.velocity = new Vector2(18, 0);
+				}	
+		go.GetComponent<Pstats> ().charges -= 1;
 	}
 }
 
