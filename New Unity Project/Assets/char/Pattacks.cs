@@ -48,7 +48,7 @@ public class Pattacks : MonoBehaviour {
 				Zwordstats swordScript = GetComponent<Zwordstats> ();
 				Dmg = statScript.aDamage;
 				hittin.gameObject.GetComponent<Estats>().getHit(Dmg);
-				hittin.gameObject.GetComponent<Estats>().rigidbody2D.AddForce(new Vector2(knockbackSide,0.05f));
+				if (hittin.tag == "Enemy") hittin.gameObject.GetComponent<Estats>().rigidbody2D.AddForce(new Vector2(knockbackSide,0.05f));
 				Debug.Log("Hit");
 			}
 		}

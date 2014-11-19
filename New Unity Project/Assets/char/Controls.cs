@@ -36,13 +36,14 @@ public class Controls : MonoBehaviour
 		float move = Input.GetAxis ("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 
-		playerposition.x = rigidbody2D.position.x;
-		playerposition.y = rigidbody2D.position.y;
+		playerposition.x = rigidbody2D.transform.position.x;
+		playerposition.y = rigidbody2D.transform.position.y;
 
 		if (move > 0 && !facingRight)
 						Flip ();
 				else if (move < 0 && facingRight)
 						Flip ();
+
 
 //		if (Input.GetKeyDown (KeyCode.Mouse0))
 //			swordScript.OnCollisionEnter2D ();
@@ -67,6 +68,7 @@ public class Controls : MonoBehaviour
 		{
 			rigidbody2D.AddForce(new Vector2(0, jumpForce));
 		}
+
 	}
 
 	void takeDamage(float damage)

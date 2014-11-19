@@ -22,8 +22,8 @@ public class Movement : MonoBehaviour {
 		float move = Input.GetAxis ("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 		
-		playerposition.x = rigidbody2D.position.x;
-		playerposition.y = rigidbody2D.position.y;
+		playerposition.x = rigidbody2D.transform.position.x;
+		playerposition.y = rigidbody2D.transform.position.y;
 
 		Pattacks attacks = GetComponent<Pattacks> ();
 
@@ -35,7 +35,26 @@ public class Movement : MonoBehaviour {
 		{
 			Flip ();
 		}
+
+		if (gameObject.GetComponent<Pstats> ().charges > 0) {
+			if (Input.GetKeyDown (KeyCode.J)) {
+				gameObject.GetComponent<Pinventory>().spell.Left = true;
+				gameObject.GetComponent<Pinventory> ().spell.Effect ();
+				
+			}
+			if (Input.GetKeyDown (KeyCode.K)) {
+				gameObject.GetComponent<Pinventory>().spell.Left = false;
+				gameObject.GetComponent<Pinventory> ().spell.Effect ();
+				
+			}		
+		}
+
+		
 	}
+	void Start()
+	{
+		gameObject.GetComponent<Pinventory> ().spell = new MagicPeashooter(gameObject);
+		}
 
 	void Flip()
 	{

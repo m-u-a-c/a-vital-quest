@@ -1,15 +1,36 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Pinventory : MonoBehaviour {
+	void Update()
+	{
+		var go = GameObject.Find ("UI_Inventory");
+		go.guiText.text = "";
+		if (items.Count == 0)
+						go.guiText.text = "No items";
+				else {
+		foreach (BaseItem item in items)
+				go.guiText.text += "\n" + item.ItemName;
+		}
+		go = GameObject.Find ("UI_Stats");
+		go.guiText.text = "";
+		go.guiText.text = "Attack damage: " + gameObject.GetComponent<Pstats>().aDamage.ToString () + "\nSpell damage: " + gameObject.GetComponent<Pstats>().sDamage.ToString () + "\nAttack speed: " + gameObject.GetComponent<Pstats>().aSpeed.ToString () + "%\nHealth: " + gameObject.GetComponent<Pstats>().health.ToString () + "\nMovement speed: " + gameObject.GetComponent<Pstats>().movement + "%\nCharges: " + gameObject.GetComponent<Pstats>().charges.ToString();
 
-	// Use this for initialization
-	void Start () {
-	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public List<BaseItem> items;
+	public BaseSpell spell;
+	void Start () {
+		items = new List<BaseItem>();
+	}
+	public void AddItem (BaseItem item)
+	{
+		items.Add (item);
+		item.Effect ();
+	}
+	public void RemoveItem (BaseItem item)
+	{
+		items.Remove (item);
 	}
 }
