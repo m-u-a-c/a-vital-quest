@@ -26,6 +26,8 @@ public class Pinventory : MonoBehaviour {
 	}
 	public void AddItem (BaseItem item)
 	{
+		if (items.Count >= 4)
+						items [3] = item;
 		items.Add (item);
 		item.Effect ();
 	}

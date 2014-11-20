@@ -8,8 +8,8 @@ public class ChestBehaviour : MonoBehaviour {
 
 	void Start()
 	{
-		gameObject.GetComponent<SpriteRenderer> ().transform.localScale = new Vector3 (3, 3, 3);
-		gameObject.GetComponent<BoxCollider2D> ().transform.localScale = new Vector3 (1 / 3, 1 / 3, 1 / 3);
+		//gameObject.GetComponent<SpriteRenderer> ().transform.localScale = new Vector3 (3, 3, 3);
+		//gameObject.GetComponent<BoxCollider2D> ().transform.localScale = new Vector3 (1 / 3, 1 / 3, 1 / 3);
 	}
 
 	void OnCollisionEnter2D(Collision2D coll)

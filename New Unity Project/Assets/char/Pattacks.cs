@@ -52,6 +52,17 @@ public class Pattacks : MonoBehaviour {
 				Debug.Log("Hit");
 			}
 		}
+
+		if (gameObject.GetComponent<Pstats> ().charges > 0) {
+			if (Input.GetKeyDown (KeyCode.J)) {
+				if (gameObject.GetComponent<Movement>().facingRight) 
+					gameObject.GetComponent<Pinventory>().spell.Left = false;
+				else
+					gameObject.GetComponent<Pinventory>().spell.Left = true;
+				
+				gameObject.GetComponent<Pinventory> ().spell.Effect ();
+			}		
+		}
 	}
 
 	public IEnumerator Cooldown()

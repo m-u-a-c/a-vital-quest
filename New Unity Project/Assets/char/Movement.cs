@@ -38,12 +38,11 @@ public class Movement : MonoBehaviour {
 
 		if (gameObject.GetComponent<Pstats> ().charges > 0) {
 			if (Input.GetKeyDown (KeyCode.J)) {
-				gameObject.GetComponent<Pinventory>().spell.Left = true;
-				gameObject.GetComponent<Pinventory> ().spell.Effect ();
-				
-			}
-			if (Input.GetKeyDown (KeyCode.K)) {
+				if (facingRight) 
 				gameObject.GetComponent<Pinventory>().spell.Left = false;
+				else
+				gameObject.GetComponent<Pinventory>().spell.Left = true;
+
 				gameObject.GetComponent<Pinventory> ().spell.Effect ();
 				
 			}		
