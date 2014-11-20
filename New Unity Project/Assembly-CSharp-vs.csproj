@@ -46,9 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Chest\ChestBehaviour.cs" />
      <Compile Include="Assets\Chest\Cplacement.cs" />
      <Compile Include="Assets\Chest\Cspawning.cs" />
-     <Compile Include="Assets\ChestBehaviour.cs" />
      <Compile Include="Assets\Enemies\Eattacks.cs" />
      <Compile Include="Assets\Enemies\Estats.cs" />
      <Compile Include="Assets\Enemies\First_AI.cs" />
@@ -69,8 +69,12 @@
      <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
      <Compile Include="Assets\Menus\MainMenu.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\Menus\OverlayUI.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
+=======
+     <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
+>>>>>>> origin/master
      <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\TucksRobeScript.cs" />
      <Compile Include="Assets\char\CameraFollow.cs" />

@@ -35,7 +35,10 @@ public class Movement : MonoBehaviour {
 		{
 			Flip ();
 		}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> origin/master
 
 		
 	}
