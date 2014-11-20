@@ -55,8 +55,10 @@ public class Pattacks : MonoBehaviour {
 
 		if (gameObject.GetComponent<Pstats> ().charges > 0) {
 			if (Input.GetKeyDown (KeyCode.J)) {
-				if (gameObject.GetComponent<Movement>().facingRight) 
+				if (gameObject.GetComponent<Movement>().facingRight)
+				{
 					gameObject.GetComponent<Pinventory>().spell.Left = false;
+				}
 				else
 					gameObject.GetComponent<Pinventory>().spell.Left = true;
 				

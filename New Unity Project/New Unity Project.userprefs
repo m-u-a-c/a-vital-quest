@@ -1,28 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\char\Pattacks.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Menus\UI\OverlayUI.cs">
     <Files>
-      <File FileName="Assets\ChestBehaviour.cs" Line="37" Column="2" />
-      <File FileName="Assets\char\Pinventory.cs" Line="32" Column="18" />
-      <File FileName="Assets\HolyGrailScript.cs" Line="21" Column="2" />
-      <File FileName="Assets\char\Movement.cs" Line="49" Column="4" />
-      <File FileName="Assets\I-V-S\Spells\BaseSpell.cs" Line="6" Column="18" />
-      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="30" Column="27" />
-      <File FileName="Assets\char\Pattacks.cs" Line="58" Column="58" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\I-V-S\Spells\Spells.cs">
-    <Files>
-      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="1" Column="1" />
-      <File FileName="Assets\Menus\MainMenu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Menus\OverlayUI.cs" Line="9" Column="3" />
->>>>>>> origin/master
+      <File FileName="Assets\Menus\UI\OverlayUI.cs" Line="9" Column="80" />
+      <File FileName="Assets\char\Movement.cs" Line="1" Column="1" />
+      <File FileName="Assets\char\Pattacks.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\viggo.lunden\Downloads\a-vital-quest\New Unity Project\Assets\char\Pinventory.cs" line="29" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
