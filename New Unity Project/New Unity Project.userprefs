@@ -1,35 +1,22 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TucksRobeScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\I-V-S\Spells\ChargeboltScript.cs">
     <Files>
-      <File FileName="Assets\char\Pattacks.cs" Line="37" Column="27" />
-      <File FileName="Assets\char\Movement.cs" Line="37" Column="4" />
-      <File FileName="Assets\char\Pinventory.cs" Line="20" Column="26" />
-      <File FileName="Assets\HolyGrailScript.cs" Line="4" Column="29" />
-      <File FileName="Assets\ChestBehaviour.cs" Line="23" Column="21" />
-      <File FileName="Assets\Enemies\First_AI.cs" Line="18" Column="31" />
-      <File FileName="Assets\TucksRobeScript.cs" Line="9" Column="52" />
-      <File FileName="Assets\I-V-S\Items\Items.cs" Line="34" Column="31" />
-      <File FileName="Assets\I-V-S\Items\BaseItem.cs" Line="1" Column="1" />
-    </Files>
-  </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="C:\Users\viggo.lunden\Downloads\a-vital-quest\New Unity Project\Assets\I-V-S\Items\Items.cs" line="17" />
-      <Breakpoint file="C:\Users\viggo.lunden\Downloads\a-vital-quest\New Unity Project\Assets\I-V-S\Items\Items.cs" line="18" />
-    </BreakpointStore>
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Menus\UI\OverlayUI.cs">
-    <Files>
-      <File FileName="Assets\Menus\UI\OverlayUI.cs" Line="9" Column="80" />
-      <File FileName="Assets\char\Movement.cs" Line="1" Column="1" />
-      <File FileName="Assets\char\Pattacks.cs" Line="1" Column="1" />
+      <File FileName="Assets\char\Movement.cs" Line="34" Column="36" />
+      <File FileName="Assets\I-V-S\Items\Items.cs" Line="16" Column="3" />
+      <File FileName="Assets\I-V-S\Spells\Sstats.cs" Line="1" Column="1" />
+      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="65" Column="42" />
+      <File FileName="Assets\I-V-S\Spells\ChargeboltScript.cs" Line="8" Column="17" />
+      <File FileName="Assets\Enemies\First_AI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Enemies\Estats.cs" Line="1" Column="1" />
+      <File FileName="Assets\char\Pstats.cs" Line="1" Column="1" />
+      <File FileName="Assets\char\Pinventory.cs" Line="10" Column="1" />
+      <File FileName="Assets\TucksRobeScript.cs" Line="13" Column="34" />
+      <File FileName="Assets\HolyGrailScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
->>>>>>> origin/master
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

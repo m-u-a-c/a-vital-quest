@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour {
 		playerposition.y = rigidbody2D.transform.position.y;
 
 		Pattacks attacks = GetComponent<Pattacks> ();
-
+		gameObject.GetComponent<Pinventory> ().spell = new Chargebolt (gameObject);
 		if (move > 0 && !facingRight)
 		{
 			Flip ();
@@ -35,10 +35,6 @@ public class Movement : MonoBehaviour {
 		{
 			Flip ();
 		}
-<<<<<<< HEAD
-	
-=======
->>>>>>> origin/master
 
 		
 	}

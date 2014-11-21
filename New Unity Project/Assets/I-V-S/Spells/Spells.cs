@@ -29,28 +29,41 @@ public class MagicPeashooter : BaseSpell {
 			pea.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
 			pea.rigidbody2D.velocity = new Vector2(18, 0);
 				}	
-		go.GetComponent<Pstats> ().charges -= 1;
+		go.GetComponent<Pstats> ().charges -= Cost;
 	}
 }
 
 public class Chargebolt : BaseSpell {
 	GameObject go;
+
 	public Chargebolt(GameObject g)
 	{
 		SpellName = "Chargebolt";
 		go = g;
-	}
-	
-	public override void Stats ()
-	{
+
 		Cooldown = 6;
 		Cost = go.GetComponent<Pstats>().charges;
 		Damage = go.GetComponent<Pstats> ().charges + go.GetComponent<Pstats> ().sDamage * 0.5f;
 	}
+	
+	public override void Stats ()
+	{
+
+	}
 
 	public override void Effect ()
 	{
-		//NULL
+		GameObject bolt = (GameObject)Object.Instantiate (Resources.Load ("Spells/Chargebolt"));
+		bolt.transform.position = go.transform.position;
+		if (Left) {
+			bolt.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
+			bolt.rigidbody2D.velocity = new Vector2(-18, 0);
+		} else {
+			bolt.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
+			bolt.rigidbody2D.velocity = new Vector2(18, 0);
+		}	
+		go.GetComponent<Pstats> ().charges = 0;
+		Damage = go.GetComponent<Pstats> ().charges + go.GetComponent<Pstats> ().sDamage * 0.5f;
 	}
 }
 
@@ -60,6 +73,10 @@ public class GodBlessYou : BaseSpell {
 	{
 		SpellName = "God Bless You";
 		go = g;
+
+		Cooldown = 10;
+		Cost = 0;
+		Damage = 0;
 	}
 
 	public override void Effect ()
@@ -68,9 +85,7 @@ public class GodBlessYou : BaseSpell {
 	}
 	public override void Stats ()
 	{
-		Cooldown = 10;
-		Cost = 0;
-		Damage = 0;
+
 	}
 }
 
@@ -80,6 +95,10 @@ public class HolyWater : BaseSpell {
 	{
 		SpellName = "Holy Water";
 		go = g;
+
+		Cooldown = 3;
+		Cost = 4;
+		Damage = go.GetComponent<Pstats> ().sDamage * 0.2f;
 	}
 	
 	public override void Effect ()
@@ -88,9 +107,7 @@ public class HolyWater : BaseSpell {
 	}
 	public override void Stats ()
 	{
-		Cooldown = 3;
-		Cost = 4;
-		Damage = go.GetComponent<Pstats> ().sDamage * 0.2f;
+
 	}
 }
 
@@ -100,6 +117,10 @@ public class YaosShield : BaseSpell {
 	{
 		SpellName = "Yao's Shield";
 		go = g;
+
+		Cooldown = 5;
+		Cost = 4;
+		Damage = go.GetComponent<Pstats> ().sDamage * 0.2f;
 	}
 	
 	public override void Effect ()
@@ -108,9 +129,7 @@ public class YaosShield : BaseSpell {
 	}
 	public override void Stats ()
 	{
-		Cooldown = 5;
-		Cost = 4;
-		Damage = go.GetComponent<Pstats> ().sDamage * 0.2f;
+
 	}
 }
 

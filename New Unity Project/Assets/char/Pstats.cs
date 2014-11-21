@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Pstats : MonoBehaviour {
 	public float aDamage = 50;
-	public float sDamage = 5;
+	public float sDamage = 50;
 	public float defense = 10;
 	public float aSpeed = 100;
 	public float health = 100;
