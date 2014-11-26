@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Pinventory : MonoBehaviour {
+	public string name;
 	void Update()
 	{
+		name = spell.SpellName;
 		var go = GameObject.Find ("UI_Inventory");
 		go.guiText.text = "";
 		if (items.Count == 0)
