@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class First_AI : MonoBehaviour {
 	
@@ -18,6 +19,7 @@ public class First_AI : MonoBehaviour {
 	
 	void Start ()
 	{
+		
 		player = GameObject.FindGameObjectWithTag("Player");
 		//myplayer = new Controls ();
 	}
