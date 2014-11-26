@@ -16,11 +16,25 @@ public class ChestBehaviour : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll)
 	{
 		rnd = new System.Random ();
-		int i = rnd.Next (1, 3);
+		int i = rnd.Next (1, 5);
 		if (coll.gameObject.name == "Player" && !open) {
 						gameObject.GetComponent<SpriteRenderer> ().sprite = chest_open;
-		if (i == 1) SpawnItem ("PFTucksRobe");
-			else SpawnItem ("PFHolyGrail");
+		switch (i)
+			{
+			case 1:
+				SpawnItem ("PFTucksRobe");
+				break;
+			case 2:
+				SpawnItem ("PFHolyGrail");
+				break;
+			case 3:
+				SpawnItem ("PFChargebolt");
+				break;
+			case 4:
+				SpawnItem ("PFMagicPeashooter");
+				break;
+			}
+		 
 			open = true;
 		}
 
