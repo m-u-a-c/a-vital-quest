@@ -70,11 +70,7 @@
      <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
      <Compile Include="Assets\Menus\MainMenu.cs" />
-<<<<<<< HEAD
-     <Compile Include="Assets\Menus\UISpell.cs" />
-=======
-     <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
->>>>>>> 13d398d9b6192e0d2b3310825d3a15e4d1c2eddb
+     <Compile Include="Assets\Menus\Spellclick1.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\TucksRobeScript.cs" />
