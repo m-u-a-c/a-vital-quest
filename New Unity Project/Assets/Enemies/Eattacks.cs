@@ -45,6 +45,7 @@ public class Eattacks : MonoBehaviour {
 			StartCoroutine(Cooldown());
 			if(hittin)
 			{
+				AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find ("Player").gameObject.transform.position);
 				Estats statScript = GetComponent<Estats> ();
 				Dmg = statScript.aDamage;
 				hittin.gameObject.GetComponent<Pstats>().getHit(Dmg);

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class Pattacks : MonoBehaviour {
 	
 	Collider2D hittin;
@@ -12,6 +12,8 @@ public class Pattacks : MonoBehaviour {
 	public float knockbackSide;
 	public bool isOnCooldown = false;
 	public bool invincible = false;
+	public AudioClip swingsound, hitsound, chargeboltHit, chargeboltUse, peashooterUse, PeashooterHit, Pickupitem, meleeHit;
+
 
 	void Start ()
 	{
@@ -39,11 +41,16 @@ public class Pattacks : MonoBehaviour {
 		checkArea = new Vector2(side,transform.position.y + 2);
 		hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
+		if (Input.GetKeyDown (KeyCode.Mouse0))
+						AudioSource.PlayClipAtPoint (swingsound, gameObject.transform.position);
+
 		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
 		{
+
 			StartCoroutine(Cooldown());
 			if(hittin)
 			{
+				AudioSource.PlayClipAtPoint (hitsound, gameObject.transform.position);
 				Pstats statScript = GetComponent<Pstats> ();
 				Zwordstats swordScript = GetComponent<Zwordstats> ();
 				Dmg = statScript.aDamage;

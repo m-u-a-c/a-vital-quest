@@ -72,8 +72,11 @@
      <Compile Include="Assets\Menus\MainMenu.cs" />
      <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
      <Compile Include="Assets\Menus\UISpell.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\PFChargeBolt.cs" />
      <Compile Include="Assets\PFMagicPeashooter.cs" />
+=======
+>>>>>>> origin/master
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\TucksRobeScript.cs" />
@@ -85,7 +88,11 @@
      <Compile Include="Assets\char\Pspells.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
+<<<<<<< HEAD
  <HintPath>C:/Users/viggo.lunden/Downloads/A Vital Quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+=======
+ <HintPath>C:/Users/steven.keaykridiotis/Downloads/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+>>>>>>> origin/master
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
