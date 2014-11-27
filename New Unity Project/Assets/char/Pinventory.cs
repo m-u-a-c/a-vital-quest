@@ -6,6 +6,7 @@ public class Pinventory : MonoBehaviour {
 	public string name;
 	void Update()
 	{
+		spell.UpdateStats ();
 		name = spell.SpellName;
 //		var go = GameObject.Find ("UI_Inventory");
 //		go.guiText.text = "";

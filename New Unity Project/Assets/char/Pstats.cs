@@ -25,13 +25,20 @@ public class Pstats : MonoBehaviour {
 	public Slider healthbar;
 	public Slider chargeslider;
 	
+	public float timeleft = 1;
+
 	void Start ()
 	{
-	
+		timeleft = chargereg;
 	}
 
 	void Update ()
 	{
+		timeleft -= Time.deltaTime;
+		if (timeleft <= 0) {
+			charges++;
+			timeleft = chargereg;
+		}
 		// makes you unable to set charges above 5
 		if (charges >= 5)
 						charges = 5;
@@ -57,4 +64,7 @@ public class Pstats : MonoBehaviour {
 		yield return new WaitForSeconds(1);
 		invincible = false;
 	}
+
+	
+
 }

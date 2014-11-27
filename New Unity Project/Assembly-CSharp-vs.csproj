@@ -71,6 +71,7 @@
      <Compile Include="Assets\Menus\Spellclick1.cs" />
      <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
      <Compile Include="Assets\PFChargeboltScript.cs" />
+     <Compile Include="Assets\PFPeaScript.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
      <Compile Include="Assets\Resources\Items\HolyGrailScript.cs" />
      <Compile Include="Assets\Resources\Items\PFMagicPeashooterScript.cs" />
@@ -81,7 +82,6 @@
      <Compile Include="Assets\char\Movement.cs" />
      <Compile Include="Assets\char\Pattacks.cs" />
      <Compile Include="Assets\char\Pinventory.cs" />
-     <Compile Include="Assets\char\Pspells.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>C:/Users/viggo.lunden/Downloads/A Vital Quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
