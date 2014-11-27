@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 public class Pattacks : MonoBehaviour {
@@ -7,13 +8,17 @@ public class Pattacks : MonoBehaviour {
 	public Transform enemycheck;
 	Vector2 checkArea;
 	public LayerMask whatIsEnemy;
+
 	float Dmg;
 	public float side = 1;
 	public float knockbackSide;
 	public bool isOnCooldown = false;
 	public bool invincible = false;
+
 	public AudioClip swingsound, hitsound, chargeboltHit, chargeboltUse, peashooterUse, PeashooterHit, Pickupitem, meleeHit;
 
+	//UI
+	public Image spellimage;
 
 	void Start ()
 	{
@@ -61,7 +66,7 @@ public class Pattacks : MonoBehaviour {
 		}
 
 		if (gameObject.GetComponent<Pstats> ().charges > 0) {
-			if (Input.GetKeyDown (KeyCode.J)) {
+			if (Input.GetKeyDown (KeyCode.Q)) {
 				var spell = gameObject.GetComponent<Pinventory>().spell;
 				if (gameObject.GetComponent<Movement>().facingRight)
 				{

@@ -21,17 +21,14 @@ public class ChargeboltScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-<<<<<<< HEAD
 		if (coll.gameObject.name == "Enemy")
 						coll.gameObject.GetComponent<Estats> ().getHit (GameObject.Find("Player").GetComponent<Pinventory> ().spell.Damage);
-
-=======
+		
 		float asd = GameObject.Find ("Player").GetComponent<Pinventory> ().spell.Damage;
 		if (coll.gameObject.name == "Enemy") {
 						coll.gameObject.GetComponent<Estats> ().getHit (GameObject.Find ("Player").GetComponent<Pinventory> ().spell.Damage);
 						AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit, gameObject.transform.position);
 				}
->>>>>>> origin/master
 		Destroy (gameObject);
 	}
 }

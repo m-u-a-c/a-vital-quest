@@ -70,17 +70,10 @@
      <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
      <Compile Include="Assets\Menus\MainMenu.cs" />
-<<<<<<< HEAD
+     <Compile Include="Assets\Menus\PauseBehaviour.cs" />
      <Compile Include="Assets\Menus\Spellclick1.cs" />
-=======
-     <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
-     <Compile Include="Assets\Menus\UISpell.cs" />
-<<<<<<< HEAD
      <Compile Include="Assets\PFChargeBolt.cs" />
      <Compile Include="Assets\PFMagicPeashooter.cs" />
-=======
->>>>>>> origin/master
->>>>>>> origin/master
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\TucksRobeScript.cs" />
@@ -92,11 +85,7 @@
      <Compile Include="Assets\char\Pspells.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
-<<<<<<< HEAD
- <HintPath>C:/Users/viggo.lunden/Downloads/A Vital Quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
-=======
- <HintPath>C:/Users/steven.keaykridiotis/Downloads/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
->>>>>>> origin/master
+ <HintPath>C:/Users/Leon/Desktop/A vital quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
