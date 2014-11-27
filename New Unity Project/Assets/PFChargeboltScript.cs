@@ -11,6 +11,7 @@ public class PFChargeboltScript : MonoBehaviour {
 	
 	void OnCollisionStay2D(Collision2D coll) {
 		if (coll.gameObject.name == "Player" && Input.GetKey(KeyCode.E)) {
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().Pickupitem, GameObject.Find ("Player").gameObject.transform.position);
 			coll.gameObject.GetComponent<Pinventory>().spell = new Chargebolt(coll.gameObject);
 			Destroy(gameObject);
 		}

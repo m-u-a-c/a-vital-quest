@@ -41,7 +41,7 @@ public class Movement : MonoBehaviour {
 	void Start()
 	{
 		gameObject.GetComponent<Pinventory> ().spell = new MagicPeashooter(gameObject);
-		}
+	}
 
 	void Flip()
 	{
