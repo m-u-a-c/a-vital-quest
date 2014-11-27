@@ -20,5 +20,5 @@ public abstract class BaseSpell {
 				set;
 	}
 	abstract public void Effect ();
-	abstract public void Stats ();
+	abstract public void UpdateStats ();
 }

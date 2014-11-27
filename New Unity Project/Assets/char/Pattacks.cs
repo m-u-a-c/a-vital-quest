@@ -8,7 +8,7 @@ public class Pattacks : MonoBehaviour {
 	public Transform enemycheck;
 	Vector2 checkArea;
 	public LayerMask whatIsEnemy;
-
+	public float timeleft;
 	float Dmg;
 	public float side = 1;
 	public float knockbackSide;
@@ -27,6 +27,7 @@ public class Pattacks : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
+		timeleft -= Time.deltaTime;
 		if (gameObject.GetComponent<Movement>().facingRight)
 		{
 			side = transform.position.x + 2;
@@ -65,8 +66,9 @@ public class Pattacks : MonoBehaviour {
 			}
 		}
 
-		if (gameObject.GetComponent<Pstats> ().charges > 0) {
-			if (Input.GetKeyDown (KeyCode.Q)) {
+		if (gameObject.GetComponent<Pstats> ().charges > 0 && timeleft <= 0 && Input.GetKeyUp (KeyCode.Q)) {
+			timeleft = gameObject.GetComponent<Pinventory>().spell.Cooldown;	
+
 				var spell = gameObject.GetComponent<Pinventory>().spell;
 				if (gameObject.GetComponent<Movement>().facingRight)
 				{
@@ -74,9 +76,9 @@ public class Pattacks : MonoBehaviour {
 				}
 				else
 					gameObject.GetComponent<Pinventory>().spell.Left = true;
-				
+
+				if (gameObject.GetComponent<Pinventory>().spell.Cost <= gameObject.GetComponent<Pstats>().charges)
 				gameObject.GetComponent<Pinventory> ().spell.Effect ();
-			}		
 		}
 	}
 

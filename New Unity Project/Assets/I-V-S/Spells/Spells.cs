@@ -9,10 +9,6 @@ public class MagicPeashooter : BaseSpell {
 		Left = true;
 		SpellName = "Magic Peashooter";
 		go = g;
-	}
-
-	public override void Stats ()
-	{
 		Cooldown = 0;
 		Cost = 1;
 		Damage = go.GetComponent<Pstats> ().sDamage * 0.4f;
@@ -24,12 +20,17 @@ public class MagicPeashooter : BaseSpell {
 		pea.transform.position = go.transform.position;
 		if (Left) {
 			pea.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
-			pea.rigidbody2D.velocity = new Vector2(-18, 0);
+			pea.rigidbody2D.velocity = new Vector2(-25, 0);
 				} else {
 			pea.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
-			pea.rigidbody2D.velocity = new Vector2(18, 0);
+			pea.rigidbody2D.velocity = new Vector2(25, 0);
 				}	
 		go.GetComponent<Pstats> ().charges -= Cost;
+	}
+
+	public override void UpdateStats ()
+	{
+
 	}
 }
 
@@ -41,14 +42,9 @@ public class Chargebolt : BaseSpell {
 		SpellName = "Chargebolt";
 		go = g;
 
-		Cooldown = 6;
-		Cost = go.GetComponent<Pstats>().charges;
+		Cooldown = 3;
+		Cost = go.GetComponent<Pstats>().charges; 
 		Damage = go.GetComponent<Pstats> ().charges + go.GetComponent<Pstats> ().sDamage * 0.5f;
-	}
-	
-	public override void Stats ()
-	{
-
 	}
 
 	public override void Effect ()
@@ -63,6 +59,12 @@ public class Chargebolt : BaseSpell {
 			bolt.rigidbody2D.velocity = new Vector2(18, 0);
 		}	
 		go.GetComponent<Pstats> ().charges = 0;
+
+	}
+
+	public override void UpdateStats ()
+	{
+		Cost = go.GetComponent<Pstats>().charges; 
 		Damage = go.GetComponent<Pstats> ().charges + go.GetComponent<Pstats> ().sDamage * 0.5f;
 	}
 }
@@ -83,9 +85,10 @@ public class GodBlessYou : BaseSpell {
 	{
 		//TODO: Convert enemy
 	}
-	public override void Stats ()
-	{
 
+	public override void UpdateStats ()
+	{
+		
 	}
 }
 
@@ -105,9 +108,10 @@ public class HolyWater : BaseSpell {
 	{
 		//TODO: Creats an AOE that deals 20% of sDamage each second for 3s
 	}
-	public override void Stats ()
-	{
 
+	public override void UpdateStats ()
+	{
+		
 	}
 }
 
@@ -127,9 +131,10 @@ public class YaosShield : BaseSpell {
 	{
 		//TODO: Summons a mighty shield which moves forward and pushes enemies hit back a short distance. Lasts 3s. The shield can also be jumped on and has standard collision.
 	}
-	public override void Stats ()
-	{
 
+	public override void UpdateStats ()
+	{
+		
 	}
 }
 
