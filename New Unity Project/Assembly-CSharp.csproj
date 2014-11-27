@@ -53,10 +53,7 @@
      <Compile Include="Assets\Enemies\Estats.cs" />
      <Compile Include="Assets\Enemies\First_AI.cs" />
      <Compile Include="Assets\Enemies\SpawnerScript.cs" />
-     <Compile Include="Assets\HolyGrailScript.cs" />
      <Compile Include="Assets\I-V-S\Items\BaseItem.cs" />
-     <Compile Include="Assets\I-V-S\Items\Ilist.cs" />
-     <Compile Include="Assets\I-V-S\Items\Istats.cs" />
      <Compile Include="Assets\I-V-S\Items\Items.cs" />
      <Compile Include="Assets\I-V-S\Spells\BaseSpell.cs" />
      <Compile Include="Assets\I-V-S\Spells\ChargeboltScript.cs" />
@@ -72,11 +69,13 @@
      <Compile Include="Assets\Menus\MainMenu.cs" />
      <Compile Include="Assets\Menus\PauseBehaviour.cs" />
      <Compile Include="Assets\Menus\Spellclick1.cs" />
-     <Compile Include="Assets\PFChargeBolt.cs" />
-     <Compile Include="Assets\PFMagicPeashooter.cs" />
+     <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
+     <Compile Include="Assets\PFChargeboltScript.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
+     <Compile Include="Assets\Resources\Items\HolyGrailScript.cs" />
+     <Compile Include="Assets\Resources\Items\PFMagicPeashooterScript.cs" />
+     <Compile Include="Assets\Resources\Items\TucksRobeScript.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
-     <Compile Include="Assets\TucksRobeScript.cs" />
      <Compile Include="Assets\char\CameraFollow.cs" />
      <Compile Include="Assets\char\Controls.cs" />
      <Compile Include="Assets\char\Movement.cs" />

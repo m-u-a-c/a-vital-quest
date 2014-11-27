@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PFMagicPeashooter : MonoBehaviour {
+public class PFMagicPeashooterScript : MonoBehaviour {
 	
 	void OnCollisionEnter2D(Collision2D coll)
 	{
