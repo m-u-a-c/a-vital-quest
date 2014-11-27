@@ -53,10 +53,10 @@ public class Chargebolt : BaseSpell {
 		bolt.transform.position = go.transform.position;
 		if (Left) {
 			bolt.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
-			bolt.rigidbody2D.velocity = new Vector2(-18, 0);
+			bolt.rigidbody2D.velocity = new Vector2(-22, 0);
 		} else {
 			bolt.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
-			bolt.rigidbody2D.velocity = new Vector2(18, 0);
+			bolt.rigidbody2D.velocity = new Vector2(22, 0);
 		}	
 		go.GetComponent<Pstats> ().charges = 0;
 

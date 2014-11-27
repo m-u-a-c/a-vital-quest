@@ -1,23 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Chest\ChestBehaviour.cs">
     <Files>
-      <File FileName="Assets\Chest\ChestBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets\Menus\PauseBehaviour.cs" Line="1" Column="1" />
-      <File FileName="Assets\Enemies\Eattacks.cs" Line="1" Column="1" />
-      <File FileName="Assets\char\Pstats.cs" Line="1" Column="1" />
-      <File FileName="Assets\char\Pattacks.cs" Line="1" Column="1" />
-      <File FileName="Assets\Enemies\Estats.cs" Line="1" Column="1" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\I-V-S\Spells\ChargeboltScript.cs">
-    <Files>
-      <File FileName="Assets\Enemies\Eattacks.cs" Line="21" Column="16" />
-      <File FileName="Assets\char\Pattacks.cs" Line="1" Column="1" />
-      <File FileName="Assets\I-V-S\Spells\ChargeboltScript.cs" Line="25" Column="3" />
-      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="45" Column="15" />
-      <File FileName="Assets\char\Pinventory.cs" Line="1" Column="1" />
->>>>>>> origin/master
+      <File FileName="Assets\I-V-S\Items\Items.cs" Line="1" Column="1" />
+      <File FileName="Assets\char\Pinventory.cs" Line="42" Column="3" />
+      <File FileName="Assets\PFChargeboltScript.cs" Line="20" Column="1" />
+      <File FileName="Assets\PFPeaScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Items\BaseItemPF.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Items\HolyGrailScript.cs" Line="15" Column="54" />
+      <File FileName="Assets\Resources\Items\PFMagicPeashooterScript.cs" Line="12" Column="44" />
+      <File FileName="Assets\I-V-S\Spells\ChargeboltScript.cs" Line="26" Column="3" />
+      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="40" Column="30" />
+      <File FileName="Assets\Chest\ChestBehaviour.cs" Line="34" Column="11" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
