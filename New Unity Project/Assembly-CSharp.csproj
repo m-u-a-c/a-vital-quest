@@ -47,8 +47,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Chest\ChestBehaviour.cs" />
-     <Compile Include="Assets\Chest\Cplacement.cs" />
-     <Compile Include="Assets\Chest\Cspawning.cs" />
      <Compile Include="Assets\Enemies\Eattacks.cs" />
      <Compile Include="Assets\Enemies\Estats.cs" />
      <Compile Include="Assets\Enemies\First_AI.cs" />
@@ -69,7 +67,7 @@
      <Compile Include="Assets\I-V-S\Weapons\Wlist.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
-     <Compile Include="Assets\Menus\MainMenu.cs" />
+     <Compile Include="Assets\Menus\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Menus\PauseBehaviour.cs" />
      <Compile Include="Assets\Menus\Spellclick1.cs" />
      <Compile Include="Assets\PFChargeBolt.cs" />
