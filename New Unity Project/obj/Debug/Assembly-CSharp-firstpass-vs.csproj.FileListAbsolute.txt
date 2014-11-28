@@ -1,0 +1,12 @@
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\UnityEditor.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\UnityEngine.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\UnityEngine.UI.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\Mono.Cecil.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\nunit.framework.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\Unity.DataContract.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass-vs.csprojResolveAssemblyReference.cache
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.dll
+E:\Dropbox\Projekt\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.pdb
