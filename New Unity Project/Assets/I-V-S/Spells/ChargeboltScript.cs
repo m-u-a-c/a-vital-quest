@@ -30,7 +30,20 @@ public class ChargeboltScript : MonoBehaviour {
 		timeleft -= Time.deltaTime;
 		if (timeleft <= 0) {
 			timeleft = changetime;
-
+			switch (sprite)
+			{
+			case 0:
+				gameObject.GetComponent<SpriteRenderer>().sprite = sprite0;
+				break;
+			case 1:
+				gameObject.GetComponent<SpriteRenderer>().sprite = sprite1;
+				break;
+			case 2:
+				sprite = -1;
+				gameObject.GetComponent<SpriteRenderer>().sprite = sprite2;
+				break;
+			}
+			sprite++;
 
 		}
 	}
