@@ -6,6 +6,8 @@ public class Movement : MonoBehaviour {
 	public float maxSpeed = 10f;
 	public float jumpForce = 1000f;
 
+	public Sprite run0, run1, run2, run3, standing0;
+
 	public Vector2 playerposition;
 	bool grounded = false;
 	public Transform groundcheck;
@@ -15,8 +17,49 @@ public class Movement : MonoBehaviour {
 	//flippin
 	public bool facingRight = true;
 
+	public float changetime;
+	public float timeleft;
+	bool moving = false;
+	int runsprite = 0;
+	bool wayback = true;
+	public float speed;
 	void FixedUpdate ()
 	{
+
+		speed = gameObject.rigidbody2D.velocity.x;
+		moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
+		timeleft -= Time.deltaTime;
+		if (timeleft <= 0 && moving) {
+						timeleft = changetime;
+						switch (runsprite) {
+						case 0:
+								runsprite++;
+								wayback = !wayback;
+								gameObject.GetComponent<SpriteRenderer> ().sprite = run0;
+								break;
+						case 1:
+								if (wayback)
+										runsprite--;
+								else
+										runsprite++;
+								gameObject.GetComponent<SpriteRenderer> ().sprite = run1;
+								break;
+						case 2:
+								if (wayback)
+										runsprite--;
+								else
+										runsprite++;
+								gameObject.GetComponent<SpriteRenderer> ().sprite = run2;
+								break;
+						case 3:
+								runsprite--;
+								wayback = true;
+								gameObject.GetComponent<SpriteRenderer> ().sprite = run3;
+								break;
+						}
+				} else if (!moving)
+						gameObject.GetComponent<SpriteRenderer> ().sprite = standing0;
+
 		grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 
 		float move = Input.GetAxis ("Horizontal");
@@ -41,7 +84,7 @@ public class Movement : MonoBehaviour {
 	void Start()
 	{
 		gameObject.GetComponent<Pinventory> ().spell = new MagicPeashooter(gameObject);
-		}
+	}
 
 	void Flip()
 	{

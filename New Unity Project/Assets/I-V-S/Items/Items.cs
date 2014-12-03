@@ -17,6 +17,11 @@ public class HolyGrail : BaseItem  {
 		go.GetComponent<Pstats> ().healthreg += 5;
 		go.GetComponent<Pstats> ().maxhealth += 15;
 	}
+	public override void RevertStats ()
+	{
+		go.GetComponent<Pstats> ().healthreg -= 5;
+		go.GetComponent<Pstats> ().maxhealth -= 15;
+	}
 }
 
 public class FriarTucksRobe : BaseItem {
@@ -34,8 +39,14 @@ public class FriarTucksRobe : BaseItem {
 	public override void Stats ()
 	{
 		go.GetComponent<Pstats> ().charges += 2;
-		go.GetComponent<Pstats> ().chargereg += 2;
+		go.GetComponent<Pstats> ().chargereg -= 0.5f;
 	}
+
+	public override void RevertStats ()
+	{
+		go.GetComponent<Pstats> ().chargereg += 0.5f;
+	}
+
 }
 
 public class GlassIdol : BaseItem {
@@ -54,6 +65,10 @@ public class GlassIdol : BaseItem {
 	{
 		//NULL
 	}
+	public override void RevertStats ()
+	{
+
+	}
 }
 
 public class LuckyHorseshoe : BaseItem {
@@ -69,6 +84,10 @@ public class LuckyHorseshoe : BaseItem {
 	public override void Stats ()
 	{
 		go.GetComponent<Pstats> ().critchance += 10;
+		
+	}
+	public override void RevertStats ()
+	{
 		
 	}
 }
@@ -90,6 +109,10 @@ public class BootsOfUrgency : BaseItem {
 		go.GetComponent<Pstats> ().aSpeed += 20;
 		go.GetComponent<Pstats> ().movement += 20;
 	}
+	public override void RevertStats ()
+	{
+		
+	}
 }
 
 public class SturdySocks : BaseItem {
@@ -107,6 +130,10 @@ public class SturdySocks : BaseItem {
 	{
 
 		go.GetComponent<Pstats> ().aDamage += 3;
+	}
+	public override void RevertStats ()
+	{
+		
 	}
 }
 
@@ -126,6 +153,10 @@ public class MysticalOrb : BaseItem {
 	{
 		go.GetComponent<Pstats> ().sDamage += 3;
 		go.GetComponent<Pstats> ().chargereg += 4;
+	}
+	public override void RevertStats ()
+	{
+		
 	}
 }
 

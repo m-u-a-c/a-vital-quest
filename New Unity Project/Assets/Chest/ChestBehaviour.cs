@@ -5,6 +5,8 @@ using System.IO;
 public class ChestBehaviour : MonoBehaviour {
 	public Sprite chest_open;
 	public bool open = false;
+	public bool random = true;
+	public GameObject prefab;
 	System.Random rnd;
 	enum Items {HolyGrail, FriarTucksRobe, GlassIdol, BootsOfUrgency, SturdySocks, MysticalOrb}
 
@@ -19,7 +21,9 @@ public class ChestBehaviour : MonoBehaviour {
 		int i = rnd.Next (1, 5);
 		if (coll.gameObject.name == "Player" && !open) {
 						gameObject.GetComponent<SpriteRenderer> ().sprite = chest_open;
-		switch (i)
+		if (random) 
+			{
+			switch (i)
 			{
 			case 1:
 				SpawnItem ("PFTucksRobe");
@@ -34,7 +38,11 @@ public class ChestBehaviour : MonoBehaviour {
 				SpawnItem ("PFMagicPeashooter");
 				break;
 			}
-		 
+			}
+			else
+			{
+				SpawnItem (prefab.name);
+			}
 			open = true;
 		}
 

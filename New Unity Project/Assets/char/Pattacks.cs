@@ -48,7 +48,7 @@ public class Pattacks : MonoBehaviour {
 		hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
 		if (Input.GetKeyDown (KeyCode.Mouse0))
-						AudioSource.PlayClipAtPoint (swingsound, gameObject.transform.position);
+						AudioSource.PlayClipAtPoint (swingsound, gameObject.transform.position, 1f);
 
 		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
 		{
@@ -56,7 +56,7 @@ public class Pattacks : MonoBehaviour {
 			StartCoroutine(Cooldown());
 			if(hittin)
 			{
-				AudioSource.PlayClipAtPoint (hitsound, gameObject.transform.position);
+				AudioSource.PlayClipAtPoint (hitsound, gameObject.transform.position, 1);
 				Pstats statScript = GetComponent<Pstats> ();
 				Zwordstats swordScript = GetComponent<Zwordstats> ();
 				Dmg = statScript.aDamage;

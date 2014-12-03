@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class Pinventory : MonoBehaviour {
 	public string name;
+	public Sprite Chargebolt;
+	public Sprite Peashooter;
 	void Update()
 	{
 		spell.UpdateStats ();
@@ -31,6 +34,7 @@ public class Pinventory : MonoBehaviour {
 
 	public List<BaseItem> items;
 	public BaseSpell spell;
+
 	void Start () {
 		items = new List<BaseItem>();
 	}
@@ -46,6 +50,16 @@ public class Pinventory : MonoBehaviour {
 	}
 	public void RemoveItem (BaseItem item)
 	{
-		items.Remove (item);
+				item.RevertStats ();
+				items.Remove (item);
 	}
+	public void SetSpell (BaseSpell s)
+	{
+		spell = s;
+		if (s.SpellName == "Magic Peashooter")
+						GameObject.Find ("Spell").GetComponent<Image> ().sprite = Peashooter;
+				else
+						GameObject.Find ("Spell").GetComponent<Image> ().sprite = Chargebolt;
+	}
+
 }
