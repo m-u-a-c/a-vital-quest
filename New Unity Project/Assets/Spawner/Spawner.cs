@@ -5,6 +5,11 @@ public class Spawner : MonoBehaviour {
 
 	public float health = 20;
 
+	public void Start()
+	{
+
+	}
+
 	//Spawns an object with the specified PREFAB name that is located in the Resources/Spawner folder
 	//Example:
 	//GameObject go = GameObject.Find ("PFSpawner");
@@ -15,27 +20,17 @@ public class Spawner : MonoBehaviour {
 		go.transform.position = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
 	}
 	float start_time = Time.timeSinceLevelLoad;
-	float cd;
+	public float cd;
+	public string object_to_spawn;
 	bool timer = false;
+	float timeleft;
 	string gospawn;
-	public void SetTimer(string name, float interval)
-	{
-		gospawn = name;
-		cd = interval;
-		timer = true;
-	}
-	public void DeactivateTimer()
-	{
-		timer = false;
-		}
 	void Update()
 	{
-		if (!timer)
-						return;
-		if (Time.timeSinceLevelLoad - start_time > cd) {
-			SpawnObject(gospawn);
-			start_time = Time.timeSinceLevelLoad;
-
+		timeleft -= Time.deltaTime;
+		if (timeleft == 0) {
+			timeleft = cd;
+			SpawnObject(object_to_spawn);
 		}
 	}
 }

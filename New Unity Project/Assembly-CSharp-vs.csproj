@@ -81,11 +81,7 @@
      <Compile Include="Assets\char\Pinventory.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
-<<<<<<< HEAD
  <HintPath>C:/Users/Leon/Desktop/A vital quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
-=======
- <HintPath>C:/Users/viggo.lunden/Downloads/muac/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
->>>>>>> origin/master
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
