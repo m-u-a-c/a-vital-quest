@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour {
 	public float maxSpeed = 10f;
 	public float jumpForce = 1000f;
 
-	public Sprite run0, run1, run2, run3, standing0;
+	public Sprite run0, run1, run2, run3, standing0, jumping0, jumping1;
 
 	public Vector2 playerposition;
 	bool grounded = false;
@@ -17,10 +17,10 @@ public class Movement : MonoBehaviour {
 	//flippin
 	public bool facingRight = true;
 
-	public float changetime;
-	public float timeleft;
+	public float changetime, changetime_jump;
+	public float timeleft, timeleft_jump;
 	bool moving = false;
-	int runsprite = 0;
+	int runsprite = 0, jumpsprite = 0;
 	bool wayback = true;
 	public float speed;
 	void FixedUpdate ()
@@ -29,7 +29,23 @@ public class Movement : MonoBehaviour {
 		speed = gameObject.rigidbody2D.velocity.x;
 		moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
 		timeleft -= Time.deltaTime;
-		if (timeleft <= 0 && moving) {
+		timeleft_jump -= Time.deltaTime;
+		if (timeleft_jump <= 0 && !grounded && gameObject.rigidbody2D.velocity.y > 0) {
+			timeleft_jump = changetime_jump;
+			if (jumpsprite == 0)
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = jumping0;
+				jumpsprite = 1;
+			}
+			else
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = jumping1;
+				jumpsprite = 0;
+			}
+		}
+		
+
+		if (timeleft <= 0 && moving && grounded) {
 						timeleft = changetime;
 						switch (runsprite) {
 						case 0:
@@ -84,7 +100,7 @@ public class Movement : MonoBehaviour {
 	void Start()
 	{
 		gameObject.GetComponent<Pinventory> ().spell = new MagicPeashooter(gameObject);
-	}
+		}
 
 	void Flip()
 	{
