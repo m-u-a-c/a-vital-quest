@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +67,6 @@
      <Compile Include="Assets\Menus\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Menus\PauseBehaviour.cs" />
      <Compile Include="Assets\Menus\Spellclick1.cs" />
-     <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
      <Compile Include="Assets\PFChargeboltScript.cs" />
      <Compile Include="Assets\PFPeaScript.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
@@ -82,7 +81,7 @@
      <Compile Include="Assets\char\Pinventory.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

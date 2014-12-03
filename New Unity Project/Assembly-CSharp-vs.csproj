@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -67,7 +67,6 @@
      <Compile Include="Assets\Menus\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Menus\PauseBehaviour.cs" />
      <Compile Include="Assets\Menus\Spellclick1.cs" />
-     <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
      <Compile Include="Assets\PFChargeboltScript.cs" />
      <Compile Include="Assets\PFPeaScript.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
@@ -82,18 +81,10 @@
      <Compile Include="Assets\char\Pinventory.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="Assembly-UnityScript-firstpass">
-<<<<<<< HEAD
-<<<<<<< HEAD
- <HintPath>C:/Users/steven.keaykridiotis/Downloads/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
-=======
  <HintPath>C:/Users/Leon/Desktop/A vital quest/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
->>>>>>> 58edd8c16cdb63430b83dba3b78c786119e2c5a7
-=======
- <HintPath>E:/Dropbox/Projekt/a-vital-quest/New Unity Project/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
->>>>>>> 97f10e5d189eea7ba649a7c6a9f7900d62fbd7e1
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
