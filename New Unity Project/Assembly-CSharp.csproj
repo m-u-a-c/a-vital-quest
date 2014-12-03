@@ -67,6 +67,7 @@
      <Compile Include="Assets\Menus\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Menus\PauseBehaviour.cs" />
      <Compile Include="Assets\Menus\Spellclick1.cs" />
+     <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
      <Compile Include="Assets\PFChargeboltScript.cs" />
      <Compile Include="Assets\PFPeaScript.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />

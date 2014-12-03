@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour {
 	public float maxSpeed = 10f;
 	public float jumpForce = 1000f;
 
-	public Sprite run0, run1, run2, run3, standing0, jumping0, jumping1;
+	public Sprite run0, run1, run2, run3, standing0, standing1, standing2, standing3, jumping0, jumping1;
 
 	public Vector2 playerposition;
 	bool grounded = false;
@@ -17,11 +17,11 @@ public class Movement : MonoBehaviour {
 	//flippin
 	public bool facingRight = true;
 
-	public float changetime, changetime_jump;
-	public float timeleft, timeleft_jump;
+	public float changetime, changetime_jump, changetime_still;
+	public float timeleft, timeleft_jump, timeleft_still;
 	bool moving = false;
-	int runsprite = 0, jumpsprite = 0;
-	bool wayback = true;
+	int runsprite = 0, jumpsprite = 0, stillsprite = 0;
+	bool wayback = true, wayback_still = true;
 	public float speed;
 	void FixedUpdate ()
 	{
@@ -30,6 +30,8 @@ public class Movement : MonoBehaviour {
 		moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
 		timeleft -= Time.deltaTime;
 		timeleft_jump -= Time.deltaTime;
+		timeleft_still -= Time.deltaTime;
+
 		if (timeleft_jump <= 0 && !grounded && gameObject.rigidbody2D.velocity.y > 0) {
 			timeleft_jump = changetime_jump;
 			if (jumpsprite == 0)
@@ -44,6 +46,35 @@ public class Movement : MonoBehaviour {
 			}
 		}
 		
+		if (timeleft_still <= 0 && grounded && !moving) {
+			timeleft_still = changetime_still;
+			switch (stillsprite) {
+			case 0:
+				stillsprite++;
+				wayback_still = !wayback_still;
+				gameObject.GetComponent<SpriteRenderer> ().sprite = standing0;
+				break;
+			case 1:
+				if (wayback)
+					stillsprite--;
+				else
+					stillsprite++;
+				gameObject.GetComponent<SpriteRenderer> ().sprite = standing1;
+				break;
+			case 2:
+				if (wayback)
+					stillsprite--;
+				else
+					stillsprite++;
+				gameObject.GetComponent<SpriteRenderer> ().sprite = standing2;
+				break;
+			case 3:
+				stillsprite--;
+				wayback_still = true;
+				gameObject.GetComponent<SpriteRenderer> ().sprite = standing3;
+				break;
+			}	
+		}
 
 		if (timeleft <= 0 && moving && grounded) {
 						timeleft = changetime;
@@ -73,8 +104,7 @@ public class Movement : MonoBehaviour {
 								gameObject.GetComponent<SpriteRenderer> ().sprite = run3;
 								break;
 						}
-				} else if (!moving)
-						gameObject.GetComponent<SpriteRenderer> ().sprite = standing0;
+				}
 
 		grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 

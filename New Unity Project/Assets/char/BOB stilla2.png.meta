@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: 799c503cef66b0545817f2442b003a1c
+guid: 56b1ece0167ca634f83ef494234d2a40
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: BOB stilla1
-    21300002: Stilla
-    21300004: Stilla 1
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
