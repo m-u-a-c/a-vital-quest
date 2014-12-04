@@ -28,7 +28,7 @@ public class Spawner : MonoBehaviour {
 	void Update()
 	{
 		timeleft -= Time.deltaTime;
-		if (timeleft == 0) {
+		if (timeleft <= 0) {
 			timeleft = cd;
 			SpawnObject(object_to_spawn);
 		}

@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
 	int runsprite = 0, jumpsprite = 0, stillsprite = 0;
 	bool wayback = true, wayback_still = true;
 	public float speed;
+
 	void FixedUpdate ()
 	{
 
@@ -110,6 +111,11 @@ public class Movement : MonoBehaviour {
 
 		float move = Input.GetAxis ("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
+
+//		if()
+//		{
+//
+//		}
 		
 		playerposition.x = rigidbody2D.transform.position.x;
 		playerposition.y = rigidbody2D.transform.position.y;
