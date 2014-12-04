@@ -1,15 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Spawner\Spawner.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Enemies\First_AI.cs">
     <Files>
-      <File FileName="Assets\Spawner\Spawner.cs" Line="19" Column="33" />
-      <File FileName="Assets\char\Movement.cs" Line="34" Column="17" />
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\char\Movement.cs">
-    <Files>
-      <File FileName="Assets\char\Movement.cs" Line="39" Column="26" />
->>>>>>> origin/master
+      <File FileName="Assets\char\Movement.cs" Line="128" Column="78" />
+      <File FileName="Assets\Enemies\First_AI.cs" Line="19" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
