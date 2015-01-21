@@ -26,6 +26,7 @@ public class Pstats : MonoBehaviour {
 	public Slider chargeslider;
 	
 	public float timeleft = 1;
+	public float invincibilitytimer = 3;
 
 	void Start ()
 	{
@@ -50,18 +51,27 @@ public class Pstats : MonoBehaviour {
 
 	}
 
+	void FixedUpdate()
+	{
+
+	}
+
+
 	public void getHit(float damageTaken)
 	{
+		if(invincible == false)
+		{
 		health -= damageTaken;
 		healthbar.value = health;
 		Invincibility ();
+		}
 		//gameObject.SendMessage ("Ja", 10);
 	}
 
 	public IEnumerator Invincibility()
 	{
 		invincible = true;
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(invincibilitytimer);
 		invincible = false;
 	}
 

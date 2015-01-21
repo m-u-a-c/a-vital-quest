@@ -4,15 +4,18 @@ using System.Collections;
 public class Movement : MonoBehaviour {
 	//runnin & jumpin
 	public float maxSpeed = 10f;
-	public float jumpForce = 1000f;
+	public float jumpForce = 50f;
+	public float jumptime = 20000f;
 
 	public Sprite run0, run1, run2, run3, standing0, standing1, standing2, standing3, jumping0, jumping1, falling0, falling1;
 
 	public Vector2 playerposition;
-	bool grounded = false;
+	Collider2D grounded;
 	public Transform groundcheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
+
+	public float platformspeed = 0;
 	
 	//flipping
 	public bool facingRight = true;
@@ -124,14 +127,14 @@ public class Movement : MonoBehaviour {
 				}
 
 		grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
-
+//		if (grounded.gameObject.name == "MovingPlatform")
+//						platformspeed = grounded.gameObject.GetComponent<Rigidbody2D> ().velocity.x;
+//				else
+//						platformspeed = 0;
+//		if (grounded.gameObject.name == "Spikes")
+//						gameObject.GetComponent<Pstats> ().getHit(90);
 		float move = Input.GetAxis ("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
-
-//		if()
-//		{
-//
-//		}
 		
 		playerposition.x = rigidbody2D.transform.position.x;
 		playerposition.y = rigidbody2D.transform.position.y;
@@ -146,8 +149,15 @@ public class Movement : MonoBehaviour {
 		{
 			Flip ();
 		}
-
-		
+		if(grounded)
+		{jumptime = 20000f;}
+		if (jumptime == 20000 && Input.GetKeyDown(KeyCode.Space)) 
+		{
+						rigidbody2D.velocity = new Vector2(0,20);
+			//rigidbody2D.AddForce(new Vector2(0, jumpForce));
+		}
+		if (!grounded)
+						jumptime -= 2;
 	}
 	void Start()
 	{
@@ -164,9 +174,12 @@ public class Movement : MonoBehaviour {
 
 	void Update()
 	{
-		if (grounded && Input.GetKeyDown(KeyCode.Space)) 
-		{
-			rigidbody2D.AddForce(new Vector2(0, jumpForce));
-		}
+//		if(grounded)
+//		{jumptime = 20000f;}
+//		if (jumptime == 20000 && Input.GetKeyDown(KeyCode.Space)) 
+//		{
+////			rigidbody2D.velocity = new Vector2(0,50);
+//			rigidbody2D.AddForce(new Vector2(0, jumpForce));
+//		}
 	}
 }

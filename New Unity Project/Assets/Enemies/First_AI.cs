@@ -17,11 +17,11 @@ public class First_AI : MonoBehaviour {
 
 	public Sprite still0, run0, run1, run2, run3;
 
-	bool grounded = false;
+	public Vector2 enemyposition;
+	Collider2D grounded;
 	public Transform groundcheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
-	public bool facingRight = true;
 	
 	void Start ()
 	{

@@ -1,15 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\char\Movement.cs">
-    <Files>
-      <File FileName="Assets\char\Movement.cs" Line="123" Column="29" />
-=======
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Enemies\First_AI.cs">
     <Files>
-      <File FileName="Assets\char\Movement.cs" Line="128" Column="78" />
-      <File FileName="Assets\Enemies\First_AI.cs" Line="19" Column="2" />
->>>>>>> origin/master
+      <File FileName="Assets\Enemies\First_AI.cs" Line="11" Column="28" />
+      <File FileName="Assets\char\Movement.cs" Line="4" Column="13" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -19,7 +19,7 @@ public class VPlatformScript : MonoBehaviour {
 		{
 			distance -= 1;
 			speed = 5;
-			rigidbody2D.velocity = new Vector2 (rigidbody2D.velocity.x, speed);
+			rigidbody2D.velocity = new Vector2 (0, speed);
 			if(distance <= 0)
 			{
 				Up =false;
