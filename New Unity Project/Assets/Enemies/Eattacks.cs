@@ -12,6 +12,8 @@ public class Eattacks : MonoBehaviour {
 	public float knockbackSide;
 	public bool isOnCooldown = false;
 
+
+
 	void Start ()
 	{
 	
@@ -20,6 +22,9 @@ public class Eattacks : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+
+
+
 		if (gameObject.GetComponent<First_AI>().facingRight)
 		{
 			side = transform.position.x + 2;

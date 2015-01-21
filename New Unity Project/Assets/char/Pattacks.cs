@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Pattacks : MonoBehaviour {
 	
 	Collider2D hittin;
+	RaycastHit2D hitting;
 	public Transform enemycheck;
 	Vector2 checkArea;
 	public LayerMask whatIsEnemy;
@@ -19,7 +20,12 @@ public class Pattacks : MonoBehaviour {
 
 	//UI
 	public Image spellimage;
-
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawRay (new Vector2(gameObject.renderer.bounds.center.x, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x + 2f, gameObject.renderer.bounds.center.y - 2f));
+		Gizmos.DrawRay (new Vector2(gameObject.renderer.bounds.center.x, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x - 2f, gameObject.renderer.bounds.center.y - 2f));
+	}
 	void Start ()
 	{
 		
@@ -28,6 +34,27 @@ public class Pattacks : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		timeleft -= Time.deltaTime;
+
+		if (Input.GetKeyUp (KeyCode.Mouse0)) {
+			switch (gameObject.GetComponent<Movement>().facingRight)
+			{
+			case true:
+				hitting = Physics2D.Raycast(new Vector2(gameObject.renderer.bounds.center.x, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x + 2f, gameObject.renderer.bounds.center.y - 2));
+				break;
+			case false:
+				hitting = Physics2D.Raycast(new Vector2(gameObject.renderer.bounds.center.x, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x - 2f, gameObject.renderer.bounds.center.y - 2));
+				break;
+			}
+		}
+
+		if (hitting && hitting.collider.gameObject.tag == "Enemy") {
+			hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
+			hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide,0.05f));
+			AudioSource.PlayClipAtPoint (hitsound, gameObject.transform.position, 1);
+			Debug.Log("Hit");
+			
+		}
+
 		if (gameObject.GetComponent<Movement>().facingRight)
 		{
 			side = transform.position.x + 2;
@@ -50,21 +77,15 @@ public class Pattacks : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Mouse0))
 						AudioSource.PlayClipAtPoint (swingsound, gameObject.transform.position, 1f);
 
-		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
-		{
-
-			StartCoroutine(Cooldown());
-			if(hittin)
-			{
-				AudioSource.PlayClipAtPoint (hitsound, gameObject.transform.position, 1);
-				Pstats statScript = GetComponent<Pstats> ();
-				Zwordstats swordScript = GetComponent<Zwordstats> ();
-				Dmg = statScript.aDamage;
-				hittin.gameObject.GetComponent<Estats>().getHit(Dmg);
-				if (hittin.tag == "Enemy") hittin.gameObject.GetComponent<Estats>().rigidbody2D.AddForce(new Vector2(knockbackSide,0.05f));
-				Debug.Log("Hit");
-			}
-		}
+//		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
+//		{
+//
+//			StartCoroutine(Cooldown());
+//			if(hittin)
+//			{
+//				if (hittin.tag == "Enemy") );
+//			}
+//		}
 
 		if (gameObject.GetComponent<Pstats> ().charges > 0 && timeleft <= 0 && Input.GetKeyUp (KeyCode.Q)) {
 			timeleft = gameObject.GetComponent<Pinventory>().spell.Cooldown;	

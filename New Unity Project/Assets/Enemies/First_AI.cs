@@ -7,7 +7,7 @@ public class First_AI : MonoBehaviour {
 	public float enemySpeed = 10f;
 	public float jumpForce = 4f;
 	public Vector2 AIposition;
-	
+	public bool facingRight = false;
 	private GameObject player;
 	private GameObject platform;
 

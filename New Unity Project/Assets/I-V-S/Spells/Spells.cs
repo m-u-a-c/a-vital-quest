@@ -145,12 +145,15 @@ public class YaosShield : BaseSpell
         if (Left)
         {
             shield.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y + 0.1f);
-            shield.rigidbody2D.velocity = new Vector2(-10, 0);
+			Vector3 theScale = shield.transform.localScale;
+			theScale.x *= -1;
+			shield.transform.localScale = theScale;
+            shield.rigidbody2D.velocity = new Vector2(-7, 0);
         }
         else
         {
             shield.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y + 0.1f);
-            shield.rigidbody2D.velocity = new Vector2(10, 0);
+            shield.rigidbody2D.velocity = new Vector2(7, 0);
         }
         go.GetComponent<Pstats>().charges -= Cost;
     }
