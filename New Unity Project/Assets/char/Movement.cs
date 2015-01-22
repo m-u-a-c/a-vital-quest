@@ -8,7 +8,7 @@ public class Movement : MonoBehaviour {
 	public float jumptime = 20000f;
 
 	
-
+    
 	public Vector2 playerposition;
 	Collider2D grounded;
 	public Transform groundcheck;
