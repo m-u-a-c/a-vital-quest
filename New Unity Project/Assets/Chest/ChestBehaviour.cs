@@ -21,6 +21,7 @@ public class ChestBehaviour : MonoBehaviour {
 		int i = rnd.Next (1, 5);
 		if (coll.gameObject.name == "Player" && !open) {
 						gameObject.GetComponent<SpriteRenderer> ().sprite = chest_open;
+						AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chestOpen, gameObject.transform.position, 0.7f);
 		if (random) 
 			{
 			switch (i)

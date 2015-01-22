@@ -13,7 +13,7 @@ public class ChargeboltScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltUse, gameObject.transform.position);
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltUse, gameObject.transform.position, 0.4f);
 		Vector3 vec = transform.localScale * -1;
 		if (!GameObject.Find ("Player").GetComponent<Movement> ().facingRight) 
 						gameObject.GetComponent<SpriteRenderer> ().transform.localScale = vec;
@@ -50,13 +50,13 @@ public class ChargeboltScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)
 	{
-		if (coll.gameObject.name == "Enemy")
+		if (coll.gameObject.name.Contains("Enemy"))
 						coll.gameObject.GetComponent<Estats> ().getHit (GameObject.Find("Player").GetComponent<Pinventory> ().spell.Damage);
 		
 		float asd = GameObject.Find ("Player").GetComponent<Pinventory> ().spell.Damage;
-		if (coll.gameObject.name == "Enemy") {
+		if (coll.gameObject.name.Contains("Enemy")) {
 						coll.gameObject.GetComponent<Estats> ().getHit (GameObject.Find ("Player").GetComponent<Pinventory> ().spell.Damage);
-						AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit, gameObject.transform.position);
+						AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit, gameObject.transform.position, 0.6f);
 				}
 		Destroy (gameObject);
 	}

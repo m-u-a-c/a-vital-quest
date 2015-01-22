@@ -14,6 +14,7 @@ public class PFShieldScript : MonoBehaviour {
         {
             coll.gameObject.GetComponent<Pinventory>().SetSpell(new YaosShield(coll.gameObject));
             Destroy(gameObject);
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().pickupitem, gameObject.transform.position);
 
         }
 

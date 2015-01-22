@@ -16,7 +16,7 @@ public class Pattacks : MonoBehaviour {
 	public bool isOnCooldown = false;
 	public bool invincible = false;
 
-	public AudioClip swingsound, hitsound, chargeboltHit, chargeboltUse, peashooterUse, PeashooterHit, Pickupitem, meleeHit;
+	public AudioClip swingsound, hitsound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickupitem, meleeHit, chestOpen;
 
 	//UI
 	public Image spellimage;
@@ -50,7 +50,7 @@ public class Pattacks : MonoBehaviour {
 		if (hitting && hitting.collider.gameObject.tag == "Enemy") {
 			hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
 			hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide,0.05f));
-			AudioSource.PlayClipAtPoint (hitsound, gameObject.transform.position, 1);
+			AudioSource.PlayClipAtPoint (hitsound, gameObject.transform.position);
 			Debug.Log("Hit");
 			
 		}
@@ -75,7 +75,7 @@ public class Pattacks : MonoBehaviour {
 		hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
 		if (Input.GetKeyDown (KeyCode.Mouse0))
-						AudioSource.PlayClipAtPoint (swingsound, gameObject.transform.position, 1f);
+						AudioSource.PlayClipAtPoint (swingsound, gameObject.transform.position, 0.6f);
 
 //		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
 //		{
