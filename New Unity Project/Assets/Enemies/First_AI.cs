@@ -15,8 +15,6 @@ public class First_AI : MonoBehaviour {
 	int runsprite = 0;
 	bool wayback = false;
 
-	public Sprite still0, run0, run1, run2, run3;
-
 	public Vector2 enemyposition;
 	Collider2D grounded;
 	public Transform groundcheck;
@@ -40,45 +38,8 @@ public class First_AI : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		timeleft -= Time.deltaTime;
-
-		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
-						Flip ();
-		else if (!facingRight && gameObject.rigidbody2D.velocity.x > 0)
-						Flip ();
-
-		if (Mathf.Abs (gameObject.rigidbody2D.velocity.x) == 0)
-						gameObject.GetComponent<SpriteRenderer> ().sprite = still0;
-
-		if (timeleft <= 0 && Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 0) {
-			timeleft = changetime;
-			switch (runsprite) {
-			case 0:
-				runsprite++;
-				wayback = !wayback;
-				gameObject.GetComponent<SpriteRenderer> ().sprite = run0;
-				break;
-			case 1:
-				if (wayback)
-					runsprite--;
-				else
-					runsprite++;
-				gameObject.GetComponent<SpriteRenderer> ().sprite = run1;
-				break;
-			case 2:
-				if (wayback)
-					runsprite--;
-				else
-					runsprite++;
-				gameObject.GetComponent<SpriteRenderer> ().sprite = run2;
-				break;
-			case 3:
-				runsprite--;
-				wayback = true;
-				gameObject.GetComponent<SpriteRenderer> ().sprite = run3;
-				break;
-			}
-		}
+        if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
+        else gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
 
 		AIposition.x = transform.position.x;
 		AIposition.y = transform.position.y;
