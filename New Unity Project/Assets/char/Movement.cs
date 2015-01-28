@@ -67,15 +67,6 @@ public class Movement : MonoBehaviour {
 		{
 			Flip ();
 		}
-		if(grounded)
-		{jumptime = 20000f;}
-		if (jumptime == 20000 && Input.GetKeyDown(KeyCode.Space)) 
-		{
-						rigidbody2D.velocity = new Vector2(0,20);
-			//rigidbody2D.AddForce(new Vector2(0, jumpForce));
-		}
-		if (!grounded)
-						jumptime -= 2;
 
         //Always last:
         last_xvel = Mathf.Abs(gameObject.rigidbody2D.velocity.x);
@@ -96,12 +87,10 @@ public class Movement : MonoBehaviour {
 
 	void Update()
 	{
-//		if(grounded)
-//		{jumptime = 20000f;}
-//		if (jumptime == 20000 && Input.GetKeyDown(KeyCode.Space)) 
-//		{
-////			rigidbody2D.velocity = new Vector2(0,50);
-//			rigidbody2D.AddForce(new Vector2(0, jumpForce));
-//		}
+		if (grounded && Input.GetKeyDown(KeyCode.Space)) 
+		{
+//			rigidbody2D.velocity = new Vector2(0,50);
+			rigidbody2D.AddForce(new Vector2(0, jumpForce));
+		}
 	}
 }
