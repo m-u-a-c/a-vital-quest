@@ -2,14 +2,20 @@
 using System.Collections;
 
 public class Spawner : MonoBehaviour {
-
+	
 	public float health = 20;
-
+	
+	public LayerMask whatIsPlayer;
+	Collider2D playerAround;
+	float searchRadius = 20.0f;
+	public float spawnlimit = 7;
+	public float spawned = 0;
+	
 	public void Start()
 	{
-
+		
 	}
-
+	
 	//Spawns an object with the specified PREFAB name that is located in the Resources/Spawner folder
 	//Example:
 	//GameObject go = GameObject.Find ("PFSpawner");
@@ -28,9 +34,11 @@ public class Spawner : MonoBehaviour {
 	void Update()
 	{
 		timeleft -= Time.deltaTime;
-		if (timeleft <= 0) {
+		if (timeleft <= 0 /*&& spawned != spawnlimit*/) {
 			timeleft = cd;
 			SpawnObject(object_to_spawn);
+			spawned += 1;
 		}
 	}
 }
+
