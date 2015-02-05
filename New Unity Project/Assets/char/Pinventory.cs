@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Pinventory : MonoBehaviour
 {
+
+
     public string name;
     public Sprite Chargebolt;
     public Sprite Peashooter;
@@ -13,6 +15,7 @@ public class Pinventory : MonoBehaviour
     {
         spell.UpdateStats();
         name = spell.SpellName;
+
         //		var go = GameObject.Find ("UI_Inventory");
         //		go.guiText.text = "";
         //		if (items.Count == 0)

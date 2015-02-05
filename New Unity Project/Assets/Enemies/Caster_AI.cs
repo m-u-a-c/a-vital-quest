@@ -1,26 +1,25 @@
 ﻿using UnityEngine;
-using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class First_AI : MonoBehaviour {
-	
-	public float enemySpeed = 15f;
+public class Caster_AI : MonoBehaviour {
+
+	public float enemySpeed = 1f;
 	public float jumpForce = 4.0f;
 	public Vector2 AIposition;
 	public bool facingRight = false;
-
+	
 	private GameObject player;
 	private GameObject platform;
-
+	
 	Collider2D grounded;
 	public Transform groundcheck;
 	float groundRadius = 0.2f;
 	public LayerMask whatIsGround;
 	
 	Collider2D playerAround;
+	Collider2D inRange;
 	public LayerMask whatIsPlayer;
-	float searchRadius = 15.0f;
+	float searchRadius = 5.0f;
 	float blockRadius = 0.1f;
 	
 	Collider2D groundAroundLB;
@@ -75,6 +74,7 @@ public class First_AI : MonoBehaviour {
 		
 		grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 		playerAround = Physics2D.OverlapCircle (AIposition, searchRadius, whatIsPlayer);
+		inRange = Physics2D.OverlapCircle (AIposition, searchRadius* 3.0f, whatIsPlayer);
 		groundAroundLB = Physics2D.OverlapCircle (blockCheckLB.position, blockRadius, whatIsGround);
 		groundAroundRB = Physics2D.OverlapCircle (blockCheckRB.position, blockRadius, whatIsGround);
 		groundAroundRM = Physics2D.OverlapCircle (blockCheckRM.position, blockRadius, whatIsGround);
@@ -88,26 +88,26 @@ public class First_AI : MonoBehaviour {
 		groundAroundR2U = Physics2D.OverlapCircle (blockCheckR2U.position, blockRadius, whatIsGround);
 		groundAroundL2U = Physics2D.OverlapCircle (blockCheckL2U.position, blockRadius, whatIsGround);
 		
-		if (playerAround
+		if (inRange && !playerAround
 		    && (((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
 		    || ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U)))
 		    )
 		{
 			EMovement ();
 		}
-
-			if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
+		
+/*		if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
 		else gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
-			
+		
 		if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
 		else gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
-
+*/		
 	}
 	
 	void EMovement()
 	{
-//		if((!groundAroundLU && !groundAroundL2U) || (!groundAroundRU && !groundAroundR2U))
-//		{ return;}
+		//		if((!groundAroundLU && !groundAroundL2U) || (!groundAroundRU && !groundAroundR2U))
+		//		{ return;}
 		if (player.transform.position.x > transform.position.x
 		    && ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U))
 		    ) 

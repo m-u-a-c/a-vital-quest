@@ -1,13 +1,19 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Enemies\First_AI.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Chest\ChestBehaviour.cs">
     <Files>
-      <File FileName="Assets\Enemies\First_AI.cs" Line="109" Column="46" />
-      <File FileName="Assets\char\Movement.cs" Line="79" Column="2" />
+      <File FileName="Assets\char\Movement.cs" Line="90" Column="4" />
+      <File FileName="Assets\char\Pinventory.cs" Line="17" Column="32" />
+      <File FileName="Assets\Enemies\Caster_AI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Enemies\First_AI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Enemies\Slime_AI.cs" Line="1" Column="1" />
+      <File FileName="Assets\Chest\ChestBehaviour.cs" Line="10" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\Leon\Documents\GitHub\a-vital-quest\New Unity Project\Assets\char\Movement.cs" line="112" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

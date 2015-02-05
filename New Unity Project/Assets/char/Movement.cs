@@ -1,13 +1,12 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour {
 	//runnin & jumpin
 	public float maxSpeed = 10f;
 	public float jumpForce = 50f;
-	public float jumptime = 20000f;
-
-	
+	public float jumptime = 0.0f;
+	bool onCooldown = false;
     
 	public Vector2 playerposition;
 	Collider2D grounded;
@@ -89,8 +88,29 @@ public class Movement : MonoBehaviour {
 	{
 		if (grounded && Input.GetKeyDown(KeyCode.Space)) 
 		{
-//			rigidbody2D.velocity = new Vector2(0,50);
 			rigidbody2D.AddForce(new Vector2(0, jumpForce));
 		}
+//		if ((grounded && Input.GetKeyDown(KeyCode.Space) || jumptime < 20)) 
+//		{
+//			Jump();
+//		}
 	}
+
+//	void Jump()
+//	{
+//		if ((jumptime != 20 || jumptime < 20) && !onCooldown)
+//		{
+//			rigidbody2D.AddForce(new Vector2(0, jumpForce/15));
+//			Cooldown ();
+//			jumptime += 2;
+//		}
+//		if (jumptime >= 20 && grounded)
+//						jumptime = 0;
+//	}
+//	public IEnumerator Cooldown()
+//	{
+//		onCooldown = true;
+//		yield return new WaitForSeconds(0.01f);
+//		onCooldown = false;
+//	}
 }

@@ -8,12 +8,19 @@ public class Spawner : MonoBehaviour {
 	public LayerMask whatIsPlayer;
 	Collider2D playerAround;
 	float searchRadius = 20.0f;
+	public Vector2 Pos;
 	public float spawnlimit = 7;
 	public float spawned = 0;
+	float start_time = Time.timeSinceLevelLoad;
+	public float cd;
+	public string object_to_spawn;
+	bool timer = false;
+	float timeleft;
+	string gospawn;
 	
 	public void Start()
 	{
-		
+
 	}
 	
 	//Spawns an object with the specified PREFAB name that is located in the Resources/Spawner folder
@@ -25,16 +32,15 @@ public class Spawner : MonoBehaviour {
 		GameObject go = (GameObject)Instantiate(Resources.Load ("Spawner/" + name));
 		go.transform.position = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
 	}
-	float start_time = Time.timeSinceLevelLoad;
-	public float cd;
-	public string object_to_spawn;
-	bool timer = false;
-	float timeleft;
-	string gospawn;
+
 	void Update()
 	{
+		Pos.x = transform.position.x;
+		Pos.y = transform.position.y;
+		playerAround = Physics2D.OverlapCircle (Pos, searchRadius, whatIsPlayer);
+
 		timeleft -= Time.deltaTime;
-		if (timeleft <= 0 /*&& spawned != spawnlimit*/) {
+		if (timeleft <= 0 && playerAround/*&& spawned != spawnlimit*/) {
 			timeleft = cd;
 			SpawnObject(object_to_spawn);
 			spawned += 1;

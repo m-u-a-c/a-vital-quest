@@ -47,9 +47,12 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Chest\ChestBehaviour.cs" />
+     <Compile Include="Assets\Enemies\Caster_AI.cs" />
      <Compile Include="Assets\Enemies\Eattacks.cs" />
      <Compile Include="Assets\Enemies\Estats.cs" />
      <Compile Include="Assets\Enemies\First_AI.cs" />
+     <Compile Include="Assets\Enemies\Flying_AI.cs" />
+     <Compile Include="Assets\Enemies\Slime_AI.cs" />
      <Compile Include="Assets\Enemies\SpawnerScript.cs" />
      <Compile Include="Assets\I-V-S\Items\BaseItem.cs" />
      <Compile Include="Assets\I-V-S\Items\Items.cs" />

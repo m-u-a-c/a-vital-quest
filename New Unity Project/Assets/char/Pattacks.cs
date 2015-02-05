@@ -10,7 +10,7 @@ public class Pattacks : MonoBehaviour
     Vector2 checkArea;
     public LayerMask whatIsEnemy;
     public float timeleft;
-    public float swing_timeleft = 0.25f;
+    public float swing_timeleft = 1.5f;
     public bool swinging;
     float Dmg;
     public float side = 1;
