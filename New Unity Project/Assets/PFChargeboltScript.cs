@@ -13,7 +13,7 @@ public class PFChargeboltScript : MonoBehaviour {
 		if (coll.gameObject.name == "Player" && Input.GetKey(KeyCode.E)) {
 			coll.gameObject.GetComponent<Pinventory>().SetSpell(new Chargebolt(coll.gameObject));
 			Destroy(gameObject);
-			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().Pickupitem, gameObject.transform.position);
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().pickUpItem, gameObject.transform.position, 1f);
             
 		}
 		

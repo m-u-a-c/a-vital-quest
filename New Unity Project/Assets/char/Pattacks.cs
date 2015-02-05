@@ -18,12 +18,13 @@ public class Pattacks : MonoBehaviour
     public bool isOnCooldown = false;
     public bool invincible = false;
 
-    public AudioClip swingsound, hitsound, chargeboltHit, chargeboltUse, peashooterUse, PeashooterHit, Pickupitem, meleeHit, chestOpen;
+	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing;
 
     //UI
     public Image spellimage;
     void Start()
     {
+		
     }
 
     void FixedUpdate()
@@ -35,7 +36,7 @@ public class Pattacks : MonoBehaviour
 
         timeleft -= Time.deltaTime;
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && !swinging)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
             swinging = true;
             swing_timeleft = 0.25f;
@@ -57,7 +58,7 @@ public class Pattacks : MonoBehaviour
             var aa = hitting.collider.gameObject.name;
             hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
             hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.05f));
-            AudioSource.PlayClipAtPoint(hitsound, gameObject.transform.position, 1);
+            AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
         }
 
@@ -81,7 +82,7 @@ public class Pattacks : MonoBehaviour
         //hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
-            AudioSource.PlayClipAtPoint(swingsound, gameObject.transform.position, 1f);
+            AudioSource.PlayClipAtPoint(swingSound, gameObject.transform.position, 0.7f);
 
         //		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
         //		{
@@ -93,7 +94,7 @@ public class Pattacks : MonoBehaviour
         //			}
         //		}
 
-        if (gameObject.GetComponent<Pstats>().charges > 0 && timeleft <= 0 && Input.GetKeyUp(KeyCode.Q))
+        if (gameObject.GetComponent<Pstats>().charges > 0 && timeleft <= 0 && Input.GetKeyDown(KeyCode.Q))
         {
             timeleft = gameObject.GetComponent<Pinventory>().spell.Cooldown;
 

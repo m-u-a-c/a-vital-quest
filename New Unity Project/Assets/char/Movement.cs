@@ -5,11 +5,18 @@ public class Movement : MonoBehaviour {
 	//runnin & jumpin
 	public float maxSpeed = 10f;
 	public float jumpForce = 50f;
+<<<<<<< HEAD
 	public float jumptime = 0.0f;
 	bool onCooldown = false;
     
+=======
+	public float jumptime = 20000f;
+
+	
+	public bool lastframegrounded;
+>>>>>>> origin/master
 	public Vector2 playerposition;
-	Collider2D grounded;
+	public Collider2D grounded;
 	public Transform groundcheck;
 	float groundRadius = 0.24f;
 	public LayerMask whatIsGround;
@@ -25,12 +32,32 @@ public class Movement : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
+		GameObject.Find ("Landing").transform.position = gameObject.transform.position;
+		if (last_yvel < 0 && grounded && !GameObject.Find ("Landing").GetComponent<AudioSource>().isPlaying)
+		{
+			GameObject.Find ("Landing").GetComponent<AudioSource>().Play();
+		}	
+
+		//if (grounded && !lastframegrounded) 
+		//	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().landing, gameObject.transform.position, 1f);
+
+		if (Mathf.Abs(rigidbody2D.velocity.x) >= 1 && grounded && !gameObject.GetComponent<AudioSource>().isPlaying)
+		{
+			gameObject.GetComponent<AudioSource>().Play();
+		}
+		if ((!grounded) || Mathf.Abs(rigidbody2D.velocity.x) < 1) 
+			gameObject.GetComponent<AudioSource>().Pause();
+
         if (gameObject.GetComponent<Pattacks>().swinging) gameObject.GetComponent<Animator>().SetInteger("Direction", 4);
         else if (Mathf.Abs(rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
         else
         {
-            if (rigidbody2D.velocity.y > 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 0);
-            else if (rigidbody2D.velocity.y < 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 2);
+            if (rigidbody2D.velocity.y > 0 && !grounded) 
+			{ 
+				gameObject.GetComponent<Animator>().SetInteger("Direction", 0);
+
+			}
+			else if (rigidbody2D.velocity.y < 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 2);
             else if (Mathf.Abs(rigidbody2D.velocity.x) > 0 && grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
         }
        
@@ -50,6 +77,7 @@ public class Movement : MonoBehaviour {
 //		if (grounded.gameObject.name == "Spikes")
 //						gameObject.GetComponent<Pstats> ().getHit(90);
 
+			
 		float move = Input.GetAxis ("Horizontal");
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 		
@@ -68,8 +96,9 @@ public class Movement : MonoBehaviour {
 		}
 
         //Always last:
-        last_xvel = Mathf.Abs(gameObject.rigidbody2D.velocity.x);
-        last_yvel = gameObject.rigidbody2D.velocity.y;
+		last_yvel = (gameObject.rigidbody2D.velocity.y);
+        last_xvel = Mathf.Abs(gameObject.rigidbody2D.velocity.x); 
+        
 	}
 	void Start()
 	{
