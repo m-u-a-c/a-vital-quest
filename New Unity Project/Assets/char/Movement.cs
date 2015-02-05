@@ -28,7 +28,9 @@ public class Movement : MonoBehaviour {
 	{
 		GameObject.Find ("Landing").transform.position = gameObject.transform.position;
 		if (last_yvel < 0 && grounded && !GameObject.Find ("Landing").GetComponent<AudioSource>().isPlaying)
+		{
 			GameObject.Find ("Landing").GetComponent<AudioSource>().Play();
+		}	
 
 		//if (grounded && !lastframegrounded) 
 		//	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().landing, gameObject.transform.position, 1f);

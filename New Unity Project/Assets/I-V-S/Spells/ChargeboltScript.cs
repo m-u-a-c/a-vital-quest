@@ -13,7 +13,7 @@ public class ChargeboltScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltUse, gameObject.transform.position, 0.30f);
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltUse, gameObject.transform.position, 0.35f);
 		Vector3 vec = transform.localScale * -1;
 		if (!GameObject.Find ("Player").GetComponent<Movement> ().facingRight) 
 						gameObject.GetComponent<SpriteRenderer> ().transform.localScale = vec;
@@ -56,6 +56,6 @@ public class ChargeboltScript : MonoBehaviour {
 						
 				}
 		Destroy (gameObject);
-		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit, gameObject.transform.position, 0.65f);
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit, gameObject.transform.position, 0.70f);
 	}
 }
