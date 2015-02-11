@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Slime_AI : MonoBehaviour {
 
-	public float enemySpeed = 1.5f;
+	public float enemySpeed = 4.0f;
 	public float jumpForce = 4.0f;
 	public Vector2 AIposition;
 	public bool facingRight = false;
@@ -74,13 +74,13 @@ public class Slime_AI : MonoBehaviour {
 		{
 			facingRight = true;
 			
-			rigidbody2D.velocity = new Vector2(enemySpeed/10, rigidbody2D.velocity.y);
+			rigidbody2D.velocity = new Vector2(enemySpeed/3, rigidbody2D.velocity.y);
 		}
 		if (player.transform.position.x < transform.position.x && groundAroundLU && !groundAroundLB) 
 		{	
 			facingRight = false;
 			
-			rigidbody2D.velocity = new Vector2((enemySpeed/10) * -1, rigidbody2D.velocity.y);
+			rigidbody2D.velocity = new Vector2((enemySpeed/3) * -1, rigidbody2D.velocity.y);
 		}
 	}
 }

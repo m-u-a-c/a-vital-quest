@@ -5,16 +5,11 @@ public class Movement : MonoBehaviour {
 	//runnin & jumpin
 	public float maxSpeed = 10f;
 	public float jumpForce = 50f;
-<<<<<<< HEAD
 	public float jumptime = 0.0f;
 	bool onCooldown = false;
-    
-=======
-	public float jumptime = 20000f;
-
 	
 	public bool lastframegrounded;
->>>>>>> origin/master
+
 	public Vector2 playerposition;
 	public Collider2D grounded;
 	public Transform groundcheck;
@@ -32,11 +27,11 @@ public class Movement : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		GameObject.Find ("Landing").transform.position = gameObject.transform.position;
-		if (last_yvel < 0 && grounded && !GameObject.Find ("Landing").GetComponent<AudioSource>().isPlaying)
-		{
-			GameObject.Find ("Landing").GetComponent<AudioSource>().Play();
-		}	
+//		GameObject.Find ("Landing").transform.position = gameObject.transform.position;
+//		if (last_yvel < 0 && grounded && !GameObject.Find ("Landing").GetComponent<AudioSource>().isPlaying)
+//		{
+//			GameObject.Find ("Landing").GetComponent<AudioSource>().Play();
+//		}	
 
 		//if (grounded && !lastframegrounded) 
 		//	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().landing, gameObject.transform.position, 1f);

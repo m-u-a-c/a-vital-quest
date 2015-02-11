@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class Pinventory : MonoBehaviour
 {
-
-
     public string name;
     public Sprite Chargebolt;
     public Sprite Peashooter;

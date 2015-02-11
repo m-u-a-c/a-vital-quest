@@ -7,7 +7,7 @@ public class ChestBehaviour : MonoBehaviour {
 	public LayerMask chests;
 	public Transform chestCheck;
 	Collider2D findChests;
-	public float searchR = 0.01f;
+	public float searchR = 1.0f;
 
 	public Sprite chest_open;
 	public bool open = false;
@@ -23,7 +23,6 @@ public class ChestBehaviour : MonoBehaviour {
 
 	void Update()
 	{
-<<<<<<< HEAD
 		findChests = Physics2D.OverlapCircle (chestCheck.position, searchR, chests);
 
 		if(findChests)
@@ -37,8 +36,8 @@ public class ChestBehaviour : MonoBehaviour {
 				rnd = new System.Random ();
 				int i = rnd.Next (1, 5);
 				if (!open) {
+						AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks> ().chestOpen, gameObject.transform.position, 0.4f);
 						gameObject.GetComponent<SpriteRenderer> ().sprite = chest_open;
-						AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks> ().chestOpen, gameObject.transform.position, 0.7f);
 						if (random) {
 								switch (i) {
 								case 1:
@@ -59,37 +58,6 @@ public class ChestBehaviour : MonoBehaviour {
 						}
 						open = true;
 				}
-=======
-		rnd = new System.Random ();
-		int i = rnd.Next (1, 5);
-		if (coll.gameObject.name == "Player" && !open) {
-			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chestOpen, gameObject.transform.position, 0.4f);
-			gameObject.GetComponent<SpriteRenderer> ().sprite = chest_open;
-		if (random) 
-			{
-			switch (i)
-			{
-			case 1:
-				SpawnItem ("PFTucksRobe");
-				break;
-			case 2:
-				SpawnItem ("PFHolyGrail");
-				break;
-			case 3:
-				SpawnItem ("PFChargebolt");
-				break;
-			case 4:
-				SpawnItem ("PFMagicPeashooter");
-				break;
-			}
-			}
-			else
-			{
-				SpawnItem (prefab.name);
-			}
-			open = true;
-
->>>>>>> origin/master
 		}
 
 	void OnCollisionEnter2D(Collision2D coll)
