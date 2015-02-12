@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Movement : MonoBehaviour {
@@ -25,8 +26,13 @@ public class Movement : MonoBehaviour {
 	bool moving = false;
 	public float speed;
 
-	void FixedUpdate ()
+	void Update ()
 	{
+
+        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        {
+            rigidbody2D.AddForce(new Vector2(0, jumpForce));
+        }
 //		GameObject.Find ("Landing").transform.position = gameObject.transform.position;
 //		if (last_yvel < 0 && grounded && !GameObject.Find ("Landing").GetComponent<AudioSource>().isPlaying)
 //		{
@@ -43,17 +49,18 @@ public class Movement : MonoBehaviour {
 		if ((!grounded) || Mathf.Abs(rigidbody2D.velocity.x) < 1) 
 			gameObject.GetComponent<AudioSource>().Pause();
 
-        if (gameObject.GetComponent<Pattacks>().swinging) gameObject.GetComponent<Animator>().SetInteger("Direction", 4);
-        else if (Mathf.Abs(rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
+        if (gameObject.GetComponent<Pattacks>().swinging) gameObject.GetComponent<Animator>().SetInteger("State", 4);
+        else if (gameObject.GetComponent<Pattacks>().casting) gameObject.GetComponent<Animator>().SetInteger("State", 5);
+        else if (Mathf.Abs(rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded) gameObject.GetComponent<Animator>().SetInteger("State", 3);
         else
         {
-            if (rigidbody2D.velocity.y > 0 && !grounded) 
-			{ 
-				gameObject.GetComponent<Animator>().SetInteger("Direction", 0);
+            if (rigidbody2D.velocity.y > 0 && !grounded)
+            {
+                gameObject.GetComponent<Animator>().SetInteger("State", 0);
 
-			}
-			else if (rigidbody2D.velocity.y < 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 2);
-            else if (Mathf.Abs(rigidbody2D.velocity.x) > 0 && grounded) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
+            }
+            else if (rigidbody2D.velocity.y < 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("State", 2);
+            else if (Mathf.Abs(rigidbody2D.velocity.x) > 0 && grounded) gameObject.GetComponent<Animator>().SetInteger("State", 1);
         }
        
 
@@ -97,8 +104,11 @@ public class Movement : MonoBehaviour {
 	}
 	void Start()
 	{
-		gameObject.GetComponent<Pinventory> ().spell = new MagicPeashooter(gameObject);
-		}
+        gameObject.GetComponent<Pinventory>().AddSpell(new Chargebolt(gameObject));
+        gameObject.GetComponent<Pinventory>().AddSpell(new MagicPeashooter(gameObject));
+        gameObject.GetComponent<Pinventory>().AddSpell(new YaosShield(gameObject));
+       
+	}
 
 	void Flip()
 	{
@@ -108,17 +118,7 @@ public class Movement : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-	void Update()
-	{
-		if (grounded && Input.GetKeyDown(KeyCode.Space)) 
-		{
-			rigidbody2D.AddForce(new Vector2(0, jumpForce));
-		}
-//		if ((grounded && Input.GetKeyDown(KeyCode.Space) || jumptime < 20)) 
-//		{
-//			Jump();
-//		}
-	}
+
 
 //	void Jump()
 //	{

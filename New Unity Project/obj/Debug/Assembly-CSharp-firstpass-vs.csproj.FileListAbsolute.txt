@@ -10,3 +10,15 @@ E:\Dropbox\Projekt\a-vital-quest\New Unity Project\Temp\bin\Debug\ICSharpCode.NR
 E:\Dropbox\Projekt\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass-vs.csprojResolveAssemblyReference.cache
 E:\Dropbox\Projekt\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.dll
 E:\Dropbox\Projekt\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\UnityEditor.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\UnityEngine.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\UnityEngine.UI.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\Mono.Cecil.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\nunit.framework.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\Unity.DataContract.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass-vs.csprojResolveAssemblyReference.cache
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\Viggo\Desktop\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.pdb

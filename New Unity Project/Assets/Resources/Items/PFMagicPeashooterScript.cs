@@ -11,7 +11,7 @@ public class PFMagicPeashooterScript : MonoBehaviour {
 	
 	void OnCollisionStay2D(Collision2D coll) {
 		if (coll.gameObject.name == "Player" && Input.GetKey(KeyCode.E)) {
-			coll.gameObject.GetComponent<Pinventory>().SetSpell(new MagicPeashooter(coll.gameObject));
+			coll.gameObject.GetComponent<Pinventory>().AddSpell(new MagicPeashooter(coll.gameObject));
 			Destroy(gameObject);
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().pickUpItem, gameObject.transform.position);
 		}
