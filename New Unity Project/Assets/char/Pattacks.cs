@@ -18,7 +18,7 @@ public class Pattacks : MonoBehaviour
     public bool isOnCooldown = false;
     public bool invincible = false;
 
-	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing;
+	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit;
 
     //UI
     public Image spellimage;

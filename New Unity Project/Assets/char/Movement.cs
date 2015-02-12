@@ -97,7 +97,7 @@ public class Movement : MonoBehaviour {
 	}
 	void Start()
 	{
-		gameObject.GetComponent<Pinventory> ().spell = new MagicPeashooter(gameObject);
+		gameObject.GetComponent<Pinventory> ().spell = new YaosShield(gameObject);
 		}
 
 	void Flip()
