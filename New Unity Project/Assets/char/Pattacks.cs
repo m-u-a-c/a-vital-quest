@@ -38,6 +38,7 @@ public class Pattacks : MonoBehaviour
 
         timeleft -= Time.deltaTime;
 
+        
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
             swinging = true;
@@ -97,9 +98,10 @@ public class Pattacks : MonoBehaviour
         //		}
 
         #region Casting
-        if (gameObject.GetComponent<Pstats>().charges > 0 && timeleft <= 0 && Input.GetKeyDown(KeyCode.Mouse1))
+        int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
+        if (gameObject.GetComponent<Pstats>().charges > 0 && GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] <= 0 && Input.GetKeyDown(KeyCode.Mouse1))
         {
-            int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
+            GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] = GetComponent<Pinventory>().spell_cooldowns[selected_spell];
             timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
             casting = true;
             cast_timeleft = 0.12f;

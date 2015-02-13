@@ -35,7 +35,8 @@ public class Pinventory : MonoBehaviour
 
     public List<BaseItem> items;
     public List<BaseSpell> spells;
-    public float[] spells_cooldowns = new float[3];
+    public List<float> spell_cooldowns;
+    public List<float> spell_cooldowns_left;
     public int selected_spell = 0;
     public int selected_item = 0;
     public int spellcount;
@@ -69,6 +70,8 @@ public class Pinventory : MonoBehaviour
         }
 
         spells.Add(s);
+        spell_cooldowns_left.Add(s.Cooldown);
+        spell_cooldowns.Add(s.Cooldown);
         Sprite sprite = null;
         switch (s.SpellName)
         {
@@ -91,6 +94,7 @@ public class Pinventory : MonoBehaviour
     public void Update()
     {
         //foreach (BaseSpell s in spells) s.UpdateStats();
+        for (int i = 0; i < spell_cooldowns_left.Count; i++) spell_cooldowns_left[i] -= Time.deltaTime;
 
         var cast = Physics2D.CircleCast(new Vector2(transform.renderer.bounds.center.x, transform.renderer.bounds.center.y - 1), 1, Vector2.zero, 0, LayerMask.GetMask("Items"));
         if (cast && cast.collider.gameObject.tag == "Item" && Input.GetKey(KeyCode.E))
