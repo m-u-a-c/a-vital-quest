@@ -38,7 +38,7 @@ public class Pinventory : MonoBehaviour
     public float[] spells_cooldowns = new float[3];
     public int selected_spell = 0;
     public int selected_item = 0;
-
+    public int spellcount;
     void Start()
     {
         items = new List<BaseItem>();
@@ -64,7 +64,7 @@ public class Pinventory : MonoBehaviour
     {
         if (spells.Count == 3)
         {
-            spells[2] = s;
+            spells[selected_spell] = s;
             return;
         }
 
@@ -84,20 +84,54 @@ public class Pinventory : MonoBehaviour
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(new Vector2(transform.renderer.bounds.center.x, transform.renderer.bounds.center.y - 1), 1);
+    }
     public void Update()
     {
         //foreach (BaseSpell s in spells) s.UpdateStats();
 
-        int num;
+        var cast = Physics2D.CircleCast(new Vector2(transform.renderer.bounds.center.x, transform.renderer.bounds.center.y - 1), 1, Vector2.zero, 0, LayerMask.GetMask("Items"));
+        if (cast && cast.collider.gameObject.tag == "Item" && Input.GetKey(KeyCode.E))
+        {
+            SendMessage("asd");
+            switch (cast.collider.gameObject.name)
+            {
+                case "PFChargebolt(Clone)":
+                    AddSpell(new Chargebolt(gameObject));
+                    break;
+                case "PFTucksRobe(Clone)":
+                    AddItem(new FriarTucksRobe(gameObject));
+                    break;
+                case "PFShield(Clone)":
+                    AddSpell(new YaosShield(gameObject));
+                    break;
+                case "PFHolyGrail(Clone)":
+                    AddItem(new HolyGrail(gameObject));
+                    break;
+                case "PFMagicPeashooter(Clone)":
+                    AddSpell(new MagicPeashooter(gameObject));
+                    break;
+            }
+            Destroy(cast.collider.gameObject);
+        }
+        else if (cast && cast.collider.gameObject.tag == "Item" && GetComponent<Movement>().grounded)
+        {
+            cast.collider.gameObject.rigidbody2D.AddForce(new Vector2(0, 60));
+        }
+
+        //int num;
         //if (Event.current.type == EventType.KeyDown)
         //{
         //    // Convert to numeric value for convenience :)
         //    num = Event.current.keyCode - KeyCode.Alpha1 + 1;
         //    if (num < 7 && num > 0) selected_item = num;
         //}
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && selected_spell < 2) selected_spell++;
+        if (spells.Count > 1)
+        if (Input.GetAxis("Mouse ScrollWheel") > 0 && (selected_spell + 1) != spells.Count) selected_spell++;
         else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selected_spell > 0) selected_spell--;
-
+        spellcount = spells.Count;
         Sprite sprite = null;
         switch (spells[selected_spell].SpellName)
         {

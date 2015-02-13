@@ -104,8 +104,6 @@ public class Movement : MonoBehaviour {
 	}
 	void Start()
 	{
-        gameObject.GetComponent<Pinventory>().AddSpell(new Chargebolt(gameObject));
-        gameObject.GetComponent<Pinventory>().AddSpell(new MagicPeashooter(gameObject));
         gameObject.GetComponent<Pinventory>().AddSpell(new YaosShield(gameObject));
        
 	}

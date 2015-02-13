@@ -75,10 +75,6 @@
      <Compile Include="Assets\PFPeaScript.cs" />
      <Compile Include="Assets\PlatformScript.cs" />
      <Compile Include="Assets\Resources\Items\BaseItemPF.cs" />
-     <Compile Include="Assets\Resources\Items\HolyGrailScript.cs" />
-     <Compile Include="Assets\Resources\Items\PFMagicPeashooterScript.cs" />
-     <Compile Include="Assets\Resources\Items\PFShieldScript.cs" />
-     <Compile Include="Assets\Resources\Items\TucksRobeScript.cs" />
      <Compile Include="Assets\Resources\Spells\ShieldScript.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\VPlatformScript.cs" />
