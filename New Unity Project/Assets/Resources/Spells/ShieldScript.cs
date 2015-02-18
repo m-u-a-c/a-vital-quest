@@ -10,6 +10,7 @@ public class ShieldScript : MonoBehaviour {
     void Start()
     {
         timeleft = destroytime;
+        
     }
 
     // Update is called once per frame

@@ -3,6 +3,7 @@ using System.Collections;
 
 public abstract class BaseSpell {
 	public string SpellName {get; set;}
+    public static float dmg = 5;
 	public bool Left {
 				get;
 				set;

@@ -10,8 +10,8 @@ public class Pattacks : MonoBehaviour
     Vector2 checkArea;
     public LayerMask whatIsEnemy;
     public float timeleft;
-    public float swing_timeleft = 1.5f;
-    public bool swinging;
+    public float swing_timeleft = 1.5f, cast_timeleft = 1;
+    public bool swinging, casting;
     float Dmg;
     public float side = 1;
     public float knockbackSide;
@@ -27,15 +27,18 @@ public class Pattacks : MonoBehaviour
 		
     }
 
-    void FixedUpdate()
+    void Update()
     {
 
 
         if (swinging) swing_timeleft -= Time.deltaTime;
+        if (casting) cast_timeleft -= Time.deltaTime;
         if (swinging && swing_timeleft <= 0) swinging = false;
+        if (casting && cast_timeleft <= 0) casting = false;
 
         timeleft -= Time.deltaTime;
 
+        
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
             swinging = true;
@@ -94,21 +97,28 @@ public class Pattacks : MonoBehaviour
         //			}
         //		}
 
-        if (gameObject.GetComponent<Pstats>().charges > 0 && timeleft <= 0 && Input.GetKeyDown(KeyCode.Q))
+        #region Casting
+        int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
+        if (gameObject.GetComponent<Pstats>().charges > 0 && GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] <= 0 && Input.GetKeyDown(KeyCode.Mouse1))
         {
-            timeleft = gameObject.GetComponent<Pinventory>().spell.Cooldown;
+            GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] = GetComponent<Pinventory>().spell_cooldowns[selected_spell];
+            timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
+            casting = true;
+            cast_timeleft = 0.12f;
 
-            var spell = gameObject.GetComponent<Pinventory>().spell;
+            var spell = gameObject.GetComponent<Pinventory>().spells[selected_spell];
             if (gameObject.GetComponent<Movement>().facingRight)
             {
-                gameObject.GetComponent<Pinventory>().spell.Left = false;
+                gameObject.GetComponent<Pinventory>().spells[selected_spell].Left = false;
             }
             else
-                gameObject.GetComponent<Pinventory>().spell.Left = true;
+                gameObject.GetComponent<Pinventory>().spells[selected_spell].Left = true;
 
-            if (gameObject.GetComponent<Pinventory>().spell.Cost <= gameObject.GetComponent<Pstats>().charges)
-                gameObject.GetComponent<Pinventory>().spell.Effect();
+            if (gameObject.GetComponent<Pinventory>().spells[selected_spell].Cost <= gameObject.GetComponent<Pstats>().charges)
+                gameObject.GetComponent<Pinventory>().spells[selected_spell].Effect();
         }
+        #endregion
+
     }
 
     public IEnumerator Cooldown()

@@ -22,7 +22,7 @@ public class PFPeaScript : MonoBehaviour {
 	{
 		if (coll.gameObject.name.Contains("Enemy"))
 		{
-			coll.gameObject.GetComponent<Estats>().getHit(GameObject.Find("Player").GetComponent<Pinventory>().spell.Damage);
+			coll.gameObject.GetComponent<Estats>().getHit(GameObject.Find("Player").GetComponent<Pinventory>().spells[GameObject.Find ("Player").GetComponent<Pinventory> ().selected_spell].Damage);
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().peashooterHit, gameObject.transform.position, 0.5f);
 		}
 	}
