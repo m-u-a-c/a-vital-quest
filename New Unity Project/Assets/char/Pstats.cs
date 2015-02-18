@@ -64,11 +64,11 @@ public class Pstats : MonoBehaviour {
 		{
 		health -= damageTaken;
 		healthbar.value = health;
-		Invincibility ();
+			StartCoroutine("Invincibility");
 		}
 	}
 
-	public IEnumerator Invincibility()
+	IEnumerator Invincibility()
 	{
 		invincible = true;
 		yield return new WaitForSeconds(invincibilitytimer);

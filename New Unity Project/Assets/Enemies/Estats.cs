@@ -8,6 +8,8 @@ public class Estats : MonoBehaviour {
 	public float health = 20.0f;
 	public float aSpeed = 3.0f;
 
+	public bool isHit = false;
+
 	void Start ()
 	{
 	
@@ -25,6 +27,13 @@ public class Estats : MonoBehaviour {
 	public void getHit(float damageTaken)
 	{
 		health -= damageTaken / defense;
-		//gameObject.SendMessage ("Ja", 10);
+		StartCoroutine ("Knockbacked");
+	}
+
+	IEnumerator Knockbacked()
+	{
+		isHit = true;
+		yield return new WaitForSeconds(1.0f);
+		isHit = false;
 	}
 }

@@ -20,7 +20,7 @@ public class PFShieldScript : MonoBehaviour {
 		if (Input.GetKey(KeyCode.E)) {
 			
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().pickUpItem, GameObject.Find ("Player").gameObject.transform.position);
-			findItems.gameObject.GetComponent<Pinventory>().SetSpell(new YaosShield(findItems.gameObject));
+//			findItems.gameObject.GetComponent<Pinventory>().SetSpell(new YaosShield(findItems.gameObject));
 			Destroy(gameObject);
 		}
 	}

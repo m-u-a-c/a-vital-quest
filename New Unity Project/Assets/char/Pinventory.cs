@@ -8,7 +8,6 @@ public class Pinventory : MonoBehaviour
     public Sprite Chargebolt;
     public Sprite Peashooter;
     public Sprite Shield;
-<<<<<<< HEAD
 	public Sprite Grail;
 	public Sprite Robe;
 
@@ -19,14 +18,12 @@ public class Pinventory : MonoBehaviour
 	public Image Slot5;
 	public Image Slot6;
 
-    void Update()
-    {
+//    void Update()
+//   {
 //        spell.UpdateStats();
 //        name = spell.SpellName;
-=======
     // void Update()
     // {
->>>>>>> origin/master
 
     // DEBUG
     //		var go = GameObject.Find ("UI_Inventory");
@@ -164,7 +161,7 @@ public class Pinventory : MonoBehaviour
         }
         else if (cast && cast.collider.gameObject.tag == "Item" && GetComponent<Movement>().grounded)
         {
-            cast.collider.gameObject.rigidbody2D.AddForce(new Vector2(0, 60));
+//            cast.collider.gameObject.rigidbody2D.AddForce(new Vector2(0, 60));
         }
 
         //int num;

@@ -105,8 +105,10 @@ public class First_AI : MonoBehaviour {
 		groundAroundLU = Physics2D.OverlapCircle (blockCheckLU.position, blockRadius, whatIsGround);
 		groundAroundR2U = Physics2D.OverlapCircle (blockCheckR2U.position, blockRadius, whatIsGround);
 		groundAroundL2U = Physics2D.OverlapCircle (blockCheckL2U.position, blockRadius, whatIsGround);
-		
-		if (playerAround
+
+		Estats statScript = GetComponent<Estats> ();
+
+		if (!statScript.isHit && playerAround
 		    && (((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
 		    || ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U)))
 		    )

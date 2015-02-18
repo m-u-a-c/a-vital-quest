@@ -10,6 +10,7 @@ public class Eattacks : MonoBehaviour {
 	public float side = 1;
 	public float knockbackSide;
 	public bool isOnCooldown = false;
+	public bool gothit = false;
 
 	void Start ()
 	{
@@ -33,17 +34,17 @@ public class Eattacks : MonoBehaviour {
 		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find ("Player").gameObject.transform.position);
 		Estats statScript = GetComponent<Estats> ();
 		Dmg = statScript.aDamage;
-//		hit.gameObject.GetComponent<Pstats>().getHit(Dmg);
-		hit.gameObject.GetComponent<Pstats>().rigidbody2D.AddForce(new Vector2(knockbackSide,0.05f));
+		hit.gameObject.GetComponent<Pstats>().getHit(Dmg);
+		hit.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 5.0f));
 		Debug.Log("Hit");
 		Cooldown ();
 	}
 
-	public IEnumerator Cooldown()
+	IEnumerator Cooldown()
 	{
 		isOnCooldown = true;
 		Estats statScript = GetComponent<Estats> ();
-		yield return new WaitForSeconds(statScript.aSpeed);
+		yield return new WaitForSeconds(6.0f);
 		isOnCooldown = false;
 	}
 }
