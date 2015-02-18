@@ -67,10 +67,13 @@
      <Compile Include="Assets\I-V-S\Weapons\Wlist.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
+     <Compile Include="Assets\Menus\Main Menu\GameOver.cs" />
      <Compile Include="Assets\Menus\Main Menu\MainMenu.cs" />
+     <Compile Include="Assets\Menus\Main Menu\ManualScript.cs" />
      <Compile Include="Assets\Menus\PauseBehaviour.cs" />
      <Compile Include="Assets\Menus\Spellclick1.cs" />
      <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
+     <Compile Include="Assets\Observer.cs" />
      <Compile Include="Assets\PFChargeboltScript.cs" />
      <Compile Include="Assets\PFPeaScript.cs" />
      <Compile Include="Assets\PlatformScript.cs" />

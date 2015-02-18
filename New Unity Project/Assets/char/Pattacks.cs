@@ -44,15 +44,15 @@ public class Pattacks : MonoBehaviour
             switch (gameObject.GetComponent<Movement>().facingRight)
             {
                 case true:
-                    hitting = Physics2D.Raycast(new Vector2(gameObject.renderer.bounds.center.x + 0.55f, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x + 1f, gameObject.renderer.bounds.center.y - 2f));
+                    hitting = Physics2D.Raycast(new Vector2(gameObject.renderer.bounds.center.x, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x + 1.5f, gameObject.renderer.bounds.center.y - 2f));
                     break;
                 case false:
-                    hitting = Physics2D.Raycast(new Vector2(gameObject.renderer.bounds.center.x - 0.55f, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x - 1f, gameObject.renderer.bounds.center.y - 2f));
+                    hitting = Physics2D.Raycast(new Vector2(gameObject.renderer.bounds.center.x, gameObject.renderer.bounds.center.y), new Vector2(gameObject.renderer.bounds.center.x - 1.5f, gameObject.renderer.bounds.center.y - 2f));
                     break;
             }
         }
 
-        if (hitting && hitting.collider.gameObject.name.Contains("Enemy"))
+        if (hitting && hitting.collider.gameObject.tag == "Enemy")
         {
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;

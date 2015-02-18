@@ -26,7 +26,7 @@ public class Pstats : MonoBehaviour {
 	public Slider chargeslider;
 	
 	public float timeleft = 1;
-	public float invincibilitytimer = 3;
+	public float invincibilitytimer = 5.0f;
 
 	void Start ()
 	{
@@ -46,6 +46,7 @@ public class Pstats : MonoBehaviour {
 		if (health <= 0) 
 		{
 			Destroy(gameObject);
+			Application.LoadLevel(2);
 		}
 		chargeslider.value = charges;
 
@@ -65,7 +66,6 @@ public class Pstats : MonoBehaviour {
 		healthbar.value = health;
 		Invincibility ();
 		}
-		//gameObject.SendMessage ("Ja", 10);
 	}
 
 	public IEnumerator Invincibility()

@@ -6,7 +6,7 @@ public class Estats : MonoBehaviour {
 	public float aDamage = 50.0f;
 	public float defense = 10.0f;
 	public float health = 20.0f;
-	public float aSpeed = 1.0f;
+	public float aSpeed = 3.0f;
 
 	void Start ()
 	{

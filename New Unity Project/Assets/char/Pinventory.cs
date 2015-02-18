@@ -9,10 +9,20 @@ public class Pinventory : MonoBehaviour
     public Sprite Chargebolt;
     public Sprite Peashooter;
     public Sprite Shield;
+	public Sprite Grail;
+	public Sprite Robe;
+
+	public Image Slot1;
+	public Image Slot2;
+	public Image Slot3;
+	public Image Slot4;
+	public Image Slot5;
+	public Image Slot6;
+
     void Update()
     {
-        spell.UpdateStats();
-        name = spell.SpellName;
+//        spell.UpdateStats();
+//        name = spell.SpellName;
 
         //		var go = GameObject.Find ("UI_Inventory");
         //		go.guiText.text = "";
@@ -44,14 +54,39 @@ public class Pinventory : MonoBehaviour
     }
     public void AddItem(BaseItem item)
     {
-        if (items.Count == 4)
+		Sprite sprite = null;
+
+        if (items.Count == 6)
         {
-            items[3] = item;
+            items[5] = item;
             return;
         }
         items.Add(item);
         item.Effect();
         item.Stats();
+
+		switch (item.ItemName)
+		{
+			case "Holy Grail":
+					sprite = Grail;
+					break;
+			case "Friar Tuck's Robe":
+					sprite = Robe;
+					break;
+		}
+
+		if(items.Count == 1)
+			GameObject.Find("Slot1").GetComponent<Image>().sprite = sprite;
+		if(items.Count == 2)
+			GameObject.Find("Slot2").GetComponent<Image>().sprite = sprite;
+		if(items.Count == 3)
+			GameObject.Find("Slot3").GetComponent<Image>().sprite = sprite;
+		if(items.Count == 4)
+			GameObject.Find("Slot4").GetComponent<Image>().sprite = sprite;
+		if(items.Count == 5)
+			GameObject.Find("Slot5").GetComponent<Image>().sprite = sprite;
+		if(items.Count == 6)
+			GameObject.Find("Slot6").GetComponent<Image>().sprite = sprite;
     }
     public void RemoveItem(BaseItem item)
     {
