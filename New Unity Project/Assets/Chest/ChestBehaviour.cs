@@ -7,7 +7,7 @@ public class ChestBehaviour : MonoBehaviour {
 	public LayerMask chests;
 	public Transform chestCheck;
 	Collider2D findChests;
-	public float searchR = 1.0f;
+	public float searchR = 2.0f;
 
 	public Sprite chest_open;
 	public bool open = false;

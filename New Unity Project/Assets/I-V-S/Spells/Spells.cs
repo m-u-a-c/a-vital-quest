@@ -144,7 +144,7 @@ public class YaosShield : BaseSpell
         shield.transform.position = go.transform.position;
         if (Left)
         {
-            shield.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y + 0.1f);
+            shield.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y + 0.3f);
 			Vector3 theScale = shield.transform.localScale;
 			theScale.x *= -1;
 			shield.transform.localScale = theScale;
@@ -152,7 +152,7 @@ public class YaosShield : BaseSpell
         }
         else
         {
-            shield.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y + 0.1f);
+            shield.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y + 0.3f);
             shield.rigidbody2D.velocity = new Vector2(7, 0);
         }
         go.GetComponent<Pstats>().charges -= Cost;

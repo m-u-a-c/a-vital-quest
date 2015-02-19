@@ -3,18 +3,25 @@ using System.Collections;
 
 public class PFMagicPeashooterScript : MonoBehaviour {
 	
-	void OnCollisionEnter2D(Collision2D coll)
-	{
-		if (coll.gameObject.name != "Player")
-			Destroy(gameObject.GetComponent("Rigidbody2D"));
-	}
+	public LayerMask Items;
+	public Transform itemCheck;
+	Collider2D findItems;
+	public float searchR = 1.0f;
 	
-	void OnCollisionStay2D(Collision2D coll) {
-		if (coll.gameObject.name == "Player" && Input.GetKey(KeyCode.E)) {
-			coll.gameObject.GetComponent<Pinventory>().SetSpell(new MagicPeashooter(coll.gameObject));
+	void Update()
+	{
+		findItems = Physics2D.OverlapCircle (itemCheck.position, searchR, Items);
+		if (findItems) {
+			FindPlayer();
+		};
+	}
+
+	void FindPlayer() {
+		if (Input.GetKey(KeyCode.E)) {
+			
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().pickUpItem, GameObject.Find ("Player").gameObject.transform.position);
+//			findItems.gameObject.GetComponent<Pinventory>().SetSpell(new MagicPeashooter(findItems.gameObject));
 			Destroy(gameObject);
-			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().pickUpItem, gameObject.transform.position);
 		}
-		
 	}
 }

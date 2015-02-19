@@ -10,7 +10,11 @@ public class ShieldScript : MonoBehaviour {
     void Start()
     {
         timeleft = destroytime;
+<<<<<<< HEAD
 		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().yaosShieldUse,gameObject.transform.position, 0.5f);
+=======
+        
+>>>>>>> origin/master
     }
 
 	void OnCollisionEnter2D(Collision2D coll)

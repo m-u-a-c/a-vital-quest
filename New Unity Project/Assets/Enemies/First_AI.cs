@@ -13,6 +13,8 @@ public class First_AI : MonoBehaviour {
 	private GameObject player;
 	private GameObject platform;
 
+	Collider2D hit;
+
 	Collider2D grounded;
 	public Transform groundcheck;
 	float groundRadius = 0.2f;
@@ -62,6 +64,22 @@ public class First_AI : MonoBehaviour {
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
+
+	void Update()
+	{
+			if (facingRight) {
+					gameObject.GetComponent<Eattacks>().side = transform.position.x + 2;
+			}
+			if (!facingRight) {
+				gameObject.GetComponent<Eattacks>().side = transform.position.x - 2;
+			}
+			if (facingRight) {
+				gameObject.GetComponent<Eattacks>().knockbackSide = 0.05f;
+			}
+			if (!facingRight) {
+				gameObject.GetComponent<Eattacks>().knockbackSide = -0.05f;
+			}
+	}
 	
 	void FixedUpdate ()
 	{
@@ -87,8 +105,10 @@ public class First_AI : MonoBehaviour {
 		groundAroundLU = Physics2D.OverlapCircle (blockCheckLU.position, blockRadius, whatIsGround);
 		groundAroundR2U = Physics2D.OverlapCircle (blockCheckR2U.position, blockRadius, whatIsGround);
 		groundAroundL2U = Physics2D.OverlapCircle (blockCheckL2U.position, blockRadius, whatIsGround);
-		
-		if (playerAround
+
+		Estats statScript = GetComponent<Estats> ();
+
+		if (!statScript.isHit && playerAround
 		    && (((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
 		    || ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U)))
 		    )

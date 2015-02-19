@@ -12,6 +12,7 @@ public class HolyGrailScript : MonoBehaviour {
 	{
 		findItems = Physics2D.OverlapCircle (itemCheck.position, searchR, Items);
 		if (findItems) {
+			FindPlayer();
 		};
 	}
 
@@ -19,7 +20,7 @@ public class HolyGrailScript : MonoBehaviour {
 		if (Input.GetKey(KeyCode.E)) {
 		
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().pickUpItem, GameObject.Find ("Player").gameObject.transform.position);
-			findItems.collider.gameObject.GetComponent<Pinventory>().AddItem(new HolyGrail(findItems.collider.gameObject));
+			findItems.GetComponent<Pinventory>().AddItem(new HolyGrail(findItems.gameObject));
 			Destroy(gameObject);
 		}
 	}
