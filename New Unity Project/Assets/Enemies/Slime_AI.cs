@@ -54,8 +54,10 @@ public class Slime_AI : MonoBehaviour {
 		groundAroundRB = Physics2D.OverlapCircle (blockCheckRB.position, blockRadius, whatIsGround);
 		groundAroundRU = Physics2D.OverlapCircle (blockCheckRU.position, blockRadius, whatIsGround);
 		groundAroundLU = Physics2D.OverlapCircle (blockCheckLU.position, blockRadius, whatIsGround);
-		
-		if (playerAround)
+
+		Estats statScript = GetComponent<Estats> ();
+
+		if (!statScript.isHit && playerAround)
 		{
 			EMovement ();
 		}

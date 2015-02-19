@@ -33,7 +33,7 @@ public class Estats : MonoBehaviour {
 	IEnumerator Knockbacked()
 	{
 		isHit = true;
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(0.5f);
 		isHit = false;
 	}
 }

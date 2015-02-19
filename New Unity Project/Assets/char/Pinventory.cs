@@ -172,8 +172,18 @@ public class Pinventory : MonoBehaviour
         //    if (num < 7 && num > 0) selected_item = num;
         //}
         if (spells.Count > 1)
-        if (Input.GetAxis("Mouse ScrollWheel") > 0 && (selected_spell + 1) != spells.Count) selected_spell++;
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selected_spell > 0) selected_spell--;
+		if (Input.GetAxis ("Mouse ScrollWheel") > 0 && (selected_spell + 1) != spells.Count)
+		{
+			selected_spell++;
+			if(spells.Count == 2)
+				selected_spell = 0;
+		}
+		else if (Input.GetAxis ("Mouse ScrollWheel") < 0 && selected_spell > 0)
+		{
+			selected_spell--;
+			if(spells.Count == 0)
+				selected_spell = 2;
+		}
         spellcount = spells.Count;
         Sprite sprite = null;
         switch (spells[selected_spell].SpellName)

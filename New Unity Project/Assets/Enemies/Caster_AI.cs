@@ -87,14 +87,18 @@ public class Caster_AI : MonoBehaviour {
 		groundAroundLU = Physics2D.OverlapCircle (blockCheckLU.position, blockRadius, whatIsGround);
 		groundAroundR2U = Physics2D.OverlapCircle (blockCheckR2U.position, blockRadius, whatIsGround);
 		groundAroundL2U = Physics2D.OverlapCircle (blockCheckL2U.position, blockRadius, whatIsGround);
-		
-		if (inRange && !playerAround
-		    && (((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
+
+		Estats statScript = GetComponent<Estats> ();
+
+		if (!statScript.isHit && inRange
+			&& (((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
 		    || ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U)))
 		    )
 		{
 			EMovement ();
 		}
+		if(playerAround)
+			rigidbody2D.velocity = new Vector2(0, 0);
 		
 /*		if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
 		else gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
