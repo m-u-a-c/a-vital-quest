@@ -104,9 +104,14 @@ public class Movement : MonoBehaviour {
 	}
 	void Start()
 	{
+<<<<<<< HEAD
+		gameObject.GetComponent<Pinventory> ().spell = new YaosShield(gameObject);
+		}
+=======
         gameObject.GetComponent<Pinventory>().AddSpell(new YaosShield(gameObject));
        
 	}
+>>>>>>> origin/master
 
 	void Flip()
 	{

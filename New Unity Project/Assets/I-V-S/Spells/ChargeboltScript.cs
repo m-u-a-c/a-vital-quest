@@ -56,6 +56,6 @@ public class ChargeboltScript : MonoBehaviour {
 						
 				}
 		Destroy (gameObject);
-		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit, gameObject.transform.position, 0.70f);
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit,gameObject.transform.position, 0.70f);
 	}
 }
