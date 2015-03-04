@@ -34,7 +34,7 @@ public class ChestBehaviour : MonoBehaviour {
 	public void OpenSesame()
 	{
 				rnd = new System.Random ();
-				int i = rnd.Next (1, 5);
+				int i = rnd.Next (1, 8);
 				if (!open) {
 						AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks> ().chestOpen, gameObject.transform.position, 0.4f);
 						gameObject.GetComponent<SpriteRenderer> ().sprite = chest_open;
@@ -52,6 +52,18 @@ public class ChestBehaviour : MonoBehaviour {
 								case 4:
 										SpawnItem ("PFMagicPeashooter");
 										break;
+								case 5:
+										SpawnItem ("PFBootsofFastness");
+										break;
+								case 6:
+										SpawnItem ("PFIdol");
+										break;
+								case 7:
+										SpawnItem ("PFSkohorn");
+										break;
+								case 8:
+									SpawnItem ("PFSkohorn");
+									break;
 								}
 						} else {
 								SpawnItem (prefab.name);

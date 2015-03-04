@@ -2,15 +2,11 @@
 using System.Collections;
 
 public class Spawner : MonoBehaviour {
-	
-	public float health = 20;
-	
+
 	public LayerMask whatIsPlayer;
 	Collider2D playerAround;
 	float searchRadius = 20.0f;
 	public Vector2 Pos;
-	public float spawnlimit = 7;
-	public float spawned = 0;
 	float start_time = Time.timeSinceLevelLoad;
 	public float cd;
 	public string object_to_spawn;
@@ -40,10 +36,9 @@ public class Spawner : MonoBehaviour {
 		playerAround = Physics2D.OverlapCircle (Pos, searchRadius, whatIsPlayer);
 
 		timeleft -= Time.deltaTime;
-		if (timeleft <= 0 && playerAround/*&& spawned != spawnlimit*/) {
+		if (timeleft <= 0 && playerAround){
 			timeleft = cd;
 			SpawnObject(object_to_spawn);
-			spawned += 1;
 		}
 	}
 }

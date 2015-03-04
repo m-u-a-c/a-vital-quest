@@ -55,14 +55,25 @@ public class Pattacks : MonoBehaviour
             }
         }
 
-        if (hitting && hitting.collider.gameObject.tag == "Enemy")
+		if (hitting)
         {
+			if(hitting.collider.gameObject.tag == "Enemy")
+			{
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
             hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
             hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.05f));
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
+			}
+			else if(hitting.collider.gameObject.tag == "Spawner")
+			{
+				float bb = gameObject.GetComponent<Pstats>().aDamage;
+				var aa = hitting.collider.gameObject.name;
+				hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
+				AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
+				hitting = new RaycastHit2D();
+			}
         }
 
         if (gameObject.GetComponent<Movement>().facingRight)

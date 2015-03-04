@@ -35,7 +35,7 @@ public class Eattacks : MonoBehaviour {
 		Estats statScript = GetComponent<Estats> ();
 		Dmg = statScript.aDamage;
 		hit.gameObject.GetComponent<Pstats>().getHit(Dmg);
-		hit.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 5.0f));
+		hit.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 5.0f));
 		Debug.Log("Hit");
 		Cooldown ();
 	}

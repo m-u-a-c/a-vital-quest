@@ -10,6 +10,9 @@ public class Pinventory : MonoBehaviour
     public Sprite Shield;
 	public Sprite Grail;
 	public Sprite Robe;
+	public Sprite Skohorn;
+	public Sprite Idol;
+	public Sprite Boots;
 
 	public Image Slot1;
 	public Image Slot2;
@@ -126,10 +129,10 @@ public class Pinventory : MonoBehaviour
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
-    void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(new Vector2(transform.renderer.bounds.center.x, transform.renderer.bounds.center.y - 1), 1);
-    }
+//    void OnDrawGizmos()
+//    {
+//        Gizmos.DrawSphere(new Vector2(transform.renderer.bounds.center.x, transform.renderer.bounds.center.y - 1), 1);
+//    }
     public void Update()
     {
         //foreach (BaseSpell s in spells) s.UpdateStats();
@@ -175,14 +178,10 @@ public class Pinventory : MonoBehaviour
 		if (Input.GetAxis ("Mouse ScrollWheel") > 0 && (selected_spell + 1) != spells.Count)
 		{
 			selected_spell++;
-			if(spells.Count == 2)
-				selected_spell = 0;
 		}
 		else if (Input.GetAxis ("Mouse ScrollWheel") < 0 && selected_spell > 0)
 		{
 			selected_spell--;
-			if(spells.Count == 0)
-				selected_spell = 2;
 		}
         spellcount = spells.Count;
         Sprite sprite = null;
