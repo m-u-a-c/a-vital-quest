@@ -56,9 +56,17 @@ public class GlassIdol : BaseItem {
 		go = g;
 		ItemName = "Glass Idol";
 	}
+
 	public override void Effect ()
 	{
 		//TODO: Restores you to full HP and Charges when brought below 10 HP. Breaks on effect.
+        if (go.GetComponent<Pstats>().health < 10)
+        {
+            go.GetComponent<Pstats>().health = 100;
+            go.GetComponent<Pstats>().charges = 5;
+            go.GetComponent<Pinventory>().RemoveItem(this);
+        }
+        
 	}
 
 	public override void Stats ()
@@ -106,8 +114,8 @@ public class BootsOfUrgency : BaseItem {
 
 	public override void Stats ()
 	{
-		go.GetComponent<Pstats> ().aSpeed += 20;
-		go.GetComponent<Pstats> ().movement += 20;
+		//go.GetComponent<Pstats> ().aSpeed += 0.2f;
+		go.GetComponent<Pstats> ().movement += 0.2f;
 	}
 	public override void RevertStats ()
 	{

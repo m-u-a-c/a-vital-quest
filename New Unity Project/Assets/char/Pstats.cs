@@ -16,9 +16,9 @@ public class Pstats : MonoBehaviour {
 	//TODO: 
 	public float chargereg = 1;
 	//TODO: 
-	public float critchance = 5;
+	public float critchance = 0.05f;
 	//TODO: 
-	public float movement = 100;
+    public float movement = 1;
 	public bool invincible = false;
 
 	//UI
@@ -49,6 +49,7 @@ public class Pstats : MonoBehaviour {
 			Application.LoadLevel(2);
 		}
 		chargeslider.value = charges;
+        healthbar.value = health;
 
 	}
 

@@ -18,15 +18,15 @@ public class Pattacks : MonoBehaviour
     public bool isOnCooldown = false;
     public bool invincible = false;
 
-	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit;
+    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit;
 
     //UI
     public Image spellimage;
     void Start()
     {
-		
-    }
 
+    }
+     
     void Update()
     {
 
@@ -38,7 +38,7 @@ public class Pattacks : MonoBehaviour
 
         timeleft -= Time.deltaTime;
 
-        
+
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
             swinging = true;
@@ -47,33 +47,31 @@ public class Pattacks : MonoBehaviour
             switch (gameObject.GetComponent<Movement>().facingRight)
             {
                 case true:
-				hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 5.0f, transform.position.y));
+                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 1, transform.position.y), LayerMask.GetMask("Enemies"));
                     break;
                 case false:
-				hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 5.0f, transform.position.y));
+                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 1, transform.position.y), LayerMask.GetMask("Enemies"));
                     break;
             }
         }
 
-		if (hitting)
+        if (hitting && hitting.collider.gameObject.tag == "Enemy")
         {
-			if(hitting.collider.gameObject.tag == "Enemy")
-			{
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
             hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
             hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.05f));
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
-			}
-			else if(hitting.collider.gameObject.tag == "Spawner")
-			{
-				float bb = gameObject.GetComponent<Pstats>().aDamage;
-				var aa = hitting.collider.gameObject.name;
-				hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
-				AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
-				hitting = new RaycastHit2D();
-			}
+        }
+        else if (hitting && hitting.collider.gameObject.tag == "Spawner")
+        {
+            float bb = gameObject.GetComponent<Pstats>().aDamage;
+            var aa = hitting.collider.gameObject.name;
+            hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
+            AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
+            hitting = new RaycastHit2D();
+
         }
 
         if (gameObject.GetComponent<Movement>().facingRight)
@@ -130,6 +128,19 @@ public class Pattacks : MonoBehaviour
         }
         #endregion
 
+    }
+
+    void OnDrawGizmos()
+    {
+         //case true:
+         //           hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 5.0f, transform.position.y));
+         //           break;
+         //       case false:
+         //           hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 5.0f, transform.position.y));
+         //           break;
+
+        Gizmos.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 5, transform.position.y));
+        Gizmos.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 5, transform.position.y));
     }
 
     public IEnumerator Cooldown()
