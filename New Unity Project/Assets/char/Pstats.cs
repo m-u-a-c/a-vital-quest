@@ -9,6 +9,7 @@ public class Pstats : MonoBehaviour {
 	public float aSpeed = 100;
 	public float health = 100;
 	public float maxhealth = 100;
+	public float knockbackmultiplier = 1;
 	//TODO: 
 	public float healthreg = 0;
 
@@ -16,7 +17,9 @@ public class Pstats : MonoBehaviour {
 	//TODO: 
 	public float chargereg = 1;
 	//TODO: 
-	public float critchance = 0.05f;
+	//In percentage:
+	public float critchance = 5f;
+	public float critmultiplier = 2;
 	//TODO: 
     public float movement = 1;
 	public bool invincible = false;

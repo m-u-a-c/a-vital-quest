@@ -4,7 +4,6 @@ using System.Collections;
 public class Estats : MonoBehaviour {
 	//hittin
 	public float aDamage = 50.0f;
-	public float defense = 10.0f;
 	public float health = 20.0f;
 	public float aSpeed = 3.0f;
 
@@ -26,7 +25,7 @@ public class Estats : MonoBehaviour {
 
 	public void getHit(float damageTaken)
 	{
-		health -= damageTaken / defense;
+		health -= damageTaken;
 		StartCoroutine ("Knockbacked");
 	}
 

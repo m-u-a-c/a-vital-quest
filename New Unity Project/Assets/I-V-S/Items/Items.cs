@@ -96,7 +96,7 @@ public class LuckyHorseshoe : BaseItem {
 	}
 	public override void RevertStats ()
 	{
-		
+		go.GetComponent<Pstats> ().critchance -= 10;
 	}
 }
 
@@ -132,16 +132,17 @@ public class SturdySocks : BaseItem {
 	}
 	public override void Effect()
 	{
-		//TODO: Cannot get knocked back.
+
 	}
 	public override void Stats ()
 	{
-
 		go.GetComponent<Pstats> ().aDamage += 3;
+		go.GetComponent<Pstats> ().knockbackmultiplier = 0;
 	}
 	public override void RevertStats ()
 	{
-		
+		go.GetComponent<Pstats> ().aDamage -= 3;
+		go.GetComponent<Pstats> ().knockbackmultiplier = 1;
 	}
 }
 
@@ -164,7 +165,8 @@ public class MysticalOrb : BaseItem {
 	}
 	public override void RevertStats ()
 	{
-		
+		go.GetComponent<Pstats> ().sDamage -= 3;
+		go.GetComponent<Pstats> ().chargereg -= 4;
 	}
 }
 

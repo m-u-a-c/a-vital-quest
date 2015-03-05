@@ -13,6 +13,7 @@ public class Pinventory : MonoBehaviour
     public Sprite Hästsko;
     public Sprite Idol;
     public Sprite Boots;
+	public Sprite Sockor;
 
     public Image Slot1;
     public Image Slot2;
@@ -68,6 +69,9 @@ public class Pinventory : MonoBehaviour
             case "Boots of Urgency":
                 sprite = Boots;
                 break;
+			case "Sturdy Socks":
+				sprite = Sockor;
+				break;
         }
 
         if (items.Count == 1)
@@ -160,6 +164,9 @@ public class Pinventory : MonoBehaviour
                 case "PFIdol(Clone)":
                     AddItem(new GlassIdol(gameObject));
                     break;
+				case "PFSturdySocks(Clone)":
+					AddItem (new SturdySocks(gameObject));
+					break;
             }
             Destroy(cast.collider.gameObject);
         }

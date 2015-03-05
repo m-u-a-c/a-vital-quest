@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 public class Pattacks : MonoBehaviour
 {
 
@@ -59,8 +60,21 @@ public class Pattacks : MonoBehaviour
         {
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
-            hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
-            hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.05f));
+			var rnd = new System.Random();
+			int result = rnd.Next(101);
+			if (GetComponent<Pstats>().critchance >= result)
+			{
+           		hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier);
+				hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.04f));
+				Debug.Log("Crit", null);
+			}
+			else
+			{
+				hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
+            	hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.02f));
+				Debug.Log ("Not Crit", null);
+			}
+
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
         }
