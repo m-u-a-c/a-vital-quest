@@ -55,7 +55,7 @@ public class ChargeboltScript : MonoBehaviour {
 						coll.gameObject.GetComponent<Estats> ().getHit (GameObject.Find ("Player").GetComponent<Pinventory> ().spells[GameObject.Find ("Player").GetComponent<Pinventory> ().selected_spell].Damage);
 						
 				}
-		Destroy (gameObject);
+		if (coll.gameObject.name != "Player") Destroy (gameObject);
 		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().chargeboltHit,gameObject.transform.position, 0.70f);
 	}
 }

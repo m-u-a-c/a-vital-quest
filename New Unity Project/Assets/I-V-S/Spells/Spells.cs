@@ -48,7 +48,7 @@ public class Chargebolt : BaseSpell
         go = g;
 
         Cooldown = 3;
-        Cost = go.GetComponent<Pstats>().charges;
+        Cost = 0;
         Damage = go.GetComponent<Pstats>().charges + go.GetComponent<Pstats>().sDamage * 0.5f;
     }
 

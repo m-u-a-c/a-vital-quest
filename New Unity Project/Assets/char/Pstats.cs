@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Pstats : MonoBehaviour {
-	public float aDamage = 50;
+	public float aDamage = 10;
+    public float aDamage_original = 10;
 	public float sDamage = 50;
 	public float defense = 2;
 	public float aSpeed = 100;

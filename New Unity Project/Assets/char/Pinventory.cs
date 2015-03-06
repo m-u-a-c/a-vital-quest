@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Pinventory : MonoBehaviour
 {
+    public Sprite _Placeholder;
     public Sprite Chargebolt;
     public Sprite Peashooter;
     public Sprite Shield;
@@ -13,21 +14,18 @@ public class Pinventory : MonoBehaviour
     public Sprite Hästsko;
     public Sprite Idol;
     public Sprite Boots;
-	public Sprite Sockor;
+    public Sprite Sockor;
+    public Sprite Core;
 
-    public Image Slot1;
-    public Image Slot2;
-    public Image Slot3;
-    public Image Slot4;
-    public Image Slot5;
-    public Image Slot6;
+
+    public List<Image> slots;
 
     //    void Update()
     //   {
     //        spell.UpdateStats();
     //        name = spell.SpellName;
 
-    public List<BaseItem> items;
+    public List<BaseItem> items = new List<BaseItem>();
     public List<BaseSpell> spells;
     public List<float> spell_cooldowns;
     public List<float> spell_cooldowns_left;
@@ -43,13 +41,10 @@ public class Pinventory : MonoBehaviour
     {
         Sprite sprite = null;
 
-        if (items.Count == 6)
-        {
-            items[5] = item;
-            return;
-        }
+        if (items.Count == 6) 
+            RemoveItem(items[5]);
+        
         items.Add(item);
-        item.Effect();
         item.Stats();
 
         switch (item.ItemName)
@@ -60,7 +55,7 @@ public class Pinventory : MonoBehaviour
             case "Friar Tuck's Robe":
                 sprite = Robe;
                 break;
-            case "Glass Idol":
+            case "Elixir of Life":
                 sprite = Idol;
                 break;
             case "Lucky Horseshoe":
@@ -69,35 +64,29 @@ public class Pinventory : MonoBehaviour
             case "Boots of Urgency":
                 sprite = Boots;
                 break;
-			case "Sturdy Socks":
-				sprite = Sockor;
-				break;
+            case "Sturdy Socks":
+                sprite = Sockor;
+                break;
+            case "Static Core":
+                sprite = Core;
+                break;
         }
-
-        if (items.Count == 1)
-            GameObject.Find("Slot1").GetComponent<Image>().sprite = sprite;
-        if (items.Count == 2)
-            GameObject.Find("Slot2").GetComponent<Image>().sprite = sprite;
-        if (items.Count == 3)
-            GameObject.Find("Slot3").GetComponent<Image>().sprite = sprite;
-        if (items.Count == 4)
-            GameObject.Find("Slot4").GetComponent<Image>().sprite = sprite;
-        if (items.Count == 5)
-            GameObject.Find("Slot5").GetComponent<Image>().sprite = sprite;
-        if (items.Count == 6)
-            GameObject.Find("Slot6").GetComponent<Image>().sprite = sprite;
+        Debug.Log(item.ItemName, null);
+        slots[items.Count - 1].GetComponent<Image>().sprite = sprite;
     }
     public void RemoveItem(BaseItem item)
     {
-        item.RevertStats();
-        items.Remove(item);
         int id = 0;
+        item.RevertStats();
+        
+
         for (int i = 0; i < items.Count; i++)
         {
-            if (items[i].ItemName == item.ItemName) id = i + 1;
+            if (items[i] == item) id = i;
         }
-        GameObject.Find(System.String.Format("Slot{0}", id.ToString())).GetComponent<Image>().sprite = Hästsko;
 
+        slots[id].GetComponent<Image>().sprite = _Placeholder;
+        items.Remove(item);
     }
     public void AddSpell(BaseSpell s)
     {
@@ -144,29 +133,45 @@ public class Pinventory : MonoBehaviour
             switch (cast.collider.gameObject.name)
             {
                 case "PFChargebolt(Clone)":
+                case "PFChargebolt":
                     AddSpell(new Chargebolt(gameObject));
                     break;
                 case "PFTucksRobe(Clone)":
+                case "PFTucksRobe":
                     AddItem(new FriarTucksRobe(gameObject));
                     break;
                 case "PFShield(Clone)":
+                case "PFShield":
                     AddSpell(new YaosShield(gameObject));
                     break;
                 case "PFHolyGrail(Clone)":
+                case "PFHolyGrail":
                     AddItem(new HolyGrail(gameObject));
                     break;
                 case "PFMagicPeashooter(Clone)":
+                case "PFMagicPeashooter":
                     AddSpell(new MagicPeashooter(gameObject));
                     break;
                 case "PFBootsofUrgency(Clone)":
+                case "PFBootsofUrgency":
                     AddItem(new BootsOfUrgency(gameObject));
                     break;
                 case "PFIdol(Clone)":
+                case "PFIdol":
                     AddItem(new GlassIdol(gameObject));
                     break;
-				case "PFSturdySocks(Clone)":
-					AddItem (new SturdySocks(gameObject));
-					break;
+                case "PFSturdySocks(Clone)":
+                case "PFSturdySocks":
+                    AddItem(new SturdySocks(gameObject));
+                    break;
+                case "PFHorseshoe(Clone)":
+                case "PFHorseshoe":
+                    AddItem(new LuckyHorseshoe(gameObject));
+                    break;
+                case "PFStaticCore(Clone)":
+                case "PFStaticCore":
+                    AddItem(new StaticCore(gameObject));
+                    break;
             }
             Destroy(cast.collider.gameObject);
         }

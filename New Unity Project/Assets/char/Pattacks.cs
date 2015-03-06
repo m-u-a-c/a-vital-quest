@@ -25,9 +25,9 @@ public class Pattacks : MonoBehaviour
     public Image spellimage;
     void Start()
     {
-
+        GetComponent<Pinventory>().AddItem(new AsgardSouvenir(gameObject));
     }
-     
+
     void Update()
     {
 
@@ -38,7 +38,6 @@ public class Pattacks : MonoBehaviour
         if (casting && cast_timeleft <= 0) casting = false;
 
         timeleft -= Time.deltaTime;
-
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
@@ -56,24 +55,27 @@ public class Pattacks : MonoBehaviour
             }
         }
 
+        // Call all item Effect() to ensure effect execution
+        foreach (BaseItem bi in GetComponent<Pinventory>().items) bi.Effect();
+
         if (hitting && hitting.collider.gameObject.tag == "Enemy")
         {
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
-			var rnd = new System.Random();
-			int result = rnd.Next(101);
-			if (GetComponent<Pstats>().critchance >= result)
-			{
-           		hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier);
-				hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.04f));
-				Debug.Log("Crit", null);
-			}
-			else
-			{
-				hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
-            	hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.02f));
-				Debug.Log ("Not Crit", null);
-			}
+            var rnd = new System.Random();
+            int result = rnd.Next(101);
+            if (GetComponent<Pstats>().critchance >= result)
+            {
+                hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier);
+                hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.04f));
+                Debug.Log("Crit", null);
+            }
+            else
+            {
+                hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
+                hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.02f));
+                Debug.Log("Not Crit", null);
+            }
 
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
@@ -125,9 +127,7 @@ public class Pattacks : MonoBehaviour
         if (gameObject.GetComponent<Pstats>().charges > 0 && GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] <= 0 && Input.GetKeyDown(KeyCode.Mouse1))
         {
             GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] = GetComponent<Pinventory>().spell_cooldowns[selected_spell];
-            timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
-            casting = true;
-            cast_timeleft = 0.12f;
+            ;
 
             var spell = gameObject.GetComponent<Pinventory>().spells[selected_spell];
             if (gameObject.GetComponent<Movement>().facingRight)
@@ -139,6 +139,10 @@ public class Pattacks : MonoBehaviour
 
             if (gameObject.GetComponent<Pinventory>().spells[selected_spell].Cost <= gameObject.GetComponent<Pstats>().charges)
                 gameObject.GetComponent<Pinventory>().spells[selected_spell].Effect();
+            
+            timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
+            casting = true;
+            cast_timeleft = 0.12f;
         }
         #endregion
 
@@ -146,16 +150,17 @@ public class Pattacks : MonoBehaviour
 
     void OnDrawGizmos()
     {
-         //case true:
-         //           hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 5.0f, transform.position.y));
-         //           break;
-         //       case false:
-         //           hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 5.0f, transform.position.y));
-         //           break;
+        //case true:
+        //           hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 5.0f, transform.position.y));
+        //           break;
+        //       case false:
+        //           hitting = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 5.0f, transform.position.y));
+        //           break;
 
         Gizmos.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 5, transform.position.y));
         Gizmos.DrawLine(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 5, transform.position.y));
     }
+
 
     public IEnumerator Cooldown()
     {
