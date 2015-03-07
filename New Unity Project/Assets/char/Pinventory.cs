@@ -15,7 +15,10 @@ public class Pinventory : MonoBehaviour
     public Sprite Idol;
     public Sprite Boots;
     public Sprite Sockor;
-    public Sprite Core;
+    public Sprite Core_Charged;
+    public Sprite Core_Uncharged;
+    public Sprite Crest;
+    public Sprite Water;
 
 
     public List<Image> slots;
@@ -68,7 +71,10 @@ public class Pinventory : MonoBehaviour
                 sprite = Sockor;
                 break;
             case "Static Core":
-                sprite = Core;
+                sprite = Core_Charged;
+                break;
+            case "Vampiric Crest":
+                sprite = Crest;
                 break;
         }
         Debug.Log(item.ItemName, null);
@@ -111,6 +117,9 @@ public class Pinventory : MonoBehaviour
             case "Yao's Shield":
                 sprite = Shield;
                 break;
+            case "Holy Water":
+                sprite = Water;
+                break;
 
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
@@ -130,6 +139,8 @@ public class Pinventory : MonoBehaviour
         if (cast && cast.collider.gameObject.tag == "Item" && Input.GetKey(KeyCode.E))
         {
             AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().pickUpItem, GameObject.Find("Player").gameObject.transform.position);
+
+            #region Items
             switch (cast.collider.gameObject.name)
             {
                 case "PFChargebolt(Clone)":
@@ -172,7 +183,16 @@ public class Pinventory : MonoBehaviour
                 case "PFStaticCore":
                     AddItem(new StaticCore(gameObject));
                     break;
-            }
+                case "PFVampiricCrest(Clone)":
+                case "PFVampiricCrest":
+                    AddItem(new VampiricCrest(gameObject));
+                    break;
+                case "PFHolyWater(Clone)":
+                case "PFHolyWater":
+                    AddSpell(new HolyWater(gameObject));
+                    break;
+            } 
+            #endregion
             Destroy(cast.collider.gameObject);
         }
         else if (cast && cast.collider.gameObject.tag == "Item" && GetComponent<Movement>().grounded)

@@ -190,6 +190,7 @@ public class VampiricCrest : BaseItem
         var hitting = go.GetComponent<Pattacks>().hitting;
         if (hitting && hitting.collider.gameObject.tag == "Enemy" && hitting.collider.gameObject.GetComponent<Estats>().health <= 15)
         {
+            Debug.Log("Vampire", null);
             hitting.collider.gameObject.GetComponent<Estats>().getHit(15);
             go.GetComponent<Pstats>().health += 3;
         }
@@ -209,47 +210,62 @@ public class StaticCore : BaseItem
 {
     GameObject go;
     bool on = false;
-    float timeleft = 1;
-    float ori_damage, ori_chargereg;
+    float timeleft = 1.5f;
 
+    float ori_damage;
     public StaticCore(GameObject g)
     {
         go = g;
         ItemName = "Static Core";
-        ori_chargereg = go.GetComponent<Pstats>().chargereg;
-        Debug.Log(ori_chargereg.ToString(), null);
+        ori_damage = go.GetComponent<Pstats>().aDamage;
     }
     public override void Effect()
     {
-        Debug.Log(timeleft.ToString() + ", " + on.ToString(), null);
         var pstats = go.GetComponent<Pstats>();
-
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (!on && go.GetComponent<Pstats>().charges == 5)
             {
-                on = true;
-                Debug.Log("turned on", null);
+                TurnOn();
             }
             else if (on && go.GetComponent<Pstats>().charges < 5) 
             {
-                on = false;
-                go.GetComponent<Pstats>().chargereg = ori_chargereg;
-                Debug.Log(ori_chargereg.ToString() + " turned off", null);
+                TurnOff();
             }
         }
         if (on)
         {
             timeleft -= Time.deltaTime;
-            go.GetComponent<Pstats>().aDamage += go.GetComponent<Pstats>().sDamage * 0.6f;
-            go.GetComponent<Pstats>().chargereg = int.MaxValue;
         }
 
         if (on && timeleft <= 0)
         {
             go.GetComponent<Pstats>().charges -= 1;
-            timeleft = 1;
+            timeleft = 1.5f;
         }
+
+        if (on && go.GetComponent<Pstats>().charges <= 0)
+        {
+            TurnOff();
+        }
+    }
+
+    public void TurnOn()
+    {
+
+        on = true;
+        go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
+        go.GetComponent<Pstats>().regcharges = false;
+        go.GetComponent<Pstats>().aDamage = ori_damage + go.GetComponent<Pstats>().sDamage * 0.6f;
+        Debug.Log("turned on", null);
+    }
+    public void TurnOff()
+    {
+        on = false;
+        go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Charged;
+        go.GetComponent<Pstats>().regcharges = true;
+        go.GetComponent<Pstats>().aDamage = ori_damage;
+        timeleft = 1;
     }
 
     public override void Stats()

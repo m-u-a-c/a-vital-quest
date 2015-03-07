@@ -5,10 +5,12 @@ public class ShieldScript : MonoBehaviour {
 
     
     public float destroytime = 3;
+    public float ori_y;
     float timeleft;
     // Use this for initialization
     void Start()
     {
+        ori_y = transform.position.y;
         timeleft = destroytime;
 		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().yaosShieldUse,gameObject.transform.position, 0.5f);
         
@@ -22,12 +24,16 @@ public class ShieldScript : MonoBehaviour {
 		}
 
 	}
+
+    void Update()
+    {
+        transform.position = new Vector2(transform.position.x, ori_y);
+        
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-
-
         timeleft -= Time.deltaTime;
         if (timeleft <= 0)
         {

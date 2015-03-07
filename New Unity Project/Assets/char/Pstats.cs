@@ -17,6 +17,7 @@ public class Pstats : MonoBehaviour {
 	public float charges = 5;
 	//TODO: 
 	public float chargereg = 1;
+    public bool regcharges = true;
 	//TODO: 
 	//In percentage:
 	public float critchance = 5f;
@@ -40,9 +41,10 @@ public class Pstats : MonoBehaviour {
 	void Update ()
 	{
 		timeleft -= Time.deltaTime;
-		if (timeleft <= 0) {
+		if (regcharges && timeleft <= 0) {
 			charges++;
 			timeleft = chargereg;
+            //Debug.Log("reg", null);
 		}
 		// makes you unable to set charges above 5
 		if (charges >= 5)

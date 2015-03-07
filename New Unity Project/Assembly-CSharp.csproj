@@ -55,14 +55,12 @@
      <Compile Include="Assets\Enemies\Flying_AI.cs" />
      <Compile Include="Assets\Enemies\Slime_AI.cs" />
      <Compile Include="Assets\Enemies\SpawnerScript.cs" />
+     <Compile Include="Assets\HolyWaterScript.cs" />
+     <Compile Include="Assets\HolyWaterSphereScript.cs" />
      <Compile Include="Assets\I-V-S\Items\BaseItem.cs" />
      <Compile Include="Assets\I-V-S\Items\Items.cs" />
      <Compile Include="Assets\I-V-S\Spells\BaseSpell.cs" />
-     <Compile Include="Assets\I-V-S\Spells\ChargeboltScript.cs" />
-     <Compile Include="Assets\I-V-S\Spells\Sbehaviour.cs" />
-     <Compile Include="Assets\I-V-S\Spells\Slist.cs" />
      <Compile Include="Assets\I-V-S\Spells\Spells.cs" />
-     <Compile Include="Assets\I-V-S\Spells\Sstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\BaseWeapon.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Weapons.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Wlist.cs" />
@@ -77,6 +75,7 @@
      <Compile Include="Assets\Observer.cs" />
      <Compile Include="Assets\PFChargeboltScript.cs" />
      <Compile Include="Assets\PlatformScript.cs" />
+     <Compile Include="Assets\Resources\Spells\ChargeboltScript.cs" />
      <Compile Include="Assets\Resources\Spells\ShieldScript.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\VPlatformScript.cs" />
