@@ -104,7 +104,8 @@ public class Movement : MonoBehaviour {
 	}
 	void Start()
 	{
-//		gameObject.GetComponent<Pinventory> ().spell = new YaosShield(gameObject);
+        var timer = gameObject.AddComponent<Timer>();
+        timer.SetTimer(1, int.MaxValue, new System.Action(Flip), new System.Func<bool>(awe));
         gameObject.GetComponent<Pinventory>().AddSpell(new YaosShield(gameObject));
        
 	}
@@ -117,7 +118,10 @@ public class Movement : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 
-
+    bool awe()
+    {
+        return true;
+    }
 
 //	void Jump()
 //	{

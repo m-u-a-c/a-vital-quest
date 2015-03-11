@@ -78,6 +78,7 @@
      <Compile Include="Assets\Resources\Spells\ChargeboltScript.cs" />
      <Compile Include="Assets\Resources\Spells\ShieldScript.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
+     <Compile Include="Assets\Timer.cs" />
      <Compile Include="Assets\VPlatformScript.cs" />
      <Compile Include="Assets\char\CameraFollow.cs" />
      <Compile Include="Assets\char\Controls.cs" />
