@@ -145,10 +145,9 @@ public class Pattacks : MonoBehaviour
 
         #region Casting
         int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
-        if (gameObject.GetComponent<Pstats>().charges > 0 && GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] <= 0 && Input.GetKeyDown(KeyCode.Mouse1))
+        if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
         {
-            GetComponent<Pinventory>().spell_cooldowns_left[selected_spell] = GetComponent<Pinventory>().spell_cooldowns[selected_spell];
-            ;
+           
 
             var spell = gameObject.GetComponent<Pinventory>().spells[selected_spell];
             if (gameObject.GetComponent<Movement>().facingRight)
@@ -164,6 +163,7 @@ public class Pattacks : MonoBehaviour
             timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
             casting = true;
             cast_timeleft = 0.12f;
+            GetComponent<Pinventory>().spell_cds[selected_spell].StartTimer();
         }
         #endregion
 

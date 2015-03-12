@@ -62,8 +62,8 @@ public class ChestBehaviour : MonoBehaviour {
 										SpawnItem ("PFSkohorn");
 										break;
 								case 8:
-									SpawnItem ("PFSkohorn");
-									break;
+									    SpawnItem ("PFSkohorn");
+									    break;
 								}
 						} else {
 								SpawnItem (prefab.name);

@@ -81,13 +81,13 @@ public class Movement : MonoBehaviour {
 
 			
 		float move = Input.GetAxis ("Horizontal");
-<<<<<<< HEAD
+
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
-		if(grounded.tag == "MovingPlatform")
+		if(grounded && grounded.gameObject.tag == "MovingPlatform")
 			rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed, grounded.rigidbody2D.velocity.y);
-=======
+
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed * GetComponent<Pstats>().movement, rigidbody2D.velocity.y);
->>>>>>> origin/master
+
 		
 		playerposition.x = rigidbody2D.transform.position.x;
 		playerposition.y = rigidbody2D.transform.position.y;

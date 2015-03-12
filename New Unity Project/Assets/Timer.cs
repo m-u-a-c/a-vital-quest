@@ -8,20 +8,20 @@ public class Timer : MonoBehaviour {
     float ticktime;
     public int ticks;
     public int maxticks;
-    bool running;
+    public bool running;
     System.Action action = null;
     System.Func<bool> condition = null;
     //Sets the timer with an interval specified in seconds, amount of ticks, method to call
     //Also starts the timer
+    //Don't forget to add the timer as a component to a GameObject in order for it to work
     public void SetTimer(float Interval, int Ticks, System.Action Action = null, System.Func<bool> Condition = null)
     {
-        if (Action == null) return;
         timeleft = Interval;
         ticktime = Interval;
         if (Ticks != 0)
-		maxticks = Ticks;
+		    maxticks = Ticks;
 		else
-		maxticks = int.MaxValue;
+		    maxticks = int.MaxValue;
         running = true;
         action = Action;
         condition = Condition;
@@ -36,11 +36,11 @@ public class Timer : MonoBehaviour {
     {
         running = false;
         timeleft = ticktime;
+        ticks = 0;
     }
 
     public void StartTimer()
     {
-        if (action == null) return;
         running = true;
     }
 
@@ -56,9 +56,9 @@ public class Timer : MonoBehaviour {
                 ticks++;
                 if (condition != null) running = condition();
                 timeleft = ticktime;
-                action();
+                if (action != null) action();
             }
         }
-        if (ticks >= maxticks) running = false;
+        if (ticks >= maxticks) StopTimer();
 	}
 }

@@ -41,12 +41,12 @@ public class FriarTucksRobe : BaseItem
     public override void Stats()
     {
         go.GetComponent<Pstats>().charges += 2;
-        go.GetComponent<Pstats>().chargereg -= 0.5f;
+        go.GetComponent<Pstats>().chargereg *= 0.5f;
     }
 
     public override void RevertStats()
     {
-        go.GetComponent<Pstats>().chargereg += 0.5f;
+        go.GetComponent<Pstats>().chargereg /= 0.5f;
     }
 
 }
@@ -408,7 +408,7 @@ public class CharmOfRestoration: BaseItem
 	public CharmOfRestoration(GameObject g)
 	{
 		go = g;
-		ItemName = "Charm Of Restoration";
+		ItemName = "Charm of Restoration";
 		pstats = go.GetComponent<Pstats> ();
 	}
 	public override void Effect()
