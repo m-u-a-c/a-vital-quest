@@ -29,11 +29,25 @@ public class Slime_AI : MonoBehaviour {
 	void Start ()
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
+		if (player.transform.position.x > transform.position.x)
+			facingRight = true;
+
+		if (facingRight)
+			Flip ();
+		else if (!facingRight)
+			Flip ();
 	}
 	
 	void Flip()
 	{
-		facingRight = !facingRight;
+		facingRight = false;
+		Vector3 theScale = transform.localScale;
+		theScale.x *= -1;
+		transform.localScale = theScale;
+	}
+	void FlipRight()
+	{
+		facingRight = true;
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
@@ -41,10 +55,15 @@ public class Slime_AI : MonoBehaviour {
 	
 	void FixedUpdate ()
 	{
+		if (player.transform.position.x > transform.position.x)
+			facingRight = true;
+		if (player.transform.position.x < transform.position.x)
+			facingRight = false;
+
 		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
 			Flip ();
 		else if (!facingRight && gameObject.rigidbody2D.velocity.x > 0)
-			Flip ();
+			FlipRight ();
 		
 		AIposition.x = transform.position.x;
 		AIposition.y = transform.position.y;
@@ -74,14 +93,10 @@ public class Slime_AI : MonoBehaviour {
 	{
 		if (player.transform.position.x > transform.position.x && groundAroundRU && !groundAroundRB)
 		{
-			facingRight = true;
-			
 			rigidbody2D.velocity = new Vector2(enemySpeed/3, rigidbody2D.velocity.y);
 		}
 		if (player.transform.position.x < transform.position.x && groundAroundLU && !groundAroundLB) 
 		{	
-			facingRight = false;
-			
 			rigidbody2D.velocity = new Vector2((enemySpeed/3) * -1, rigidbody2D.velocity.y);
 		}
 	}

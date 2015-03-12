@@ -55,14 +55,34 @@ public class First_AI : MonoBehaviour {
 	void Start ()
 	{		
 		player = GameObject.FindGameObjectWithTag("Player");
+		if (player.transform.position.x > transform.position.x)
+			facingRight = true;
+		if (player.transform.position.x < transform.position.x)
+			facingRight = false;
+		if (facingRight)
+			Flip ();
+		else if (!facingRight)
+			Flip ();
 	}
 	
 	void Flip()
 	{
-		facingRight = !facingRight;
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
+		if (facingRight == true) {
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
+		}
+		facingRight = false;
+	}
+	void FlipRight()
+	{
+
+		if (facingRight == false) {
+						Vector3 theScale = transform.localScale;
+						theScale.x *= -1;
+						transform.localScale = theScale;
+				}
+		facingRight = true;
 	}
 
 	void Update()
@@ -83,10 +103,15 @@ public class First_AI : MonoBehaviour {
 	
 	void FixedUpdate ()
 	{
+		if (player.transform.position.x > transform.position.x)
+			facingRight = true;
+		if (player.transform.position.x < transform.position.x)
+			facingRight = false;
+
 		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
 			Flip ();
 		else if (!facingRight && gameObject.rigidbody2D.velocity.x > 0)
-			Flip ();
+			FlipRight ();
 		
 		AIposition.x = transform.position.x;
 		AIposition.y = transform.position.y;
@@ -128,31 +153,30 @@ public class First_AI : MonoBehaviour {
 	{
 //		if((!groundAroundLU && !groundAroundL2U) || (!groundAroundRU && !groundAroundR2U))
 //		{ return;}
+
 		if (player.transform.position.x > transform.position.x
 		    && ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U))
 		    ) 
-		{
-			facingRight = true;
-			
+		{	
 			rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
 		}
 		if (player.transform.position.x < transform.position.x
 		    && ((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
 		    ) 
 		{	
-			facingRight = false;
+
 			
 			rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
 		}
 		if (player.transform.position.x > transform.position.x && !grounded) 
 		{
-			facingRight = true;
+
 			
 			rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
 		}
 		if (player.transform.position.x < transform.position.x && !grounded)
 		{
-			facingRight = false;
+
 			
 			rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
 		}

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Chest\ChestBehaviour.cs" />
+     <Compile Include="Assets\Enemies\CasterAttack.cs" />
      <Compile Include="Assets\Enemies\Caster_AI.cs" />
      <Compile Include="Assets\Enemies\Eattacks.cs" />
      <Compile Include="Assets\Enemies\Estats.cs" />
