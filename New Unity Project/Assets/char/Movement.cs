@@ -62,9 +62,9 @@ public class Movement : MonoBehaviour {
             else if (rigidbody2D.velocity.y < 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("State", 2);
             else if (Mathf.Abs(rigidbody2D.velocity.x) > 0 && grounded) gameObject.GetComponent<Animator>().SetInteger("State", 1);
         }
-       
 
 
+        if (Input.GetKeyDown(KeyCode.X)) GetComponent<Pstats>().health -= 5;
        
 
 		speed = gameObject.rigidbody2D.velocity.x;
@@ -81,9 +81,13 @@ public class Movement : MonoBehaviour {
 
 			
 		float move = Input.GetAxis ("Horizontal");
+<<<<<<< HEAD
 		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
 		if(grounded.tag == "MovingPlatform")
 			rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed, grounded.rigidbody2D.velocity.y);
+=======
+		rigidbody2D.velocity = new Vector2 (move * maxSpeed * GetComponent<Pstats>().movement, rigidbody2D.velocity.y);
+>>>>>>> origin/master
 		
 		playerposition.x = rigidbody2D.transform.position.x;
 		playerposition.y = rigidbody2D.transform.position.y;

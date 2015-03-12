@@ -3,22 +3,27 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class Pstats : MonoBehaviour {
-	public float aDamage = 50;
+	public float aDamage = 10;
+    public float aDamage_original = 10;
 	public float sDamage = 50;
 	public float defense = 2;
 	public float aSpeed = 100;
 	public float health = 100;
 	public float maxhealth = 100;
+	public float knockbackmultiplier = 1;
 	//TODO: 
 	public float healthreg = 0;
 
 	public float charges = 5;
 	//TODO: 
 	public float chargereg = 1;
+    public bool regcharges = true;
 	//TODO: 
-	public float critchance = 5;
+	//In percentage:
+	public float critchance = 5f;
+	public float critmultiplier = 2;
 	//TODO: 
-	public float movement = 100;
+    public float movement = 1;
 	public bool invincible = false;
 
 	//UI
@@ -36,9 +41,10 @@ public class Pstats : MonoBehaviour {
 	void Update ()
 	{
 		timeleft -= Time.deltaTime;
-		if (timeleft <= 0) {
+		if (regcharges && timeleft <= 0) {
 			charges++;
 			timeleft = chargereg;
+            //Debug.Log("reg", null);
 		}
 		// makes you unable to set charges above 5
 		if (charges >= 5)
@@ -49,6 +55,7 @@ public class Pstats : MonoBehaviour {
 			Application.LoadLevel(2);
 		}
 		chargeslider.value = charges;
+        healthbar.value = health;
 
 	}
 

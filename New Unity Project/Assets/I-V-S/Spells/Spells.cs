@@ -48,7 +48,7 @@ public class Chargebolt : BaseSpell
         go = g;
 
         Cooldown = 3;
-        Cost = go.GetComponent<Pstats>().charges;
+        Cost = 0;
         Damage = go.GetComponent<Pstats>().charges + go.GetComponent<Pstats>().sDamage * 0.5f;
     }
 
@@ -117,6 +117,20 @@ public class HolyWater : BaseSpell
     public override void Effect()
     {
         //TODO: Creats an AOE that deals 20% of sDamage each second for 3s
+        var g = (GameObject)Object.Instantiate(Resources.Load("Spells/HolyWater"));
+
+        if (go.GetComponent<Movement>().facingRight)
+        {
+            g.transform.position = new Vector2(go.transform.position.x + 0.35f, go.transform.position.y);
+            g.rigidbody2D.AddForce(new Vector2(20, 50));
+        }
+        else
+        {
+            g.transform.position = new Vector2(go.transform.position.x - 0.35f, go.transform.position.y);
+            g.rigidbody2D.AddForce(new Vector2(-20, 50));
+        }
+        if (go.GetComponent<Movement>().facingRight) g.rigidbody2D.AddForceAtPosition(Vector2.right * 50, new Vector2(g.transform.position.x, g.transform.position.y + 0.1f));
+        else g.rigidbody2D.AddForceAtPosition(Vector2.right * -50, new Vector2(g.transform.position.x, g.transform.position.y + 0.1f));
     }
 
     public override void UpdateStats()
@@ -145,9 +159,9 @@ public class YaosShield : BaseSpell
         if (Left)
         {
             shield.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y + 0.3f);
-			Vector3 theScale = shield.transform.localScale;
-			theScale.x *= -1;
-			shield.transform.localScale = theScale;
+            Vector3 theScale = shield.transform.localScale;
+            theScale.x *= -1;
+            shield.transform.localScale = theScale;
             shield.rigidbody2D.velocity = new Vector2(-7, 0);
         }
         else
