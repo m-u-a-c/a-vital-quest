@@ -22,6 +22,7 @@ public class HolyWaterScript : MonoBehaviour {
     {
         if (coll.gameObject.tag != "Player")
         {
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().holyWater, gameObject.transform.position, 0.1f);
             if (!isplaying)
             {
                 isplaying = true;

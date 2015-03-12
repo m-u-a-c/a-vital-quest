@@ -76,6 +76,9 @@ public class Pinventory : MonoBehaviour
             case "Vampiric Crest":
                 sprite = Crest;
                 break;
+			case "Tablet of Shadows":
+				sprite = _Placeholder;
+				break;
         }
         Debug.Log(item.ItemName, null);
         slots[items.Count - 1].GetComponent<Image>().sprite = sprite;
@@ -128,6 +131,15 @@ public class Pinventory : MonoBehaviour
     //    {
     //        Gizmos.DrawSphere(new Vector2(transform.renderer.bounds.center.x, transform.renderer.bounds.center.y - 1), 1);
     //    }
+
+	public bool CheckForItem(BaseItem ittem)
+	{
+		foreach (BaseItem i in items) {
+			if (i.ItemName == ittem.ItemName) return true;		
+		}
+		return false;
+	}
+
     public void Update()
     {
         if (items.Count != 0) foreach (BaseItem item in items) item.Effect();
@@ -191,6 +203,10 @@ public class Pinventory : MonoBehaviour
                 case "PFHolyWater":
                     AddSpell(new HolyWater(gameObject));
                     break;
+				case "PFTabletOfShadows(Clone)":
+				case "PFTabletOfShadows":
+					AddItem (new TabletOfShadows(gameObject));
+					break;
             } 
             #endregion
             Destroy(cast.collider.gameObject);

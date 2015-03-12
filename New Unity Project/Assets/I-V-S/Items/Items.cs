@@ -318,3 +318,37 @@ public class AsgardSouvenir : BaseItem
 
     }
 }
+
+public class TabletOfShadows : BaseItem
+{
+	GameObject go;
+	int hitcount;
+	
+	public TabletOfShadows(GameObject g)
+	{
+		go = g;
+		ItemName = "Tablet of Shadows";
+	}
+	public override void Effect()
+	{
+		bool facingRight = GameObject.Find ("Player").GetComponent<Movement> ().facingRight;
+		var g = (GameObject)Object.Instantiate(Resources.Load("Spells/ShadowHitBox"));
+		if (facingRight)
+						g.transform.position = new Vector2 (go.transform.position.x + 0.75f, go.transform.position.y);
+		else
+						g.transform.position = new Vector2 (go.transform.position.x - 0.75f, go.transform.position.y);
+			
+
+	}
+	
+	public override void Stats()
+	{
+		
+	}
+	
+	
+	public override void RevertStats()
+	{
+		
+	}
+}

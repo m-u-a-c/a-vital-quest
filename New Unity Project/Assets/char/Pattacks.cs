@@ -19,7 +19,7 @@ public class Pattacks : MonoBehaviour
     public bool isOnCooldown = false;
     public bool invincible = false;
 
-    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit;
+    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater;
 
     //UI
     public Image spellimage;
@@ -58,9 +58,9 @@ public class Pattacks : MonoBehaviour
         // Call all item Effect() to ensure effect execution
         foreach (BaseItem bi in GetComponent<Pinventory>().items) bi.Effect();
 
-        if (hitting && hitting.collider.gameObject.tag == "Enemy")
+        if (hitting && hitting.collider.gameObject.tag == "Enemy" && !gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
         {
-            float bb = gameObject.GetComponent<Pstats>().aDamage;
+            var bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
             var rnd = new System.Random();
             int result = rnd.Next(101);
@@ -80,15 +80,15 @@ public class Pattacks : MonoBehaviour
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
         }
-        else if (hitting && hitting.collider.gameObject.tag == "Spawner")
+		else if (hitting && hitting.collider.gameObject.tag == "Spawner" && !hitting.collider.gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
         {
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
             hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
-
         }
+		
 
         if (gameObject.GetComponent<Movement>().facingRight)
         {
