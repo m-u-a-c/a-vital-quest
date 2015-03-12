@@ -30,8 +30,6 @@ public class Pattacks : MonoBehaviour
 
     void Update()
     {
-
-
         if (swinging) swing_timeleft -= Time.deltaTime;
         if (casting) cast_timeleft -= Time.deltaTime;
         if (swinging && swing_timeleft <= 0) swinging = false;
@@ -80,7 +78,7 @@ public class Pattacks : MonoBehaviour
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
         }
-		else if (hitting && hitting.collider.gameObject.tag == "Spawner" && !hitting.collider.gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
+		else if (hitting && hitting.collider.gameObject.tag == "Spawner" && !gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
         {
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
@@ -88,6 +86,29 @@ public class Pattacks : MonoBehaviour
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
         }
+						
+		if (hitting)
+		{
+			if (hitting.collider.gameObject.tag == "Enemy" && gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
+			{
+				Collider2D[] coll1;
+				coll1 = Physics2D.OverlapAreaAll (new Vector2 (GameObject.Find ("Player").transform.position.x, 
+				                                               GameObject.Find ("Player").GetComponent<BoxCollider2D> ().bounds.extents.y), 
+				                                  new Vector2 (GameObject.Find ("Player").transform.position.x + 1f, 
+				             GameObject.Find ("Player").GetComponent<BoxCollider2D> ().bounds.extents.y - GameObject.Find ("Player").GetComponent<BoxCollider2D> ().bounds.size.y));
+				
+				foreach(Collider2D c in coll1)
+				{
+					if (c && (c.gameObject.tag == "Enemy" || c.gameObject.tag == "Spawner"))
+					{
+						c.gameObject.GetComponent<Estats>().getHit(GameObject.Find("Player").GetComponent<Pstats>().aDamage);
+					}
+				}
+				Debug.Log ("HIT", null);
+			}
+
+		
+		}
 		
 
         if (gameObject.GetComponent<Movement>().facingRight)

@@ -323,21 +323,40 @@ public class TabletOfShadows : BaseItem
 {
 	GameObject go;
 	int hitcount;
-	
+	public float cd = 0.2f;
+	public bool available = false;
+	Timer timer;
+
 	public TabletOfShadows(GameObject g)
 	{
 		go = g;
 		ItemName = "Tablet of Shadows";
+		timer = go.AddComponent<Timer> ();
+		timer.SetTimer (0.2f, 1, new System.Action (ClearCD)); 
 	}
+
+	void ClearCD()
+	{
+		available = true;
+		timer.StopTimer ();
+	}
+
+
 	public override void Effect()
 	{
-		bool facingRight = GameObject.Find ("Player").GetComponent<Movement> ().facingRight;
-		var g = (GameObject)Object.Instantiate(Resources.Load("Spells/ShadowHitBox"));
-		if (facingRight)
-						g.transform.position = new Vector2 (go.transform.position.x + 0.75f, go.transform.position.y);
-		else
-						g.transform.position = new Vector2 (go.transform.position.x - 0.75f, go.transform.position.y);
-			
+//		if (!available && !go.GetComponent<Pattacks>().hitting)
+//						return;
+//		Debug.Log ("HORA", null);
+//
+//			bool facingRight = GameObject.Find ("Player").GetComponent<Movement> ().facingRight;
+//			var g = (GameObject)Object.Instantiate(Resources.Load("Spells/ShadowHitbox"));
+//			if (facingRight)
+//				g.transform.position = new Vector2 (go.transform.position.x + 0.75f, go.transform.position.y);
+//			else
+//				g.transform.position = new Vector2 (go.transform.position.x - 0.75f, go.transform.position.y);
+//
+//		timer.StartTimer ();
+
 
 	}
 	
@@ -350,5 +369,62 @@ public class TabletOfShadows : BaseItem
 	public override void RevertStats()
 	{
 		
+	}
+}
+
+public class Bandaid : BaseItem
+{
+	GameObject go;
+	Pstats pstats;
+	public Bandaid(GameObject g)
+	{
+		go = g;
+		ItemName = "Bandaid";
+		pstats = go.GetComponent<Pstats> ();
+	}
+	public override void Effect()
+	{
+
+	}
+	
+	public override void Stats()
+	{
+		pstats.health	 += 10;
+		pstats.maxhealth += 10;
+		pstats.healthreg += 2;
+	}
+
+	public override void RevertStats()
+	{
+		pstats.maxhealth -= 10;
+		pstats.healthreg -= 2;
+	}
+}
+
+public class CharmOfRestoration: BaseItem
+{
+	GameObject go;
+	Pstats pstats;
+	public CharmOfRestoration(GameObject g)
+	{
+		go = g;
+		ItemName = "Charm Of Restoration";
+		pstats = go.GetComponent<Pstats> ();
+	}
+	public override void Effect()
+	{
+		
+	}
+	
+	public override void Stats()
+	{
+		pstats.healthreg += 3;
+		pstats.movement	 *= 0.85f;
+	}
+	
+	public override void RevertStats()
+	{
+		pstats.healthreg -= 3;
+		pstats.movement	 /= 0.85f;
 	}
 }

@@ -1,16 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TabletScript.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\I-V-S\Items\Items.cs">
     <Files>
-      <File FileName="Assets\char\Pattacks.cs" Line="82" Column="10" />
-      <File FileName="Assets\I-V-S\Items\Items.cs" Line="335" Column="77" />
-      <File FileName="Assets\char\Movement.cs" Line="1" Column="1" />
-      <File FileName="Assets\char\Pinventory.cs" Line="140" Column="16" />
-      <File FileName="Assets\char\Pstats.cs" Line="1" Column="1" />
-      <File FileName="Assets\HolyWaterScript.cs" Line="40" Column="21" />
-      <File FileName="Assets\Resources\Spells\ChargeboltScript.cs" Line="16" Column="137" />
-      <File FileName="Assets\HolyWaterSphereScript.cs" Line="18" Column="29" />
-      <File FileName="Assets\TabletScript.cs" Line="9" Column="15" />
+      <File FileName="Assets\I-V-S\Spells\Spells.cs" Line="1" Column="1" />
+      <File FileName="Assets\TabletScript.cs" Line="6" Column="1" />
+      <File FileName="Assets\char\Pattacks.cs" Line="107" Column="1" />
+      <File FileName="Assets\I-V-S\Items\Items.cs" Line="411" Column="37" />
+      <File FileName="Assets\char\Pinventory.cs" Line="1" Column="1" />
+      <File FileName="Assets\char\Pstats.cs" Line="49" Column="45" />
+      <File FileName="Assets\Timer.cs" Line="22" Column="11" />
+      <File FileName="Assets\HolyWaterScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\HolyWaterSphereScript.cs" Line="1" Column="1" />
+      <File FileName="Assets\Resources\Spells\ShieldScript.cs" Line="10" Column="35" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

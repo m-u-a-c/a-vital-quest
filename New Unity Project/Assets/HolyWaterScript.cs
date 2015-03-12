@@ -3,10 +3,8 @@ using System.Collections;
 
 public class HolyWaterScript : MonoBehaviour {
 
-    public float timeleft = 0.11f;
-    public int ticks;
     public Sprite sprite1, sprite2;
-    public bool isplaying;
+    Timer timer;
 
 	// Use this for initialization
 	void Start () {
@@ -18,34 +16,25 @@ public class HolyWaterScript : MonoBehaviour {
 	    
 	}
 
+    void Tick()
+    {
+        if (timer.ticks == 1)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = sprite2;
+        }
+        if (timer.ticks == 2)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag != "Player")
         {
-			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().holyWater, gameObject.transform.position, 0.1f);
-            if (!isplaying)
-            {
-                isplaying = true;
-            }
-            if (isplaying)
-            {
-                if (ticks == 0) GetComponent<SpriteRenderer>().sprite = sprite1;
-                else if (ticks == 1) GetComponent<SpriteRenderer>().sprite = sprite2;
-                
-                timeleft -= Time.deltaTime;
-                if (timeleft <= 0)
-                {
-                    Debug.Log("ASD", null);
-                    ticks++;
-                    timeleft = 0.11f;
-                }
-                
-            }
-
-            if (ticks < 2) return;
-            var go = (GameObject)Object.Instantiate(Resources.Load("Spells/HolyWaterSphere"));
-            go.transform.position = transform.position;
-            Destroy(gameObject);
+            GetComponent<SpriteRenderer>().sprite = sprite1;
+            timer = gameObject.AddComponent<Timer>();
+            timer.SetTimer(0.025f, 2, new System.Action(Tick));
         }
     }
 

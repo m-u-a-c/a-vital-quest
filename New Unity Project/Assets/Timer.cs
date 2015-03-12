@@ -18,7 +18,10 @@ public class Timer : MonoBehaviour {
         if (Action == null) return;
         timeleft = Interval;
         ticktime = Interval;
-        if (Ticks != 0) maxticks = Ticks;
+        if (Ticks != 0)
+		maxticks = Ticks;
+		else
+		maxticks = int.MaxValue;
         running = true;
         action = Action;
         condition = Condition;
