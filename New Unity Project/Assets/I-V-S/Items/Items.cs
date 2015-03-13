@@ -65,8 +65,8 @@ public class GlassIdol : BaseItem
         //TODO: Restores you to full HP and Charges when brought below 10 HP. Breaks on effect.
         if (go.GetComponent<Pstats>().health < 10)
         {
-            go.GetComponent<Pstats>().health = 100;
-            go.GetComponent<Pstats>().charges = 5;
+			go.GetComponent<Pstats>().health = go.GetComponent<Pstats>().maxcharges;
+            go.GetComponent<Pstats>().charges = go.GetComponent<Pstats>().maxcharges;
             go.GetComponent<Pinventory>().RemoveItem(this);
         }
 
@@ -222,7 +222,7 @@ public class StaticCore : BaseItem
     public override void Effect()
     {
         var pstats = go.GetComponent<Pstats>();
-        if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
         {
             if (!on && go.GetComponent<Pstats>().charges == 5)
             {
@@ -257,7 +257,6 @@ public class StaticCore : BaseItem
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
         go.GetComponent<Pstats>().regcharges = false;
         go.GetComponent<Pstats>().aDamage = ori_damage + go.GetComponent<Pstats>().sDamage * 0.6f;
-        Debug.Log("turned on", null);
     }
     public void TurnOff()
     {
@@ -290,7 +289,7 @@ public class AsgardSouvenir : BaseItem
     }
     public override void Effect()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
         {
             var g = (GameObject)Object.Instantiate(Resources.Load("Items/Asgard"));
             g.transform.position = go.transform.position;
@@ -401,7 +400,7 @@ public class Bandaid : BaseItem
 	}
 }
 
-public class CharmOfRestoration: BaseItem
+public class CharmOfRestoration : BaseItem
 {
 	GameObject go;
 	Pstats pstats;
@@ -426,5 +425,38 @@ public class CharmOfRestoration: BaseItem
 	{
 		pstats.healthreg -= 3;
 		pstats.movement	 /= 0.85f;
+	}
+}
+
+
+public class ZephyrJuice : BaseItem
+{
+	GameObject go;
+	Pstats pstats;
+	public ZephyrJuice(GameObject g)
+	{
+		go = g;
+		ItemName = "Zephyr Juice";
+		pstats = go.GetComponent<Pstats> ();
+	}
+	public override void Effect()
+	{
+		if (Input.GetKeyDown (go.GetComponent<Pinventory> ().CheckSlot ())) {
+			pstats.health += 22.5f;
+			go.GetComponent<Pinventory>().RemoveItem(this);
+		}
+
+	}
+	
+	public override void Stats()
+	{ 
+
+
+	}
+	
+	public override void RevertStats()
+	{
+
+
 	}
 }

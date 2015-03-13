@@ -154,6 +154,33 @@ public class Pinventory : MonoBehaviour
 		return false;
 	}
 
+	public KeyCode CheckSlot(BaseItem ittem)
+	{
+		int id = 0;
+		id = items.IndexOf (ittem);
+		switch (id) {
+		case 0:
+			return KeyCode.Keypad1;
+			break;
+		case 1:
+			return KeyCode.Keypad2;
+			break;
+		case 2:
+			return KeyCode.Keypad3;
+			break;
+		case 3:
+			return KeyCode.Keypad4;
+			break;
+		case 4:
+			return KeyCode.Keypad5;
+			break;
+		case 5:
+			return KeyCode.Keypad6;
+			break;
+		}
+		return null;
+	}
+
     public void Update()
     {
         if (items.Count != 0) foreach (BaseItem item in items) item.Effect();
