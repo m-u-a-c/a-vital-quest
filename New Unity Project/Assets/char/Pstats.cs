@@ -57,7 +57,6 @@ public class Pstats : MonoBehaviour
     {
         if (charges < maxcharges)
             charges += chargereg;
-        Debug.Log("nopo", null);
     }
 
     void Update()

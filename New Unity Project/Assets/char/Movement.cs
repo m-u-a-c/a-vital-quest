@@ -2,32 +2,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Movement : MonoBehaviour {
-	//runnin & jumpin
-	public float maxSpeed = 10f;
-	public float jumpForce = 50f;
-	public float jumptime = 0.0f;
-	bool onCooldown = false;
-	
-	public bool lastframegrounded;
+public class Movement : MonoBehaviour
+{
+    //runnin & jumpin
+    public float maxSpeed = 10f;
+    public float jumpForce = 50f;
+    public float jumptime = 0.0f;
+    bool onCooldown = false;
 
-	public Vector2 playerposition;
-	public Collider2D grounded;
-	public Transform groundcheck;
-	float groundRadius = 0.24f;
-	public LayerMask whatIsGround;
+    public bool lastframegrounded;
+
+    public Vector2 playerposition;
+    public Collider2D grounded;
+    public Transform groundcheck;
+    float groundRadius = 0.24f;
+    public LayerMask whatIsGround;
     float last_yvel = 0;
     float last_xvel = 0;
-	public float platformspeed = 0;
-	
-	//flipping
-	public bool facingRight = true;
+    public float platformspeed = 0;
 
-	bool moving = false;
-	public float speed;
+    //flipping
+    public bool facingRight = true;
 
-	void Update ()
+    bool moving = false;
+    public float speed;
+
+    void Update()
 	{
+
 
         if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
@@ -49,10 +51,18 @@ public class Movement : MonoBehaviour {
 		if ((!grounded) || Mathf.Abs(rigidbody2D.velocity.x) < 1) 
 			gameObject.GetComponent<AudioSource>().Pause();
 
-        if (gameObject.GetComponent<Pattacks>().swinging) gameObject.GetComponent<Animator>().SetInteger("State", 4);
-        else if (gameObject.GetComponent<Pattacks>().casting) gameObject.GetComponent<Animator>().SetInteger("State", 5);
-        else if (Mathf.Abs(rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded) gameObject.GetComponent<Animator>().SetInteger("State", 3);
-        else
+        if (gameObject.GetComponent<Pattacks> ().swinging)
+						gameObject.GetComponent<Animator> ().SetInteger ("State", 4);
+
+		else if (gameObject.GetComponent<Pattacks> ().casting)
+				gameObject.GetComponent<Animator> ().SetInteger ("State", GetComponent<Pinventory> ().spells [GetComponent<Pinventory> ().selected_spell].animation);
+
+		else if (Mathf.Abs (rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded && !gameObject.GetComponent<Pattacks> ().casting) 
+		{
+				gameObject.GetComponent<Animator> ().SetInteger ("State", 3);
+		}
+
+		else
         {
             if (rigidbody2D.velocity.y > 0 && !grounded)
             {
@@ -108,38 +118,18 @@ public class Movement : MonoBehaviour {
         last_xvel = Mathf.Abs(gameObject.rigidbody2D.velocity.x); 
         
 	}
-	void Start()
-	{
-//		gameObject.GetComponent<Pinventory> ().spell = new YaosShield(gameObject);
+    void Start()
+    {
+        //		gameObject.GetComponent<Pinventory> ().spell = new YaosShield(gameObject);
         gameObject.GetComponent<Pinventory>().AddSpell(new YaosShield(gameObject));
-       
-	}
 
-	void Flip()
-	{
-		facingRight = !facingRight;
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-	}
+    }
 
-
-
-//	void Jump()
-//	{
-//		if ((jumptime != 20 || jumptime < 20) && !onCooldown)
-//		{
-//			rigidbody2D.AddForce(new Vector2(0, jumpForce/15));
-//			Cooldown ();
-//			jumptime += 2;
-//		}
-//		if (jumptime >= 20 && grounded)
-//						jumptime = 0;
-//	}
-//	public IEnumerator Cooldown()
-//	{
-//		onCooldown = true;
-//		yield return new WaitForSeconds(0.01f);
-//		onCooldown = false;
-//	}
+    void Flip()
+    {
+        facingRight = !facingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 }

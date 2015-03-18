@@ -13,11 +13,12 @@ public class MagicPeashooter : BaseSpell
         Cooldown = 0;
         Cost = 1;
         Damage = go.GetComponent<Pstats>().sDamage * 0.4f;
+		animation = 6;
     }
 
     public override void Effect()
     {
-        GameObject pea = (GameObject)Object.Instantiate(Resources.Load("Spells/Pea"));
+        var pea = (GameObject)Object.Instantiate(Resources.Load("Spells/Pea"));
         pea.transform.position = go.transform.position;
         if (Left)
         {
@@ -50,6 +51,7 @@ public class Chargebolt : BaseSpell
         Cooldown = 3;
         Cost = 0;
         Damage = go.GetComponent<Pstats>().charges + go.GetComponent<Pstats>().sDamage * 0.5f;
+		animation = 5;
     }
 
     public override void Effect()
@@ -150,6 +152,7 @@ public class YaosShield : BaseSpell
         Cooldown = 5;
         Cost = 4;
         Damage = go.GetComponent<Pstats>().sDamage * 0.2f;
+		animation = 5;
     }
 
     public override void Effect()
@@ -177,3 +180,4 @@ public class YaosShield : BaseSpell
 
     }
 }
+

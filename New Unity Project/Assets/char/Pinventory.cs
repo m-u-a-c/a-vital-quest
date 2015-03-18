@@ -165,22 +165,16 @@ public class Pinventory : MonoBehaviour
 		switch (id) {
 		case 0:
 			return KeyCode.Alpha0;
-			break;
 		case 1:
 			return KeyCode.Alpha1;
-			break;
 		case 2:
 			return KeyCode.Alpha2;
-			break;
 		case 3:
 			return KeyCode.Alpha3;
-			break;
 		case 4:
 			return KeyCode.Alpha4;
-			break;
 		case 5:
 			return KeyCode.Alpha5;
-			break;
 		}
 		return KeyCode.Alpha0;
 	}

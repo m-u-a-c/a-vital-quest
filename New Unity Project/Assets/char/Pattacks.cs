@@ -30,6 +30,7 @@ public class Pattacks : MonoBehaviour
 
     void Update()
     {
+
         if (swinging) swing_timeleft -= Time.deltaTime;
         if (casting) cast_timeleft -= Time.deltaTime;
         if (swinging && swing_timeleft <= 0) swinging = false;
@@ -147,7 +148,6 @@ public class Pattacks : MonoBehaviour
         int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
         if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
         {
-           
 
             var spell = gameObject.GetComponent<Pinventory>().spells[selected_spell];
             if (gameObject.GetComponent<Movement>().facingRight)
