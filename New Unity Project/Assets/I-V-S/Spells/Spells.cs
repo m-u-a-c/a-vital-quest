@@ -181,3 +181,57 @@ public class YaosShield : BaseSpell
     }
 }
 
+public class VengefulCharge : BaseSpell
+{
+    GameObject go;
+    public VengefulCharge(GameObject g)
+    {
+        SpellName = "Vengeful Charge";
+        go = g;
+
+        
+    }
+
+    public override void Effect()
+    {
+    
+    }
+
+    public override void UpdateStats()
+    {
+
+    }
+}
+
+public class Barrier : BaseSpell
+{
+    GameObject go;
+    float usedcharges;
+    
+    public Barrier(GameObject g)
+    {
+        SpellName = "Barrier";
+        go = g;
+        Cost = 1;
+        Cooldown = 8;
+
+    }
+
+    public override void Effect()
+    {
+        usedcharges = go.GetComponent<Pstats>().charges;
+        var barrier = (GameObject)Object.Instantiate(Resources.Load("Spells/Barrier"));
+        barrier.transform.position = go.transform.position;
+
+        if (usedcharges < 3) barrier.GetComponent<BarrierBehaviour>().ticks = 20;
+        else if (usedcharges < 5) barrier.GetComponent<BarrierBehaviour>().ticks = 25;
+        else if (usedcharges <= 5) barrier.GetComponent<BarrierBehaviour>().ticks = 30;
+
+        go.GetComponent<Pstats>().charges = 0;
+    }
+
+    public override void UpdateStats()
+    {
+
+    }
+}

@@ -22,6 +22,7 @@ public class Pinventory : MonoBehaviour
     public Sprite Orb;
     public Sprite Charm;
 	public Sprite HPPot;
+    public Sprite Barrier;
 
 
     public List<Image> slots;
@@ -145,6 +146,9 @@ public class Pinventory : MonoBehaviour
             case "Holy Water":
                 sprite = Water;
                 break;
+            case "Barrier":
+                sprite = Barrier;
+                break;
 
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
@@ -164,17 +168,17 @@ public class Pinventory : MonoBehaviour
 		id = items.IndexOf (ittem);
 		switch (id) {
 		case 0:
-			return KeyCode.Alpha0;
-		case 1:
 			return KeyCode.Alpha1;
-		case 2:
+		case 1:
 			return KeyCode.Alpha2;
-		case 3:
+		case 2:
 			return KeyCode.Alpha3;
-		case 4:
+		case 3:
 			return KeyCode.Alpha4;
-		case 5:
+		case 4:
 			return KeyCode.Alpha5;
+		case 5:
+			return KeyCode.Alpha6;
 		}
 		return KeyCode.Alpha0;
 	}

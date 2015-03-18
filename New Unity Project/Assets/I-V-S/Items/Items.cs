@@ -124,7 +124,7 @@ public class BootsOfUrgency : BaseItem
     }
     public override void RevertStats()
     {
-
+        go.GetComponent<Pstats>().movement -= 0.2f;
     }
 }
 
@@ -218,6 +218,7 @@ public class StaticCore : BaseItem
         go = g;
         ItemName = "Static Core";
         ori_damage = go.GetComponent<Pstats>().aDamage;
+        animation = 4;
     }
     public override void Effect()
     {
@@ -252,7 +253,7 @@ public class StaticCore : BaseItem
 
     public void TurnOn()
     {
-
+        animation = 7;
         on = true;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
         go.GetComponent<Pstats>().regcharges = false;
@@ -260,6 +261,7 @@ public class StaticCore : BaseItem
     }
     public void TurnOff()
     {
+        animation = 4;
         on = false;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Charged;
         go.GetComponent<Pstats>().regcharges = true;
@@ -427,7 +429,6 @@ public class CharmOfRestoration : BaseItem
 		pstats.movement	 /= 0.85f;
 	}
 }
-
 
 public class ZephyrJuice : BaseItem
 {

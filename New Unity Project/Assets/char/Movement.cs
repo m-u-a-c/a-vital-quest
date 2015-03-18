@@ -28,41 +28,55 @@ public class Movement : MonoBehaviour
     public float speed;
 
     void Update()
-	{
+    {
 
 
         if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
             rigidbody2D.AddForce(new Vector2(0, jumpForce));
         }
-//		GameObject.Find ("Landing").transform.position = gameObject.transform.position;
-//		if (last_yvel < 0 && grounded && !GameObject.Find ("Landing").GetComponent<AudioSource>().isPlaying)
-//		{
-//			GameObject.Find ("Landing").GetComponent<AudioSource>().Play();
-//		}	
+        //		GameObject.Find ("Landing").transform.position = gameObject.transform.position;
+        //		if (last_yvel < 0 && grounded && !GameObject.Find ("Landing").GetComponent<AudioSource>().isPlaying)
+        //		{
+        //			GameObject.Find ("Landing").GetComponent<AudioSource>().Play();
+        //		}	
 
-		//if (grounded && !lastframegrounded) 
-		//	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().landing, gameObject.transform.position, 1f);
+        //if (grounded && !lastframegrounded) 
+        //	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().landing, gameObject.transform.position, 1f);
 
-		if (Mathf.Abs(rigidbody2D.velocity.x) >= 1 && grounded && !gameObject.GetComponent<AudioSource>().isPlaying)
-		{
-			gameObject.GetComponent<AudioSource>().Play();
-		}
-		if ((!grounded) || Mathf.Abs(rigidbody2D.velocity.x) < 1) 
-			gameObject.GetComponent<AudioSource>().Pause();
+        if (Mathf.Abs(rigidbody2D.velocity.x) >= 1 && grounded && !gameObject.GetComponent<AudioSource>().isPlaying)
+        {
+            gameObject.GetComponent<AudioSource>().Play();
+        }
+        if ((!grounded) || Mathf.Abs(rigidbody2D.velocity.x) < 1)
+            gameObject.GetComponent<AudioSource>().Pause();
 
-        if (gameObject.GetComponent<Pattacks> ().swinging)
-						gameObject.GetComponent<Animator> ().SetInteger ("State", 4);
+        if (gameObject.GetComponent<Pattacks>().swinging)
+        {
+            bool specwep = false;
+            if (gameObject.GetComponent<Pinventory>().items.Count > 0)
+                foreach (BaseItem item in gameObject.GetComponent<Pinventory>().items)
+                {
+                    if (item.animation != 4)
+                    {
+                        gameObject.GetComponent<Animator>().SetInteger("State", gameObject.GetComponent<Pinventory>().items[gameObject.GetComponent<Pinventory>().items.IndexOf(item)].animation);
+                        specwep = true;
+                        break;
+                    }
+                }
+            if (!specwep) gameObject.GetComponent<Animator>().SetInteger("State", 4);
 
-		else if (gameObject.GetComponent<Pattacks> ().casting)
-				gameObject.GetComponent<Animator> ().SetInteger ("State", GetComponent<Pinventory> ().spells [GetComponent<Pinventory> ().selected_spell].animation);
+        }
 
-		else if (Mathf.Abs (rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded && !gameObject.GetComponent<Pattacks> ().casting) 
-		{
-				gameObject.GetComponent<Animator> ().SetInteger ("State", 3);
-		}
+        else if (gameObject.GetComponent<Pattacks>().casting)
+            gameObject.GetComponent<Animator>().SetInteger("State", GetComponent<Pinventory>().spells[GetComponent<Pinventory>().selected_spell].animation);
 
-		else
+        else if (Mathf.Abs(rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded && !gameObject.GetComponent<Pattacks>().casting)
+        {
+            gameObject.GetComponent<Animator>().SetInteger("State", 3);
+        }
+
+        else
         {
             if (rigidbody2D.velocity.y > 0 && !grounded)
             {
@@ -75,53 +89,54 @@ public class Movement : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.X)) GetComponent<Pstats>().health -= 5;
-       
 
-		speed = gameObject.rigidbody2D.velocity.x;
-		moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
-     
-		grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 
-//		if (grounded.gameObject.name == "MovingPlatform")
-//						platformspeed = grounded.gameObject.GetComponent<Rigidbody2D> ().velocity.x;
-//				else
-//						platformspeed = 0;
-//		if (grounded.gameObject.name == "Spikes")
-//						gameObject.GetComponent<Pstats> ().getHit(90);
+        speed = gameObject.rigidbody2D.velocity.x;
+        moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
 
-			
-		float move = Input.GetAxis ("Horizontal");
+        grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 
-		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
-		if(grounded && grounded.gameObject.tag == "MovingPlatform")
-			rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed, grounded.rigidbody2D.velocity.y);
+        //		if (grounded.gameObject.name == "MovingPlatform")
+        //						platformspeed = grounded.gameObject.GetComponent<Rigidbody2D> ().velocity.x;
+        //				else
+        //						platformspeed = 0;
+        //		if (grounded.gameObject.name == "Spikes")
+        //						gameObject.GetComponent<Pstats> ().getHit(90);
 
-		rigidbody2D.velocity = new Vector2 (move * maxSpeed * GetComponent<Pstats>().movement, rigidbody2D.velocity.y);
 
-		
-		playerposition.x = rigidbody2D.transform.position.x;
-		playerposition.y = rigidbody2D.transform.position.y;
+        float move = Input.GetAxis("Horizontal");
 
-		Pattacks attacks = GetComponent<Pattacks> ();
-		//gameObject.GetComponent<Pinventory> ().spell = new Chargebolt (gameObject);
-		if (move > 0 && !facingRight)
-		{
-			Flip ();
-		}
-		else if (move < 0 && facingRight)
-		{
-			Flip ();
-		}
+        rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
+        if (grounded && grounded.gameObject.tag == "MovingPlatform")
+            rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed, grounded.rigidbody2D.velocity.y);
+
+        rigidbody2D.velocity = new Vector2(move * maxSpeed * GetComponent<Pstats>().movement, rigidbody2D.velocity.y);
+
+
+        playerposition.x = rigidbody2D.transform.position.x;
+        playerposition.y = rigidbody2D.transform.position.y;
+
+        Pattacks attacks = GetComponent<Pattacks>();
+        //gameObject.GetComponent<Pinventory> ().spell = new Chargebolt (gameObject);
+        if (move > 0 && !facingRight)
+        {
+            Flip();
+        }
+        else if (move < 0 && facingRight)
+        {
+            Flip();
+        }
 
         //Always last:
-		last_yvel = (gameObject.rigidbody2D.velocity.y);
-        last_xvel = Mathf.Abs(gameObject.rigidbody2D.velocity.x); 
-        
-	}
+        last_yvel = (gameObject.rigidbody2D.velocity.y);
+        last_xvel = Mathf.Abs(gameObject.rigidbody2D.velocity.x);
+
+    }
     void Start()
     {
         //		gameObject.GetComponent<Pinventory> ().spell = new YaosShield(gameObject);
-        gameObject.GetComponent<Pinventory>().AddSpell(new YaosShield(gameObject));
+        gameObject.GetComponent<Pinventory>().AddSpell(new MagicPeashooter(gameObject));
+        gameObject.GetComponent<Pinventory>().AddSpell(new Barrier(gameObject));
 
     }
 

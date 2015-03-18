@@ -12,6 +12,7 @@ public class Pstats : MonoBehaviour
     public float health = 100;
     public float maxhealth = 100;
     public float knockbackmultiplier = 1;
+    public bool takedamage = true;
     //TODO: 
     public float healthreg = 0.2f;
 
@@ -55,7 +56,7 @@ public class Pstats : MonoBehaviour
 
     void ChReg()
     {
-        if (charges < maxcharges)
+        if (charges < maxcharges && regcharges)
             charges += chargereg;
     }
 
@@ -76,7 +77,7 @@ public class Pstats : MonoBehaviour
 
     public void getHit(float damageTaken)
     {
-        if (invincible == false)
+        if (!invincible && takedamage)
         {
             health -= damageTaken;
             healthbar.value = health;

@@ -4,7 +4,7 @@ using System.Collections;
 public abstract class BaseSpell {
 	public string SpellName {get; set;}
     public static float dmg = 5;
-	public int animation { get; set; }
+    public int animation = 5;
 	public bool Left {
 				get;
 				set;
