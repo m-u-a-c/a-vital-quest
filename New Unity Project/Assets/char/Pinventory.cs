@@ -21,6 +21,7 @@ public class Pinventory : MonoBehaviour
     public Sprite Water;
     public Sprite Orb;
     public Sprite Charm;
+	public Sprite HPPot;
 
 
     public List<Image> slots;
@@ -92,6 +93,9 @@ public class Pinventory : MonoBehaviour
             case "Charm of Restoration":
                 sprite = Charm;
                 break;
+			case "Zephyr Juice":
+				sprite = HPPot;
+				break;
         }
         slots[items.Count - 1].GetComponent<Image>().sprite = sprite;
     }
@@ -160,25 +164,25 @@ public class Pinventory : MonoBehaviour
 		id = items.IndexOf (ittem);
 		switch (id) {
 		case 0:
-			return KeyCode.Keypad1;
+			return KeyCode.Alpha0;
 			break;
 		case 1:
-			return KeyCode.Keypad2;
+			return KeyCode.Alpha1;
 			break;
 		case 2:
-			return KeyCode.Keypad3;
+			return KeyCode.Alpha2;
 			break;
 		case 3:
-			return KeyCode.Keypad4;
+			return KeyCode.Alpha3;
 			break;
 		case 4:
-			return KeyCode.Keypad5;
+			return KeyCode.Alpha4;
 			break;
 		case 5:
-			return KeyCode.Keypad6;
+			return KeyCode.Alpha5;
 			break;
 		}
-		return null;
+		return KeyCode.Alpha0;
 	}
 
     public void Update()
@@ -255,6 +259,10 @@ public class Pinventory : MonoBehaviour
                 case "PFCharmofRestoration(Clone)":
                     AddItem(new CharmOfRestoration(gameObject));
                     break;
+				case "PFZephyrJuice":
+				case "ZephyrJuice":
+					AddItem(new ZephyrJuice(gameObject));
+					break;
             } 
             #endregion
             Destroy(cast.collider.gameObject);

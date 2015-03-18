@@ -441,7 +441,7 @@ public class ZephyrJuice : BaseItem
 	}
 	public override void Effect()
 	{
-		if (Input.GetKeyDown (go.GetComponent<Pinventory> ().CheckSlot ())) {
+		if (Input.GetKeyDown (go.GetComponent<Pinventory> ().CheckSlot (this))) {
 			pstats.health += 22.5f;
 			go.GetComponent<Pinventory>().RemoveItem(this);
 		}
