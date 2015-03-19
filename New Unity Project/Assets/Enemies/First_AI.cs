@@ -2,11 +2,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/master
 public class First_AI : MonoBehaviour {
 	
 	public float enemySpeed = 15f;
@@ -211,9 +206,7 @@ public class First_AI : MonoBehaviour {
 						}
 				}
 	}
-<<<<<<< HEAD
 }
-=======
 //public class First_AI : MonoBehaviour
 //{
 
@@ -389,5 +382,4 @@ public class First_AI : MonoBehaviour {
 //            }
 //        }
 //    }
-}
->>>>>>> origin/master
+//}

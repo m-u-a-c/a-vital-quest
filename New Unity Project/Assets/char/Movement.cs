@@ -89,43 +89,35 @@ public class Movement : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.X)) GetComponent<Pstats>().health -= 5;
+       
 
+		speed = gameObject.rigidbody2D.velocity.x;
+		moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
+     
+		grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
+			
+		float move = Input.GetAxis ("Horizontal");
 
-        speed = gameObject.rigidbody2D.velocity.x;
-        moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
+		rigidbody2D.velocity = new Vector2 (move * maxSpeed, rigidbody2D.velocity.y);
+		if (grounded && grounded.gameObject.tag == "MovingPlatform")
+			rigidbody2D.velocity = new Vector2 (grounded.rigidbody2D.velocity.x + move * maxSpeed * GetComponent<Pstats>().movement, grounded.rigidbody2D.velocity.y);
 
-        grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
+		if (grounded && grounded.gameObject.tag == "Spike")
+						gameObject.GetComponent<Pstats> ().getHit (40);
 
-        //		if (grounded.gameObject.name == "MovingPlatform")
-        //						platformspeed = grounded.gameObject.GetComponent<Rigidbody2D> ().velocity.x;
-        //				else
-        //						platformspeed = 0;
-        //		if (grounded.gameObject.name == "Spikes")
-        //						gameObject.GetComponent<Pstats> ().getHit(90);
+		playerposition.x = rigidbody2D.transform.position.x;
+		playerposition.y = rigidbody2D.transform.position.y;
 
-
-        float move = Input.GetAxis("Horizontal");
-
-        rigidbody2D.velocity = new Vector2(move * maxSpeed, rigidbody2D.velocity.y);
-        if (grounded && grounded.gameObject.tag == "MovingPlatform")
-            rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed, grounded.rigidbody2D.velocity.y);
-
-        rigidbody2D.velocity = new Vector2(move * maxSpeed * GetComponent<Pstats>().movement, rigidbody2D.velocity.y);
-
-
-        playerposition.x = rigidbody2D.transform.position.x;
-        playerposition.y = rigidbody2D.transform.position.y;
-
-        Pattacks attacks = GetComponent<Pattacks>();
-        //gameObject.GetComponent<Pinventory> ().spell = new Chargebolt (gameObject);
-        if (move > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if (move < 0 && facingRight)
-        {
-            Flip();
-        }
+		Pattacks attacks = GetComponent<Pattacks> ();
+		//gameObject.GetComponent<Pinventory> ().spell = new Chargebolt (gameObject);
+		if (move > 0 && !facingRight)
+		{
+			Flip ();
+		}
+		else if (move < 0 && facingRight)
+		{
+			Flip ();
+		}
 
         //Always last:
         last_yvel = (gameObject.rigidbody2D.velocity.y);
