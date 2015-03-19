@@ -5,7 +5,7 @@ public class GameOver : MonoBehaviour {
 
 	public void LoadMainMenu()
 	{
-		Application.LoadLevel (0);
+		Application.LoadLevel ("Main menu");
 	}
 
 	public void Quit()

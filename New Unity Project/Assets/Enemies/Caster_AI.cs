@@ -147,4 +147,9 @@ public class Caster_AI : MonoBehaviour {
 			}
 		}
 	}
+
+	void Attack()
+	{
+
+	}
 }

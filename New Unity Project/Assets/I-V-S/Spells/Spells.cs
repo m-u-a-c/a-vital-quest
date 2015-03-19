@@ -237,20 +237,20 @@ public class Barrier : BaseSpell
 }
 
 //ENEMY SPELL:
-public class Bloodbolt : BaseSpell
-{
-    GameObject go;
-    float usedcharges;
-    
-    public Bloodbolt(GameObject g)
-    {
-        SpellName = "Bloodbolt";
-        go = g;
-
-    }
-
-    public override void Effect()
-    {
-
-    }
-}
+//public class Bloodbolt : BaseSpell
+//{
+//    GameObject go;
+//    float usedcharges;
+//    
+//    public Bloodbolt(GameObject g)
+//    {
+//        SpellName = "Bloodbolt";
+//        go = g;
+//
+//    }
+//
+//    public override void Effect()
+//    {
+//
+//    }
+//}

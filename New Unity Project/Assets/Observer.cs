@@ -16,7 +16,10 @@ public class Observer : MonoBehaviour {
 		FindSpawners = Physics2D.OverlapCircle (transform.position, SearchRadius, whatIsSpawners);
 
 		if (!FindSpawners)
+		{
+			GameObject.Find ("WinScreen").GetComponent<Clear> ().Show();
 			StartCoroutine (StageClear ());
+		}
 	}
 
 	public void AddEnemy()
