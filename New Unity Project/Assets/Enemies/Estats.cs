@@ -18,6 +18,7 @@ public class Estats : MonoBehaviour {
 	{
 		if (health <= 0) 
 		{
+			GameObject.Find ("Observer").GetComponent<Observer> ().RemoveEnemy();
 			Destroy(gameObject);
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().enemySplat, gameObject.transform.position, 0.18f);
 		}

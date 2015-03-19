@@ -7,6 +7,7 @@ public class Observer : MonoBehaviour {
 	public Transform SpawnCheck;
 	public LayerMask whatIsSpawners;
 	float SearchRadius = 100.0f;
+	public float SpawnLimit = 0.0f;
 
 	void Start () {
 	}
@@ -15,6 +16,22 @@ public class Observer : MonoBehaviour {
 		FindSpawners = Physics2D.OverlapCircle (transform.position, SearchRadius, whatIsSpawners);
 
 		if (!FindSpawners)
-			Application.LoadLevel (2);
+			StartCoroutine (StageClear ());
+	}
+
+	public void AddEnemy()
+	{
+		SpawnLimit += 1;
+	}
+
+	public void RemoveEnemy()
+	{
+		SpawnLimit -= 1;
+	}
+
+	IEnumerator StageClear()
+	{
+		yield return new WaitForSeconds(6);
+		Application.LoadLevel (2);
 	}
 }

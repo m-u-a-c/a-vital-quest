@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class First_AI : MonoBehaviour {
 	
 	public float enemySpeed = 15f;
-	public float jumpForce = 4.0f;
+	public float jumpForce = 8.0f;
 	public Vector2 AIposition;
 	public bool facingRight = false;
 

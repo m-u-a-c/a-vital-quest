@@ -9,10 +9,12 @@ public class Spawner : MonoBehaviour {
 	public Vector2 Pos;
 	float start_time = Time.timeSinceLevelLoad;
 	public float cd;
+	public float limit = 10;
 	public string object_to_spawn;
 	bool timer = false;
 	float timeleft;
 	string gospawn;
+
 	
 	public void Start()
 	{
@@ -31,14 +33,16 @@ public class Spawner : MonoBehaviour {
 
 	void Update()
 	{
+		var observeLimit = GameObject.Find ("Observer").GetComponent<Observer> ().SpawnLimit;
 		Pos.x = transform.position.x;
 		Pos.y = transform.position.y;
 		playerAround = Physics2D.OverlapCircle (Pos, searchRadius, whatIsPlayer);
 
 		timeleft -= Time.deltaTime;
-		if (timeleft <= 0 && playerAround){
+		if (timeleft <= 0 && playerAround && observeLimit <= limit){
 			timeleft = cd;
 			SpawnObject(object_to_spawn);
+			GameObject.Find ("Observer").GetComponent<Observer> ().AddEnemy();
 		}
 	}
 }
