@@ -7,6 +7,7 @@ public class Caster_AI : MonoBehaviour {
 	public float jumpForce = 4.0f;
 	public Vector2 AIposition;
 	public bool facingRight = false;
+	public bool cast = true;
 	
 	private GameObject player;
 	private GameObject platform;
@@ -109,6 +110,10 @@ public class Caster_AI : MonoBehaviour {
 		}
 		if(playerAround)
 			rigidbody2D.velocity = new Vector2(0, 0);
+		if (inRange && cast)
+		{
+			Attack ();
+		}
 		
 /*		if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
 		else gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
@@ -157,8 +162,17 @@ public class Caster_AI : MonoBehaviour {
 		}
 	}
 
-	void Attack()
+	public void Attack()
 	{
+		var bolt = new Bloodbolt (gameObject);
+		bolt.Effect ();
+		StartCoroutine (Cooldown ());
+	}
 
+	IEnumerator Cooldown()
+	{
+		cast = false;
+		yield return new WaitForSeconds(4.2f);
+		cast = true;
 	}
 }

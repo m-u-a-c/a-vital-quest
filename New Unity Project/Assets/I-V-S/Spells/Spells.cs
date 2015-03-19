@@ -237,7 +237,6 @@ public class Barrier : BaseSpell
 }
 
 //ENEMY SPELL:
-<<<<<<< HEAD
 //public class Bloodbolt : BaseSpell
 //{
 //    GameObject go;
@@ -255,7 +254,6 @@ public class Barrier : BaseSpell
 //
 //    }
 //}
-=======
 public class Bloodbolt : BaseSpell
 {
     GameObject go;
@@ -293,4 +291,3 @@ public class Bloodbolt : BaseSpell
         throw new System.NotImplementedException();
     }
 }
->>>>>>> 15531ea41b59b19040cacb28a38c78b54316d889

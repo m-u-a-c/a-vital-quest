@@ -4,7 +4,7 @@ using System.Collections;
 
 public class Pstats : MonoBehaviour
 {
-    public float aDamage = 10;
+    public float aDamage = 20;
     public float aDamage_original = 10;
     public float sDamage = 50;
     public float defense = 2;
@@ -35,7 +35,7 @@ public class Pstats : MonoBehaviour
     public Slider chargeslider;
 
     public float timeleft = 1;
-    public float invincibilitytimer = 5.0f;
+    public float invincibilitytimer = 4.0f;
 
     Timer hptimer, chtimer;
 
