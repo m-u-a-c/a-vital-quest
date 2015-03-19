@@ -11,6 +11,7 @@ public class Slime_AI : MonoBehaviour {
 	private GameObject player;
 	
 	Collider2D playerAround;
+	Collider2D attackRange;
 	public LayerMask whatIsPlayer;
 	public LayerMask whatIsGround;
 	float searchRadius = 10.0f;
@@ -68,6 +69,7 @@ public class Slime_AI : MonoBehaviour {
 		AIposition.x = transform.position.x;
 		AIposition.y = transform.position.y;
 
+		attackRange = Physics2D.OverlapCircle (AIposition, 0.1f, whatIsPlayer);
 		playerAround = Physics2D.OverlapCircle (AIposition, searchRadius, whatIsPlayer);
 		groundAroundLB = Physics2D.OverlapCircle (blockCheckLB.position, blockRadius, whatIsGround);
 		groundAroundRB = Physics2D.OverlapCircle (blockCheckRB.position, blockRadius, whatIsGround);
@@ -91,13 +93,15 @@ public class Slime_AI : MonoBehaviour {
 	
 	void EMovement()
 	{
-		if (player.transform.position.x > transform.position.x && groundAroundRU && !groundAroundRB)
-		{
-			rigidbody2D.velocity = new Vector2(enemySpeed/3, rigidbody2D.velocity.y);
-		}
-		if (player.transform.position.x < transform.position.x && groundAroundLU && !groundAroundLB) 
-		{	
-			rigidbody2D.velocity = new Vector2((enemySpeed/3) * -1, rigidbody2D.velocity.y);
-		}
+		if (attackRange) {
+						rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
+				} else {
+						if (player.transform.position.x > transform.position.x && groundAroundRU && !groundAroundRB) {
+								rigidbody2D.velocity = new Vector2 (enemySpeed / 3, rigidbody2D.velocity.y);
+						}
+						if (player.transform.position.x < transform.position.x && groundAroundLU && !groundAroundLB) {	
+								rigidbody2D.velocity = new Vector2 ((enemySpeed / 3) * -1, rigidbody2D.velocity.y);
+						}
+				}
 	}
 }

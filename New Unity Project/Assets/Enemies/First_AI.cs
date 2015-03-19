@@ -3,6 +3,10 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> origin/master
 public class First_AI : MonoBehaviour {
 	
 	public float enemySpeed = 15f;
@@ -21,6 +25,7 @@ public class First_AI : MonoBehaviour {
 	public LayerMask whatIsGround;
 	
 	Collider2D playerAround;
+	Collider2D attackRange;
 	public LayerMask whatIsPlayer;
 	float searchRadius = 15.0f;
 	float blockRadius = 0.1f;
@@ -62,7 +67,7 @@ public class First_AI : MonoBehaviour {
 		if (facingRight)
 			Flip ();
 		else if (!facingRight)
-			Flip ();
+			FlipRight ();
 	}
 	
 	void Flip()
@@ -88,7 +93,7 @@ public class First_AI : MonoBehaviour {
 	void Update()
 	{
 			if (facingRight) {
-					gameObject.GetComponent<Eattacks>().side = transform.position.x + 2;
+				gameObject.GetComponent<Eattacks>().side = transform.position.x + 2;
 			}
 			if (!facingRight) {
 				gameObject.GetComponent<Eattacks>().side = transform.position.x - 2;
@@ -104,18 +109,32 @@ public class First_AI : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		if (player.transform.position.x > transform.position.x)
+		{
+			FlipRight();
 			facingRight = true;
+			Debug.Log("Right");
+		}
 		if (player.transform.position.x < transform.position.x)
-			facingRight = false;
-
-		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
+		{
 			Flip ();
-		else if (!facingRight && gameObject.rigidbody2D.velocity.x > 0)
-			FlipRight ();
+			facingRight = false;
+			Debug.Log("Left");
+		}
+//		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
+//		{	
+//			Flip ();
+//			Debug.Log("FlipLeft");
+//		}
+//		else if (!facingRight && gameObject.rigidbody2D.velocity.x > 0)
+//		{
+//			FlipRight ();
+//			Debug.Log("FlipRight");
+//		}
 		
 		AIposition.x = transform.position.x;
 		AIposition.y = transform.position.y;
-		
+
+		attackRange = Physics2D.OverlapCircle (AIposition, 0.5f, whatIsPlayer);
 		grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 		playerAround = Physics2D.OverlapCircle (AIposition, searchRadius, whatIsPlayer);
 		groundAroundLB = Physics2D.OverlapCircle (blockCheckLB.position, blockRadius, whatIsGround);
@@ -154,46 +173,47 @@ public class First_AI : MonoBehaviour {
 //		if((!groundAroundLU && !groundAroundL2U) || (!groundAroundRU && !groundAroundR2U))
 //		{ return;}
 
-		if (player.transform.position.x > transform.position.x
-		    && ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U))
-		    ) 
-		{	
-			rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
-		}
-		if (player.transform.position.x < transform.position.x
-		    && ((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
-		    ) 
-		{	
+		if (attackRange) {
+						rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
+		
+				} else {
+						if (player.transform.position.x > transform.position.x
+								&& ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U))
+		    ) {	
+								rigidbody2D.velocity = new Vector2 (enemySpeed, rigidbody2D.velocity.y);
+						}
+						if (player.transform.position.x < transform.position.x
+								&& ((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
+		    ) {	
 
 			
-			rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
-		}
-		if (player.transform.position.x > transform.position.x && !grounded) 
-		{
+								rigidbody2D.velocity = new Vector2 (enemySpeed * -1, rigidbody2D.velocity.y);
+						}
+						if (player.transform.position.x > transform.position.x && !grounded) {
 
 			
-			rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
-		}
-		if (player.transform.position.x < transform.position.x && !grounded)
-		{
+								rigidbody2D.velocity = new Vector2 (enemySpeed, rigidbody2D.velocity.y);
+						}
+						if (player.transform.position.x < transform.position.x && !grounded) {
 
 			
-			rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
-		}
-		if(grounded && (player.transform.position.x > transform.position.x 
-		                || player.transform.position.x < transform.position.x))
-		{
-			if ((groundAroundLB && !groundAroundL2T) || (groundAroundRB && !groundAroundR2T))
-			{
-				rigidbody2D.AddForce(new Vector2(0, (jumpForce/105)));
-			}
-			if ((groundAroundLB && !groundAroundLT && groundAroundL2T) 
-			    || (groundAroundRB && !groundAroundRT && groundAroundR2T))
-			{
-				rigidbody2D.AddForce(new Vector2(0, (jumpForce/105)));
-			}
-		}
+								rigidbody2D.velocity = new Vector2 (enemySpeed * -1, rigidbody2D.velocity.y);
+						}
+						if (grounded && (player.transform.position.x > transform.position.x 
+								|| player.transform.position.x < transform.position.x)) {
+								if ((groundAroundLB && !groundAroundL2T) || (groundAroundRB && !groundAroundR2T)) {
+										rigidbody2D.AddForce (new Vector2 (0, (jumpForce / 105)));
+								}
+								if ((groundAroundLB && !groundAroundLT && groundAroundL2T) 
+										|| (groundAroundRB && !groundAroundRT && groundAroundR2T)) {
+										rigidbody2D.AddForce (new Vector2 (0, (jumpForce / 105)));
+								}
+						}
+				}
 	}
+<<<<<<< HEAD
+}
+=======
 //public class First_AI : MonoBehaviour
 //{
 
@@ -370,3 +390,4 @@ public class First_AI : MonoBehaviour {
 //        }
 //    }
 }
+>>>>>>> origin/master
