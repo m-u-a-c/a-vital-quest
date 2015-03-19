@@ -54,7 +54,12 @@ public class Eattacks : MonoBehaviour
         Estats statScript = GetComponent<Estats>();
         Dmg = statScript.aDamage;
 
-        if (GetComponent<First_AI>().facingRight)
+        bool fr = false;
+        if (gameObject.name == "Slime" || gameObject.name == "Slime(Clone)") fr = gameObject.GetComponent<Slime_AI>().facingRight;
+        else if (gameObject.name == "Caster" || gameObject.name == "Caster(Clone") fr = gameObject.GetComponent<Caster_AI>().facingRight;
+        else fr = gameObject.GetComponent<First_AI>().facingRight;
+        
+        if (fr)
         {
             hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 0.6f, transform.position.y), whatIsPlayer);
         }

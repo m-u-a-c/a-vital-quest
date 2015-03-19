@@ -158,7 +158,10 @@ public class Pinventory : MonoBehaviour
     {
         foreach(BaseSpell bs in spells)
         {
-            if (bs.GetType() == type) return bs;
+            if (bs.GetType() == type)
+            {
+                return bs;
+            } 
         }
         return null;
     }

@@ -237,6 +237,7 @@ public class Barrier : BaseSpell
 }
 
 //ENEMY SPELL:
+<<<<<<< HEAD
 //public class Bloodbolt : BaseSpell
 //{
 //    GameObject go;
@@ -254,3 +255,42 @@ public class Barrier : BaseSpell
 //
 //    }
 //}
+=======
+public class Bloodbolt : BaseSpell
+{
+    GameObject go;
+    float usedcharges;
+    
+    public Bloodbolt(GameObject g)
+    {
+        SpellName = "Bloodbolt";
+        go = g;
+        Damage = 10;
+    }
+
+    public override void Effect()
+    {
+        GameObject bolt = (GameObject)Object.Instantiate(Resources.Load("Spells/Bloodbolt"));
+        bolt.transform.position = go.transform.position;
+        if (!go.GetComponent<Caster_AI>().facingRight)
+        {
+            bolt.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
+            bolt.rigidbody2D.velocity = new Vector2(-22, 0);
+        }
+        else
+        {
+            bolt.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
+            bolt.rigidbody2D.velocity = new Vector2(22, 0);
+        }
+
+        Vector3 vec = bolt.transform.localScale * -1;
+        if (!go.GetComponent<Caster_AI>().facingRight)
+            bolt.GetComponent<SpriteRenderer>().transform.localScale = vec;
+    }
+
+    public override void UpdateStats()
+    {
+        throw new System.NotImplementedException();
+    }
+}
+>>>>>>> 15531ea41b59b19040cacb28a38c78b54316d889
