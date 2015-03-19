@@ -18,7 +18,7 @@ public class PeaScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        var pinv = coll.gameObject.GetComponent<Pinventory>();
+        var pinv = GameObject.Find("Player").gameObject.GetComponent<Pinventory>();
         if (coll.gameObject.tag == "Enemy") coll.gameObject.GetComponent<Estats>().getHit(pinv.GetSpell(typeof(MagicPeashooter)).Damage);
         Destroy(gameObject);
     }

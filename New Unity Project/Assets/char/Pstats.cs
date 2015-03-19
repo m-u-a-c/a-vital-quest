@@ -77,7 +77,7 @@ public class Pstats : MonoBehaviour
 
     public void getHit(float damageTaken)
     {
-		if (getHit && !takedamage)
+		if (!takedamage)
 		{
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().barrierBlock, gameObject.transform.position, 1f);
 		}

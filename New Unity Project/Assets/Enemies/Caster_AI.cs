@@ -62,6 +62,15 @@ public class Caster_AI : MonoBehaviour {
 		transform.localScale = theScale;
 	}
 	
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            var bolt = new Bloodbolt(gameObject);
+            bolt.Effect();
+        }
+    }
+
 	void FixedUpdate ()
 	{
 		if (player.transform.position.x > transform.position.x)

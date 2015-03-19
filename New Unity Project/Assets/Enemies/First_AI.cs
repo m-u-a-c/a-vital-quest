@@ -107,13 +107,11 @@ public class First_AI : MonoBehaviour {
 		{
 			FlipRight();
 			facingRight = true;
-			Debug.Log("Right");
 		}
 		if (player.transform.position.x < transform.position.x)
 		{
 			Flip ();
 			facingRight = false;
-			Debug.Log("Left");
 		}
 //		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
 //		{	
