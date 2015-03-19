@@ -46,10 +46,10 @@ public class Pattacks : MonoBehaviour
             switch (gameObject.GetComponent<Movement>().facingRight)
             {
                 case true:
-                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 1, transform.position.y), LayerMask.GetMask("Enemies"));
+                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 1, transform.position.y), whatIsEnemy);
                     break;
                 case false:
-                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 1, transform.position.y), LayerMask.GetMask("Enemies"));
+                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 1, transform.position.y), whatIsEnemy);
                     break;
             }
         }
