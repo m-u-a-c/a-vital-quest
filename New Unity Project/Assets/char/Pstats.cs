@@ -67,7 +67,7 @@ public class Pstats : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-            Application.LoadLevel(2);
+            Application.LoadLevel("GameOver");
         }
         chargeslider.value = charges;
         healthbar.value = health;

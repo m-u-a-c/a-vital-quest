@@ -37,8 +37,8 @@ public class Eattacks : MonoBehaviour
         AIposition.x = transform.position.x;
         AIposition.y = transform.position.y;
         detect = Physics2D.OverlapCircle(AIposition, 1.0f, whatIsPlayer);
-        if (detect && !swinging) swinging = true;
-        else if (detect && swinging && swing_timeleft <= 0)
+ //       if (detect && !swinging) swinging = true;
+        if (detect)
         {
             Attack();
             swinging = false;
@@ -56,29 +56,17 @@ public class Eattacks : MonoBehaviour
 
         if (GetComponent<First_AI>().facingRight)
         {
-            hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 1, transform.position.y), LayerMask.GetMask("Player"));
+            hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 0.6f, transform.position.y), whatIsPlayer);
         }
         else
         {
-            hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 1, transform.position.y), LayerMask.GetMask("Player"));
+            hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 0.6f, transform.position.y), whatIsPlayer);
         }
 
-        if (hitting && hitting.collider.gameObject.tag == "Player")
+        if (hitting)
         {
             hitting.collider.GetComponent<Pstats>().getHit(Dmg);
-            hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 5.0f));
+//            hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(10.0f, 5.0f));
         }
-        //hit.gameObject.GetComponent<Pstats>().getHit(Dmg);
-        //hit.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0.0f, 5.0f));
-        //Debug.Log("Hit");
-        //Cooldown();
     }
-
-    //IEnumerator Cooldown()
-    //{
-    //    isOnCooldown = true;
-    //    Estats statScript = GetComponent<Estats>();
-    //    yield return new WaitForSeconds(6.0f);
-    //    isOnCooldown = false;
-    //}
 }
