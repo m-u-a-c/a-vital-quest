@@ -19,7 +19,7 @@ public class Pattacks : MonoBehaviour
     public bool isOnCooldown = false;
     public bool invincible = false;
 
-    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater;
+	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock;
 
     //UI
     public Image spellimage;
@@ -76,7 +76,13 @@ public class Pattacks : MonoBehaviour
                 Debug.Log("Not Crit", null);
             }
 
-            AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
+				 AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
+			foreach (BaseItem item in gameObject.GetComponent<Pinventory>().items)
+				if (item.animation != 4)
+				{
+					AudioSource.PlayClipAtPoint (GameObject.Find("Player").GetComponent<Pattacks>().staticCoreHit, GameObject.Find("Player").gameObject.transform.position);
+					break;
+				}
             hitting = new RaycastHit2D();
         }
 		else if (hitting && hitting.collider.gameObject.tag == "Spawner" && !gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))

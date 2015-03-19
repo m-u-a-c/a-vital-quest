@@ -60,7 +60,8 @@ public class Movement : MonoBehaviour
                     if (item.animation != 4)
                     {
                         gameObject.GetComponent<Animator>().SetInteger("State", gameObject.GetComponent<Pinventory>().items[gameObject.GetComponent<Pinventory>().items.IndexOf(item)].animation);
-                        specwep = true;
+						AudioSource.PlayClipAtPoint (GameObject.Find("Player").GetComponent<Pattacks>().staticCoreHit, GameObject.Find("Player").gameObject.transform.position);
+						specwep = true;
                         break;
                     }
                 }

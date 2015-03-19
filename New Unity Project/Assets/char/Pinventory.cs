@@ -154,6 +154,15 @@ public class Pinventory : MonoBehaviour
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
 
+    public BaseSpell GetSpell(System.Type type)
+    {
+        foreach(BaseSpell bs in spells)
+        {
+            if (bs.GetType() == type) return bs;
+        }
+        return null;
+    }
+
 	public bool CheckForItem(BaseItem ittem)
 	{
 		foreach (BaseItem i in items) {

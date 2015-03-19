@@ -209,16 +209,21 @@ public class VampiricCrest : BaseItem
 public class StaticCore : BaseItem
 {
     GameObject go;
+	GameObject camera;
     bool on = false;
     float timeleft = 1.5f;
-
     float ori_damage;
+	AudioSource AS;
     public StaticCore(GameObject g)
     {
         go = g;
         ItemName = "Static Core";
         ori_damage = go.GetComponent<Pstats>().aDamage;
         animation = 4;
+		camera = GameObject.Find ("Camera");
+		AS = camera.AddComponent<AudioSource> ();
+		AS.clip = GameObject.Find ("Player").GetComponent<Pattacks> ().staticCoreActivation;
+		
     }
     public override void Effect()
     {
@@ -253,14 +258,17 @@ public class StaticCore : BaseItem
 
     public void TurnOn()
     {
+		AS.Play ();
+		AS.volume = 1.2f;
         animation = 7;
         on = true;
-        go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
+		go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
         go.GetComponent<Pstats>().regcharges = false;
         go.GetComponent<Pstats>().aDamage = ori_damage + go.GetComponent<Pstats>().sDamage * 0.6f;
     }
     public void TurnOff()
     {
+		AS.Pause ();
         animation = 4;
         on = false;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Charged;
