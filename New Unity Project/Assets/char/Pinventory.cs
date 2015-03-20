@@ -24,7 +24,6 @@ public class Pinventory : MonoBehaviour
 	public Sprite HPPot;
     public Sprite Barrier;
 
-
     public List<Image> slots;
 
     //    void Update()
@@ -97,6 +96,8 @@ public class Pinventory : MonoBehaviour
 			case "Zephyr Juice":
 				sprite = HPPot;
 				break;
+
+
         }
         slots[items.Count - 1].GetComponent<Image>().sprite = sprite;
     }
@@ -273,6 +274,10 @@ public class Pinventory : MonoBehaviour
 				case "ZephyrJuice":
 					AddItem(new ZephyrJuice(gameObject));
 					break;
+                case "PFBarrier":
+                case "PFBarrier(Clone)":
+                    AddSpell(new Barrier(gameObject));
+                    break;
             } 
             #endregion
             Destroy(cast.collider.gameObject);
@@ -301,6 +306,9 @@ public class Pinventory : MonoBehaviour
                 break;
             case "Holy Water":
                 sprite = Water;
+                break;
+            case "Barrier":
+                sprite = Barrier;
                 break;
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;

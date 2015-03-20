@@ -41,28 +41,16 @@ public class SpellChestBehaviour : MonoBehaviour {
 			if (random) {
 				switch (i) {
 				case 1:
-					SpawnItem ("PFTucksRobe");
-					break;
-				case 2:
-					SpawnItem ("PFHolyGrail");
-					break;
-				case 3:
 					SpawnItem ("PFChargebolt");
 					break;
-				case 4:
+				case 2:
 					SpawnItem ("PFMagicPeashooter");
 					break;
-				case 5:
-					SpawnItem ("PFBootsofFastness");
+				case 3:
+					SpawnItem ("PFBarrier");
 					break;
-				case 6:
-					SpawnItem ("PFIdol");
-					break;
-				case 7:
-					SpawnItem ("PFSkohorn");
-					break;
-				case 8:
-					SpawnItem ("PFSkohorn");
+				case 4:
+					SpawnItem ("PFHolyWater");
 					break;
 				}
 			} else {
