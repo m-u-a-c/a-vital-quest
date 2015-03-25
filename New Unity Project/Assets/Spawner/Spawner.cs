@@ -41,6 +41,25 @@ public class Spawner : MonoBehaviour {
 		timeleft -= Time.deltaTime;
 		if (timeleft <= 0 && playerAround && observeLimit <= limit){
 			timeleft = cd;
+
+            var rnd = new System.Random();
+            int i = rnd.Next(2);
+            switch(i)
+            {
+                case 0:
+                    object_to_spawn = "Enemy";
+                    break;
+                case 1:
+                    object_to_spawn = "Caster";
+                    break;
+                case 2:
+                    object_to_spawn = "Slime";
+                    break;
+                default:
+                    object_to_spawn = "Enemy";
+                    break;
+            }
+
 			SpawnObject(object_to_spawn);
 			GameObject.Find ("Observer").GetComponent<Observer> ().AddEnemy();
 		}
