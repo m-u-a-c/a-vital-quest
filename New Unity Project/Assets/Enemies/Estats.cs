@@ -20,7 +20,7 @@ public class Estats : MonoBehaviour {
 		{
 			GameObject.Find ("Observer").GetComponent<Observer> ().RemoveEnemy();
 			Destroy(gameObject);
-			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().enemySplat, gameObject.transform.position, 0.18f);
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().enemySplat, gameObject.transform.position, 0.15f);
 		}
 	}
 

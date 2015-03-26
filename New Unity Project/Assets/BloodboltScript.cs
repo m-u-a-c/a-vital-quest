@@ -17,7 +17,11 @@ public class BloodboltScript : MonoBehaviour {
     
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.tag == "Player") coll.gameObject.GetComponent<Pstats>().getHit(Damage);
+        if (coll.gameObject.tag == "Player") 
+		{
+			coll.gameObject.GetComponent<Pstats> ().getHit (Damage, GameObject.Find ("Caster"));
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().casterHit, gameObject.transform.position);
+		}
         Destroy(gameObject);
 
     }

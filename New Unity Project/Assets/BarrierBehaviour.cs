@@ -13,6 +13,7 @@ public class BarrierBehaviour : MonoBehaviour
         timer = gameObject.AddComponent<Timer>();
         timer.SetTimer(0.1f, ticks, new System.Action(Tick));
         Debug.Log(ticks);
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().barrierActivation, gameObject.transform.position, 1f);
     }
 
     void Tick()

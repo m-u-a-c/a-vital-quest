@@ -46,7 +46,8 @@ public class Movement : MonoBehaviour
 
         if (Mathf.Abs(rigidbody2D.velocity.x) >= 1 && grounded && !gameObject.GetComponent<AudioSource>().isPlaying)
         {
-            gameObject.GetComponent<AudioSource>().Play();
+			gameObject.GetComponent<AudioSource>().Play();
+			gameObject.GetComponent<AudioSource>().pitch = 0.8f;
         }
         if ((!grounded) || Mathf.Abs(rigidbody2D.velocity.x) < 1)
             gameObject.GetComponent<AudioSource>().Pause();

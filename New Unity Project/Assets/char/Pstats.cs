@@ -75,19 +75,25 @@ public class Pstats : MonoBehaviour
     }
 
 
-    public void getHit(float damageTaken)
+    public void getHit(float damageTaken, GameObject sender = null)
     {
 		if (!takedamage)
 		{
-			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().barrierBlock, gameObject.transform.position, 1f);
+		//	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().barrierBlock, gameObject.transform.position, 1f);
 		}
 
         if (!invincible && takedamage)
         {
-            health -= damageTaken;
-            healthbar.value = health;
-            StartCoroutine("Invincibility");
+			if (sender != null && sender.name.Contains("Enemy")) 
+				AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find("Player").gameObject.transform.position);
+			//if (sender.name.Contains("Slime"));
+			//if (sender.name.Contains("Caster"));
+
+			    health -= damageTaken;
+			    healthbar.value = health;
+			    StartCoroutine("Invincibility");
         }
+
     }
 
     IEnumerator Invincibility()
