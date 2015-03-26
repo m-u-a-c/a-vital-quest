@@ -4,15 +4,16 @@ using System.Collections;
 public class BloodboltScript : MonoBehaviour {
 
     int Damage = 20;
-
+    Timer timer;
 	// Use this for initialization
 	void Start () {
-	
+	    
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	    
+        timer = gameObject.AddComponent<Timer>();
+        timer.SetTimer(1, 5, () => { if (timer.ticks == 5) Destroy(gameObject); });
 	}
     
     void OnCollisionEnter2D(Collision2D coll)

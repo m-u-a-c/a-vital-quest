@@ -273,12 +273,16 @@ public class Bloodbolt : BaseSpell
         if (!go.GetComponent<Caster_AI>().facingRight)
         {
             bolt.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
-            bolt.rigidbody2D.velocity = new Vector2(-22, 0);
+           // bolt.rigidbody2D.velocity = new Vector2(-15, 0);
+            bolt.rigidbody2D.velocity = Vector2.MoveTowards(bolt.transform.position, -GameObject.Find("Player").transform.position, 1000);
+            bolt.rigidbody2D.velocity = bolt.rigidbody2D.velocity * 0.5f;
         }
         else
         {
             bolt.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
-            bolt.rigidbody2D.velocity = new Vector2(22, 0);
+            //bolt.rigidbody2D.velocity = new Vector2(15, 0);
+            bolt.rigidbody2D.velocity = Vector2.MoveTowards(bolt.transform.position, GameObject.Find("Player").transform.position, 1000);
+            bolt.rigidbody2D.velocity = bolt.rigidbody2D.velocity * 0.5f;
         }
 
         Vector3 vec = bolt.transform.localScale * -1;
