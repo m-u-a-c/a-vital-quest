@@ -198,6 +198,12 @@ public class Pinventory : MonoBehaviour
 
     public void Update()
     {
+        var pstats = GameObject.Find("Player").GetComponent<Pstats>();
+        GameObject.Find("ADMG").  GetComponent<Text>().text = pstats.aDamage.ToString();
+        GameObject.Find("SDMG").  GetComponent<Text>().text = pstats.sDamage.ToString();
+        GameObject.Find("MSPEED").GetComponent<Text>().text = (pstats.movement * 100).ToString() + "%";
+        GameObject.Find("CRIT").  GetComponent<Text>().text = (pstats.critchance).ToString() + "%";
+
         if (items.Count != 0) foreach (BaseItem item in items) item.Effect();
 
         //foreach (BaseSpell s in spells) s.UpdateStats();

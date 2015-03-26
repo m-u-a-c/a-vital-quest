@@ -29,42 +29,38 @@ public class Slime_AI : MonoBehaviour {
 	
 	void Start ()
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
-		if (player.transform.position.x > transform.position.x)
-			facingRight = true;
+        player = GameObject.Find("Player");
 
-		if (facingRight)
-			Flip ();
-		else if (!facingRight)
-			Flip ();
+        //if (facingRight)
+        //    Flip ();
+        //else if (!facingRight)
+        //    Flip ();
 	}
 	
 	void Flip()
 	{
-		facingRight = false;
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-	}
-	void FlipRight()
-	{
-		facingRight = true;
+        facingRight = !facingRight;
 		Vector3 theScale = transform.localScale;
 		theScale.x *= -1;
 		transform.localScale = theScale;
 	}
 	
+    void Update()
+    {
+        if (player.transform.position.x > transform.position.x && facingRight)
+        {
+            Flip();
+        }
+        if (player.transform.position.x < transform.position.x && !facingRight)
+        {
+            Flip();
+        }
+    }
+
 	void FixedUpdate ()
 	{
-		if (player.transform.position.x > transform.position.x)
-			facingRight = true;
-		if (player.transform.position.x < transform.position.x)
-			facingRight = false;
 
-		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
-			Flip ();
-		else if (!facingRight && gameObject.rigidbody2D.velocity.x > 0)
-			FlipRight ();
+       
 		
 		AIposition.x = transform.position.x;
 		AIposition.y = transform.position.y;

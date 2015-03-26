@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour {
 	Collider2D playerAround;
 	float searchRadius = 20.0f;
 	public Vector2 Pos;
-	float start_time = Time.timeSinceLevelLoad;
+	//float start_time = Time.timeSinceLevelLoad;
 	public float cd;
 	public float limit = 10;
 	public string object_to_spawn;

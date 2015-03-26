@@ -45,14 +45,6 @@ public class Caster_AI : MonoBehaviour {
 	void Start ()
 	{		
 		player = GameObject.FindGameObjectWithTag("Player");
-		if (player.transform.position.x > transform.position.x)
-			facingRight = true;
-		if (player.transform.position.x < transform.position.x)
-			facingRight = false;
-		if (facingRight)
-			Flip ();
-		else if (!facingRight)
-			Flip ();
 	}
 	
 	void Flip()
@@ -65,6 +57,11 @@ public class Caster_AI : MonoBehaviour {
 	
     void Update()
     {
+        if (player.transform.position.x > transform.position.x & facingRight)
+            Flip();
+        if (player.transform.position.x < transform.position.x & !facingRight)
+            Flip();
+
         if (Input.GetKeyDown(KeyCode.Y))
         {
             var bolt = new Bloodbolt(gameObject);
@@ -74,15 +71,7 @@ public class Caster_AI : MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		if (player.transform.position.x > transform.position.x)
-			facingRight = true;
-		if (player.transform.position.x < transform.position.x)
-			facingRight = false;
-
-		if (facingRight && gameObject.rigidbody2D.velocity.x < 0)
-			Flip ();
-		else if (!facingRight && gameObject.rigidbody2D.velocity.x > 0)
-			Flip ();
+		
 		
 		AIposition.x = transform.position.x;
 		AIposition.y = transform.position.y;
