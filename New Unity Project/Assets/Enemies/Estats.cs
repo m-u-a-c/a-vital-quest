@@ -24,10 +24,10 @@ public class Estats : MonoBehaviour {
 		}
 	}
 
-	public void getHit(float damageTaken)
+	public void getHit(float damageTaken, bool knockback = true)
 	{
 		health -= damageTaken;
-		StartCoroutine ("Knockbacked");
+		if (knockback) StartCoroutine ("Knockbacked");
 	}
 
 	IEnumerator Knockbacked()

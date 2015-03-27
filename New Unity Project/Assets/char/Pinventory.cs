@@ -23,6 +23,7 @@ public class Pinventory : MonoBehaviour
     public Sprite Charm;
 	public Sprite HPPot;
     public Sprite Barrier;
+	public Sprite Beam;
 
     public List<Image> slots;
 
@@ -150,7 +151,9 @@ public class Pinventory : MonoBehaviour
             case "Barrier":
                 sprite = Barrier;
                 break;
-
+			case "Photon Beam":
+				sprite = Beam;
+				break;
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
@@ -284,6 +287,10 @@ public class Pinventory : MonoBehaviour
                 case "PFBarrier(Clone)":
                     AddSpell(new Barrier(gameObject));
                     break;
+				case "PFLaser":
+				case "PFLaser(Clone)":
+					AddSpell(new PhotonBeam(gameObject));
+					break;
             } 
             #endregion
             Destroy(cast.collider.gameObject);
@@ -316,6 +323,9 @@ public class Pinventory : MonoBehaviour
             case "Barrier":
                 sprite = Barrier;
                 break;
+			case "Photon Beam":
+				sprite = Beam;
+				break;
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }

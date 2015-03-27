@@ -22,6 +22,7 @@ public class MagicPeashooter : BaseSpell
         pea.transform.position = go.transform.position;
         if (Left)
         {
+            
             pea.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
             pea.rigidbody2D.velocity = new Vector2(-35, 0);
         }
@@ -236,24 +237,45 @@ public class Barrier : BaseSpell
     }
 }
 
-//ENEMY SPELL:
-//public class Bloodbolt : BaseSpell
-//{
-//    GameObject go;
-//    float usedcharges;
-//    
-//    public Bloodbolt(GameObject g)
-//    {
-//        SpellName = "Bloodbolt";
-//        go = g;
-//
-//    }
-//
-//    public override void Effect()
-//    {
-//
-//    }
-//}
+public class PhotonBeam : BaseSpell
+{
+	GameObject go;
+	public PhotonBeam(GameObject g)
+	{
+		SpellName = "Photon Beam";
+		go = g;
+		Cost = 5;
+		Cooldown = 8;
+	}
+
+	public override void UpdateStats()
+	{
+
+	}
+
+	public override void Effect()
+	{
+		var beam = (GameObject)Object.Instantiate (Resources.Load ("Spells/Laser"));
+		var center = beam.GetComponent<SpriteRenderer> ().bounds.center;
+		//beam.transform.position = new Vector3 (beam.transform.position.x + beam.renderer.bounds.center.x / 2, beam.transform.position.y, -2);
+		if (Left)
+		{
+			beam.transform.position = new Vector2(go.transform.position.x - center.x / 1.2f, go.transform.position.y + 0.3f);
+			Vector3 theScale = beam.transform.localScale;
+			theScale.x *= -1;
+			beam.transform.localScale = theScale;
+		}
+		else
+		{
+			beam.transform.position = new Vector2(go.transform.position.x + center.x / 1.2f, go.transform.position.y + 0.3f);
+		}
+		go.gameObject.GetComponent<Pstats> ().charges -= Cost;
+	}
+
+}
+
+
+
 public class Bloodbolt : BaseSpell
 {
     GameObject go;
