@@ -131,6 +131,7 @@ public class Movement : MonoBehaviour
         //		gameObject.GetComponent<Pinventory> ().spell = new YaosShield(gameObject);
         gameObject.GetComponent<Pinventory>().AddSpell(new MagicPeashooter(gameObject));
         gameObject.GetComponent<Pinventory>().AddSpell(new Barrier(gameObject));
+        gameObject.GetComponent<Pinventory>().AddSpell(new PhotonBeam(gameObject));
 
     }
 

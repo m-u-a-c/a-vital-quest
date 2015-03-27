@@ -260,21 +260,19 @@ public class PhotonBeam : BaseSpell
 		//beam.transform.position = new Vector3 (beam.transform.position.x + beam.renderer.bounds.center.x / 2, beam.transform.position.y, -2);
 		if (Left)
 		{
-			beam.transform.position = new Vector2(go.transform.position.x - center.x / 1.2f, go.transform.position.y + 0.3f);
+			beam.transform.position = new Vector2(go.transform.position.x - center.x / 1.2f + 0.5f, go.transform.position.y + 0.3f);
 			Vector3 theScale = beam.transform.localScale;
 			theScale.x *= -1;
 			beam.transform.localScale = theScale;
 		}
 		else
 		{
-			beam.transform.position = new Vector2(go.transform.position.x + center.x / 1.2f, go.transform.position.y + 0.3f);
+			beam.transform.position = new Vector2(go.transform.position.x + center.x / 1.2f - 0.5f, go.transform.position.y + 0.3f);
 		}
 		go.gameObject.GetComponent<Pstats> ().charges -= Cost;
 	}
 
 }
-
-
 
 public class Bloodbolt : BaseSpell
 {
