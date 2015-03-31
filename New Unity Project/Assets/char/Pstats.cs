@@ -1,21 +1,20 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 
 public class Pstats : MonoBehaviour
 {
     public float aDamage = 20;
     public float aDamage_original = 10;
     public float sDamage = 50;
-    public float defense = 2;
-    public float aSpeed = 100;
+    public float aSpeed = 2;
     public float health = 100;
     public float maxhealth = 100;
     public float knockbackmultiplier = 1;
     public bool takedamage = true;
     //TODO: 
     public float healthreg = 0.2f;
-
     public float charges = 5;
     //TODO: 
     public float chargereg = 0.2f;
@@ -25,6 +24,7 @@ public class Pstats : MonoBehaviour
     //TODO: 
     //In percentage:
     public float critchance = 5f;
+    public List<float> extracritchance = new List<float>();
     public float critmultiplier = 2;
     //TODO: 
     public float movement = 1;
@@ -77,21 +77,32 @@ public class Pstats : MonoBehaviour
 
     public void getHit(float damageTaken, GameObject sender = null)
     {
-		if (!takedamage)
-		{
-		//	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().barrierBlock, gameObject.transform.position, 1f);
-		}
+
+
+        if (!takedamage)
+        {
+            //	AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().barrierBlock, gameObject.transform.position, 1f);
+        }
 
         if (!invincible && takedamage)
         {
-			if (sender != null && sender.name.Contains("Enemy")) 
-				AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find("Player").gameObject.transform.position);
-			//if (sender.name.Contains("Slime"));
-			//if (sender.name.Contains("Caster"));
+            if (sender != null && sender.name.Contains("Enemy"))
+                AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find("Player").gameObject.transform.position);
+            //if (sender.name.Contains("Slime"));
+            //if (sender.name.Contains("Caster"));
 
-			    health -= damageTaken;
-			    healthbar.value = health;
-			    StartCoroutine("Invincibility");
+            var col = gameObject.GetComponent<SpriteRenderer>().color;
+            col = new Color(col.r, 0, 0);
+            var timer = gameObject.AddComponent<Timer>();
+            timer.SetTimer(0.1f, 20, () =>
+            {
+                col = new Color(col.r, col.g + 0.05f, col.b + 0.05f);
+                gameObject.GetComponent<SpriteRenderer>().color = col;
+            });
+
+            health -= damageTaken;
+            healthbar.value = health;
+            StartCoroutine("Invincibility");
         }
 
     }

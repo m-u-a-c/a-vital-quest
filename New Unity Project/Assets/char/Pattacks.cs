@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+using System.Xml;
+
 public class Pattacks : MonoBehaviour
 {
 
@@ -16,10 +19,13 @@ public class Pattacks : MonoBehaviour
     float Dmg;
     public float side = 1;
     public float knockbackSide;
-    public bool isOnCooldown = false;
-    public bool invincible = false;
+    public bool isOnCooldown;
+    public bool invincible;
+    public int hits;
 
-	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock;
+
+
+    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock;
 
     //UI
     public Image spellimage;
@@ -33,7 +39,11 @@ public class Pattacks : MonoBehaviour
 
         if (swinging) swing_timeleft -= Time.deltaTime;
         if (casting) cast_timeleft -= Time.deltaTime;
-        if (swinging && swing_timeleft <= 0) swinging = false;
+        if (swinging && swing_timeleft <= 0)
+        {
+            swinging = false;
+            gameObject.GetComponent<Animator>().speed = 1;
+        }
         if (casting && cast_timeleft <= 0) casting = false;
 
         timeleft -= Time.deltaTime;
@@ -41,8 +51,9 @@ public class Pattacks : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
             swinging = true;
-            swing_timeleft = 0.25f;
-
+            swing_timeleft = 0.25f / GetComponent<Pstats>().aSpeed;
+            Debug.Log(swing_timeleft);
+            gameObject.GetComponent<Animator>().speed *= GetComponent<Pstats>().aSpeed;
             switch (gameObject.GetComponent<Movement>().facingRight)
             {
                 case true:
@@ -51,6 +62,23 @@ public class Pattacks : MonoBehaviour
                 case false:
                     hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 1, transform.position.y), whatIsEnemy);
                     break;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Mouse0) &&
+                 gameObject.GetComponent<Pinventory>().CheckForItem((new TabletOfShadows(gameObject))))
+        {
+            var bounds = gameObject.renderer.bounds;
+            var colls = Physics2D.OverlapAreaAll(
+                new Vector2(bounds.max.y, bounds.center.x),
+                new Vector2(bounds.min.y, gameObject.GetComponent<Movement>().facingRight ? bounds.center.x + 2 : bounds.center.x - 2),
+                LayerMask.GetMask("Enemies"));
+            if (colls.Length > 0)
+            {
+                var gos = new List<int>();
+                foreach (var coll in colls.Where(coll => !gos.Contains(coll.gameObject.GetInstanceID())))
+                {
+                    gos.Add(coll.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage));
+                }
             }
         }
 
@@ -62,8 +90,9 @@ public class Pattacks : MonoBehaviour
             var bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
             var rnd = new System.Random();
-            int result = rnd.Next(101);
-            if (GetComponent<Pstats>().critchance >= result)
+            var result = rnd.Next(101);
+            var extracrit = GetComponent<Pstats>().extracritchance.Sum();
+            if (GetComponent<Pstats>().critchance + extracrit >= result)
             {
                 hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier);
                 hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.04f));
@@ -76,16 +105,16 @@ public class Pattacks : MonoBehaviour
                 Debug.Log("Not Crit", null);
             }
 
-				 AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
-			foreach (BaseItem item in gameObject.GetComponent<Pinventory>().items)
-				if (item.animation != 4)
-				{
-					AudioSource.PlayClipAtPoint (GameObject.Find("Player").GetComponent<Pattacks>().staticCoreHit, GameObject.Find("Player").gameObject.transform.position);
-					break;
-				}
+            AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
+            foreach (BaseItem item in gameObject.GetComponent<Pinventory>().items)
+                if (item.animation != 4)
+                {
+                    AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().staticCoreHit, GameObject.Find("Player").gameObject.transform.position);
+                    break;
+                }
             hitting = new RaycastHit2D();
         }
-		else if (hitting && hitting.collider.gameObject.tag == "Spawner" && !gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
+        else if (hitting && hitting.collider.gameObject.tag == "Spawner" && !gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
         {
             float bb = gameObject.GetComponent<Pstats>().aDamage;
             var aa = hitting.collider.gameObject.name;
@@ -93,30 +122,6 @@ public class Pattacks : MonoBehaviour
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);
             hitting = new RaycastHit2D();
         }
-						
-		if (hitting)
-		{
-			if (hitting.collider.gameObject.tag == "Enemy" && gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
-			{
-				Collider2D[] coll1;
-				coll1 = Physics2D.OverlapAreaAll (new Vector2 (GameObject.Find ("Player").transform.position.x, 
-				                                               GameObject.Find ("Player").GetComponent<BoxCollider2D> ().bounds.extents.y), 
-				                                  new Vector2 (GameObject.Find ("Player").transform.position.x + 1f, 
-				             GameObject.Find ("Player").GetComponent<BoxCollider2D> ().bounds.extents.y - GameObject.Find ("Player").GetComponent<BoxCollider2D> ().bounds.size.y));
-				
-				foreach(Collider2D c in coll1)
-				{
-					if (c && (c.gameObject.tag == "Enemy" || c.gameObject.tag == "Spawner"))
-					{
-						c.gameObject.GetComponent<Estats>().getHit(GameObject.Find("Player").GetComponent<Pstats>().aDamage);
-					}
-				}
-				Debug.Log ("HIT", null);
-			}
-
-		
-		}
-		
 
         if (gameObject.GetComponent<Movement>().facingRight)
         {
@@ -152,6 +157,7 @@ public class Pattacks : MonoBehaviour
 
         #region Casting
         int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
+        if (gameObject.GetComponent<Pinventory>().spells.Count > 0)
         if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
         {
 
@@ -165,7 +171,7 @@ public class Pattacks : MonoBehaviour
 
             if (gameObject.GetComponent<Pinventory>().spells[selected_spell].Cost <= gameObject.GetComponent<Pstats>().charges)
                 gameObject.GetComponent<Pinventory>().spells[selected_spell].Effect();
-            
+
             timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
             casting = true;
             cast_timeleft = 0.12f;

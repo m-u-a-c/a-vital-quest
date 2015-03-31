@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4E9FC52A-3BAD-7496-90D2-14B5FBFC00D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace></RootNamespace>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
+    <UnityVersion>4.6.1f1</UnityVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Debug\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>DEBUG;TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\UnityVS_bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DefineConstants>TRACE;UNITY_4_6_1;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_MONO;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;DEVELOPMENT_BUILD;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="UnityScript.Lang" />
+    <Reference Include="UnityEngine">
+      <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-UnityScript-firstpass">
+      <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="UnityVS.New Unity Project.CSharp.Plugins.csproj">
+      <Project>{84B10724-7119-5C3F-E639-CEC8C718E016}</Project>
+      <Name>UnityVS.New Unity Project.CSharp.Plugins</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\ArgardScript.cs" />
+    <Compile Include="Assets\BarrierBehaviour.cs" />
+    <Compile Include="Assets\BloodboltScript.cs" />
+    <Compile Include="Assets\Chest\ChestBehaviour.cs" />
+    <Compile Include="Assets\Enemies\CasterAttack.cs" />
+    <Compile Include="Assets\Enemies\Caster_AI.cs" />
+    <Compile Include="Assets\Enemies\Eattacks.cs" />
+    <Compile Include="Assets\Enemies\Estats.cs" />
+    <Compile Include="Assets\Enemies\First_AI.cs" />
+    <Compile Include="Assets\Enemies\Flying_AI.cs" />
+    <Compile Include="Assets\Enemies\Slime_AI.cs" />
+    <Compile Include="Assets\Enemies\SpawnerScript.cs" />
+    <Compile Include="Assets\HitTextScript.cs" />
+    <Compile Include="Assets\HolyWaterScript.cs" />
+    <Compile Include="Assets\HolyWaterSphereScript.cs" />
+    <Compile Include="Assets\I-V-S\Items\BaseClassItem.cs" />
+    <Compile Include="Assets\I-V-S\Items\BaseItem.cs" />
+    <Compile Include="Assets\I-V-S\Items\Items.cs" />
+    <Compile Include="Assets\I-V-S\Spells\BaseSpell.cs" />
+    <Compile Include="Assets\I-V-S\Spells\EnemySpells.cs" />
+    <Compile Include="Assets\I-V-S\Spells\Spells.cs" />
+    <Compile Include="Assets\I-V-S\Weapons\BaseWeapon.cs" />
+    <Compile Include="Assets\I-V-S\Weapons\Weapons.cs" />
+    <Compile Include="Assets\I-V-S\Weapons\Wlist.cs" />
+    <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
+    <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
+    <Compile Include="Assets\Menus\Clear.cs" />
+    <Compile Include="Assets\Menus\Main Menu\GameOver.cs" />
+    <Compile Include="Assets\Menus\Main Menu\MainMenu.cs" />
+    <Compile Include="Assets\Menus\Main Menu\ManualScript.cs" />
+    <Compile Include="Assets\Menus\PauseBehaviour.cs" />
+    <Compile Include="Assets\Menus\Spellclick1.cs" />
+    <Compile Include="Assets\Menus\UI\OverlayUI.cs" />
+    <Compile Include="Assets\Observer.cs" />
+    <Compile Include="Assets\PFChargeboltScript.cs" />
+    <Compile Include="Assets\PeaScript.cs" />
+    <Compile Include="Assets\PlatformScript.cs" />
+    <Compile Include="Assets\Resources\Spells\ChargeboltScript.cs" />
+    <Compile Include="Assets\Resources\Spells\LaserScript.cs" />
+    <Compile Include="Assets\Resources\Spells\ShieldScript.cs" />
+    <Compile Include="Assets\Spawner\Spawner.cs" />
+    <Compile Include="Assets\SpellChestBehaviour.cs" />
+    <Compile Include="Assets\TabletScript.cs" />
+    <Compile Include="Assets\Timer.cs" />
+    <Compile Include="Assets\VPlatformScript.cs" />
+    <Compile Include="Assets\char\CameraFollow.cs" />
+    <Compile Include="Assets\char\Controls.cs" />
+    <Compile Include="Assets\char\Movement.cs" />
+    <Compile Include="Assets\char\Pattacks.cs" />
+    <Compile Include="Assets\char\Pinventory.cs" />
+    <Compile Include="Assets\char\Pstats.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
+</Project>

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Items;
+using System;
 using UnityEngine.UI;
 
 public class Pinventory : MonoBehaviour
@@ -36,17 +38,24 @@ public class Pinventory : MonoBehaviour
     public List<BaseSpell> spells;
     public List<float> spell_cooldowns;
     public List<float> spell_cooldowns_left;
+    public BaseClassItem ClassItem;
 
     public List<Timer> spell_cds;
     public int selected_spell = 0;
     public int selected_item = 0;
     public int spellcount;
     
+    
     void Start()
     {
         items = new List<BaseItem>();
         spells = new List<BaseSpell>();
         spell_cds = new List<Timer>();
+    }
+
+    public void AddClassItem(BaseClassItem classitem)
+    {
+        
     }
 
     public void AddItem(BaseItem item)
@@ -207,17 +216,18 @@ public class Pinventory : MonoBehaviour
         GameObject.Find("MSPEED").GetComponent<Text>().text = (pstats.movement * 100).ToString() + "%";
         GameObject.Find("CRIT").  GetComponent<Text>().text = (pstats.critchance).ToString() + "%";
 
-        if (items.Count != 0) foreach (BaseItem item in items) item.Effect();
+        if (items.Count != 0) foreach (var item in items) item.Effect();
+        if (ClassItem != null) ClassItem.Effect();
 
         //foreach (BaseSpell s in spells) s.UpdateStats();
         for (int i = 0; i < spell_cooldowns_left.Count; i++) spell_cooldowns_left[i] -= Time.deltaTime;
 
-        var cast = Physics2D.CircleCast(new Vector2(transform.renderer.bounds.center.x, transform.renderer.bounds.center.y - 1), 1, Vector2.zero, 0, LayerMask.GetMask("Items"));
-        if (cast && cast.collider.gameObject.tag == "Item" && Input.GetKeyDown(KeyCode.E))
+        var cast = Physics2D.OverlapArea(new Vector2(transform.renderer.bounds.center.x - transform.renderer.bounds.size.x / 2, transform.renderer.bounds.center.y), new Vector2(transform.renderer.bounds.center.x + transform.renderer.bounds.size.x / 2, transform.renderer.bounds.center.y - 1), LayerMask.GetMask("Items"));
+        if (cast && cast.gameObject.tag == "Item" && Input.GetKeyDown(KeyCode.E))
         {
             AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().pickUpItem, GameObject.Find("Player").gameObject.transform.position);
             #region Items
-            switch (cast.collider.gameObject.name)
+            switch (cast.gameObject.name)
             {
                 case "PFChargebolt(Clone)":
                 case "PFChargebolt":
@@ -293,7 +303,7 @@ public class Pinventory : MonoBehaviour
 					break;
             } 
             #endregion
-            Destroy(cast.collider.gameObject);
+            Destroy(cast.gameObject);
         }
         if (spells.Count > 1)
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && (selected_spell + 1) != spells.Count)
@@ -306,6 +316,7 @@ public class Pinventory : MonoBehaviour
             }
         spellcount = spells.Count;
         Sprite sprite = null;
+        if (spells.Count > 0)
         switch (spells[selected_spell].SpellName)
         {
             case "Magic Peashooter":

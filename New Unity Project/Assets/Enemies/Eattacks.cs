@@ -90,7 +90,7 @@ public class Eattacks : MonoBehaviour
         float endx = 0;
         bool fr = true;
         if (gameObject.name == "Slime" || gameObject.name == "Slime(Clone)") fr = gameObject.GetComponent<Slime_AI>().facingRight;
-        else if (gameObject.name == "Caster" || gameObject.name == "Caster(Clone") fr = gameObject.GetComponent<Caster_AI>().facingRight;
+        else if (gameObject.name == "Caster" || gameObject.name == "Caster(Clone)") fr = gameObject.GetComponent<Caster_AI>().facingRight;
         else fr = gameObject.GetComponent<First_AI>().facingRight;
 
         if (fr) endx = 1.5f;

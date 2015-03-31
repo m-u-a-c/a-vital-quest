@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Assets.Items;
 
 public class HolyGrail : BaseItem
 {
@@ -65,7 +66,7 @@ public class GlassIdol : BaseItem
         //TODO: Restores you to full HP and Charges when brought below 10 HP. Breaks on effect.
         if (go.GetComponent<Pstats>().health < 10)
         {
-			go.GetComponent<Pstats>().health = go.GetComponent<Pstats>().maxcharges;
+            go.GetComponent<Pstats>().health = go.GetComponent<Pstats>().maxcharges;
             go.GetComponent<Pstats>().charges = go.GetComponent<Pstats>().maxcharges;
             go.GetComponent<Pinventory>().RemoveItem(this);
         }
@@ -95,12 +96,12 @@ public class LuckyHorseshoe : BaseItem
     }
     public override void Stats()
     {
-        go.GetComponent<Pstats>().critchance += 10;
+        go.GetComponent<Pstats>().extracritchance.Add(10);
 
     }
     public override void RevertStats()
     {
-        go.GetComponent<Pstats>().critchance -= 10;
+        go.GetComponent<Pstats>().extracritchance.Remove(10);
     }
 }
 
@@ -209,21 +210,21 @@ public class VampiricCrest : BaseItem
 public class StaticCore : BaseItem
 {
     GameObject go;
-	GameObject camera;
+    GameObject camera;
     bool on = false;
     float timeleft = 1.5f;
     float ori_damage;
-	AudioSource AS;
+    AudioSource AS;
     public StaticCore(GameObject g)
     {
         go = g;
         ItemName = "Static Core";
         ori_damage = go.GetComponent<Pstats>().aDamage;
         animation = 4;
-		camera = GameObject.Find ("Camera");
-		AS = camera.AddComponent<AudioSource> ();
-		AS.clip = GameObject.Find ("Player").GetComponent<Pattacks> ().staticCoreActivation;
-		
+        camera = GameObject.Find("Camera");
+        AS = camera.AddComponent<AudioSource>();
+        AS.clip = GameObject.Find("Player").GetComponent<Pattacks>().staticCoreActivation;
+
     }
     public override void Effect()
     {
@@ -234,7 +235,7 @@ public class StaticCore : BaseItem
             {
                 TurnOn();
             }
-            else if (on && go.GetComponent<Pstats>().charges < 5) 
+            else if (on && go.GetComponent<Pstats>().charges < 5)
             {
                 TurnOff();
             }
@@ -258,17 +259,17 @@ public class StaticCore : BaseItem
 
     public void TurnOn()
     {
-		AS.Play ();
-		AS.volume = 1.2f;
+        AS.Play();
+        AS.volume = 1.2f;
         animation = 7;
         on = true;
-		go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
+        go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
         go.GetComponent<Pstats>().regcharges = false;
         go.GetComponent<Pstats>().aDamage = ori_damage + go.GetComponent<Pstats>().sDamage * 0.6f;
     }
     public void TurnOff()
     {
-		AS.Pause ();
+        AS.Pause();
         animation = 4;
         on = false;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Charged;
@@ -330,142 +331,208 @@ public class AsgardSouvenir : BaseItem
 
 public class TabletOfShadows : BaseItem
 {
-	GameObject go;
-	int hitcount;
-	public float cd = 0.2f;
-	public bool available = false;
-	Timer timer;
+    GameObject go;
+    int hitcount;
+    int lasthitcount;
+    public float cd = 0.2f;
+    public bool available = false;
+    Timer timer;
 
-	public TabletOfShadows(GameObject g)
-	{
-		go = g;
-		ItemName = "Tablet of Shadows";
-		timer = go.AddComponent<Timer> ();
-		timer.SetTimer (0.2f, 1, new System.Action (ClearCD)); 
-	}
+    public TabletOfShadows(GameObject g)
+    {
 
-	void ClearCD()
-	{
-		available = true;
-		timer.StopTimer ();
-	}
+        go = g;
+        ItemName = "Tablet of Shadows";
+        timer = go.AddComponent<Timer>();
+        timer.SetTimer(0.2f, 1, new System.Action(ClearCD));
+        lasthitcount = go.GetComponent<Pattacks>().hits;
+
+    }
 
 
-	public override void Effect()
-	{
-//		if (!available && !go.GetComponent<Pattacks>().hitting)
-//						return;
-//		Debug.Log ("HORA", null);
-//
-//			bool facingRight = GameObject.Find ("Player").GetComponent<Movement> ().facingRight;
-//			var g = (GameObject)Object.Instantiate(Resources.Load("Spells/ShadowHitbox"));
-//			if (facingRight)
-//				g.transform.position = new Vector2 (go.transform.position.x + 0.75f, go.transform.position.y);
-//			else
-//				g.transform.position = new Vector2 (go.transform.position.x - 0.75f, go.transform.position.y);
-//
-//		timer.StartTimer ();
+
+    void ClearCD()
+    {
+        available = true;
+        timer.StopTimer();
+    }
 
 
-	}
-	
-	public override void Stats()
-	{
-		
-	}
-	
-	
-	public override void RevertStats()
-	{
-		
-	}
+    public override void Effect()
+    {
+        if (go.GetComponent<Pattacks>().hits - lasthitcount >= 5)
+        {
+            //Cast spell
+            lasthitcount = go.GetComponent<Pattacks>().hits;
+        }
+
+        bool facingRight = GameObject.Find("Player").GetComponent<Movement>().facingRight;
+        var g = (GameObject)Object.Instantiate(Resources.Load("Spells/ShadowHitbox"));
+        if (facingRight)
+            g.transform.position = new Vector2(go.transform.position.x + 0.75f, go.transform.position.y);
+        else
+            g.transform.position = new Vector2(go.transform.position.x - 0.75f, go.transform.position.y);
+
+        timer.StartTimer();
+
+
+    }
+
+    public override void Stats()
+    {
+
+    }
+
+
+    public override void RevertStats()
+    {
+
+    }
 }
 
 public class Bandaid : BaseItem
 {
-	GameObject go;
-	Pstats pstats;
-	public Bandaid(GameObject g)
-	{
-		go = g;
-		ItemName = "Bandaid";
-		pstats = go.GetComponent<Pstats> ();
-	}
-	public override void Effect()
-	{
+    GameObject go;
+    Pstats pstats;
+    public Bandaid(GameObject g)
+    {
+        go = g;
+        ItemName = "Bandaid";
+        pstats = go.GetComponent<Pstats>();
+    }
+    public override void Effect()
+    {
 
-	}
-	
-	public override void Stats()
-	{
-		pstats.health	 += 10;
-		pstats.maxhealth += 10;
-		pstats.healthreg += 2;
-	}
+    }
 
-	public override void RevertStats()
-	{
-		pstats.maxhealth -= 10;
-		pstats.healthreg -= 2;
-	}
+    public override void Stats()
+    {
+        pstats.health += 10;
+        pstats.maxhealth += 10;
+        pstats.healthreg += 2;
+    }
+
+    public override void RevertStats()
+    {
+        pstats.maxhealth -= 10;
+        pstats.healthreg -= 2;
+    }
 }
 
 public class CharmOfRestoration : BaseItem
 {
-	GameObject go;
-	Pstats pstats;
-	public CharmOfRestoration(GameObject g)
-	{
-		go = g;
-		ItemName = "Charm of Restoration";
-		pstats = go.GetComponent<Pstats> ();
-	}
-	public override void Effect()
-	{
-		
-	}
-	
-	public override void Stats()
-	{
-		pstats.healthreg += 3;
-		pstats.movement	 *= 0.85f;
-	}
-	
-	public override void RevertStats()
-	{
-		pstats.healthreg -= 3;
-		pstats.movement	 /= 0.85f;
-	}
+    GameObject go;
+    Pstats pstats;
+    public CharmOfRestoration(GameObject g)
+    {
+        go = g;
+        ItemName = "Charm of Restoration";
+        pstats = go.GetComponent<Pstats>();
+    }
+    public override void Effect()
+    {
+
+    }
+
+    public override void Stats()
+    {
+        pstats.healthreg += 3;
+        pstats.movement *= 0.85f;
+    }
+
+    public override void RevertStats()
+    {
+        pstats.healthreg -= 3;
+        pstats.movement /= 0.85f;
+    }
 }
 
 public class ZephyrJuice : BaseItem
 {
-	GameObject go;
-	Pstats pstats;
-	public ZephyrJuice(GameObject g)
-	{
-		go = g;
-		ItemName = "Zephyr Juice";
-		pstats = go.GetComponent<Pstats> ();
-	}
-	public override void Effect()
-	{
-		if (Input.GetKeyDown (go.GetComponent<Pinventory> ().CheckSlot (this))) {
-			pstats.health += 22.5f;
-			go.GetComponent<Pinventory>().RemoveItem(this);
-		}
+    GameObject go;
+    Pstats pstats;
+    public ZephyrJuice(GameObject g)
+    {
+        go = g;
+        ItemName = "Zephyr Juice";
+        pstats = go.GetComponent<Pstats>();
+    }
+    public override void Effect()
+    {
+        if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
+        {
+            pstats.health += 22.5f;
+            go.GetComponent<Pinventory>().RemoveItem(this);
+        }
 
-	}
-	
-	public override void Stats()
-	{ 
+    }
 
-
-	}
-	
-	public override void RevertStats()
-	{
+    public override void Stats()
+    {
 
 
-	}
+    }
+
+    public override void RevertStats()
+    {
+
+
+    }
+}
+
+public class Masochism : BaseClassItem
+{
+    private GameObject go;
+    private float _lastaddition = 0;
+
+    Masochism(GameObject g)
+    {
+        go = g;
+        ItemName = "Masochism";
+    }
+
+    public override void Stats()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void RevertStats()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Effect()
+    {
+        var pstats = go.GetComponent<Pstats>();
+        var val = (pstats.maxhealth - pstats.health) / 4;
+        var i = Mathf.RoundToInt(val);
+        if (_lastaddition <= 0) pstats.extracritchance.Remove(_lastaddition);
+        pstats.extracritchance.Add(i);
+        _lastaddition = i;
+    }
+}
+
+public class Sadism : BaseClassItem
+{
+    private GameObject go;
+    Sadism(GameObject g)
+    {
+        go = g;
+        ItemName = "Sadism";
+    }
+
+    public override void Effect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Stats()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void RevertStats()
+    {
+        throw new System.NotImplementedException();
+    }
 }

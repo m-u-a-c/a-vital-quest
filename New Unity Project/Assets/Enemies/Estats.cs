@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Estats : MonoBehaviour {
 	//hittin
@@ -28,6 +30,26 @@ public class Estats : MonoBehaviour {
 	{
 		health -= damageTaken;
 		if (knockback) StartCoroutine ("Knockbacked");
+	    if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem != null)
+        if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem.ItemName == "Sadism")
+	    {
+            GetComponent<Pstats>().movement += 0.2f;
+            GetComponent<Pstats>().healthreg += 0.3f;
+	        var timer = GameObject.Find("Player").AddComponent<Timer>();
+            timer.SetTimer(2, 1, new Action(() =>
+            {
+                GetComponent<Pstats>().movement -= 0.2f;
+                GetComponent<Pstats>().healthreg -= 0.3f;
+            }));
+	    }
+	    var text = (GameObject) Instantiate(Resources.Load("Other/Text"));
+	    var gopos = gameObject.transform.position;
+	    var textcomp = text.GetComponent<TextMesh>();
+	    text.transform.position = new Vector3(gopos.x + 1f, gopos.y + 2, -1);
+        textcomp.text = damageTaken.ToString();
+        
+
+
 	    return gameObject.GetInstanceID();
 	}
 
