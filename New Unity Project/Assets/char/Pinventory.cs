@@ -24,11 +24,13 @@ public class Pinventory : MonoBehaviour
     public Sprite Water;
     public Sprite Orb;
     public Sprite Charm;
-	public Sprite HPPot;
+    public Sprite HPPot;
     public Sprite Barrier;
-	public Sprite Beam;
+    public Sprite Beam;
     public Sprite MerlinBand;
     public Sprite HerculesBand;
+    public Sprite Sadism;
+    public Sprite Masochism;
 
 
     public List<Image> slots;
@@ -43,8 +45,8 @@ public class Pinventory : MonoBehaviour
     public int selected_spell = 0;
     public int selected_item = 0;
     public int spellcount;
-    
-    
+
+
     void Start()
     {
         items = new List<BaseItem>();
@@ -52,9 +54,12 @@ public class Pinventory : MonoBehaviour
         spell_cds = new List<Timer>();
     }
 
-    public void AddClassItem(BaseClassItem classitem)
+    public void SetClassItem(BaseClassItem classitem)
     {
-        
+        if (ClassItem != null) ClassItem.RevertStats();
+        ClassItem = classitem;
+        ClassItem.Stats();
+        ShowText(classitem.ItemName);
     }
 
     public void ShowText(string name)
@@ -83,11 +88,11 @@ public class Pinventory : MonoBehaviour
     {
         Sprite sprite = null;
         ShowText(item.ItemName);
-        
 
-        if (items.Count == 6) 
+
+        if (items.Count == 6)
             RemoveItem(items[5]);
-        
+
         items.Add(item);
         item.Stats();
 
@@ -117,23 +122,29 @@ public class Pinventory : MonoBehaviour
             case "Vampiric Crest":
                 sprite = Crest;
                 break;
-			case "Tablet of Shadows":
-				sprite = _Placeholder;
-				break;
+            case "Tablet of Shadows":
+                sprite = _Placeholder;
+                break;
             case "Mystical Orb":
                 sprite = Orb;
                 break;
             case "Charm of Restoration":
                 sprite = Charm;
                 break;
-			case "Zephyr Juice":
-				sprite = HPPot;
-				break;
+            case "Zephyr Juice":
+                sprite = HPPot;
+                break;
             case "Merlin's Band of Fate":
                 sprite = MerlinBand;
                 break;
             case "Hercules' Band of Power":
                 sprite = HerculesBand;
+                break;
+            case "Sadism":
+                sprite = Sadism;
+                break;
+            case "Masochism":
+                sprite = Masochism;
                 break;
         }
         slots[items.Count - 1].GetComponent<Image>().sprite = sprite;
@@ -188,58 +199,59 @@ public class Pinventory : MonoBehaviour
             case "Barrier":
                 sprite = Barrier;
                 break;
-			case "Photon Beam":
-				sprite = Beam;
-				break;
+            case "Photon Beam":
+                sprite = Beam;
+                break;
         }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
 
     public BaseSpell GetSpell(System.Type type)
     {
-        foreach(BaseSpell bs in spells)
+        foreach (BaseSpell bs in spells)
         {
             if (bs.GetType() == type)
             {
                 return bs;
-            } 
+            }
         }
         return null;
     }
 
-	public bool CheckForItem(BaseItem ittem)
-	{
-	    return items.Any(i => i.ItemName == ittem.ItemName);
-	}
+    public bool CheckForItem(BaseItem ittem)
+    {
+        return items.Any(i => i.ItemName == ittem.ItemName);
+    }
 
     public KeyCode CheckSlot(BaseItem ittem)
-	{
-		int id = 0;
-		id = items.IndexOf (ittem);
-		switch (id) {
-		case 0:
-			return KeyCode.Alpha1;
-		case 1:
-			return KeyCode.Alpha2;
-		case 2:
-			return KeyCode.Alpha3;
-		case 3:
-			return KeyCode.Alpha4;
-		case 4:
-			return KeyCode.Alpha5;
-		case 5:
-			return KeyCode.Alpha6;
-		}
-		return KeyCode.Alpha0;
-	}
+    {
+        int id = 0;
+        id = items.IndexOf(ittem);
+        switch (id)
+        {
+            case 0:
+                return KeyCode.Alpha1;
+            case 1:
+                return KeyCode.Alpha2;
+            case 2:
+                return KeyCode.Alpha3;
+            case 3:
+                return KeyCode.Alpha4;
+            case 4:
+                return KeyCode.Alpha5;
+            case 5:
+                return KeyCode.Alpha6;
+        }
+        return KeyCode.Alpha0;
+    }
 
     public void Update()
     {
         var pstats = GameObject.Find("Player").GetComponent<Pstats>();
-        GameObject.Find("ADMG").  GetComponent<Text>().text = pstats.aDamage.ToString();
-        GameObject.Find("SDMG").  GetComponent<Text>().text = pstats.sDamage.ToString();
+        GameObject.Find("ADMG").GetComponent<Text>().text = pstats.aDamage.ToString();
+        GameObject.Find("SDMG").GetComponent<Text>().text = pstats.sDamage.ToString();
         GameObject.Find("MSPEED").GetComponent<Text>().text = (pstats.movement * 100).ToString() + "%";
-        GameObject.Find("CRIT").  GetComponent<Text>().text = (pstats.critchance).ToString() + "%";
+        GameObject.Find("CRIT").GetComponent<Text>().text = (pstats.critchance).ToString() + "%";
         GameObject.Find("HPText").GetComponent<Text>().text = Mathf.RoundToInt(pstats.health) + " / " +
                                                               Mathf.RoundToInt(pstats.maxhealth);
         GameObject.Find("CHText").GetComponent<Text>().text = Mathf.RoundToInt(pstats.charges) + " / " +
@@ -306,10 +318,10 @@ public class Pinventory : MonoBehaviour
                 case "PFHolyWater":
                     AddSpell(new HolyWater(gameObject));
                     break;
-				case "PFTabletOfShadows(Clone)":
-				case "PFTabletOfShadows":
-					AddItem (new TabletOfShadows(gameObject));
-					break;
+                case "PFTabletOfShadows(Clone)":
+                case "PFTabletOfShadows":
+                    AddItem(new TabletOfShadows(gameObject));
+                    break;
                 case "PFMysticalOrb(Clone)":
                 case "PFMysticalOrb":
                     AddItem(new MysticalOrb(gameObject));
@@ -318,18 +330,18 @@ public class Pinventory : MonoBehaviour
                 case "PFCharmofRestoration(Clone)":
                     AddItem(new CharmOfRestoration(gameObject));
                     break;
-				case "PFZephyrJuice":
-				case "ZephyrJuice":
-					AddItem(new ZephyrJuice(gameObject));
-					break;
+                case "PFZephyrJuice":
+                case "ZephyrJuice":
+                    AddItem(new ZephyrJuice(gameObject));
+                    break;
                 case "PFBarrier":
                 case "PFBarrier(Clone)":
                     AddSpell(new Barrier(gameObject));
                     break;
-				case "PFLaser":
-				case "PFLaser(Clone)":
-					AddSpell(new PhotonBeam(gameObject));
-					break;
+                case "PFLaser":
+                case "PFLaser(Clone)":
+                    AddSpell(new PhotonBeam(gameObject));
+                    break;
                 case "PFMerlinBand":
                 case "PFMerlinBand(Clone)":
                     AddItem(new MerlinsBandofFate((gameObject)));
@@ -338,7 +350,15 @@ public class Pinventory : MonoBehaviour
                 case "PFHerculesBand(Clone)":
                     AddItem((new HerculesBandofPower(gameObject)));
                     break;
-            } 
+                case "PFSadism":
+                case "PFSadism(Clone)":
+                    SetClassItem(new Sadism(gameObject));
+                    break;
+                case "PFMasochism":
+                case "PFMasochism(Clone)":
+                    SetClassItem(new Masochism(gameObject));
+                    break;
+            }
             #endregion
             Destroy(cast.gameObject);
         }
@@ -354,28 +374,27 @@ public class Pinventory : MonoBehaviour
         spellcount = spells.Count;
         Sprite sprite = null;
         if (spells.Count > 0)
-        switch (spells[selected_spell].SpellName)
-        {
-            case "Magic Peashooter":
-                sprite = Peashooter;
-                break;
-            case "Chargebolt":
-                sprite = Chargebolt;
-                break;
-            case "Yao's Shield":
-                sprite = Shield;
-                break;
-            case "Holy Water":
-                sprite = Water;
-                break;
-            case "Barrier":
-                sprite = Barrier;
-                break;
-			case "Photon Beam":
-				sprite = Beam;
-				break;
-        }
+            switch (spells[selected_spell].SpellName)
+            {
+                case "Magic Peashooter":
+                    sprite = Peashooter;
+                    break;
+                case "Chargebolt":
+                    sprite = Chargebolt;
+                    break;
+                case "Yao's Shield":
+                    sprite = Shield;
+                    break;
+                case "Holy Water":
+                    sprite = Water;
+                    break;
+                case "Barrier":
+                    sprite = Barrier;
+                    break;
+                case "Photon Beam":
+                    sprite = Beam;
+                    break;
+            }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
 }
-

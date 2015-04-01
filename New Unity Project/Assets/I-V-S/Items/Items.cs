@@ -540,7 +540,7 @@ public class Masochism : BaseClassItem
     private GameObject go;
     private float _lastaddition = 0;
 
-    Masochism(GameObject g)
+    public Masochism(GameObject g)
     {
         go = g;
         ItemName = "Masochism";
@@ -557,23 +557,23 @@ public class Masochism : BaseClassItem
 
     public override void RevertStats()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Effect()
     {
-        var pstats = go.GetComponent<Pstats>();
-        var val = (pstats.maxhealth - pstats.health) / 4;
-        var i = Mathf.RoundToInt(val);
-        pstats.critchance_e -= _lastaddition;
-        pstats.critchance_e += i;
+        //var pstats = go.GetComponent<Pstats>();
+        //var val = (pstats.maxhealth - pstats.health) / 4;
+        //var i = Mathf.RoundToInt(val);
+        //pstats.critchance_e -= _lastaddition;
+        //pstats.critchance_e += i;
     }
 }
 
 public class Sadism : BaseClassItem
 {
     private GameObject go;
-    Sadism(GameObject g)
+    public Sadism(GameObject g)
     {
         go = g;
         ItemName = "Sadism";
@@ -581,16 +581,16 @@ public class Sadism : BaseClassItem
 
     public override void Effect()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Stats()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void RevertStats()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

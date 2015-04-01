@@ -24,7 +24,8 @@ public class Pstats : MonoBehaviour
     public float sDamage_e;
     public float sDamage_ep = 1;
     public float aSpeed = 2;
-    public float health = 100;
+
+    public float health;
     public float maxhealth = 100;
     public float knockbackmultiplier = 1;
     public bool takedamage = true;
@@ -34,6 +35,8 @@ public class Pstats : MonoBehaviour
     public bool regcharges = true;
     public float maxcharges = 5;
     public float knockbackpower = 1;
+
+    private float _lastaddition;
 
     //In percentage:
     public float critchance
@@ -58,6 +61,21 @@ public class Pstats : MonoBehaviour
 
     Timer hptimer, chtimer;
 
+    private void Masochism()
+    {
+        var pinv = gameObject.GetComponent<Pinventory>();
+        if (pinv.ClassItem != null && pinv.ClassItem.ItemName == "Masochism")
+        {
+            var pstats = gameObject.GetComponent<Pstats>();
+            var val = (pstats.maxhealth - pstats.health) / 4;
+            var i = Mathf.RoundToInt(val);
+            if (_lastaddition == i) return;
+            pstats.critchance_e -= _lastaddition;
+            pstats.critchance_e += i;
+            _lastaddition = i;
+        }
+    }
+
     void Start()
     {
         hptimer = gameObject.AddComponent<Timer>();
@@ -70,6 +88,7 @@ public class Pstats : MonoBehaviour
     {
         if (health < maxhealth)
             health += healthreg;
+        Masochism();
     }
 
     void ChReg()
@@ -104,6 +123,8 @@ public class Pstats : MonoBehaviour
 
         if (!invincible && takedamage)
         {
+            
+
             if (sender != null && sender.name.Contains("Enemy"))
                 AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find("Player").gameObject.transform.position);
             //if (sender.name.Contains("Slime"));
@@ -120,6 +141,8 @@ public class Pstats : MonoBehaviour
 
             health -= damageTaken;
             healthbar.value = health;
+
+            Masochism();
             StartCoroutine("Invincibility");
         }
 

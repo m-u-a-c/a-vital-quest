@@ -93,8 +93,8 @@ public class Eattacks : MonoBehaviour
         else if (gameObject.name == "Caster" || gameObject.name == "Caster(Clone)") fr = gameObject.GetComponent<Caster_AI>().facingRight;
         else fr = gameObject.GetComponent<First_AI>().facingRight;
 
-        if (fr) endx = 1.5f;
-        else endx = -1.5f;
+        if (fr) endx = 1.8f;
+        else endx = -1.8f;
 
         line1 = Physics2D.Linecast(new Vector2(startx, starty), new Vector2(endx, starty), whatIsPlayer);
         line2 = Physics2D.Linecast(new Vector2(startx, starty + 0.3f), new Vector2(endx, starty + 0.3f), whatIsPlayer);

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine.UI;
 
 public class Estats : MonoBehaviour {
@@ -32,19 +33,19 @@ public class Estats : MonoBehaviour {
 		if (knockback) StartCoroutine ("Knockbacked");
         #region Sadism
         if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem != null)
-        if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem.ItemName == "Sadism")
-	    {
-            GetComponent<Pstats>().movement += 0.2f;
-            GetComponent<Pstats>().healthreg += 0.3f;
-	        var timer = GameObject.Find("Player").AddComponent<Timer>();
-            timer.SetTimer(2, 1, new Action(() =>
+            if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem.ItemName == "Sadism")
             {
-                GetComponent<Pstats>().movement -= 0.2f;
-                GetComponent<Pstats>().healthreg -= 0.3f;
-            }));
-        }
+                GetComponent<Pstats>().movement += 0.2f;
+                GetComponent<Pstats>().healthreg += 0.3f;
+                var t = GameObject.Find("Player").AddComponent<Timer>();
+                t.SetTimer(2, 1, () =>
+                {
+                    GetComponent<Pstats>().movement -= 0.2f;
+                    GetComponent<Pstats>().healthreg -= 0.3f;
+                    Destroy(t);
+                });
+            }
         #endregion
-
         var text = (GameObject) Instantiate(Resources.Load("Other/Text"));
 	    var gopos = gameObject.transform.position;
 	    var textcomp = text.GetComponent<TextMesh>();
