@@ -5,9 +5,26 @@ using System.Collections.Generic;
 
 public class Pstats : MonoBehaviour
 {
-    public float aDamage = 20;
-    public float aDamage_original = 10;
-    public float sDamage = 50;
+    public float aDamage
+    {
+        get
+        {
+            return aDamage_base + aDamage_e;
+        }
+    }
+    public float aDamage_base;
+    public float aDamage_e;
+
+    public float sDamage
+    {
+        get
+        {
+            return sDamage_base + sDamage_e;
+        }
+    }
+    public float sDamage_e;
+
+    public float sDamage_base;
     public float aSpeed = 2;
     public float health = 100;
     public float maxhealth = 100;
@@ -23,8 +40,15 @@ public class Pstats : MonoBehaviour
 
     //TODO: 
     //In percentage:
-    public float critchance = 5f;
-    public List<float> extracritchance = new List<float>();
+    public float critchance
+    {
+        get
+        {
+            return critchance_e + critchance_base;
+        }
+    }
+    public float critchance_base;
+    public float critchance_e;
     public float critmultiplier = 2;
     //TODO: 
     public float movement = 1;

@@ -9,7 +9,7 @@ public class HitTextScript : MonoBehaviour
     void Start()
     {
         _timer = gameObject.AddComponent<Timer>();
-        _timer.SetTimer(0.05f, 10, Tick);
+        _timer.SetTimer(0.05f, 20, Tick);
         _col = gameObject.GetComponent<TextMesh>().color;
         gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up * 50);
     }
@@ -17,7 +17,7 @@ public class HitTextScript : MonoBehaviour
     void Tick()
     {
         _col = gameObject.GetComponent<TextMesh>().color;
-        gameObject.GetComponent<TextMesh>().color = new Color(_col.r, _col.g, _col.b, _col.a - 0.1f);
-        if (_timer.ticks == 10) Destroy(gameObject);
+        gameObject.GetComponent<TextMesh>().color = new Color(_col.r, _col.g, _col.b, _col.a - 0.05f);
+        if (_timer.ticks == 20) Destroy(gameObject);
     }
 }

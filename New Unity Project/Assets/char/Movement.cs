@@ -23,7 +23,6 @@ public class Movement : MonoBehaviour
 
     //flipping
     public bool facingRight = true;
-
     bool moving = false;
     public float speed;
 
@@ -126,6 +125,7 @@ public class Movement : MonoBehaviour
         //gameObject.GetComponent<Pinventory>().AddSpell(new MagicPeashooter(gameObject));
         //gameObject.GetComponent<Pinventory>().AddSpell(new Barrier(gameObject));
         //gameObject.GetComponent<Pinventory>().AddSpell(new PhotonBeam(gameObject));
+        
 
     }
 

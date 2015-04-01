@@ -96,12 +96,12 @@ public class LuckyHorseshoe : BaseItem
     }
     public override void Stats()
     {
-        go.GetComponent<Pstats>().extracritchance.Add(10);
+        go.GetComponent<Pstats>().critchance_e += 10;
 
     }
     public override void RevertStats()
     {
-        go.GetComponent<Pstats>().extracritchance.Remove(10);
+        go.GetComponent<Pstats>().critchance_e -= 10;
     }
 }
 
@@ -143,12 +143,12 @@ public class SturdySocks : BaseItem
     }
     public override void Stats()
     {
-        go.GetComponent<Pstats>().aDamage += 3;
+        go.GetComponent<Pstats>().aDamage_e += 3;
         go.GetComponent<Pstats>().knockbackmultiplier = 0;
     }
     public override void RevertStats()
     {
-        go.GetComponent<Pstats>().aDamage -= 3;
+        go.GetComponent<Pstats>().aDamage_e -= 3;
         go.GetComponent<Pstats>().knockbackmultiplier = 1;
     }
 }
@@ -168,12 +168,12 @@ public class MysticalOrb : BaseItem
 
     public override void Stats()
     {
-        go.GetComponent<Pstats>().sDamage += 3;
+        go.GetComponent<Pstats>().sDamage_e += 3;
         go.GetComponent<Pstats>().chargereg += 2;
     }
     public override void RevertStats()
     {
-        go.GetComponent<Pstats>().sDamage -= 3;
+        go.GetComponent<Pstats>().sDamage_e -= 3;
         go.GetComponent<Pstats>().chargereg -= 2;
     }
 }
@@ -265,7 +265,7 @@ public class StaticCore : BaseItem
         on = true;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
         go.GetComponent<Pstats>().regcharges = false;
-        go.GetComponent<Pstats>().aDamage = ori_damage + go.GetComponent<Pstats>().sDamage * 0.6f;
+        go.GetComponent<Pstats>().aDamage_e = ori_damage + go.GetComponent<Pstats>().sDamage * 0.6f;
     }
     public void TurnOff()
     {
@@ -274,7 +274,7 @@ public class StaticCore : BaseItem
         on = false;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Charged;
         go.GetComponent<Pstats>().regcharges = true;
-        go.GetComponent<Pstats>().aDamage = ori_damage;
+        go.GetComponent<Pstats>().aDamage_e = ori_damage;
         timeleft = 1;
     }
 
@@ -493,7 +493,11 @@ public class Masochism : BaseClassItem
 
     public override void Stats()
     {
-        throw new System.NotImplementedException();
+        var pstats = go.GetComponent<Pstats>();
+        var val = (pstats.maxhealth - pstats.health) / 4;
+        var i = Mathf.RoundToInt(val);
+        pstats.critchance_e += i;
+        _lastaddition = i;
     }
 
     public override void RevertStats()
@@ -506,9 +510,8 @@ public class Masochism : BaseClassItem
         var pstats = go.GetComponent<Pstats>();
         var val = (pstats.maxhealth - pstats.health) / 4;
         var i = Mathf.RoundToInt(val);
-        if (_lastaddition <= 0) pstats.extracritchance.Remove(_lastaddition);
-        pstats.extracritchance.Add(i);
-        _lastaddition = i;
+        pstats.critchance_e -= _lastaddition;
+        pstats.critchance_e += i;
     }
 }
 

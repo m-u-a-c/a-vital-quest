@@ -23,8 +23,6 @@ public class Pattacks : MonoBehaviour
     public bool invincible;
     public int hits;
 
-
-
     public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock;
 
     //UI
@@ -45,9 +43,7 @@ public class Pattacks : MonoBehaviour
             gameObject.GetComponent<Animator>().speed = 1;
         }
         if (casting && cast_timeleft <= 0) casting = false;
-
         timeleft -= Time.deltaTime;
-
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
             swinging = true;
@@ -57,10 +53,10 @@ public class Pattacks : MonoBehaviour
             switch (gameObject.GetComponent<Movement>().facingRight)
             {
                 case true:
-                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 1, transform.position.y), whatIsEnemy);
+                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x + 1.5f, transform.position.y), whatIsEnemy);
                     break;
                 case false:
-                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 1, transform.position.y), whatIsEnemy);
+                    hitting = Physics2D.Linecast(new Vector2(transform.position.x, transform.position.y), new Vector2(transform.position.x - 1.5f, transform.position.y), whatIsEnemy);
                     break;
             }
         }
@@ -91,8 +87,7 @@ public class Pattacks : MonoBehaviour
             var aa = hitting.collider.gameObject.name;
             var rnd = new System.Random();
             var result = rnd.Next(101);
-            var extracrit = GetComponent<Pstats>().extracritchance.Sum();
-            if (GetComponent<Pstats>().critchance + extracrit >= result)
+            if (GetComponent<Pstats>().critchance >= result)
             {
                 hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier);
                 hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.04f));
