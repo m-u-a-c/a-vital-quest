@@ -25,7 +25,7 @@ public class Pattacks : MonoBehaviour
 
 
 
-    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock;
+	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock, buttonClick;
 
     //UI
     public Image spellimage;
@@ -50,6 +50,7 @@ public class Pattacks : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
+			AudioSource.PlayClipAtPoint(swingSound, gameObject.transform.position, 0.7f);
             swinging = true;
             swing_timeleft = 0.25f / GetComponent<Pstats>().aSpeed;
             Debug.Log(swing_timeleft);
@@ -142,9 +143,7 @@ public class Pattacks : MonoBehaviour
         checkArea = new Vector2(side, transform.position.y + 2);
         //hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-            AudioSource.PlayClipAtPoint(swingSound, gameObject.transform.position, 0.7f);
-
+        
         //		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
         //		{
         //
