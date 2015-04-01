@@ -7,7 +7,7 @@ public class PeaScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().peashooterUse, gameObject.transform.position, 0.60f);
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().peashooterUse, gameObject.transform.position, 0.8f);
     }
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class PeaScript : MonoBehaviour
     {
         var pinv = GameObject.Find("Player").gameObject.GetComponent<Pinventory>();
         if (coll.gameObject.tag == "Enemy") coll.gameObject.GetComponent<Estats>().getHit(pinv.GetSpell(typeof(MagicPeashooter)).Damage);
-		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().peashooterHit, gameObject.transform.position, 0.30f);
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().peashooterHit, gameObject.transform.position, 0.5f);
         Destroy(gameObject);
     }
 }

@@ -117,14 +117,14 @@ public class Eattacks : MonoBehaviour
 
         if (line1 || line2)
         {
-
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().meleeHit, gameObject.transform.position, 1f);
         }
 
     }
 
     public void Attack()
     {
-        AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find("Player").gameObject.transform.position);
+	
         Estats statScript = GetComponent<Estats>();
         Dmg = statScript.aDamage;
 

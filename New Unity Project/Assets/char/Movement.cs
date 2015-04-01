@@ -28,7 +28,14 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-
+		if (Input.GetKeyDown (KeyCode.C))
+		{
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().casterHit, gameObject.transform.position);
+		}
+		if (Input.GetKeyDown (KeyCode.V))
+		{
+			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().slimeHit, gameObject.transform.position, 0.5f);
+		}
 
         if (grounded && Input.GetKeyDown(KeyCode.Space))
         {
