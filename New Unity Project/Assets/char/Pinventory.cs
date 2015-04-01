@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Items;
 using System;
+using System.Linq;
 using UnityEngine.UI;
 
 public class Pinventory : MonoBehaviour
@@ -26,13 +27,11 @@ public class Pinventory : MonoBehaviour
 	public Sprite HPPot;
     public Sprite Barrier;
 	public Sprite Beam;
+    public Sprite MerlinBand;
+    public Sprite HerculesBand;
+
 
     public List<Image> slots;
-
-    //    void Update()
-    //   {
-    //        spell.UpdateStats();
-    //        name = spell.SpellName;
 
     public List<BaseItem> items = new List<BaseItem>();
     public List<BaseSpell> spells;
@@ -58,9 +57,33 @@ public class Pinventory : MonoBehaviour
         
     }
 
+    public void ShowText(string name)
+    {
+        var text = GameObject.Find("ItemText");
+        text.GetComponent<Text>().text = name;
+        var textcolor = text.GetComponent<Text>().color;
+        textcolor = new Color(textcolor.r, textcolor.g, textcolor.b, 0);
+        text.GetComponent<Text>().color = textcolor;
+        var timer1 = text.AddComponent<Timer>();
+        var timer2 = text.AddComponent<Timer>();
+        timer1.SetTimer(0.001f, 80, () =>
+        {
+            if (textcolor.a <= 1) textcolor = new Color(textcolor.r, textcolor.g, textcolor.b, textcolor.a + 0.1f);
+            text.GetComponent<Text>().color = textcolor;
+            if (timer1.ticks >= 80)
+                timer2.SetTimer(0.05f, 20, () =>
+                {
+                    if (textcolor.a >= 0) textcolor = new Color(textcolor.r, textcolor.g, textcolor.b, textcolor.a - 0.1f);
+                    text.GetComponent<Text>().color = textcolor;
+                });
+        });
+    }
+
     public void AddItem(BaseItem item)
     {
         Sprite sprite = null;
+        ShowText(item.ItemName);
+        
 
         if (items.Count == 6) 
             RemoveItem(items[5]);
@@ -106,8 +129,12 @@ public class Pinventory : MonoBehaviour
 			case "Zephyr Juice":
 				sprite = HPPot;
 				break;
-
-
+            case "Merlin's Band of Fate":
+                sprite = MerlinBand;
+                break;
+            case "Hercules' Band of Power":
+                sprite = HerculesBand;
+                break;
         }
         slots[items.Count - 1].GetComponent<Image>().sprite = sprite;
     }
@@ -131,6 +158,7 @@ public class Pinventory : MonoBehaviour
 
     public void AddSpell(BaseSpell s)
     {
+        ShowText(s.SpellName);
         if (spells.Count == 3)
         {
             spells[selected_spell] = s;
@@ -181,13 +209,10 @@ public class Pinventory : MonoBehaviour
 
 	public bool CheckForItem(BaseItem ittem)
 	{
-		foreach (BaseItem i in items) {
-			if (i.ItemName == ittem.ItemName) return true;		
-		}
-		return false;
+	    return items.Any(i => i.ItemName == ittem.ItemName);
 	}
 
-	public KeyCode CheckSlot(BaseItem ittem)
+    public KeyCode CheckSlot(BaseItem ittem)
 	{
 		int id = 0;
 		id = items.IndexOf (ittem);
@@ -215,6 +240,10 @@ public class Pinventory : MonoBehaviour
         GameObject.Find("SDMG").  GetComponent<Text>().text = pstats.sDamage.ToString();
         GameObject.Find("MSPEED").GetComponent<Text>().text = (pstats.movement * 100).ToString() + "%";
         GameObject.Find("CRIT").  GetComponent<Text>().text = (pstats.critchance).ToString() + "%";
+        GameObject.Find("HPText").GetComponent<Text>().text = Mathf.RoundToInt(pstats.health) + " / " +
+                                                              Mathf.RoundToInt(pstats.maxhealth);
+        GameObject.Find("CHText").GetComponent<Text>().text = Mathf.RoundToInt(pstats.charges) + " / " +
+                                                              Mathf.RoundToInt(pstats.maxcharges);
 
         if (items.Count != 0) foreach (var item in items) item.Effect();
         if (ClassItem != null) ClassItem.Effect();
@@ -301,6 +330,14 @@ public class Pinventory : MonoBehaviour
 				case "PFLaser(Clone)":
 					AddSpell(new PhotonBeam(gameObject));
 					break;
+                case "PFMerlinBand":
+                case "PFMerlinBand(Clone)":
+                    AddItem(new MerlinsBandofFate((gameObject)));
+                    break;
+                case "PFHerculesBand":
+                case "PFHerculesBand(Clone)":
+                    AddItem((new HerculesBandofPower(gameObject)));
+                    break;
             } 
             #endregion
             Destroy(cast.gameObject);

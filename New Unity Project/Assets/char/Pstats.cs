@@ -9,36 +9,32 @@ public class Pstats : MonoBehaviour
     {
         get
         {
-            return aDamage_base + aDamage_e;
+            return (aDamage_base + aDamage_e) * aDamage_ep;
         }
     }
     public float aDamage_base;
     public float aDamage_e;
+    public float aDamage_ep = 1;
 
     public float sDamage
     {
-        get
-        {
-            return sDamage_base + sDamage_e;
-        }
+        get { return (sDamage_base + sDamage_e) * sDamage_ep; }
     }
-    public float sDamage_e;
-
     public float sDamage_base;
+    public float sDamage_e;
+    public float sDamage_ep = 1;
     public float aSpeed = 2;
     public float health = 100;
     public float maxhealth = 100;
     public float knockbackmultiplier = 1;
     public bool takedamage = true;
-    //TODO: 
     public float healthreg = 0.2f;
     public float charges = 5;
-    //TODO: 
     public float chargereg = 0.2f;
     public bool regcharges = true;
     public float maxcharges = 5;
+    public float knockbackpower = 1;
 
-    //TODO: 
     //In percentage:
     public float critchance
     {
@@ -50,7 +46,6 @@ public class Pstats : MonoBehaviour
     public float critchance_base;
     public float critchance_e;
     public float critmultiplier = 2;
-    //TODO: 
     public float movement = 1;
     public bool invincible = false;
 
@@ -70,7 +65,6 @@ public class Pstats : MonoBehaviour
         hptimer.SetTimer(0.2f, 0, new System.Action(HpReg));
         chtimer.SetTimer(0.2f, 0, new System.Action(ChReg));
     }
-
 
     void HpReg()
     {

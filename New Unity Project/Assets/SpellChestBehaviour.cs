@@ -18,7 +18,7 @@ public class SpellChestBehaviour : MonoBehaviour {
 	
 	void Start()
 	{
-        gameObject.GetComponent<Animation>().Play("spellchest_sparkle");
+	    GetComponent<Animator>().SetBool("Active", true);
 	}
 	
 	void Update()
@@ -34,10 +34,11 @@ public class SpellChestBehaviour : MonoBehaviour {
 	{
 		rnd = new System.Random ();
 		int i = rnd.Next (1, 8);
-		if (!open) {
+		if (!open)
+		{
+		    Destroy(gameObject.GetComponent<Animator>());
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks> ().chestOpen, gameObject.transform.position, 0.4f);
 			gameObject.GetComponent<SpriteRenderer> ().sprite = chest_open;
-            gameObject.GetComponent<Animation>().Stop("spellchest_sparkle");
 			if (random) {
 				switch (i) {
 				case 1:

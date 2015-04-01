@@ -480,6 +480,61 @@ public class ZephyrJuice : BaseItem
     }
 }
 
+public class MerlinsBandofFate : BaseItem
+{
+    private GameObject go;
+    private Pstats pstats;
+
+    public MerlinsBandofFate(GameObject g)
+    {
+        go = g;
+        ItemName = "Merlin's Band of Fate";
+        pstats = go.GetComponent<Pstats>();
+    }
+
+    public override void Effect()
+    {
+    }
+
+    public override void Stats()
+    {
+        pstats.sDamage_ep += 0.4f;
+    }
+
+    public override void RevertStats()
+    {
+        pstats.sDamage_ep -= 0.4f;
+    }
+}
+
+public class HerculesBandofPower : BaseItem
+{
+    private GameObject go;
+    private Pstats pstats;
+    public HerculesBandofPower(GameObject g)
+    {
+        go = g;
+        pstats = go.GetComponent<Pstats>();
+        ItemName = "Hercules' Band of Power";
+    }
+    public override void Effect()
+    {
+        
+    }
+
+    public override void Stats()
+    {
+        pstats.aDamage_ep += 0.3f;
+        pstats.knockbackpower += 0.5f;
+    }
+
+    public override void RevertStats()
+    {
+        pstats.aDamage_ep -= 0.3f;
+        pstats.knockbackpower -= 0.5f;
+    }
+}
+
 public class Masochism : BaseClassItem
 {
     private GameObject go;

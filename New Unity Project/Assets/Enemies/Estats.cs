@@ -30,7 +30,8 @@ public class Estats : MonoBehaviour {
 	{
 		health -= damageTaken;
 		if (knockback) StartCoroutine ("Knockbacked");
-	    if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem != null)
+        #region Sadism
+        if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem != null)
         if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem.ItemName == "Sadism")
 	    {
             GetComponent<Pstats>().movement += 0.2f;
@@ -41,8 +42,10 @@ public class Estats : MonoBehaviour {
                 GetComponent<Pstats>().movement -= 0.2f;
                 GetComponent<Pstats>().healthreg -= 0.3f;
             }));
-	    }
-	    var text = (GameObject) Instantiate(Resources.Load("Other/Text"));
+        }
+        #endregion
+
+        var text = (GameObject) Instantiate(Resources.Load("Other/Text"));
 	    var gopos = gameObject.transform.position;
 	    var textcomp = text.GetComponent<TextMesh>();
 	    text.transform.position = new Vector3(gopos.x + 1f, gopos.y + 2, -1);

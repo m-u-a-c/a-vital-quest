@@ -16,26 +16,20 @@ public class Pattacks : MonoBehaviour
     public float timeleft;
     public float swing_timeleft = 1.5f, cast_timeleft = 1;
     public bool swinging, casting;
-    float Dmg;
     public float side = 1;
     public float knockbackSide;
     public bool isOnCooldown;
     public bool invincible;
     public int hits;
 
-<<<<<<< HEAD
-
-
-	public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock, buttonClick;
-=======
     public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock;
->>>>>>> origin/master
+
 
     //UI
     public Image spellimage;
     void Start()
     {
-        GetComponent<Pinventory>().AddItem(new AsgardSouvenir(gameObject));
+       // GetComponent<Pinventory>().AddItem(new AsgardSouvenir(gameObject));
     }
 
     void Update()
@@ -52,7 +46,7 @@ public class Pattacks : MonoBehaviour
         timeleft -= Time.deltaTime;
         if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
-			AudioSource.PlayClipAtPoint(swingSound, gameObject.transform.position, 0.7f);
+            AudioSource.PlayClipAtPoint(swingSound, gameObject.transform.position, 0.7f);
             swinging = true;
             swing_timeleft = 0.25f / GetComponent<Pstats>().aSpeed;
             Debug.Log(swing_timeleft);
@@ -90,20 +84,19 @@ public class Pattacks : MonoBehaviour
 
         if (hitting && hitting.collider.gameObject.tag == "Enemy" && !gameObject.GetComponent<Pinventory>().CheckForItem(new TabletOfShadows(gameObject)))
         {
-            var bb = gameObject.GetComponent<Pstats>().aDamage;
-            var aa = hitting.collider.gameObject.name;
+            var pstats = gameObject.GetComponent<Pstats>();
             var rnd = new System.Random();
             var result = rnd.Next(101);
             if (GetComponent<Pstats>().critchance >= result)
             {
                 hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier);
-                hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.04f));
+                hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide * pstats.knockbackpower, 0.04f * pstats.knockbackpower * 2));
                 Debug.Log("Crit", null);
             }
             else
             {
                 hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
-                hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide, 0.02f));
+                hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide * pstats.knockbackpower, 0.02f * pstats.knockbackpower * 2));
                 Debug.Log("Not Crit", null);
             }
 
@@ -144,7 +137,7 @@ public class Pattacks : MonoBehaviour
         checkArea = new Vector2(side, transform.position.y + 2);
         //hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
-        
+
         //		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
         //		{
         //
@@ -158,25 +151,34 @@ public class Pattacks : MonoBehaviour
         #region Casting
         int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
         if (gameObject.GetComponent<Pinventory>().spells.Count > 0)
-        if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
-        {
-
-            var spell = gameObject.GetComponent<Pinventory>().spells[selected_spell];
-            if (gameObject.GetComponent<Movement>().facingRight)
+            if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
             {
-                gameObject.GetComponent<Pinventory>().spells[selected_spell].Left = false;
+                if (gameObject.GetComponent<Pinventory>().CheckForItem(new MerlinsBandofFate(gameObject)))
+                {
+                    gameObject.GetComponent<Pstats>().movement += 0.5f;
+                    var timer = gameObject.AddComponent<Timer>();
+                    timer.SetTimer(1, 1, () =>
+                    {
+                        gameObject.GetComponent<Pstats>().movement -= 0.5f;
+                        Destroy(timer);
+                    });
+                }
+                var spell = gameObject.GetComponent<Pinventory>().spells[selected_spell];
+                if (gameObject.GetComponent<Movement>().facingRight)
+                {
+                    gameObject.GetComponent<Pinventory>().spells[selected_spell].Left = false;
+                }
+                else
+                    gameObject.GetComponent<Pinventory>().spells[selected_spell].Left = true;
+
+                if (gameObject.GetComponent<Pinventory>().spells[selected_spell].Cost <= gameObject.GetComponent<Pstats>().charges)
+                    gameObject.GetComponent<Pinventory>().spells[selected_spell].Effect();
+
+                timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
+                casting = true;
+                cast_timeleft = 0.12f;
+                GetComponent<Pinventory>().spell_cds[selected_spell].StartTimer();
             }
-            else
-                gameObject.GetComponent<Pinventory>().spells[selected_spell].Left = true;
-
-            if (gameObject.GetComponent<Pinventory>().spells[selected_spell].Cost <= gameObject.GetComponent<Pstats>().charges)
-                gameObject.GetComponent<Pinventory>().spells[selected_spell].Effect();
-
-            timeleft = gameObject.GetComponent<Pinventory>().spells[selected_spell].Cooldown;
-            casting = true;
-            cast_timeleft = 0.12f;
-            GetComponent<Pinventory>().spell_cds[selected_spell].StartTimer();
-        }
         #endregion
 
     }
