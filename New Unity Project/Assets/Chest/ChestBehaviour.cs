@@ -35,7 +35,7 @@ public class ChestBehaviour : MonoBehaviour
     public void OpenSesame()
     {
         rnd = new System.Random();
-        int i = rnd.Next(1, 8);
+        int i = rnd.Next(1, 12);
         if (!open)
         {
             AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().chestOpen, gameObject.transform.position, 0.4f);
@@ -68,9 +68,21 @@ public class ChestBehaviour : MonoBehaviour
                     case 8:
                         SpawnItem("PFVampiricCrest");
                         break;
-                    case 9:
-                        SpawnItem("PFZephyrJuice");
-                        break;
+//                    case 9:
+//                        SpawnItem("PFZephyrJuice");
+//                        break;
+				case 9:
+					SpawnItem ("PFMerlinBand");
+					break;
+				case 10:
+					SpawnItem ("PFHerculesBand");
+					break;
+				case 11:
+					SpawnItem ("Sadism");
+					break;
+				case 12:
+					SpawnItem ("Masochism");
+					break;
                 }
             }
             else
@@ -119,7 +131,7 @@ public class ChestBehaviour : MonoBehaviour
     {
         GameObject go = (GameObject)Instantiate(Resources.Load("Items/" + itemname));
         go.transform.position = gameObject.transform.position;
-        go.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+        go.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, -1);
         go.rigidbody2D.AddForce(new Vector2(0, 500));
     }
 }

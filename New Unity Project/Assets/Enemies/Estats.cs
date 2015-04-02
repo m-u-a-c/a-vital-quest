@@ -27,7 +27,7 @@ public class Estats : MonoBehaviour {
 		}
 	}
 
-	public int getHit(float damageTaken, bool knockback = true)
+	public int getHit(float damageTaken, bool knockback = true, bool crit = false)
 	{
 		health -= damageTaken;
 		if (knockback) StartCoroutine ("Knockbacked");
@@ -49,6 +49,12 @@ public class Estats : MonoBehaviour {
         var text = (GameObject) Instantiate(Resources.Load("Other/Text"));
 	    var gopos = gameObject.transform.position;
 	    var textcomp = text.GetComponent<TextMesh>();
+        if (crit) 
+        {
+            textcomp.color = Color.red;
+            text.transform.localScale *= 1.5f;
+        } 
+        
 	    text.transform.position = new Vector3(gopos.x + 1f, gopos.y + 2, -1);
         textcomp.text = damageTaken.ToString();
         

@@ -22,7 +22,7 @@ public class Pattacks : MonoBehaviour
     public bool invincible;
     public int hits;
 
-    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock;
+    public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock, lazerUse;
 
 
     //UI
@@ -89,15 +89,13 @@ public class Pattacks : MonoBehaviour
             var result = rnd.Next(101);
             if (GetComponent<Pstats>().critchance >= result)
             {
-                hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier);
+                hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage * GetComponent<Pstats>().critmultiplier, true, true);
                 hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide * pstats.knockbackpower, 0.04f * pstats.knockbackpower * 2));
-                Debug.Log("Crit", null);
             }
             else
             {
                 hitting.collider.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage);
                 hitting.collider.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(knockbackSide * pstats.knockbackpower, 0.02f * pstats.knockbackpower * 2));
-                Debug.Log("Not Crit", null);
             }
 
             AudioSource.PlayClipAtPoint(hitSound, gameObject.transform.position, 0.7f);

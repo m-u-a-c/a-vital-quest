@@ -74,11 +74,11 @@ public class First_AI : MonoBehaviour
 
     void Update()
     {
-        if (player.transform.position.x > transform.position.x && facingRight)
+        if (player.transform.position.x > transform.position.x && !facingRight)
         {
             Flip();
         }
-        if (player.transform.position.x < transform.position.x && !facingRight)
+        if (player.transform.position.x < transform.position.x && facingRight)
         {
             Flip();
         }
@@ -136,8 +136,8 @@ public class First_AI : MonoBehaviour
         Estats statScript = GetComponent<Estats>();
 
         if (!statScript.isHit && playerAround
-            && (((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U))
-            || ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U)))
+            && (((groundAroundLU) || (!groundAroundLU))
+            || ((groundAroundRU) || (!groundAroundRU)))
             )
         {
             EMovement();
@@ -169,12 +169,12 @@ public class First_AI : MonoBehaviour
         else
         {
             if (player.transform.position.x > transform.position.x
-                    && ((groundAroundRU && !groundAroundR2U) || (!groundAroundRU && groundAroundR2U)))
+                    && ((groundAroundRU) || (!groundAroundRU)))
             {
                 rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
             }
             if (player.transform.position.x < transform.position.x
-                    && ((groundAroundLU && !groundAroundL2U) || (!groundAroundLU && groundAroundL2U)))
+                    && ((groundAroundLU) || (!groundAroundLU)))
             {
 
 

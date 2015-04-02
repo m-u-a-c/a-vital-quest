@@ -9,6 +9,7 @@ public class LaserScript : MonoBehaviour {
 	float yscale;
 	// Use this for initialization
 	void Start () {
+		AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().lazerUse, gameObject.transform.position);
 		timer = gameObject.AddComponent<Timer> ();
 		timer.SetTimer (0.05f, 10, new System.Action(Tick));
 		yscale  = gameObject.transform.localScale.x;
