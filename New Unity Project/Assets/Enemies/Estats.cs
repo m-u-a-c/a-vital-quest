@@ -60,7 +60,7 @@ public class Estats : MonoBehaviour {
         } 
         
 	    text.transform.position = new Vector3(gopos.x + 1f, gopos.y + 2, -1);
-        textcomp.text = damageTaken.ToString();
+        textcomp.text = Math.Round(damageTaken, 1).ToString();
         
 
 

@@ -9,6 +9,7 @@ public class MagicPeashooter : BaseSpell
     {
         Left = true;
         SpellName = "Magic Peashooter";
+        SpellDescription = "A magic peashooter that does low damage, but has no cooldown";
         go = g;
         Cooldown = 0;
         Cost = 1;
@@ -215,6 +216,7 @@ public class Barrier : BaseSpell
         go = g;
         Cost = 1;
         Cooldown = 8;
+        SpellDescription = "Summons a barrier of light, making you invulnerable for a short period of time";
 
     }
 
@@ -246,6 +248,7 @@ public class PhotonBeam : BaseSpell
 		go = g;
 		Cost = 5;
 		Cooldown = 8;
+        SpellDescription = "Summons a beam of light that passes through enemies and terrain, dealing a signifcant amount of spell damage";
 	}
 
 	public override void UpdateStats()

@@ -43,6 +43,8 @@ public class Pinventory : MonoBehaviour
     public List<float> spell_cooldowns;
     public List<float> spell_cooldowns_left;
     public BaseClassItem ClassItem;
+    public UnityEngine.Object[] pfitems;
+    public UnityEngine.Object[] pfspells;
 
     public List<Timer> spell_cds;
     public int selected_spell = 0;
@@ -64,7 +66,9 @@ public class Pinventory : MonoBehaviour
         RightSpell = GameObject.Find("RightSpell").GetComponent<Image>();
         ItemDes = GameObject.Find("ItemDes").GetComponent<Text>();
         PanelDes = GameObject.Find("DesPanel").GetComponent<Image>();
-
+        
+        pfitems = Resources.LoadAll("Items/Items");
+        pfspells = Resources.LoadAll("Items/Spells");
 
         items = new List<BaseItem>();
         spells = new List<BaseSpell>();
@@ -125,6 +129,7 @@ public class Pinventory : MonoBehaviour
 
         items.Add(item);
         item.Stats();
+
 
         switch (item.ItemName)
         {
@@ -291,7 +296,7 @@ public class Pinventory : MonoBehaviour
 
         classImage.color = classImage.sprite == null ? new Color(classImage.color.r, classImage.color.g, classImage.color.b, 0) : new Color(classImage.color.r, classImage.color.g, classImage.color.b, 1);
 
-        if (spells.Count > 0)
+        if (spells != null && spells.Count > 0)
             if (spell_cds[selected_spell].running)
             {
                 CDTEXT.color = new Color(CDTEXT.color.r, CDTEXT.color.g, CDTEXT.color.b, 1);
@@ -312,6 +317,7 @@ public class Pinventory : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(gameObject.GetComponent<Pattacks>().pickUpItem, GameObject.Find("Player").gameObject.transform.position);
             #region Items
+
             switch (cast.gameObject.name)
             {
                 case "PFChargebolt(Clone)":
@@ -406,7 +412,7 @@ public class Pinventory : MonoBehaviour
             #endregion
             Destroy(cast.gameObject);
         }
-        if (spells.Count > 1)
+        if (spells != null && spells.Count > 1)
             if (Input.GetAxis("Mouse ScrollWheel") > 0 && (selected_spell + 1) != spells.Count)
             {
                 selected_spell++;

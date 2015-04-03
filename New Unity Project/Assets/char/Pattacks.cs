@@ -148,7 +148,7 @@ public class Pattacks : MonoBehaviour
 
         #region Casting
         int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
-        if (gameObject.GetComponent<Pinventory>().spells.Count > 0)
+        if (gameObject.GetComponent<Pinventory>().spells != null && gameObject.GetComponent<Pinventory>().spells.Count > 0  )
             if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
             {
                 #region Merlin's Band

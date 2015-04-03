@@ -34,56 +34,17 @@ public class ChestBehaviour : MonoBehaviour
 
     public void OpenSesame()
     {
-        rnd = new System.Random(Guid.NewGuid().GetHashCode());
-        int i = rnd.Next(1, 14);
+       
         if (!open)
         {
             AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().chestOpen, gameObject.transform.position, 0.4f);
             gameObject.GetComponent<SpriteRenderer>().sprite = chest_open;
             if (random)
             {
-                switch (i)
-                {
-                    case 1:
-                        SpawnItem("PFTucksRobe");
-                        break;
-                    case 2:
-                        SpawnItem("PFHolyGrail");
-                        break;
-                    case 3:
-                        SpawnItem("PFBootsofUrgency");
-                        break;
-                    case 4:
-                        SpawnItem("PFMysticalOrb");
-                        break;
-                    case 5:
-                        SpawnItem("PFStaticCharge");
-                        break;
-                    case 6:
-                        SpawnItem("PFSturdySocks");
-                        break;
-                    case 7:
-                        SpawnItem("PFHorseshoe");
-                        break;
-                    case 8:
-                        SpawnItem("PFVampiricCrest");
-                        break;
-                    case 9:
-                        SpawnItem("PFMerlinBand");
-                        break;
-                    case 10:
-                        SpawnItem("PFHerculesBand");
-                        break;
-                    case 11:
-                        SpawnItem("PFSadism");
-                        break;
-                    case 12:
-                        SpawnItem("PFMasochism");
-                        break;
-                    case 13:
-                        SpawnItem("PFStaticCore");
-                        break;
-                }
+                rnd = new System.Random(Guid.NewGuid().GetHashCode());
+                var items = Resources.LoadAll("Items/Items");
+                int i = rnd.Next(0, items.Length - 1);
+                SpawnItem(items[i].name);
             }
             else
             {
@@ -129,7 +90,7 @@ public class ChestBehaviour : MonoBehaviour
 
     void SpawnItem(string itemname)
     {
-        GameObject go = (GameObject)Instantiate(Resources.Load("Items/" + itemname));
+        GameObject go = (GameObject)Instantiate(Resources.Load("Items/Items/" + itemname));
         go.transform.position = gameObject.transform.position;
         go.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, -1);
         go.rigidbody2D.AddForce(new Vector2(0, 500));

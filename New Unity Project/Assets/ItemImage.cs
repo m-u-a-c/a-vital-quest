@@ -13,6 +13,8 @@ public class ItemImage : MonoBehaviour
     {
         if (Slot == 6) 
             pinv.ShowItemDes(pinv.ClassItem.ItemDescription);
+        if (Slot == 7)
+            pinv.ShowItemDes(pinv.spells[pinv.selected_spell].SpellDescription);
         if (pinv.items.Count > Slot) pinv.ShowItemDes(pinv.items[Slot].ItemDescription);
     }
 
