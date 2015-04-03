@@ -256,18 +256,20 @@ public class PhotonBeam : BaseSpell
 	public override void Effect()
 	{
 		var beam = (GameObject)Object.Instantiate (Resources.Load ("Spells/Laser"));
-		var center = beam.GetComponent<SpriteRenderer> ().bounds.center;
+		var size = beam.GetComponent<SpriteRenderer> ().bounds.size;
+	    if (go.GetComponent<Movement>().facingRight) beam.GetComponent<LaserScript>().Right = true;
 		//beam.transform.position = new Vector3 (beam.transform.position.x + beam.renderer.bounds.center.x / 2, beam.transform.position.y, -2);
 		if (Left)
+            
 		{
-			beam.transform.position = new Vector2(go.transform.position.x - center.x / 1.2f + 0.5f, go.transform.position.y + 0.3f);
-			Vector3 theScale = beam.transform.localScale;
+			beam.transform.position = new Vector3(go.transform.position.x - size.x / 1.8f + 0.8f, go.transform.position.y + 0.3f);
+			var theScale = beam.transform.localScale;
 			theScale.x *= -1;
 			beam.transform.localScale = theScale;
 		}
 		else
 		{
-			beam.transform.position = new Vector2(go.transform.position.x + center.x / 1.2f - 0.5f, go.transform.position.y + 0.3f);
+			beam.transform.position = new Vector3(go.transform.position.x + size.x / 1.8f - 0.8f, go.transform.position.y + 0.3f);
 		}
 		go.gameObject.GetComponent<Pstats> ().charges -= Cost;
 	}

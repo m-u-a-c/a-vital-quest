@@ -36,7 +36,7 @@ public class Pstats : MonoBehaviour
     public float maxcharges = 5;
     public float knockbackpower = 1;
 
-    private float _lastaddition;
+    public float Lastaddition;
 
     //In percentage:
     public float critchance
@@ -69,10 +69,10 @@ public class Pstats : MonoBehaviour
             var pstats = gameObject.GetComponent<Pstats>();
             var val = (pstats.maxhealth - pstats.health) / 4;
             var i = Mathf.RoundToInt(val);
-            if (_lastaddition == i) return;
-            pstats.critchance_e -= _lastaddition;
+            if (Lastaddition == i) return;
+            pstats.critchance_e -= Lastaddition;
             pstats.critchance_e += i;
-            _lastaddition = i;
+            Lastaddition = i;
         }
     }
 
@@ -126,7 +126,7 @@ public class Pstats : MonoBehaviour
             
 
             if (sender != null && sender.name.Contains("Enemy"))
-                AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().meleeHit, GameObject.Find("Player").gameObject.transform.position);
+                AudioSource.PlayClipAtPoint(GetComponent<Pattacks>().meleeHit, GameObject.Find("Player").gameObject.transform.position);
             //if (sender.name.Contains("Slime"));
             //if (sender.name.Contains("Caster"));
 

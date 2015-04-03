@@ -72,6 +72,7 @@
      <Compile Include="Assets\I-V-S\Weapons\Wlist.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Wstats.cs" />
      <Compile Include="Assets\I-V-S\Weapons\Zwordstats.cs" />
+     <Compile Include="Assets\ItemImage.cs" />
      <Compile Include="Assets\Menus\Clear.cs" />
      <Compile Include="Assets\Menus\Main Menu\GameOver.cs" />
      <Compile Include="Assets\Menus\Main Menu\MainMenu.cs" />

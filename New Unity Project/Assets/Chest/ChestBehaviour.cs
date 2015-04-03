@@ -34,8 +34,8 @@ public class ChestBehaviour : MonoBehaviour
 
     public void OpenSesame()
     {
-        rnd = new System.Random();
-        int i = rnd.Next(1, 12);
+        rnd = new System.Random(Guid.NewGuid().GetHashCode());
+        int i = rnd.Next(1, 14);
         if (!open)
         {
             AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().chestOpen, gameObject.transform.position, 0.4f);
@@ -68,21 +68,21 @@ public class ChestBehaviour : MonoBehaviour
                     case 8:
                         SpawnItem("PFVampiricCrest");
                         break;
-//                    case 9:
-//                        SpawnItem("PFZephyrJuice");
-//                        break;
-				case 9:
-					SpawnItem ("PFMerlinBand");
-					break;
-				case 10:
-					SpawnItem ("PFHerculesBand");
-					break;
-				case 11:
-					SpawnItem ("Sadism");
-					break;
-				case 12:
-					SpawnItem ("Masochism");
-					break;
+                    case 9:
+                        SpawnItem("PFMerlinBand");
+                        break;
+                    case 10:
+                        SpawnItem("PFHerculesBand");
+                        break;
+                    case 11:
+                        SpawnItem("PFSadism");
+                        break;
+                    case 12:
+                        SpawnItem("PFMasochism");
+                        break;
+                    case 13:
+                        SpawnItem("PFStaticCore");
+                        break;
                 }
             }
             else

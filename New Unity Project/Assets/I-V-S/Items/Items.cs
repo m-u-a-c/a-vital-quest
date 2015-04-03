@@ -9,6 +9,7 @@ public class HolyGrail : BaseItem
     {
         go = g;
         ItemName = "Holy Grail";
+        ItemDescription = "Restores 15 hp\nIncreases max hp by 15";
     }
     public override void Effect()
     {
@@ -16,7 +17,7 @@ public class HolyGrail : BaseItem
     }
     public override void Stats()
     {
-        go.GetComponent<Pstats>().healthreg += 5;
+        go.GetComponent<Pstats>().healthreg += 0.2f;
         go.GetComponent<Pstats>().maxhealth += 15;
     }
     public override void RevertStats()
@@ -34,6 +35,7 @@ public class FriarTucksRobe : BaseItem
     {
         go = g;
         ItemName = "Friar Tuck's Robe";
+        ItemDescription = "Restores 2 charges\nTODOOOOO";
     }
     public override void Effect()
     {
@@ -59,11 +61,12 @@ public class GlassIdol : BaseItem
     {
         go = g;
         ItemName = "Elixir of Life";
+        ItemDescription = "Restores full hp when brought below 10 hp. Breaks on effect.";
     }
 
     public override void Effect()
     {
-        //TODO: Restores you to full HP and Charges when brought below 10 HP. Breaks on effect.
+        //TODO: Restores you to full hp and Charges when brought below 10 hp. Breaks on effect.
         if (go.GetComponent<Pstats>().health < 10)
         {
             go.GetComponent<Pstats>().health = go.GetComponent<Pstats>().maxcharges;
@@ -90,6 +93,7 @@ public class LuckyHorseshoe : BaseItem
     {
         go = g;
         ItemName = "Lucky Horseshoe";
+        ItemDescription = "Increases crit chance by 10%";
     }
     public override void Effect()
     {
@@ -112,6 +116,7 @@ public class BootsOfUrgency : BaseItem
     {
         go = g;
         ItemName = "Boots of Urgency";
+        ItemDescription = "Increases attack speed and movement speed by 20%";
     }
     public override void Effect()
     {
@@ -120,7 +125,7 @@ public class BootsOfUrgency : BaseItem
 
     public override void Stats()
     {
-        //go.GetComponent<Pstats> ().aSpeed += 0.2f;
+        go.GetComponent<Pstats>().aSpeed += 0.2f;
         go.GetComponent<Pstats>().movement += 0.2f;
     }
     public override void RevertStats()
@@ -136,6 +141,7 @@ public class SturdySocks : BaseItem
     {
         go = g;
         ItemName = "Sturdy Socks";
+        ItemDescription = "You can't be knocked back. In addition, spikes deal no damage to you.";
     }
     public override void Effect()
     {
@@ -160,6 +166,7 @@ public class MysticalOrb : BaseItem
     {
         go = g;
         ItemName = "Mystical Orb";
+        ItemDescription = "Increases spell damage by 2\nIncreases charge regeneration";
     }
     public override void Effect()
     {
@@ -185,6 +192,7 @@ public class VampiricCrest : BaseItem
     {
         go = g;
         ItemName = "Vampiric Crest";
+        ItemDescription = "Resores 5 hp when executing enemies";
     }
     public override void Effect()
     {
@@ -224,6 +232,8 @@ public class StaticCore : BaseItem
         camera = GameObject.Find("Camera");
         AS = camera.AddComponent<AudioSource>();
         AS.clip = GameObject.Find("Player").GetComponent<Pattacks>().staticCoreActivation;
+        ItemDescription =
+            "Adds 60% of spell damage to your attack damage when activated. Drains all charges upon activation";
 
     }
     public override void Effect()
@@ -346,6 +356,7 @@ public class TabletOfShadows : BaseItem
         timer = go.AddComponent<Timer>();
         timer.SetTimer(0.2f, 1, new System.Action(ClearCD));
         lasthitcount = go.GetComponent<Pattacks>().hits;
+        ItemDescription = "Your melee attacks penetrate enemies";
 
     }
 
@@ -409,7 +420,7 @@ public class Bandaid : BaseItem
     {
         pstats.health += 10;
         pstats.maxhealth += 10;
-        pstats.healthreg += 2;
+        pstats.healthreg += 0.2f;
     }
 
     public override void RevertStats()
@@ -428,6 +439,7 @@ public class CharmOfRestoration : BaseItem
         go = g;
         ItemName = "Charm of Restoration";
         pstats = go.GetComponent<Pstats>();
+        ItemDescription = "Increases hp regeneration, but decreases your movement speed to 85%";
     }
     public override void Effect()
     {
@@ -490,6 +502,7 @@ public class MerlinsBandofFate : BaseItem
         go = g;
         ItemName = "Merlin's Band of Fate";
         pstats = go.GetComponent<Pstats>();
+        ItemDescription = "Increases spell damage by 40%\nGives you a temporal speed boost when casting spells";
     }
 
     public override void Effect()
@@ -516,6 +529,7 @@ public class HerculesBandofPower : BaseItem
         go = g;
         pstats = go.GetComponent<Pstats>();
         ItemName = "Hercules' Band of Power";
+        ItemDescription = "Increases attack power by 30%\nIncreases knockback power";
     }
     public override void Effect()
     {
@@ -544,6 +558,7 @@ public class Masochism : BaseClassItem
     {
         go = g;
         ItemName = "Masochism";
+        ItemDescription = "Increases crit chance by 1% for each 4hp missing.";
     }
 
     public override void Stats()
@@ -577,6 +592,7 @@ public class Sadism : BaseClassItem
     {
         go = g;
         ItemName = "Sadism";
+        ItemDescription = "Increases movement speed and hp regeneration when dealing damage to enemies";
     }
 
     public override void Effect()
@@ -591,6 +607,7 @@ public class Sadism : BaseClassItem
 
     public override void RevertStats()
     {
-        
+        var pstats = go.GetComponent<Pstats>();
+        pstats.critchance_e -= pstats.Lastaddition;
     }
 }

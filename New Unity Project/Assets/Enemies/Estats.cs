@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 using System.Security.Cryptography;
 using UnityEngine.UI;
 
@@ -9,12 +10,14 @@ public class Estats : MonoBehaviour {
 	public float aDamage = 10.0f;
 	public float health = 20.0f;
 	public float aSpeed = 3.0f;
-
+    private Pstats pstats;
+    private GameObject player;
 	public bool isHit = false;
 
 	void Start ()
 	{
-	
+	    pstats = GameObject.Find("Player").GetComponent<Pstats>();
+	    player = GameObject.Find("Player");
 	}
 
 	void Update ()
@@ -32,18 +35,19 @@ public class Estats : MonoBehaviour {
 		health -= damageTaken;
 		if (knockback) StartCoroutine ("Knockbacked");
         #region Sadism
-        if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem != null)
-            if (GameObject.Find("Player").GetComponent<Pinventory>().ClassItem.ItemName == "Sadism")
+        if (player.GetComponent<Pinventory>().ClassItem != null)
+            foreach (var ti in player.GetComponents<Timer>().Where(ti => ti.Id == 0).Where(ti => player.GetComponent<Pinventory>().ClassItem.ItemName == "Sadism"))
             {
-                GetComponent<Pstats>().movement += 0.2f;
-                GetComponent<Pstats>().healthreg += 0.3f;
-                var t = GameObject.Find("Player").AddComponent<Timer>();
+                pstats.movement += 0.2f;
+                pstats.healthreg += 0.3f;
+                var t = player.AddComponent<Timer>();
                 t.SetTimer(2, 1, () =>
                 {
-                    GetComponent<Pstats>().movement -= 0.2f;
-                    GetComponent<Pstats>().healthreg -= 0.3f;
+                    pstats.movement -= 0.2f;
+                    pstats.healthreg -= 0.3f;
                     Destroy(t);
                 });
+                t.Id = 0;
             }
         #endregion
         var text = (GameObject) Instantiate(Resources.Load("Other/Text"));

@@ -3,6 +3,7 @@
     public abstract class BaseClassItem
     {
         public string ItemName { get; set; }
+        public string ItemDescription;
         public int animation = 4;
         //NOTE: Effect is called once per frame
         abstract public void Effect();

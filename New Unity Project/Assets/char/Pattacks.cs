@@ -29,7 +29,7 @@ public class Pattacks : MonoBehaviour
     public Image spellimage;
     void Start()
     {
-       // GetComponent<Pinventory>().AddItem(new AsgardSouvenir(gameObject));
+        // GetComponent<Pinventory>().AddItem(new AsgardSouvenir(gameObject));
     }
 
     void Update()
@@ -151,6 +151,9 @@ public class Pattacks : MonoBehaviour
         if (gameObject.GetComponent<Pinventory>().spells.Count > 0)
             if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
             {
+                #region Merlin's Band
+
+
                 if (gameObject.GetComponent<Pinventory>().CheckForItem(new MerlinsBandofFate(gameObject)))
                 {
                     gameObject.GetComponent<Pstats>().movement += 0.5f;
@@ -161,6 +164,8 @@ public class Pattacks : MonoBehaviour
                         Destroy(timer);
                     });
                 }
+                #endregion
+
                 var spell = gameObject.GetComponent<Pinventory>().spells[selected_spell];
                 if (gameObject.GetComponent<Movement>().facingRight)
                 {

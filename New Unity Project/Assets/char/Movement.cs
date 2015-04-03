@@ -104,7 +104,7 @@ public class Movement : MonoBehaviour
         if (grounded && grounded.gameObject.tag == "MovingPlatform")
             rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed * GetComponent<Pstats>().movement, grounded.rigidbody2D.velocity.y);
 
-        if (grounded && grounded.gameObject.tag == "Spike")
+        if (grounded && grounded.gameObject.tag == "Spike" && !GetComponent<Pinventory>().CheckForItem(new SturdySocks(gameObject)))
             gameObject.GetComponent<Pstats>().getHit(40);
 
         playerposition.x = rigidbody2D.transform.position.x;

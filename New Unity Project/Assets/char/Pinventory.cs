@@ -32,8 +32,11 @@ public class Pinventory : MonoBehaviour
     public Sprite Sadism;
     public Sprite Masochism;
 
+    private Text ADMG, SDMG, MSPEED, CRIT, HPTEXT, CHTEXT, CDTEXT, ItemDes;
+    
 
     public List<Image> slots;
+    private Image classImage, LeftSpell, RightSpell, PanelDes;
 
     public List<BaseItem> items = new List<BaseItem>();
     public List<BaseSpell> spells;
@@ -49,6 +52,20 @@ public class Pinventory : MonoBehaviour
 
     void Start()
     {
+        ADMG = GameObject.Find("ADMG").GetComponent<Text>();
+        SDMG = GameObject.Find("SDMG").GetComponent<Text>();
+        MSPEED = GameObject.Find("MSPEED").GetComponent<Text>();
+        CRIT = GameObject.Find("CRIT").GetComponent<Text>();
+        HPTEXT = GameObject.Find("HPText").GetComponent<Text>();
+        CHTEXT = GameObject.Find("CHText").GetComponent<Text>();
+        CDTEXT = GameObject.Find("CDText").GetComponent<Text>();
+        classImage = GameObject.Find("Spell").GetComponent<Image>();
+        LeftSpell = GameObject.Find("LeftSpell").GetComponent<Image>();
+        RightSpell = GameObject.Find("RightSpell").GetComponent<Image>();
+        ItemDes = GameObject.Find("ItemDes").GetComponent<Text>();
+        PanelDes = GameObject.Find("DesPanel").GetComponent<Image>();
+
+
         items = new List<BaseItem>();
         spells = new List<BaseSpell>();
         spell_cds = new List<Timer>();
@@ -59,14 +76,27 @@ public class Pinventory : MonoBehaviour
         if (ClassItem != null) ClassItem.RevertStats();
         ClassItem = classitem;
         ClassItem.Stats();
-        ShowText(classitem.ItemName);
+        var img = GameObject.Find("ClassItem").GetComponent<Image>();
+        img.color = new Color(img.color.r, img.color.g, img.color.b, 1);
+        switch (classitem.ItemName)
+        {
+            case "Sadism":
+                img.sprite = Sadism;
+                break;
+            case "Masochism":
+                img.sprite = Masochism;
+                break;
+        }
+        ShowText(classitem.ItemName, Color.red);
     }
 
-    public void ShowText(string name)
+    public void ShowText(string name, Color color)
     {
+        
         var text = GameObject.Find("ItemText");
         text.GetComponent<Text>().text = name;
         var textcolor = text.GetComponent<Text>().color;
+        textcolor = color;
         textcolor = new Color(textcolor.r, textcolor.g, textcolor.b, 0);
         text.GetComponent<Text>().color = textcolor;
         var timer1 = text.AddComponent<Timer>();
@@ -87,7 +117,7 @@ public class Pinventory : MonoBehaviour
     public void AddItem(BaseItem item)
     {
         Sprite sprite = null;
-        ShowText(item.ItemName);
+        ShowText(item.ItemName, Color.yellow);
 
 
         if (items.Count == 6)
@@ -169,7 +199,7 @@ public class Pinventory : MonoBehaviour
 
     public void AddSpell(BaseSpell s)
     {
-        ShowText(s.SpellName);
+        ShowText(s.SpellName, Color.cyan);
         if (spells.Count == 3)
         {
             spells[selected_spell] = s;
@@ -248,25 +278,39 @@ public class Pinventory : MonoBehaviour
     public void Update()
     {
         var pstats = GameObject.Find("Player").GetComponent<Pstats>();
-        GameObject.Find("ADMG").GetComponent<Text>().text = pstats.aDamage.ToString();
-        GameObject.Find("SDMG").GetComponent<Text>().text = pstats.sDamage.ToString();
-        GameObject.Find("MSPEED").GetComponent<Text>().text = (pstats.movement * 100).ToString() + "%";
-        GameObject.Find("CRIT").GetComponent<Text>().text = (pstats.critchance).ToString() + "%";
-        GameObject.Find("HPText").GetComponent<Text>().text = Mathf.RoundToInt(pstats.health) + " / " +
+        ADMG.text = pstats.aDamage.ToString();
+        SDMG.text = pstats.sDamage.ToString();
+        MSPEED.text = (pstats.movement * 100).ToString() + "%";
+        CRIT.text = (pstats.critchance).ToString() + "%";
+        HPTEXT.text = Mathf.RoundToInt(pstats.health) + " / " +
                                                               Mathf.RoundToInt(pstats.maxhealth);
-        GameObject.Find("CHText").GetComponent<Text>().text = Mathf.RoundToInt(pstats.charges) + " / " +
-                                                              Mathf.RoundToInt(pstats.maxcharges);
+        CHTEXT.text = Mathf.RoundToInt(pstats.charges) + " / " +
+                                                          Mathf.RoundToInt(pstats.maxcharges);
+
+        foreach (var slot in slots) slot.color = slot.sprite == null ? new Color(slot.color.r, slot.color.g, slot.color.b, 0) : new Color(slot.color.r, slot.color.g, slot.color.b, 1);
+
+        classImage.color = classImage.sprite == null ? new Color(classImage.color.r, classImage.color.g, classImage.color.b, 0) : new Color(classImage.color.r, classImage.color.g, classImage.color.b, 1);
+
+        if (spells.Count > 0)
+            if (spell_cds[selected_spell].running)
+            {
+                CDTEXT.color = new Color(CDTEXT.color.r, CDTEXT.color.g, CDTEXT.color.b, 1);
+                CDTEXT.text = Math.Round(spell_cds[selected_spell].Totaltimeleft, 1).ToString();
+            }
+            else
+            {
+                CDTEXT.color = new Color(CDTEXT.color.r, CDTEXT.color.g, CDTEXT.color.b, 0);
+            }
+
+
 
         if (items.Count != 0) foreach (var item in items) item.Effect();
         if (ClassItem != null) ClassItem.Effect();
 
-        //foreach (BaseSpell s in spells) s.UpdateStats();
-        for (int i = 0; i < spell_cooldowns_left.Count; i++) spell_cooldowns_left[i] -= Time.deltaTime;
-
         var cast = Physics2D.OverlapArea(new Vector2(transform.renderer.bounds.center.x - transform.renderer.bounds.size.x / 2, transform.renderer.bounds.center.y), new Vector2(transform.renderer.bounds.center.x + transform.renderer.bounds.size.x / 2, transform.renderer.bounds.center.y - 1), LayerMask.GetMask("Items"));
         if (cast && cast.gameObject.tag == "Item" && Input.GetKeyDown(KeyCode.E))
         {
-            AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().pickUpItem, GameObject.Find("Player").gameObject.transform.position);
+            AudioSource.PlayClipAtPoint(gameObject.GetComponent<Pattacks>().pickUpItem, GameObject.Find("Player").gameObject.transform.position);
             #region Items
             switch (cast.gameObject.name)
             {
@@ -396,5 +440,18 @@ public class Pinventory : MonoBehaviour
                     break;
             }
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
+    }
+
+    public void ShowItemDes(string text)
+    {
+        ItemDes.text = text;
+        PanelDes.color = new Color(PanelDes.color.r, PanelDes.color.g, PanelDes.color.b, 100f/255f);
+        ItemDes.color = new Color(ItemDes.color.r, ItemDes.color.g, ItemDes.color.b, 1);
+    }
+
+    public void HiteItemDes()
+    {
+        PanelDes.color = new Color(PanelDes.color.r, PanelDes.color.g, PanelDes.color.b, 0);
+        ItemDes.color = new Color(ItemDes.color.r, ItemDes.color.g, ItemDes.color.b, 0);
     }
 }
