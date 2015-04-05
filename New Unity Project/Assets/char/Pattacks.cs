@@ -49,7 +49,6 @@ public class Pattacks : MonoBehaviour
             AudioSource.PlayClipAtPoint(swingSound, gameObject.transform.position, 0.7f);
             swinging = true;
             swing_timeleft = 0.25f / GetComponent<Pstats>().aSpeed;
-            Debug.Log(swing_timeleft);
             gameObject.GetComponent<Animator>().speed *= GetComponent<Pstats>().aSpeed;
             switch (gameObject.GetComponent<Movement>().facingRight)
             {

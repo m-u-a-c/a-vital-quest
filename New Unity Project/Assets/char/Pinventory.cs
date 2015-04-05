@@ -45,6 +45,8 @@ public class Pinventory : MonoBehaviour
     public BaseClassItem ClassItem;
     public UnityEngine.Object[] pfitems;
     public UnityEngine.Object[] pfspells;
+    public UnityEngine.Object[] itemsprites;
+    public UnityEngine.Object[] spellsprites;
 
     public List<Timer> spell_cds;
     public int selected_spell = 0;
@@ -69,6 +71,9 @@ public class Pinventory : MonoBehaviour
         
         pfitems = Resources.LoadAll("Items/Items");
         pfspells = Resources.LoadAll("Items/Spells");
+        itemsprites = Resources.LoadAll<Sprite>("Items/Items/Sprites");
+        spellsprites = Resources.LoadAll<Sprite>("Items/Spells/Sprites");
+
 
         items = new List<BaseItem>();
         spells = new List<BaseSpell>();
@@ -129,59 +134,67 @@ public class Pinventory : MonoBehaviour
 
         items.Add(item);
         item.Stats();
-
-
-        switch (item.ItemName)
+        
+        foreach(var spr in itemsprites)
         {
-            case "Holy Grail":
-                sprite = Grail;
+            if (spr.name == item.ItemName)
+            {
+                sprite = (Sprite)spr;
                 break;
-            case "Friar Tuck's Robe":
-                sprite = Robe;
-                break;
-            case "Elixir of Life":
-                sprite = Idol;
-                break;
-            case "Lucky Horseshoe":
-                sprite = Hästsko;
-                break;
-            case "Boots of Urgency":
-                sprite = Boots;
-                break;
-            case "Sturdy Socks":
-                sprite = Sockor;
-                break;
-            case "Static Core":
-                sprite = Core_Charged;
-                break;
-            case "Vampiric Crest":
-                sprite = Crest;
-                break;
-            case "Tablet of Shadows":
-                sprite = _Placeholder;
-                break;
-            case "Mystical Orb":
-                sprite = Orb;
-                break;
-            case "Charm of Restoration":
-                sprite = Charm;
-                break;
-            case "Zephyr Juice":
-                sprite = HPPot;
-                break;
-            case "Merlin's Band of Fate":
-                sprite = MerlinBand;
-                break;
-            case "Hercules' Band of Power":
-                sprite = HerculesBand;
-                break;
-            case "Sadism":
-                sprite = Sadism;
-                break;
-            case "Masochism":
-                sprite = Masochism;
-                break;
+            } 
         }
+
+        //switch (item.ItemName)
+        //{
+        //    case "Holy Grail":
+        //        sprite = Grail;
+        //        break;
+        //    case "Friar Tuck's Robe":
+        //        sprite = Robe;
+        //        break;
+        //    case "Elixir of Life":
+        //        sprite = Idol;
+        //        break;
+        //    case "Lucky Horseshoe":
+        //        sprite = Hästsko;
+        //        break;
+        //    case "Boots of Urgency":
+        //        sprite = Boots;
+        //        break;
+        //    case "Sturdy Socks":
+        //        sprite = Sockor;
+        //        break;
+        //    case "Static Core":
+        //        sprite = Core_Charged;
+        //        break;
+        //    case "Vampiric Crest":
+        //        sprite = Crest;
+        //        break;
+        //    case "Tablet of Shadows":
+        //        sprite = _Placeholder;
+        //        break;
+        //    case "Mystical Orb":
+        //        sprite = Orb;
+        //        break;
+        //    case "Charm of Restoration":
+        //        sprite = Charm;
+        //        break;
+        //    case "Zephyr Juice":
+        //        sprite = HPPot;
+        //        break;
+        //    case "Merlin's Band of Fate":
+        //        sprite = MerlinBand;
+        //        break;
+        //    case "Hercules' Band of Power":
+        //        sprite = HerculesBand;
+        //        break;
+        //    case "Sadism":
+        //        sprite = Sadism;
+        //        break;
+        //    case "Masochism":
+        //        sprite = Masochism;
+        //        break;
+        //}
         slots[items.Count - 1].GetComponent<Image>().sprite = sprite;
     }
 
@@ -217,27 +230,15 @@ public class Pinventory : MonoBehaviour
         spell_cds.Add(timer);
         spell_cds[id].SetTimer(s.Cooldown, 1);
         Sprite sprite = null;
-        switch (s.SpellName)
+        foreach (var spr in spellsprites)
         {
-            case "Magic Peashooter":
-                sprite = Peashooter;
+            if (spr.name == s.SpellName)
+            {
+                sprite = (Sprite)spr;
                 break;
-            case "Chargebolt":
-                sprite = Chargebolt;
-                break;
-            case "Yao's Shield":
-                sprite = Shield;
-                break;
-            case "Holy Water":
-                sprite = Water;
-                break;
-            case "Barrier":
-                sprite = Barrier;
-                break;
-            case "Photon Beam":
-                sprite = Beam;
-                break;
+            }
         }
+
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
 
@@ -421,7 +422,7 @@ public class Pinventory : MonoBehaviour
             {
                 selected_spell--;
             }
-        spellcount = spells.Count;
+        if (spells != null) spellcount = spells.Count;
         Sprite sprite = null;
         if (spells.Count > 0)
             switch (spells[selected_spell].SpellName)

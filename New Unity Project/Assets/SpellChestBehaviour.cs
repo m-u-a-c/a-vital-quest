@@ -45,9 +45,12 @@ public class SpellChestBehaviour : MonoBehaviour
             if (random)
             {
                 var items = Resources.LoadAll("Items/Spells");
+                var pfs = new System.Collections.Generic.List<GameObject>();
+                foreach (var item in items) if (item.ToString().Contains("PF")) pfs.Add((GameObject)item);
+                
                 rnd = new System.Random(Guid.NewGuid().GetHashCode());
-                int i = rnd.Next(0, items.Length - 1);
-                GameObject go = (GameObject)Instantiate(Resources.Load("Items/Spells/" + items[i].name));
+                int i = rnd.Next(0, pfs.Count - 1);
+                GameObject go = (GameObject)Instantiate(Resources.Load("Items/Spells/" + pfs[i].name));
                 go.transform.position = gameObject.transform.position;
                 go.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, -1);
                 go.rigidbody2D.AddForce(new Vector2(0, 500));

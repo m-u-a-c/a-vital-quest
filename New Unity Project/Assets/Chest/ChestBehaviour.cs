@@ -43,8 +43,10 @@ public class ChestBehaviour : MonoBehaviour
             {
                 rnd = new System.Random(Guid.NewGuid().GetHashCode());
                 var items = Resources.LoadAll("Items/Items");
-                int i = rnd.Next(0, items.Length - 1);
-                SpawnItem(items[i].name);
+                var pfs = new System.Collections.Generic.List<GameObject>();
+                foreach (var item in items) if (item.ToString().Contains("PF")) pfs.Add((GameObject)item);
+                int i = rnd.Next(0, pfs.Count - 1);
+                SpawnItem(pfs[i].name);
             }
             else
             {
