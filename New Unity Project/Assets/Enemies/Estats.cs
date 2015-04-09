@@ -30,13 +30,22 @@ public class Estats : MonoBehaviour {
 		}
 	}
 
+    bool CheckForBuff()
+    {
+        foreach (var ti in player.GetComponents<Timer>())
+        {
+            if (ti.Id == 1) return true;
+        }
+        return false;
+    }
+
 	public int getHit(float damageTaken, bool knockback = true, bool crit = false)
 	{
 		health -= damageTaken;
 		if (knockback) StartCoroutine ("Knockbacked");
         #region Sadism
         if (player.GetComponent<Pinventory>().ClassItem != null)
-            foreach (var ti in player.GetComponents<Timer>().Where(ti => ti.Id == 0).Where(ti => player.GetComponent<Pinventory>().ClassItem.ItemName == "Sadism"))
+            if (player.GetComponent<Pinventory>().ClassItem.ItemName == "Sadism" && !CheckForBuff()) 
             {
                 pstats.movement += 0.2f;
                 pstats.healthreg += 0.3f;
@@ -47,7 +56,7 @@ public class Estats : MonoBehaviour {
                     pstats.healthreg -= 0.3f;
                     Destroy(t);
                 });
-                t.Id = 0;
+                t.Id = 1;
             }
         #endregion
         var text = (GameObject) Instantiate(Resources.Load("Other/Text"));
