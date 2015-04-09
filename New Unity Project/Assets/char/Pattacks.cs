@@ -21,7 +21,7 @@ public class Pattacks : MonoBehaviour
     public bool isOnCooldown;
     public bool invincible;
     public int hits;
-
+        
     public AudioClip swingSound, hitSound, chargeboltHit, chargeboltUse, peashooterUse, peashooterHit, pickUpItem, meleeHit, casterHit, slimeHit, chestOpen, enemySplat, landing, yaosShieldUse, yaosShieldHit, holyWater, staticCoreActivation, staticCoreHit, barrierActivation, barrierBlock, lazerUse;
 
 

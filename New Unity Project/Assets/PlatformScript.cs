@@ -3,58 +3,58 @@ using System.Collections;
 
 public class PlatformScript : MonoBehaviour
 {
-
-    public Vector2 Middleposition;
-    public float speed = 5f;
-    public float distance = 80f;
-    public bool Left = true;
+    public float speed = 0.05f;
+    public float leftx, rightx;
+    public bool Right = true;
     public bool Stay = false;
+    public float Staytime;
+    Timer staytimer;
+    Timer movetimer;
+
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        coll.gameObject.transform.parent = null;
+    }
+
+    void MoveRight()
+    {
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x + speed, gameObject.transform.position.y, -1);
+    }
+
+    void MoveLeft()
+    {
+        gameObject.transform.position = new Vector3(gameObject.transform.position.x - speed, gameObject.transform.position.y, -1);
+    }
 
     void Start()
     {
         GetComponent<BoxCollider2D>().isTrigger = false;
+        staytimer = gameObject.AddComponent<Timer>();
+        movetimer = gameObject.AddComponent<Timer>();
+        staytimer.SetTimer(Staytime, 1, () =>
+        {
+            if (Right) MoveRight();
+            else MoveLeft();
+        });
+        staytimer.StopTimer();
+        movetimer.SetTimer(0.01f, 0, () =>
+        {
+            if (staytimer.running) return;
+            if (Right) MoveRight();
+            else MoveLeft();
+
+        });
+
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        if (Left && !Stay)
+        if (gameObject.transform.position.x >= rightx || gameObject.transform.position.x <= leftx)
         {
-            distance -= 1;
-            speed = -5;
-            rigidbody2D.velocity = new Vector2(speed, 0);
-            if (distance <= 0)
-            {
-                Stay = true;
-                StartCoroutine(StayingRight());
-            }
+            staytimer.StartTimer();
+            Right = gameObject.transform.position.x >= rightx ? false : true;
         }
-        if (!Left && !Stay)
-        {
-            distance -= 1;
-            speed = 5;
-            rigidbody2D.velocity = new Vector2(speed, 0);
-            if (distance <= 0)
-            {
-                Stay = true;
-                StartCoroutine(StayingLeft());
-            }
-        }
-    }
 
-    IEnumerator StayingLeft()
-    {
-        rigidbody2D.velocity = new Vector2(0, 0);
-        yield return new WaitForSeconds(1.5f);
-        Left = true;
-        Stay = false;
-        distance = 80f;
     }
-    IEnumerator StayingRight()
-    {
-        rigidbody2D.velocity = new Vector2(0, 0);
-        yield return new WaitForSeconds(1.5f);
-        Left = false;
-        Stay = false;
-        distance = 80f;
-    }
+  
 }

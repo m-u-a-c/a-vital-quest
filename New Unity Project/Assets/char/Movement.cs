@@ -101,11 +101,12 @@ public class Movement : MonoBehaviour
         float move = Input.GetAxis("Horizontal");
 
         rigidbody2D.velocity = new Vector2(move * maxSpeed * GetComponent<Pstats>().movement, rigidbody2D.velocity.y);
-        if (grounded && grounded.gameObject.tag == "MovingPlatform")
-            rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed * GetComponent<Pstats>().movement, grounded.rigidbody2D.velocity.y);
+        if (grounded && grounded.gameObject.name == "MovingPlatform")
+            transform.parent = grounded.gameObject.transform;
+           // rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed * GetComponent<Pstats>().movement, grounded.rigidbody2D.velocity.y);
 
-        if (grounded && grounded.gameObject.tag == "Spike" && !GetComponent<Pinventory>().CheckForItem(new SturdySocks(gameObject)))
-            gameObject.GetComponent<Pstats>().getHit(40);
+       if (grounded && grounded.gameObject.tag == "Spike" && !GetComponent<Pinventory>().CheckForItem(new SturdySocks(gameObject)))
+           gameObject.GetComponent<Pstats>().getHit(40);
 
         playerposition.x = rigidbody2D.transform.position.x;
         playerposition.y = rigidbody2D.transform.position.y;
