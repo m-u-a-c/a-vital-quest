@@ -9,7 +9,7 @@ public class HolyGrail : BaseItem
     {
         go = g;
         ItemName = "Holy Grail";
-        ItemDescription = "Restores 15 hp\nIncreases max hp by 15";
+        ItemDescription = "Increases your health and max health";
     }
     public override void Effect()
     {
@@ -93,7 +93,7 @@ public class LuckyHorseshoe : BaseItem
     {
         go = g;
         ItemName = "Lucky Horseshoe";
-        ItemDescription = "Increases crit chance by 10%";
+        ItemDescription = "Increases your crit chance";
     }
     public override void Effect()
     {
@@ -116,7 +116,7 @@ public class BootsOfUrgency : BaseItem
     {
         go = g;
         ItemName = "Boots of Urgency";
-        ItemDescription = "Increases attack speed and movement speed by 20%";
+        ItemDescription = "Increases attack speed and movement speed";
     }
     public override void Effect()
     {
@@ -166,7 +166,7 @@ public class MysticalOrb : BaseItem
     {
         go = g;
         ItemName = "Mystical Orb";
-        ItemDescription = "Increases spell damage by 2\nIncreases charge regeneration";
+        ItemDescription = "Increases spell damage and charge regeneration";
     }
     public override void Effect()
     {
@@ -192,7 +192,7 @@ public class VampiricCrest : BaseItem
     {
         go = g;
         ItemName = "Vampiric Crest";
-        ItemDescription = "Resores 5 hp when executing enemies";
+        ItemDescription = "Restores health upon executing enemies";
     }
     public override void Effect()
     {
@@ -233,7 +233,7 @@ public class StaticCore : BaseItem
         AS = camera.AddComponent<AudioSource>();
         AS.clip = GameObject.Find("Player").GetComponent<Pattacks>().staticCoreActivation;
         ItemDescription =
-            "Adds 60% of spell damage to your attack damage when activated. Drains all charges upon activation";
+            "Adds a part of your spell damage to your attack damage when activated. Drains all charges upon activation";
 
     }
     public override void Effect()
@@ -439,7 +439,7 @@ public class CharmOfRestoration : BaseItem
         go = g;
         ItemName = "Charm of Restoration";
         pstats = go.GetComponent<Pstats>();
-        ItemDescription = "Increases hp regeneration, but decreases your movement speed to 85%";
+        ItemDescription = "Increases health regeneration but decreases your movement speed";
     }
     public override void Effect()
     {
@@ -448,7 +448,7 @@ public class CharmOfRestoration : BaseItem
 
     public override void Stats()
     {
-        pstats.healthreg += 3;
+        pstats.healthreg += 0.6f;
         pstats.movement *= 0.85f;
     }
 
@@ -502,7 +502,7 @@ public class MerlinsBandofFate : BaseItem
         go = g;
         ItemName = "Merlin's Band of Fate";
         pstats = go.GetComponent<Pstats>();
-        ItemDescription = "Increases spell damage by 40%\nGives you a temporal speed boost when casting spells";
+        ItemDescription = "Increases your spell damage and also gives you a speed boost when casting spells";
     }
 
     public override void Effect()
@@ -529,7 +529,7 @@ public class HerculesBandofPower : BaseItem
         go = g;
         pstats = go.GetComponent<Pstats>();
         ItemName = "Hercules' Band of Power";
-        ItemDescription = "Increases attack power by 30%\nIncreases knockback power";
+        ItemDescription = "Increases your attack damage and knockback distance";
     }
     public override void Effect()
     {
@@ -558,7 +558,7 @@ public class Masochism : BaseClassItem
     {
         go = g;
         ItemName = "Masochism";
-        ItemDescription = "Increases crit chance by 1% for each 4hp missing.";
+        ItemDescription = "Your crit chance increases when your health decreases";
     }
 
     public override void Stats()
@@ -592,7 +592,7 @@ public class Sadism : BaseClassItem
     {
         go = g;
         ItemName = "Sadism";
-        ItemDescription = "Increases movement speed and hp regeneration when dealing damage to enemies";
+        ItemDescription = "Increases movement speed and health regeneration when dealing damage to enemies";
     }
 
     public override void Effect()

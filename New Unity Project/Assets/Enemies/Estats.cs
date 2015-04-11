@@ -22,6 +22,7 @@ public class Estats : MonoBehaviour {
 
 	void Update ()
 	{
+
 		if (health <= 0) 
 		{
 			GameObject.Find ("Observer").GetComponent<Observer> ().RemoveEnemy();
@@ -32,14 +33,10 @@ public class Estats : MonoBehaviour {
 
     bool CheckForBuff()
     {
-        foreach (var ti in player.GetComponents<Timer>())
-        {
-            if (ti.Id == 1) return true;
-        }
-        return false;
+        return player.GetComponents<Timer>().Any(ti => ti.Id == 1);
     }
 
-	public int getHit(float damageTaken, bool knockback = true, bool crit = false)
+    public int getHit(float damageTaken, bool knockback = true, bool crit = false)
 	{
 		health -= damageTaken;
 		if (knockback) StartCoroutine ("Knockbacked");

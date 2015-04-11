@@ -53,9 +53,12 @@ public class Pinventory : MonoBehaviour
     public int selected_item = 0;
     public int spellcount;
 
+    public Pstats pstats;
+
 
     void Start()
     {
+        pstats = GameObject.Find("Player").GetComponent<Pstats>();
         ADMG = GameObject.Find("ADMG").GetComponent<Text>();
         SDMG = GameObject.Find("SDMG").GetComponent<Text>();
         MSPEED = GameObject.Find("MSPEED").GetComponent<Text>();
@@ -229,15 +232,7 @@ public class Pinventory : MonoBehaviour
         var timer = gameObject.AddComponent<Timer>();
         spell_cds.Add(timer);
         spell_cds[id].SetTimer(s.Cooldown, 1);
-        Sprite sprite = null;
-        foreach (var spr in spellsprites)
-        {
-            if (spr.name == s.SpellName)
-            {
-                sprite = (Sprite)spr;
-                break;
-            }
-        }
+        Sprite sprite = spellsprites.Where(spr => spr.name == s.SpellName).Cast<Sprite>().FirstOrDefault();
 
         GameObject.Find("Spell").GetComponent<Image>().sprite = sprite;
     }
@@ -283,11 +278,10 @@ public class Pinventory : MonoBehaviour
 
     public void Update()
     {
-        var pstats = GameObject.Find("Player").GetComponent<Pstats>();
-        ADMG.text = pstats.aDamage.ToString();
-        SDMG.text = pstats.sDamage.ToString();
-        MSPEED.text = (pstats.movement * 100).ToString() + "%";
-        CRIT.text = (pstats.critchance).ToString() + "%";
+        ADMG.text = Mathf.RoundToInt(pstats.aDamage).ToString();
+        SDMG.text = Mathf.RoundToInt(pstats.sDamage).ToString();
+        MSPEED.text = Mathf.RoundToInt((pstats.movement * 100)).ToString() + "%";
+        CRIT.text = Mathf.RoundToInt((pstats.critchance)).ToString() + "%";
         HPTEXT.text = Mathf.RoundToInt(pstats.health) + " / " +
                                                               Mathf.RoundToInt(pstats.maxhealth);
         CHTEXT.text = Mathf.RoundToInt(pstats.charges) + " / " +

@@ -74,6 +74,8 @@ public class First_AI : MonoBehaviour
 
     void Update()
     {
+        facingRight = transform.localScale.x > 0;
+
         if (player.transform.position.x > transform.position.x && !facingRight)
         {
             Flip();

@@ -15,7 +15,6 @@ public class ChestBehaviour : MonoBehaviour
     public bool random = true;
     public GameObject prefab;
     System.Random rnd;
-    enum Items { HolyGrail, FriarTucksRobe, GlassIdol, BootsOfUrgency, SturdySocks, MysticalOrb }
 
     void Start()
     {
