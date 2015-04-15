@@ -224,7 +224,7 @@ public class Barrier : BaseSpell
     {
         usedcharges = go.GetComponent<Pstats>().charges;
         var barrier = (GameObject)Object.Instantiate(Resources.Load("Spells/Barrier"));
-        barrier.transform.position = go.transform.position;
+        barrier.transform.position = new Vector3(go.transform.position.x, go.transform.position.y, -3);
 
         if (usedcharges < 3) barrier.GetComponent<BarrierBehaviour>().ticks = 20;
         else if (usedcharges < 5) barrier.GetComponent<BarrierBehaviour>().ticks = 25;
@@ -265,14 +265,14 @@ public class PhotonBeam : BaseSpell
 		if (Left)
             
 		{
-			beam.transform.position = new Vector3(go.transform.position.x - size.x / 1.8f + 0.8f, go.transform.position.y + 0.3f);
+			beam.transform.position = new Vector3(go.transform.position.x - size.x / 1.8f + 0.8f, go.transform.position.y + 0.3f, -2);
 			var theScale = beam.transform.localScale;
 			theScale.x *= -1;
 			beam.transform.localScale = theScale;
 		}
 		else
 		{
-			beam.transform.position = new Vector3(go.transform.position.x + size.x / 1.8f - 0.8f, go.transform.position.y + 0.3f);
+			beam.transform.position = new Vector3(go.transform.position.x + size.x / 1.8f - 0.8f, go.transform.position.y + 0.3f, -2);
 		}
 		go.gameObject.GetComponent<Pstats> ().charges -= Cost;
 	}

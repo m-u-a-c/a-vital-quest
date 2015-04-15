@@ -539,7 +539,7 @@ public class HerculesBandofPower : BaseItem
     public override void Stats()
     {
         pstats.aDamage_ep += 0.3f;
-        pstats.knockbackpower += 0.5f;
+        pstats.knockbackpower += 0.25f;
     }
 
     public override void RevertStats()

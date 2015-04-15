@@ -65,7 +65,7 @@ public class Estats : MonoBehaviour {
             text.transform.localScale *= 1.5f;
         } 
         
-	    text.transform.position = new Vector3(gopos.x + 1f, gopos.y + 2, -1);
+	    text.transform.position = new Vector3(gopos.x + 1f, gopos.y + 2, -5);
         textcomp.text = Math.Round(damageTaken, 1).ToString();
         
 

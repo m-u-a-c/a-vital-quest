@@ -98,20 +98,24 @@ public class Movement : MonoBehaviour
 
         grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 
-        float move = Input.GetAxis("Horizontal");
+        var move = Input.GetAxis("Horizontal");
 
-        rigidbody2D.velocity = new Vector2(move * maxSpeed * GetComponent<Pstats>().movement, rigidbody2D.velocity.y);
+        rigidbody2D.velocity = new Vector2(move * maxSpeed * GetComponent<Pstats>().movement * 0.8f, rigidbody2D.velocity.y);
+
         if (grounded && grounded.gameObject.name == "MovingPlatform")
+            transform.parent = grounded.gameObject.transform;
+        if (grounded && grounded.gameObject.name == "VMovingPlatform")
             transform.parent = grounded.gameObject.transform;
            // rigidbody2D.velocity = new Vector2(grounded.rigidbody2D.velocity.x + move * maxSpeed * GetComponent<Pstats>().movement, grounded.rigidbody2D.velocity.y);
 
-       if (grounded && grounded.gameObject.tag == "Spike" && !GetComponent<Pinventory>().CheckForItem(new SturdySocks(gameObject)))
-           gameObject.GetComponent<Pstats>().getHit(40);
+       if (grounded && grounded.gameObject.tag == "Spike") 
+           gameObject.GetComponent<Pstats>().getHit(gameObject.GetComponent<Pinventory>().CheckForItem(new SturdySocks(gameObject)) ? 20 : 40);
+             
 
         playerposition.x = rigidbody2D.transform.position.x;
         playerposition.y = rigidbody2D.transform.position.y;
 
-        Pattacks attacks = GetComponent<Pattacks>();
+        //Pattacks attacks = GetComponent<Pattacks>();
         //gameObject.GetComponent<Pinventory> ().spell = new Chargebolt (gameObject);
         if (move > 0 && !facingRight)
         {

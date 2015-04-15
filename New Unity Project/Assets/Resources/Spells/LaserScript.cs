@@ -14,7 +14,7 @@ public class LaserScript : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(GameObject.Find("Player").GetComponent<Pattacks>().lazerUse, gameObject.transform.position);
         timer = gameObject.AddComponent<Timer>();
-        timer.SetTimer(0.05f, 10, new System.Action(Tick));
+        timer.SetTimer(0.05f, 10, Tick);
         yscale = gameObject.transform.localScale.x;
     }
     void Tick()
@@ -41,9 +41,9 @@ public class LaserScript : MonoBehaviour
         if (hit.Length <= 0) return;
 
         var hitgos = new System.Collections.Generic.List<int>();
-        foreach (var coll in hit)
+        foreach (var coll in hit.Where(coll => !hitgos.Contains(coll.gameObject.GetInstanceID())))
         {
-            if (!hitgos.Contains(coll.gameObject.GetInstanceID())) hitgos.Add(coll.gameObject.GetComponent<Estats>().getHit((pstats.sDamage * 2) + 3, false));
+            hitgos.Add(coll.gameObject.GetComponent<Estats>().getHit((pstats.sDamage) + 3, false));
         }
     }
 

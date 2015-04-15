@@ -5,13 +5,16 @@ public class VPlatformScript : MonoBehaviour
 {
     public float speed = 0.05f;
     public bool Up = true;
-   // public bool Stay = false;
+    // public bool Stay = false;
     public float topy = 0, boty = 0;
     Timer staytimer;
     Timer movetimer;
     public float Staytime;
 
-
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        coll.gameObject.transform.parent = null;
+    }
     void MoveUp()
     {
         gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + speed, -1);
@@ -38,7 +41,7 @@ public class VPlatformScript : MonoBehaviour
                 if (staytimer.running) return;
                 if (Up) MoveUp();
                 else MoveDown();
-                    
+
             });
 
     }
@@ -50,6 +53,6 @@ public class VPlatformScript : MonoBehaviour
             staytimer.StartTimer();
             Up = gameObject.transform.position.y >= topy ? false : true;
         }
-        
+
     }
 }

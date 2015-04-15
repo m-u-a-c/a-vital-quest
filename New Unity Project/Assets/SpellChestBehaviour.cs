@@ -15,7 +15,6 @@ public class SpellChestBehaviour : MonoBehaviour
     public bool random = true;
     public GameObject prefab;
     System.Random rnd;
-    enum Items { HolyGrail, FriarTucksRobe, GlassIdol, BootsOfUrgency, SturdySocks, MysticalOrb }
 
     void Start()
     {
@@ -66,9 +65,9 @@ public class SpellChestBehaviour : MonoBehaviour
 
     void SpawnItem(string itemname)
     {
-        GameObject go = (GameObject)Instantiate(Resources.Load("Items/" + itemname));
+        GameObject go = (GameObject)Instantiate(Resources.Load("Items/Spells/" + itemname));
         go.transform.position = gameObject.transform.position;
-        go.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 1);
+        go.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, -1);
         go.rigidbody2D.AddForce(new Vector2(0, 500));
     }
 }

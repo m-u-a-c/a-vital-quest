@@ -27,7 +27,7 @@ public class Spawner : MonoBehaviour {
 	public void SpawnObject(string name)
 	{
 		GameObject go = (GameObject)Instantiate(Resources.Load ("Spawner/" + name));
-		go.transform.position = new Vector2 (gameObject.transform.position.x, gameObject.transform.position.y);
+		go.transform.position = new Vector3 (gameObject.transform.position.x, gameObject.transform.position.y, -1);
 	}
 
 	void Update()
