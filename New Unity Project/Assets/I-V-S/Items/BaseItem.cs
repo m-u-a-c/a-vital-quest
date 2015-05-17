@@ -9,4 +9,5 @@ public abstract class BaseItem {
     abstract public void Effect();
 	abstract public void Stats ();
 	abstract public void RevertStats ();
+    public GameObject go { get; set; }
 }

@@ -1,4 +1,6 @@
-﻿namespace Assets.Items
+﻿using UnityEngine;
+
+namespace Assets.Items
 {
     public abstract class BaseClassItem
     {
@@ -9,5 +11,6 @@
         abstract public void Effect();
         abstract public void Stats();
         abstract public void RevertStats();
+        public GameObject go { get; set; }
     }
 }

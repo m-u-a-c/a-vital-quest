@@ -6,6 +6,7 @@ public abstract class BaseSpell {
     public string SpellDescription;
     public static float dmg = 5;
     public int animation = 5;
+    public GameObject go { get; set; }
 	public bool Left {
 				get;
 				set;

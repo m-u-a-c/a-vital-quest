@@ -35,6 +35,12 @@ public class Observer : MonoBehaviour {
 	IEnumerator StageClear()
 	{
 		yield return new WaitForSeconds(6);
-		Application.LoadLevel (2);
+        var oldvars = GameObject.Find("SavedVars").GetComponent<SavedVars>();
+	    var inv = GameObject.Find("Player").GetComponent<Pinventory>();
+	    oldvars.ClassItem = inv.ClassItem;
+	    oldvars.items = inv.items;
+	    oldvars.spells = inv.spells;
+        Application.LoadLevel (2);
+
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Assets.Items;
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine.UI;
 
 public class Pinventory : MonoBehaviour
@@ -77,10 +78,24 @@ public class Pinventory : MonoBehaviour
         itemsprites = Resources.LoadAll<Sprite>("Items/Items/Sprites");
         spellsprites = Resources.LoadAll<Sprite>("Items/Spells/Sprites");
 
-
-        items = new List<BaseItem>();
         spells = new List<BaseSpell>();
-        spell_cds = new List<Timer>();
+        items = new List<BaseItem>();
+
+        var oldvars = GameObject.Find("SavedVars").GetComponent<SavedVars>();
+
+        foreach (var item in oldvars.items)
+        {
+            item.go = gameObject;
+            AddItem(item);
+        }
+        foreach (var spell in oldvars.spells)
+        {
+            spell.go = gameObject;
+            AddSpell(spell);
+        }
+        if (oldvars.ClassItem != null) oldvars.ClassItem.go = gameObject;
+        ClassItem = oldvars.ClassItem;
+
     }
 
     public void SetClassItem(BaseClassItem classitem)

@@ -19,7 +19,12 @@ public class Spawner : MonoBehaviour {
 	public void Start()
 	{
 	}
-	
+
+	public void Awake()
+	{
+		DontDestroyOnLoad (gameObject);
+	}
+
 	//Spawns an object with the specified PREFAB name that is located in the Resources/Spawner folder
 	//Example:
 	//GameObject go = GameObject.Find ("PFSpawner");

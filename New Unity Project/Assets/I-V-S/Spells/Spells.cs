@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MagicPeashooter : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
 
     public MagicPeashooter(GameObject g)
     {
@@ -43,7 +43,7 @@ public class MagicPeashooter : BaseSpell
 
 public class Chargebolt : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
 
     public Chargebolt(GameObject g)
     {
@@ -83,7 +83,7 @@ public class Chargebolt : BaseSpell
 
 public class GodBlessYou : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
     public GodBlessYou(GameObject g)
     {
         SpellName = "God Bless You";
@@ -107,7 +107,7 @@ public class GodBlessYou : BaseSpell
 
 public class HolyWater : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
     public HolyWater(GameObject g)
     {
         SpellName = "Holy Water";
@@ -145,7 +145,7 @@ public class HolyWater : BaseSpell
 
 public class YaosShield : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
     public YaosShield(GameObject g)
     {
         SpellName = "Yao's Shield";
@@ -185,7 +185,7 @@ public class YaosShield : BaseSpell
 
 public class VengefulCharge : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
     public VengefulCharge(GameObject g)
     {
         SpellName = "Vengeful Charge";
@@ -207,7 +207,7 @@ public class VengefulCharge : BaseSpell
 
 public class Barrier : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
     float usedcharges;
     
     public Barrier(GameObject g)
@@ -241,7 +241,7 @@ public class Barrier : BaseSpell
 
 public class PhotonBeam : BaseSpell
 {
-	GameObject go;
+	public GameObject go {get; set;}
 	public PhotonBeam(GameObject g)
 	{
 		SpellName = "Photon Beam";
@@ -281,7 +281,7 @@ public class PhotonBeam : BaseSpell
 
 public class Bloodbolt : BaseSpell
 {
-    GameObject go;
+    public GameObject go {get; set;}
     float usedcharges;
     
     public Bloodbolt(GameObject g)

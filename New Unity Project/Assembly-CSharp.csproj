@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>E:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>D:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +87,7 @@
      <Compile Include="Assets\Resources\Spells\ChargeboltScript.cs" />
      <Compile Include="Assets\Resources\Spells\LaserScript.cs" />
      <Compile Include="Assets\Resources\Spells\ShieldScript.cs" />
+     <Compile Include="Assets\SavedVars.cs" />
      <Compile Include="Assets\Spawner\Spawner.cs" />
      <Compile Include="Assets\SpellChestBehaviour.cs" />
      <Compile Include="Assets\TabletScript.cs" />
@@ -99,7 +100,7 @@
      <Compile Include="Assets\char\Pinventory.cs" />
      <Compile Include="Assets\char\Pstats.cs" />
  <Reference Include="UnityEngine.UI">
- <HintPath>E:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

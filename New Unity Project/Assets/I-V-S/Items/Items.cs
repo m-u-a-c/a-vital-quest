@@ -4,7 +4,7 @@ using Assets.Items;
 
 public class HolyGrail : BaseItem
 {
-    GameObject go;
+     
     public HolyGrail(GameObject g)
     {
         go = g;
@@ -29,7 +29,7 @@ public class HolyGrail : BaseItem
 
 public class FriarTucksRobe : BaseItem
 {
-    GameObject go;
+     
 
     public FriarTucksRobe(GameObject g)
     {
@@ -56,7 +56,7 @@ public class FriarTucksRobe : BaseItem
 
 public class GlassIdol : BaseItem
 {
-    GameObject go;
+     
     public GlassIdol(GameObject g)
     {
         go = g;
@@ -88,7 +88,7 @@ public class GlassIdol : BaseItem
 
 public class LuckyHorseshoe : BaseItem
 {
-    GameObject go;
+     
     public LuckyHorseshoe(GameObject g)
     {
         go = g;
@@ -111,7 +111,7 @@ public class LuckyHorseshoe : BaseItem
 
 public class BootsOfUrgency : BaseItem
 {
-    GameObject go;
+     
     public BootsOfUrgency(GameObject g)
     {
         go = g;
@@ -136,7 +136,7 @@ public class BootsOfUrgency : BaseItem
 
 public class SturdySocks : BaseItem
 {
-    GameObject go;
+     
     public SturdySocks(GameObject g)
     {
         go = g;
@@ -161,7 +161,6 @@ public class SturdySocks : BaseItem
 
 public class MysticalOrb : BaseItem
 {
-    GameObject go;
     public MysticalOrb(GameObject g)
     {
         go = g;
@@ -187,7 +186,7 @@ public class MysticalOrb : BaseItem
 
 public class VampiricCrest : BaseItem
 {
-    GameObject go;
+     
     public VampiricCrest(GameObject g)
     {
         go = g;
@@ -217,7 +216,7 @@ public class VampiricCrest : BaseItem
 
 public class StaticCore : BaseItem
 {
-    GameObject go;
+     
     GameObject camera;
     bool on = false;
     float timeleft = 1.5f;
@@ -238,7 +237,7 @@ public class StaticCore : BaseItem
     }
     public override void Effect()
     {
-        var pstats = go.GetComponent<Pstats>();
+    
         if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
         {
             if (!on && go.GetComponent<Pstats>().charges == 5)
@@ -300,7 +299,7 @@ public class StaticCore : BaseItem
 
 public class AsgardSouvenir : BaseItem
 {
-    GameObject go;
+     
     int hitcount;
 
     public AsgardSouvenir(GameObject g)
@@ -341,7 +340,7 @@ public class AsgardSouvenir : BaseItem
 
 public class TabletOfShadows : BaseItem
 {
-    GameObject go;
+     
     int hitcount;
     int lasthitcount;
     public float cd = 0.2f;
@@ -403,7 +402,7 @@ public class TabletOfShadows : BaseItem
 
 public class Bandaid : BaseItem
 {
-    GameObject go;
+     
     Pstats pstats;
     public Bandaid(GameObject g)
     {
@@ -418,6 +417,7 @@ public class Bandaid : BaseItem
 
     public override void Stats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.health += 10;
         pstats.maxhealth += 10;
         pstats.healthreg += 0.2f;
@@ -425,6 +425,7 @@ public class Bandaid : BaseItem
 
     public override void RevertStats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.maxhealth -= 10;
         pstats.healthreg -= 2;
     }
@@ -432,7 +433,7 @@ public class Bandaid : BaseItem
 
 public class CharmOfRestoration : BaseItem
 {
-    GameObject go;
+     
     Pstats pstats;
     public CharmOfRestoration(GameObject g)
     {
@@ -448,12 +449,14 @@ public class CharmOfRestoration : BaseItem
 
     public override void Stats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.healthreg += 0.6f;
         pstats.movement *= 0.85f;
     }
 
     public override void RevertStats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.healthreg -= 3;
         pstats.movement /= 0.85f;
     }
@@ -461,7 +464,7 @@ public class CharmOfRestoration : BaseItem
 
 public class ZephyrJuice : BaseItem
 {
-    GameObject go;
+     
     Pstats pstats;
     public ZephyrJuice(GameObject g)
     {
@@ -471,6 +474,7 @@ public class ZephyrJuice : BaseItem
     }
     public override void Effect()
     {
+        pstats = go.GetComponent<Pstats>();
         if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
         {
             pstats.health += 22.5f;
@@ -494,7 +498,7 @@ public class ZephyrJuice : BaseItem
 
 public class MerlinsBandofFate : BaseItem
 {
-    private GameObject go;
+     
     private Pstats pstats;
 
     public MerlinsBandofFate(GameObject g)
@@ -511,18 +515,20 @@ public class MerlinsBandofFate : BaseItem
 
     public override void Stats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.sDamage_ep += 0.4f;
     }
 
     public override void RevertStats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.sDamage_ep -= 0.4f;
     }
 }
 
 public class HerculesBandofPower : BaseItem
 {
-    private GameObject go;
+     
     private Pstats pstats;
     public HerculesBandofPower(GameObject g)
     {
@@ -533,17 +539,19 @@ public class HerculesBandofPower : BaseItem
     }
     public override void Effect()
     {
-        
+
     }
 
     public override void Stats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.aDamage_ep += 0.3f;
         pstats.knockbackpower += 0.25f;
     }
 
     public override void RevertStats()
     {
+        pstats = go.GetComponent<Pstats>();
         pstats.aDamage_ep -= 0.3f;
         pstats.knockbackpower -= 0.5f;
     }
@@ -551,7 +559,7 @@ public class HerculesBandofPower : BaseItem
 
 public class Masochism : BaseClassItem
 {
-    private GameObject go;
+     
     private float _lastaddition = 0;
 
     public Masochism(GameObject g)
@@ -572,7 +580,7 @@ public class Masochism : BaseClassItem
 
     public override void RevertStats()
     {
-        
+
     }
 
     public override void Effect()
@@ -587,7 +595,7 @@ public class Masochism : BaseClassItem
 
 public class Sadism : BaseClassItem
 {
-    private GameObject go;
+     
     public Sadism(GameObject g)
     {
         go = g;
@@ -597,12 +605,12 @@ public class Sadism : BaseClassItem
 
     public override void Effect()
     {
-        
+
     }
 
     public override void Stats()
     {
-        
+
     }
 
     public override void RevertStats()
