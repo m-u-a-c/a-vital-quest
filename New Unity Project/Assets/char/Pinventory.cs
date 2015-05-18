@@ -93,8 +93,11 @@ public class Pinventory : MonoBehaviour
             spell.go = gameObject;
             AddSpell(spell);
         }
-        if (oldvars.ClassItem != null) oldvars.ClassItem.go = gameObject;
-        ClassItem = oldvars.ClassItem;
+        if (oldvars.ClassItem != null)
+        {
+            oldvars.ClassItem.go = gameObject;
+            SetClassItem(oldvars.ClassItem);
+        }
 
     }
 
@@ -322,7 +325,7 @@ public class Pinventory : MonoBehaviour
         if (items.Count != 0) foreach (var item in items) item.Effect();
         if (ClassItem != null) ClassItem.Effect();
 
-        var cast = Physics2D.OverlapArea(new Vector2(transform.renderer.bounds.center.x - transform.renderer.bounds.size.x / 2, transform.renderer.bounds.center.y), new Vector2(transform.renderer.bounds.center.x + transform.renderer.bounds.size.x / 2, transform.renderer.bounds.center.y - 1), LayerMask.GetMask("Items"));
+        var cast = Physics2D.OverlapArea(new Vector2(transform.GetComponent<Renderer>().bounds.center.x - transform.GetComponent<Renderer>().bounds.size.x / 2, transform.GetComponent<Renderer>().bounds.center.y), new Vector2(transform.GetComponent<Renderer>().bounds.center.x + transform.GetComponent<Renderer>().bounds.size.x / 2, transform.GetComponent<Renderer>().bounds.center.y - 1), LayerMask.GetMask("Items"));
         if (cast && cast.gameObject.tag == "Item" && Input.GetKeyDown(KeyCode.E))
         {
             AudioSource.PlayClipAtPoint(gameObject.GetComponent<Pattacks>().pickUpItem, GameObject.Find("Player").gameObject.transform.position);

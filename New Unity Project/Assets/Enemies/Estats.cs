@@ -45,12 +45,12 @@ public class Estats : MonoBehaviour {
             if (player.GetComponent<Pinventory>().ClassItem.ItemName == "Sadism" && !CheckForBuff()) 
             {
                 pstats.movement += 0.2f;
-                pstats.healthreg += 0.3f;
+                pstats.healthreg += 0.1f;
                 var t = player.AddComponent<Timer>();
                 t.SetTimer(2, 1, () =>
                 {
                     pstats.movement -= 0.2f;
-                    pstats.healthreg -= 0.3f;
+                    pstats.healthreg -= 0.1f;
                     Destroy(t);
                 });
                 t.Id = 1;

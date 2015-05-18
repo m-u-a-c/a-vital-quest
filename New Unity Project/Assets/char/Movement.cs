@@ -28,26 +28,26 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-		if (Input.GetKeyDown (KeyCode.C))
+		if (Time.timeScale > 0 && Input.GetKeyDown (KeyCode.C))
 		{
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().casterHit, gameObject.transform.position);
 		}
-		if (Input.GetKeyDown (KeyCode.V))
+		if (Time.timeScale > 0 && Input.GetKeyDown (KeyCode.V))
 		{
 			AudioSource.PlayClipAtPoint (GameObject.Find ("Player").GetComponent<Pattacks>().slimeHit, gameObject.transform.position, 0.5f);
 		}
 
-        if (grounded && Input.GetKeyDown(KeyCode.Space))
+        if (grounded && Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Space))
         {
-            rigidbody2D.AddForce(new Vector2(0, jumpForce));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
         }
 
-        if (Mathf.Abs(rigidbody2D.velocity.x) >= 1 && grounded && !gameObject.GetComponent<AudioSource>().isPlaying)
+        if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) >= 1 && grounded && !gameObject.GetComponent<AudioSource>().isPlaying)
         {
             gameObject.GetComponent<AudioSource>().Play();
             gameObject.GetComponent<AudioSource>().pitch = 0.8f;
         }
-        if ((!grounded) || Mathf.Abs(rigidbody2D.velocity.x) < 1)
+        if ((!grounded) || Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) < 1)
             gameObject.GetComponent<AudioSource>().Pause();
 
         if (gameObject.GetComponent<Pattacks>().swinging)
@@ -70,37 +70,37 @@ public class Movement : MonoBehaviour
         else if (gameObject.GetComponent<Pattacks>().casting)
             gameObject.GetComponent<Animator>().SetInteger("State", GetComponent<Pinventory>().spells[GetComponent<Pinventory>().selected_spell].animation);
 
-        else if (Mathf.Abs(rigidbody2D.velocity.x) <= 2 && rigidbody2D.velocity.y <= 2 && grounded && !gameObject.GetComponent<Pattacks>().casting)
+        else if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) <= 2 && GetComponent<Rigidbody2D>().velocity.y <= 2 && grounded && !gameObject.GetComponent<Pattacks>().casting)
         {
             gameObject.GetComponent<Animator>().SetInteger("State", 3);
         }
 
         else
         {
-            if (rigidbody2D.velocity.y > 0 && !grounded)
+            if (GetComponent<Rigidbody2D>().velocity.y > 0 && !grounded)
             {
                 gameObject.GetComponent<Animator>().SetInteger("State", 0);
 
             }
-            else if (rigidbody2D.velocity.y < 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("State", 2);
-            else if (Mathf.Abs(rigidbody2D.velocity.x) > 0 && grounded)
+            else if (GetComponent<Rigidbody2D>().velocity.y < 0 && !grounded) gameObject.GetComponent<Animator>().SetInteger("State", 2);
+            else if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > 0 && grounded)
             {
                 gameObject.GetComponent<Animator>().SetInteger("State", 1);
             }
         }
 
 
-        if (Input.GetKeyDown(KeyCode.X)) GetComponent<Pstats>().health -= 5;
+        if (Time.timeScale > 0 && Input.GetKeyDown(KeyCode.X)) GetComponent<Pstats>().health -= 5;
 
 
-        speed = gameObject.rigidbody2D.velocity.x;
-        moving = !(Mathf.Abs(gameObject.rigidbody2D.velocity.x) < 3);
+        speed = gameObject.GetComponent<Rigidbody2D>().velocity.x;
+        moving = !(Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().velocity.x) < 3);
 
         grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
 
         var move = Input.GetAxis("Horizontal");
 
-        rigidbody2D.velocity = new Vector2(move * maxSpeed * GetComponent<Pstats>().movement * 0.8f, rigidbody2D.velocity.y);
+        GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed * GetComponent<Pstats>().movement * 0.8f, GetComponent<Rigidbody2D>().velocity.y);
 
         if (grounded && grounded.gameObject.name == "MovingPlatform")
             transform.parent = grounded.gameObject.transform;
@@ -112,8 +112,8 @@ public class Movement : MonoBehaviour
            gameObject.GetComponent<Pstats>().getHit(gameObject.GetComponent<Pinventory>().CheckForItem(new SturdySocks(gameObject)) ? 20 : 40);
              
 
-        playerposition.x = rigidbody2D.transform.position.x;
-        playerposition.y = rigidbody2D.transform.position.y;
+        playerposition.x = GetComponent<Rigidbody2D>().transform.position.x;
+        playerposition.y = GetComponent<Rigidbody2D>().transform.position.y;
 
         //Pattacks attacks = GetComponent<Pattacks>();
         //gameObject.GetComponent<Pinventory> ().spell = new Chargebolt (gameObject);
@@ -127,8 +127,8 @@ public class Movement : MonoBehaviour
         }
 
         //Always last:
-        last_yvel = (gameObject.rigidbody2D.velocity.y);
-        last_xvel = Mathf.Abs(gameObject.rigidbody2D.velocity.x);
+        last_yvel = (gameObject.GetComponent<Rigidbody2D>().velocity.y);
+        last_xvel = Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().velocity.x);
 
     }
     void Start()

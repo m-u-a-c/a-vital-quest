@@ -11,9 +11,9 @@ public class ItemImage : MonoBehaviour
     }
     void OnMouseEnter()
     {
-        if (Slot == 6) 
+        if (Slot == 6 && pinv.ClassItem != null) 
             pinv.ShowItemDes(pinv.ClassItem.ItemDescription);
-        if (Slot == 7)
+        if (Slot == 7 && pinv.spells.Count > 0)
             pinv.ShowItemDes(pinv.spells[pinv.selected_spell].SpellDescription);
         if (pinv.items.Count > Slot) pinv.ShowItemDes(pinv.items[Slot].ItemDescription);
     }

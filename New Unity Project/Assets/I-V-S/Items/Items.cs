@@ -220,13 +220,11 @@ public class StaticCore : BaseItem
     GameObject camera;
     bool on = false;
     float timeleft = 1.5f;
-    float ori_damage;
     AudioSource AS;
     public StaticCore(GameObject g)
     {
         go = g;
         ItemName = "Static Core";
-        ori_damage = go.GetComponent<Pstats>().aDamage;
         animation = 4;
         camera = GameObject.Find("Camera");
         AS = camera.AddComponent<AudioSource>();
@@ -238,7 +236,7 @@ public class StaticCore : BaseItem
     public override void Effect()
     {
     
-        if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
+        if (Time.timeScale > 0 && Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
         {
             if (!on && go.GetComponent<Pstats>().charges == 5)
             {
@@ -274,7 +272,7 @@ public class StaticCore : BaseItem
         on = true;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Uncharged;
         go.GetComponent<Pstats>().regcharges = false;
-        go.GetComponent<Pstats>().aDamage_e = ori_damage + go.GetComponent<Pstats>().sDamage * 0.6f;
+        go.GetComponent<Pstats>().aDamage_e += go.GetComponent<Pstats>().sDamage * 0.6f;
     }
     public void TurnOff()
     {
@@ -283,7 +281,7 @@ public class StaticCore : BaseItem
         on = false;
         go.GetComponent<Pinventory>().slots[go.GetComponent<Pinventory>().items.IndexOf(this)].sprite = go.GetComponent<Pinventory>().Core_Charged;
         go.GetComponent<Pstats>().regcharges = true;
-        go.GetComponent<Pstats>().aDamage_e = ori_damage;
+        go.GetComponent<Pstats>().aDamage_e -= go.GetComponent<Pstats>().sDamage * 0.6f;
         timeleft = 1;
     }
 
@@ -309,19 +307,19 @@ public class AsgardSouvenir : BaseItem
     }
     public override void Effect()
     {
-        if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
+        if (Time.timeScale > 0 && Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
         {
             var g = (GameObject)Object.Instantiate(Resources.Load("Items/Asgard"));
             g.transform.position = go.transform.position;
             if (!go.GetComponent<Movement>().facingRight)
             {
                 g.transform.position = new Vector2(go.transform.position.x - 1, go.transform.position.y);
-                g.rigidbody2D.velocity = new Vector2(-40, 0);
+                g.GetComponent<Rigidbody2D>().velocity = new Vector2(-40, 0);
             }
             else
             {
                 g.transform.position = new Vector2(go.transform.position.x + 1, go.transform.position.y);
-                g.rigidbody2D.velocity = new Vector2(40, 0);
+                g.GetComponent<Rigidbody2D>().velocity = new Vector2(40, 0);
             }
         }
     }
@@ -475,7 +473,7 @@ public class ZephyrJuice : BaseItem
     public override void Effect()
     {
         pstats = go.GetComponent<Pstats>();
-        if (Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
+        if (Time.timeScale > 0 && Input.GetKeyDown(go.GetComponent<Pinventory>().CheckSlot(this)))
         {
             pstats.health += 22.5f;
             go.GetComponent<Pinventory>().RemoveItem(this);

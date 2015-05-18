@@ -8,6 +8,7 @@ public class Observer : MonoBehaviour {
 	public LayerMask whatIsSpawners;
 	float SearchRadius = 100.0f;
 	public float SpawnLimit = 0.0f;
+    public int nextlvl;
 
 	void Start () {
 	}
@@ -40,7 +41,7 @@ public class Observer : MonoBehaviour {
 	    oldvars.ClassItem = inv.ClassItem;
 	    oldvars.items = inv.items;
 	    oldvars.spells = inv.spells;
-        Application.LoadLevel (2);
+        Application.LoadLevel(nextlvl);
 
 	}
 }

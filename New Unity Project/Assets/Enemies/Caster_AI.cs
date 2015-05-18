@@ -62,7 +62,7 @@ public class Caster_AI : MonoBehaviour {
         if (player.transform.position.x < transform.position.x & !facingRight)
             Flip();
 
-        if (Input.GetKeyDown(KeyCode.Y))
+        if (Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Y))
         {
             var bolt = new Bloodbolt(gameObject);
             bolt.Effect();
@@ -98,7 +98,7 @@ public class Caster_AI : MonoBehaviour {
 			EMovement ();
 		}
 		if(playerAround)
-			rigidbody2D.velocity = new Vector2(0, 0);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
 		if (inRange && cast)
 		{
 			Attack ();
@@ -120,33 +120,33 @@ public class Caster_AI : MonoBehaviour {
 		    && ((groundAroundRU) || (!groundAroundRU))
 		    ) 
 		{
-			rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed, GetComponent<Rigidbody2D>().velocity.y);
 		}
 		if (player.transform.position.x < transform.position.x
 		    && ((groundAroundLU) || (!groundAroundLU))
 		    ) 
 		{	
-			rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed * -1, GetComponent<Rigidbody2D>().velocity.y);
 		}
 		if (player.transform.position.x > transform.position.x && !grounded) 
 		{
-			rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed, GetComponent<Rigidbody2D>().velocity.y);
 		}
 		if (player.transform.position.x < transform.position.x && !grounded)
 		{
-			rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
+			GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed * -1, GetComponent<Rigidbody2D>().velocity.y);
 		}
 		if(grounded && (player.transform.position.x > transform.position.x 
 		                || player.transform.position.x < transform.position.x))
 		{
 			if ((groundAroundLB) || (groundAroundRB))
 			{
-				rigidbody2D.AddForce(new Vector2(0, (jumpForce/105)));
+				GetComponent<Rigidbody2D>().AddForce(new Vector2(0, (jumpForce/105)));
 			}
 			if ((groundAroundLB && !groundAroundLT) 
 			    || (groundAroundRB && !groundAroundRT))
 			{
-				rigidbody2D.AddForce(new Vector2(0, (jumpForce/105)));
+				GetComponent<Rigidbody2D>().AddForce(new Vector2(0, (jumpForce/105)));
 			}
 		}
 	}

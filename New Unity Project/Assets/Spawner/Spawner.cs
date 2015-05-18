@@ -53,9 +53,9 @@ public class Spawner : MonoBehaviour {
 	        case 0:
 	            object_to_spawn = "Enemy";
 	            break;
-	        case 1:
-	            object_to_spawn = "Caster";
-	            break;
+            //case 1:
+            //    object_to_spawn = "Caster";
+            //    break;
 	        case 2:
 	            object_to_spawn = "Slime";
 	            break;

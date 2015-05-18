@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 #if UNITY_EDITOR
@@ -18,14 +19,14 @@ public class PauseBehaviour : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.Escape))
+		if (Input.GetKeyUp(KeyCode.Escape))
 			Pause();
 	}
 
 	public void Pause()
 	{
 		canvas.enabled = !canvas.enabled;
-		Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+		Time.timeScale = Math.Abs(Time.timeScale) < 1 ? 1 : 0;
 	}
 
 	public void Quit()

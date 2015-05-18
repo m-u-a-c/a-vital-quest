@@ -26,6 +26,7 @@ public class First_AI : MonoBehaviour
     float searchRadius = 15.0f;
     float blockRadius = 0.1f;
 
+
     Collider2D groundAroundLB;
     Collider2D groundAroundRB;
     Collider2D groundAroundRM;
@@ -119,7 +120,7 @@ public class First_AI : MonoBehaviour
         AIposition.x = transform.position.x;
         AIposition.y = transform.position.y;
 
-        attackRange = Physics2D.OverlapCircle(AIposition, 0.5f, whatIsPlayer);
+        attackRange = Physics2D.OverlapCircle(AIposition, 1f, whatIsPlayer);
         grounded = Physics2D.OverlapCircle(groundcheck.position, groundRadius, whatIsGround);
         playerAround = Physics2D.OverlapCircle(AIposition, searchRadius, whatIsPlayer);
         groundAroundLB = Physics2D.OverlapCircle(blockCheckLB.position, blockRadius, whatIsGround);
@@ -148,10 +149,10 @@ public class First_AI : MonoBehaviour
         if (gameObject.GetComponent<Eattacks>().swinging) gameObject.GetComponent<Animator>().SetInteger("Direction", 2);
         else
         {
-            if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
+            if (Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
             else gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
 
-            if (Mathf.Abs(gameObject.rigidbody2D.velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
+            if (Mathf.Abs(gameObject.GetComponent<Rigidbody2D>().velocity.x) > 2) gameObject.GetComponent<Animator>().SetInteger("Direction", 1);
             else gameObject.GetComponent<Animator>().SetInteger("Direction", 3);
         }
 
@@ -165,46 +166,45 @@ public class First_AI : MonoBehaviour
 
         if (attackRange)
         {
-            rigidbody2D.velocity = new Vector2(0, rigidbody2D.velocity.y);
-
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0, GetComponent<Rigidbody2D>().velocity.y);
         }
         else
         {
             if (player.transform.position.x > transform.position.x
                     && ((groundAroundRU) || (!groundAroundRU)))
             {
-                rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
             if (player.transform.position.x < transform.position.x
                     && ((groundAroundLU) || (!groundAroundLU)))
             {
 
 
-                rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed * -1, GetComponent<Rigidbody2D>().velocity.y);
             }
             if (player.transform.position.x > transform.position.x && !grounded)
             {
 
 
-                rigidbody2D.velocity = new Vector2(enemySpeed, rigidbody2D.velocity.y);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed, GetComponent<Rigidbody2D>().velocity.y);
             }
             if (player.transform.position.x < transform.position.x && !grounded)
             {
 
 
-                rigidbody2D.velocity = new Vector2(enemySpeed * -1, rigidbody2D.velocity.y);
+                GetComponent<Rigidbody2D>().velocity = new Vector2(enemySpeed * -1, GetComponent<Rigidbody2D>().velocity.y);
             }
             if (grounded && (player.transform.position.x > transform.position.x
                     || player.transform.position.x < transform.position.x))
             {
                 if ((groundAroundLB && !groundAroundL2T) || (groundAroundRB && !groundAroundR2T))
                 {
-                    rigidbody2D.AddForce(new Vector2(0, (jumpForce / 105)));
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, (jumpForce / 105)));
                 }
                 if ((groundAroundLB && !groundAroundLT && groundAroundL2T)
                         || (groundAroundRB && !groundAroundRT && groundAroundR2T))
                 {
-                    rigidbody2D.AddForce(new Vector2(0, (jumpForce / 105)));
+                    GetComponent<Rigidbody2D>().AddForce(new Vector2(0, (jumpForce / 105)));
                 }
             }
         }

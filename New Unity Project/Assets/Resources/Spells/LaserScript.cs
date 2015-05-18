@@ -29,7 +29,7 @@ public class LaserScript : MonoBehaviour
     private void DoDamage()
     {
         var pstats = GameObject.Find("Player").GetComponent<Pstats>();
-        var bounds = gameObject.renderer.bounds.center;
+        var bounds = gameObject.GetComponent<Renderer>().bounds.center;
         var pos = GameObject.Find("Player").transform.position;
         Collider2D[] hit = null;
         hit = Physics2D.OverlapAreaAll(new Vector2(Right ? pos.x + 1 : pos.x - 1, 2 + pos.y - 0.5f), 

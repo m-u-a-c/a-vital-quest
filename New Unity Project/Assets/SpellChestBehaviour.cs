@@ -52,7 +52,7 @@ public class SpellChestBehaviour : MonoBehaviour
                 GameObject go = (GameObject)Instantiate(Resources.Load("Items/Spells/" + pfs[i].name));
                 go.transform.position = gameObject.transform.position;
                 go.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, -1);
-                go.rigidbody2D.AddForce(new Vector2(0, 500));
+                go.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 500));
             }
             else
             {
@@ -68,6 +68,6 @@ public class SpellChestBehaviour : MonoBehaviour
         GameObject go = (GameObject)Instantiate(Resources.Load("Items/Spells/" + itemname));
         go.transform.position = gameObject.transform.position;
         go.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, -1);
-        go.rigidbody2D.AddForce(new Vector2(0, 500));
+        go.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 500));
     }
 }

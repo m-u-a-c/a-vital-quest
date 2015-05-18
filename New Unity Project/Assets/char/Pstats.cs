@@ -29,7 +29,7 @@ public class Pstats : MonoBehaviour
     public float maxhealth = 100;
     public float knockbackmultiplier = 1;
     public bool takedamage = true;
-    public float healthreg = 0.2f;
+    public float healthreg;
     public float charges = 5;
     public float chargereg = 0.2f;
     public bool regcharges = true;

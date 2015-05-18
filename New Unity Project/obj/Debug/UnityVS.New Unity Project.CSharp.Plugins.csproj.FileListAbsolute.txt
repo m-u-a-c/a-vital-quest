@@ -20,3 +20,5 @@ D:\Misc\Projects\a-vital-quest\New Unity Project\Temp\UnityVS_bin\Debug\UnityEng
 D:\Misc\Projects\a-vital-quest\New Unity Project\obj\Debug\UnityVS.New Unity Project.CSharp.Plugins.csprojResolveAssemblyReference.cache
 D:\Misc\Projects\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.dll
 D:\Misc\Projects\a-vital-quest\New Unity Project\obj\Debug\Assembly-CSharp-firstpass.pdb
+D:\Misc\Projects\a-vital-quest\New Unity Project\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.dll
+D:\Misc\Projects\a-vital-quest\New Unity Project\Temp\UnityVS_bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml

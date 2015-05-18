@@ -44,7 +44,7 @@ public class Pattacks : MonoBehaviour
         }
         if (casting && cast_timeleft <= 0) casting = false;
         timeleft -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
+        if (Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Mouse0) && !swinging)
         {
             AudioSource.PlayClipAtPoint(swingSound, gameObject.transform.position, 0.7f);
             swinging = true;
@@ -60,23 +60,23 @@ public class Pattacks : MonoBehaviour
                     break;
             }
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse0) &&
-                 gameObject.GetComponent<Pinventory>().CheckForItem((new TabletOfShadows(gameObject))))
-        {
-            var bounds = gameObject.renderer.bounds;
-            var colls = Physics2D.OverlapAreaAll(
-                new Vector2(bounds.max.y, bounds.center.x),
-                new Vector2(bounds.min.y, gameObject.GetComponent<Movement>().facingRight ? bounds.center.x + 2 : bounds.center.x - 2),
-                LayerMask.GetMask("Enemies"));
-            if (colls.Length > 0)
-            {
-                var gos = new List<int>();
-                foreach (var coll in colls.Where(coll => !gos.Contains(coll.gameObject.GetInstanceID())))
-                {
-                    gos.Add(coll.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage));
-                }
-            }
-        }
+        //else if (Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Mouse0) &&
+        //         gameObject.GetComponent<Pinventory>().CheckForItem((new TabletOfShadows(gameObject))))
+        //{
+        //    var bounds = gameObject.GetComponent<Renderer>().bounds;
+        //    var colls = Physics2D.OverlapAreaAll(
+        //        new Vector2(bounds.max.y, bounds.center.x),
+        //        new Vector2(bounds.min.y, gameObject.GetComponent<Movement>().facingRight ? bounds.center.x + 2 : bounds.center.x - 2),
+        //        LayerMask.GetMask("Enemies"));
+        //    if (colls.Length > 0)
+        //    {
+        //        var gos = new List<int>();
+        //        foreach (var coll in colls.Where(coll => !gos.Contains(coll.gameObject.GetInstanceID())))
+        //        {
+        //            gos.Add(coll.gameObject.GetComponent<Estats>().getHit(gameObject.GetComponent<Pstats>().aDamage));
+        //        }
+        //    }
+        //}
 
         // Call all item Effect() to ensure effect execution
         foreach (BaseItem bi in GetComponent<Pinventory>().items) bi.Effect();
@@ -135,7 +135,7 @@ public class Pattacks : MonoBehaviour
         //hittin = Physics2D.OverlapArea(transform.position, checkArea, whatIsEnemy, -Mathf.Infinity, Mathf.Infinity);
 
 
-        //		if (Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
+        //		if (Time.timeScale > 0 && Input.GetKey (KeyCode.Mouse0) && hittin && !isOnCooldown)
         //		{
         //
         //			StartCoroutine(Cooldown());
@@ -148,7 +148,7 @@ public class Pattacks : MonoBehaviour
         #region Casting
         int selected_spell = gameObject.GetComponent<Pinventory>().selected_spell;
         if (gameObject.GetComponent<Pinventory>().spells != null && gameObject.GetComponent<Pinventory>().spells.Count > 0  )
-            if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Input.GetKeyDown(KeyCode.Mouse1))
+            if (gameObject.GetComponent<Pstats>().charges > 0 && gameObject.GetComponent<Pstats>().charges >= GetComponent<Pinventory>().spells[selected_spell].Cost && !GetComponent<Pinventory>().spell_cds[selected_spell].running && Time.timeScale > 0 && Input.GetKeyDown(KeyCode.Mouse1))
             {
                 #region Merlin's Band
 

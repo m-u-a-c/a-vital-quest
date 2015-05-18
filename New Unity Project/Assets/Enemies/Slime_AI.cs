@@ -90,13 +90,13 @@ public class Slime_AI : MonoBehaviour {
 	void EMovement()
 	{
 		if (attackRange) {
-						rigidbody2D.velocity = new Vector2 (0, rigidbody2D.velocity.y);
+						GetComponent<Rigidbody2D>().velocity = new Vector2 (0, GetComponent<Rigidbody2D>().velocity.y);
 				} else {
 						if (player.transform.position.x > transform.position.x && groundAroundRU && !groundAroundRB) {
-								rigidbody2D.velocity = new Vector2 (enemySpeed / 3, rigidbody2D.velocity.y);
+								GetComponent<Rigidbody2D>().velocity = new Vector2 (enemySpeed / 3, GetComponent<Rigidbody2D>().velocity.y);
 						}
 						if (player.transform.position.x < transform.position.x && groundAroundLU && !groundAroundLB) {	
-								rigidbody2D.velocity = new Vector2 ((enemySpeed / 3) * -1, rigidbody2D.velocity.y);
+								GetComponent<Rigidbody2D>().velocity = new Vector2 ((enemySpeed / 3) * -1, GetComponent<Rigidbody2D>().velocity.y);
 						}
 				}
 	}

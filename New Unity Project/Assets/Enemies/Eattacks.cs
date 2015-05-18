@@ -96,8 +96,8 @@ public class Eattacks : MonoBehaviour
         if (fr) endx = 1.8f;
         else endx = -1.8f;
 
-        line1 = Physics2D.Linecast(new Vector2(startx, starty), new Vector2(endx, starty), whatIsPlayer);
-        line2 = Physics2D.Linecast(new Vector2(startx, starty + 0.3f), new Vector2(endx, starty + 0.3f), whatIsPlayer);
+        line1 = Physics2D.Linecast(new Vector2(startx, starty), new Vector2(startx + endx, starty), whatIsPlayer);
+        line2 = Physics2D.Linecast(new Vector2(startx, starty + 0.3f), new Vector2(startx + endx, starty + 0.3f), whatIsPlayer);
 
         if (line1 && line1.collider.gameObject.tag != "Player") return;
         if (line2 && line2.collider.gameObject.tag != "Player") return;
